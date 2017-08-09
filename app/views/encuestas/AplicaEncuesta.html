@@ -1,0 +1,54 @@
+<div class="card" style="margin-top:10px;">
+  <div class="card-head style-default-light" style="padding-top:10px; padding-left:10px;">
+    <header>
+      <strong style="font-weight:bold; border:none; margin-left:10px;">Aplicar encuesta</strong>
+      <br /><small class="text-muted" style="font-size:14px; margin-left:10px;"> <a href="#"><i class="fa fa-home" aria-hidden="true"></i> Inicio</a>><a href="#" class="paginaActiva">Catálogos</a></small>
+
+    </header>
+    <div class="tools">
+      <button title="Crear un nuevo proceso" class="btn btn-primary btn-sm" type="button" ui-sref="home.encuestas.nuevoproceso" permission permission-only="'encuestaAdd'"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo proceso</button>
+    </div>
+  </div>
+  <div class="card-body">
+
+    <div class="col-md-12 table-responsive">
+
+      <table class="table">
+        <thead>
+          <tr>
+            <td><b>ID</b></td>
+            <td><b>Nombre proceso</b> </td>
+            <td><b>Tipo Servicio</b></td>
+            <td><b>Fecha</b></td>
+            <td><b>Creada por</b></td>
+            <td><b>Estado</b></td>
+            <td><b>Opciones</b></td>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr dir-paginate="x in $ctrl.Procesos|orderBy:$ctrl.sortKey:reverse|filter:$ctrl.search|itemsPerPage:8">
+            <td>{{x.IdProcesoEnc}}</td>
+            <td>{{x.NombreProceso}}</td>
+            <td>{{x.TipSer}}</td>
+            <td>{{x.FechaInicio}}</td>
+            <td>{{x.Usuario}}</td>
+            <td>{{x.StatusEncuesta}}</td>
+
+            <td>
+              <button title="Aplicar encuesta" ng-if="x.StatusEncuesta!='Terminada'" class="btn ink-reaction  btn-xs btn-info" ui-sref="home.encuestas.aplicacontratos({id:x.IdProcesoEnc})"> Aplicar</button>
+              <button title="Finalizar proceso" ng-if="x.StatusEncuesta!='Terminada'"class="btn ink-reaction  btn-xs btn-warning" ng-click="$ctrl.TerminaProceso(x.IdProcesoEnc)">Terminar proceso</button>
+              <button title="Consultar resultados" ng-if="x.StatusEncuesta=='Terminada'" ui-sref="home.encuestas.estadisticasdetalle({id:x.IdProcesoEnc})" type="button" class="btn ink-reaction btn-xs btn-warning"><i class="md md-equalizer"></i> Resultados</button>
+              <!--permission permission-only="'encuestasUpdate'"-->
+          </tr>
+        </tbody>
+      </table>
+      <div style="padding-left: 20px;">
+        <dir-pagination-controls max-size="5" direction-links="true" boundary-links="true">
+        </dir-pagination-controls>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>

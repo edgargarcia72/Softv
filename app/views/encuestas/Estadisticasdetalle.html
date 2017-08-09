@@ -1,0 +1,38 @@
+<div class="card" style="margin-top:10px;">
+  <div class="card-head style-default-light" style="padding-top:10px; padding-left:10px;">
+    <header>
+      <strong style="font-weight:bold; border:none; margin-left:10px;">Estadísticas</strong>
+      <br /><small class="text-muted" style="font-size:14px; margin-left:10px;"> <a href="#"><i class="fa fa-home" aria-hidden="true"></i> Inicio</a>><a href="#" class="paginaActiva">Catálogos</a></small>
+
+    </header>
+    <div class="tools">
+      <button title="Salir de estadísticas" class="btn btn-default btn-sm" type="button" ui-sref="home.encuestas.estadisticas"><i class="fa fa-arrow-left" aria-hidden="true"></i> Regresar</button>
+    </div>
+  </div>
+
+  <div class="card-body">
+ </div>
+
+    <div class="col-md-12">
+      <div class="col-md-4">
+        <br>
+        <button class="btn btn-success btn-flat btn-sm" ng-click="$ctrl.printDiv('print')"><i class="fa fa-print"></i> Imprimir resultados</b<utton>
+        </div>
+        <div class="col-md-4">
+          <p>Selecciona el tipo de gráfica:</p>
+          <select class="form-control input-sm" ng-model="$ctrl.TipoGrafica"
+           ng-change="$ctrl.cambioGrafico()"
+           >
+           <option value="PieChart" selected>Gráfico circular </option>
+           <option value="BarChart">Gráfico de barras</option>
+           <option value="ColumnChart">Gráfico columnas</option>
+           
+           </select>
+        </div>
+     
+    </div>
+<div class="col-md-12" id="print" style=" ">
+ <div  class="col-md-6" ng-repeat="x in $ctrl.Preguntas" google-chart chart="x" style="height:500px; width:100%;"></div>
+  </div>
+  </div>
+</div>

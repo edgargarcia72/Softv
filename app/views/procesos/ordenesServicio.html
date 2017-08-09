@@ -1,0 +1,237 @@
+<style type="text/css">
+	.scrollDiv {
+		height: 500px;
+		overflow: auto;
+		overflow-x: hidden;
+	}
+</style>
+
+<div class="card animated fadeIn" style="margin-top:20px;">
+	<div class="card-head style-default-light" style="padding-top:10px; padding-left:10px;">
+		<header>
+			<strong style="font-weight:bold; border:none; margin-left:10px;">Ordenes de Servicio</strong>
+			<br /><small class="text-muted" style="font-size:14px; margin-left:10px;"> <a href="#"><i class="fa fa-home" aria-hidden="true"></i> Inicio</a>><a href="#" class="paginaActiva">Ordenes de Servicio</a></small>
+
+		</header>
+		<div class="tools">
+			<div class="btn-group">
+				<a title="Crear una orden de servicio nueva" class="btn btn-primary btn-sm"  ui-sref="home.procesos.ordenNueva">CREAR NUEVA ORDEN </a>
+			</div>
+		</div>
+	</div>
+	<div class="card-body">
+
+		<div class="panel-group" id="accordion3">
+			<div class="card panel" style="font-size: 11px;">
+				<div class="card-head card-head-xs collapsed" data-toggle="collapse" data-parent="#accordion3" data-target="#accordion3-1"
+				 aria-expanded="false">
+					<header><i class="fa fa-search"></i> Filtros de búsqueda</header>
+					<div class="tools">
+						<a class="btn btn-icon-toggle"><i class="fa fa-angle-down"></i></a>
+					</div>
+				</div>
+				<div id="accordion3-1" class="collapse buscarContrato" aria-expanded="false" style="height: 0px;">
+					<div class="panel-body">
+						<uib-tabset active="active">
+							<uib-tab index="0">
+								<uib-tab-heading><i class="md md-receipt"></i> Contrato y status</uib-tab-heading>
+								<br>
+								<div class="col-md-3">
+									<label class="text-muted">Plaza</label>
+									<select id="idplaza" ng-change="$ctrl.cambioPlaza()" class="form-control input-sm" ng-model="$ctrl.selectedPlaza" ng-options="v.razon_social for v in $ctrl.plazas track by v.id_compania"></select>
+								</div>
+								<div class="col-md-4">
+									<strong style="padding-left:15px;">Ver por Status</strong><br>
+									<div class="col-md-12">
+										<div class="col-md-6">
+											<label class="radio-inline radio-styled">
+                                                <input type="radio" name="inlineRadioOptions" ng-value="1" ng-model="$ctrl.status" ng-change="$ctrl.buscarStatus()"><span>Pendientes</span>
+                                            </label>
+										</div>
+										<div class="col-md-6">
+											<label class="radio-inline radio-styled">
+                                                <input type="radio" name="inlineRadioOptions" ng-value="2" ng-model="$ctrl.status" ng-change="$ctrl.buscarStatus()"><span>Ejecutadas</span>
+                                            </label>
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="col-md-6">
+											<label class="radio-inline radio-styled">
+                                                <input type="radio" name="inlineRadioOptions" ng-value="3" ng-model="$ctrl.status" ng-change="$ctrl.buscarStatus()"><span>Con visita</span>
+                                            </label>
+										</div>
+										<div class="col-md-6">
+											<label class="checkbox-inline checkbox-styled">
+                                                <input type="checkbox" name="inlineRadioOptions" ng-value="1" ng-change="$ctrl.buscarStatus()" ng-model="$ctrl.auto"><span>Proceso Automático</span>
+                                            </label>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-5">
+									<div class="col-md-6 form-group">
+										<label># Orden</label>
+										<input type="number" class="form-control input-sm" step="1" min="0" ng-model="$ctrl.orden" ng-change="$ctrl.cambioReporte(1)" placeholder="Orden">
+										<button class="btn btn-xs btn-info" ng-click="$ctrl.buscarOrden()"><i class="fa fa-search"></i> Buscar</button>
+									</div>
+									<div class="col-md-6 form-group">
+										<label>Contrato</label>
+										<input type="text" class="form-control input-sm" ng-model="$ctrl.contrato" ng-change="$ctrl.cambioReporte(2)" placeholder="El número de contrato ejemplo: (1234-1)">
+										<button class="btn btn-xs btn-info" ng-click="$ctrl.buscarOrden()"><i class="fa fa-search"></i> Buscar</button>
+										
+									</div>
+								</div>	
+							</uib-tab>
+
+							<!--<uib-tab index="1">
+								<uib-tab-heading><i class="md md-content-paste"></i> Contrato</uib-tab-heading>
+								<br/>
+								<div class="row">
+									<div class="col-md-4 form-group">
+										<label># Orden</label>
+										<input type="number" class="form-control input-sm" step="1" min="0" ng-model="$ctrl.orden" ng-change="$ctrl.cambioReporte(1)" placeholder="Orden">
+									</div>
+									<div class="col-md-4 form-group">
+										<label>Contrato</label>
+										<input type="text" class="form-control input-sm" ng-model="$ctrl.contrato" ng-change="$ctrl.cambioReporte(2)" placeholder="Contrato">
+										<p class="text-muted"><strong>El número de contrato</strong> está formado por 2 grupos de números con un guión intermedio p.e. (1234-1)</p>
+									</div>
+								</div>								
+								<div class="note">
+									<strong>El número de contrato</strong> está formado por 2 grupos de números con un guión intermedio p.e. (1234-1)
+								</div>
+								<footer>
+									<p class="text-right">
+										<button class="btn btn-xs btn-info" ng-click="$ctrl.buscarOrden()"><i class="fa fa-search"></i> Buscar</button>
+									</p>
+								</footer>
+							</uib-tab>-->
+
+							<uib-tab index="2">
+								<uib-tab-heading><i class="fa fa-home"></i> Dirección</uib-tab-heading>
+								<br/>
+								<form ng-submit="$ctrl.buscarColonia()">
+									<div class="row">
+										<div class="col-md-3">
+									<label class="text-muted">Plaza</label>
+									<select id="idplaza" ng-change="$ctrl.cambioPlaza()" class="form-control input-sm" ng-model="$ctrl.selectedPlaza" ng-options="v.razon_social for v in $ctrl.plazas track by v.id_compania"></select>
+								</div>
+										<div class="col-md-3 form-group">
+											<label>Colonia</label>
+											<select class="form-control input-sm" ng-model="$ctrl.selectedColonia" ng-options="v.nombre for v in $ctrl.colonias|orderBy:'nombre' track by v.clvColonia">
+ 												<option value="">Seleccione</option>
+											</select>
+										</div>
+										<div class="col-md-3 form-group">
+											<label>Calle</label>
+											<input type="text" class="form-control input-sm" ng-model="$ctrl.calle">
+										</div>
+										<div class="col-md-1 form-group">
+											<label>Número</label>
+											<input type="text" class="form-control input-sm" placeholder="#" ng-model="$ctrl.numero">
+										</div>
+										<div class="col-md-2">
+											<br>
+                                              <button type="submit" class="btn btn-xs btn-info">
+	 											 <i class="fa fa-search"></i> Buscar
+	 											 </button>
+										</div>
+										
+									</div>								
+									
+								</form>
+							</uib-tab>
+							<uib-tab index="3">
+								<uib-tab-heading><i class="fa fa-user"></i> Nombre</uib-tab-heading>
+								<br/>
+								<form ng-submit="$ctrl.buscarNombres()">
+									<div class="row">
+										<div class="col-md-3 form-group">
+											<label>Nombre</label>
+											<input type="text" class="form-control" ng-model="$ctrl.nombre">
+										</div>
+										<div class="col-md-3 form-group">
+											<label>Apellido Paterno</label>
+											<input type="text" class="form-control" ng-model="$ctrl.paterno">
+										</div>
+										<div class="col-md-3 form-group">
+											<label>Apellido Materno</label>
+											<input type="text" class="form-control" ng-model="$ctrl.materno">
+										</div>
+									</div>									
+									<footer>
+										<p class="text-right">
+											<button type="submit" class="btn btn-sm btn-info">
+	 											 <i class="fa fa-search"></i> Buscar
+	 											 </button>
+										</p>
+									</footer>
+								</form>
+							</uib-tab>
+							<!--<uib-tab index="4">
+								<uib-tab-heading><i></i> Set Up Box</uib-tab-heading>
+								<br>
+								<form ng-submit="$ctrl.buscarSetup()">
+									<div class="row">
+										<div class="col-md-5 form-group">
+											<label>Setup Box</label>
+											<input type="text" class="form-control" ng-model="$ctrl.setupbox">
+										</div>
+									</div>
+									<footer>
+										<p class="text-right">
+											<button type="submit" class="btn btn-sm btn-info"><i class="fa fa-search"></i> Buscar</button>
+										</p>
+									</footer>
+								</form>
+							</uib-tab>-->
+						</uib-tabset>
+					</div>
+					<!-- panel body -->
+				</div>
+			</div>
+			<!--end .panel -->
+		</div>
+
+
+		<div class="col-md-12 table-responsive">
+			<div class="col-md-12" style="padding-left: 25px; padding-right: 25px;">
+				<table class="table">
+					<thead>
+						<tr>
+							<th># Orden</th>
+							<th>Status</th>
+							<th>Contrato</th>
+							<th>Nombre</th>
+							<th>Calle</th>
+							<th>Número</th>
+							<th colspan="2">Acción</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-show="$ctrl.sinRegistros">
+							<td class="text-center" colspan="9">SIN REGISTROS</td>
+						</tr>
+						<tr dir-paginate="x in $ctrl.ordenes|itemsPerPage:7" ng-show="$ctrl.conRegistros">
+							<td>{{ x.Clv_Orden }}</td>
+							<td>{{ x.STATUS }}</td>
+							<td>{{ x.Contrato }}</td>
+							<td>{{ x.Nombre }} {{ x.Apellido_Paterno }} {{ x.Apellido_Materno }}</td>
+							<td>{{ x.CALLE }}</td>
+							<td>#{{ x.NUMERO}}</td>
+							<td>
+								<button ui-sref="home.procesos.ordendetalle({ id: x.Clv_Orden})" title="Consultar orden de servicio" class="btn ink-reaction btn-xs btn-info" ><i class="md md-content-paste"></i> Consultar</button>
+							</td>
+							<td>
+								<a title="Ejecutar orden de servicio" ng-if="x.STATUS !='E'" ng-click="$ctrl.ejecuta(x.Clv_Orden)" class="btn ink-reaction btn-xs btn-warning"><i class="md md-launch"></i> Ejecutar</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div style="margin-top:-40px;">
+					<dir-pagination-controls max-size="7" direction-links="true" boundary-links="true" ng-if="$ctrl.ordenes.length > 0">
+					</dir-pagination-controls>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
