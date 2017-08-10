@@ -143,6 +143,21 @@ angular
                 templateUrl: 'views/catalogos/Clientes.html',
                 controller: 'ClientesCtrl',
                 controllerAs: '$ctrl'
+            },
+            {
+                name: 'home.catalogos.cliente_nuevo',
+                data: {
+                    pageTitle: 'SOFTV | NUEVO CLIENTE',
+                    permissions: {
+                        options: {
+                            reload: false
+                        }
+                    }
+                },
+                url: '/catalogo/clientes/nuevo',
+                templateUrl: 'views/catalogos/ClienteNuevo.html',
+                controller: 'ClienteNuevoCtrl',
+                controllerAs: '$ctrl'
             }
         ];
         states.forEach(function (state) {

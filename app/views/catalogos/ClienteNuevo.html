@@ -1,0 +1,166 @@
+<style type="text/css">
+	.scrollDiv {
+		height: 500px;
+		overflow: auto;
+		overflow-x: hidden;
+	}
+</style>
+<style>
+    .nav-tabs{
+        float:left;
+    }
+    .contect-tabs{
+        float:left;
+    }
+</style>
+<div class="card animated fadeIn" style="margin-top:20px;">
+    <div class="card-head style-default-light" style="padding-top:10px; padding-left:10px;">
+        <header>
+            <strong style="font-weight:bold; border:none; margin-left:10px;">Cliente nuevo</strong>
+			<br>
+            <small class="text-muted" style="font-size:14px; margin-left:10px;">
+                <a href="#"><i class="fa fa-home" aria-hidden="true"></i> Inicio</a>><a href="#" class="paginaActiva">Cliente nuevo</a>
+            </small>
+        </header>
+    </div>
+    <div class="card-body">
+        <uib-tabset active="active" vertical="true" type="tabs">
+
+            <uib-tab index="0">
+                <uib-tab-heading>
+                    <i class="fa fa-user"></i>  <small>Datos personales</small>
+                </uib-tab-heading>
+                <form name="FormValidarCliente" angular-validator-submit="$ctrl.ValidarCliente()" novalidate angular-validator>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="col-md-3">
+                                <p>Contrato:</p>
+                            </div>
+                            <div class="col-md-3">
+                                <p>Plaza:</p>
+                            </div>
+                            <div class="col-md-3">
+                                <p>Periodo:</p>
+                            </div>
+                            <div class="col-md-3">
+                                <p>Tipo de Cobro:</p>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="number" name="InpContrato" class="form-control input-sm" ng-model="$ctrl.Contrato">
+                            </div>
+                            <div class="col-md-3">
+                                <select name="SlcPlaza" class="form-control input-sm" ng-model="$ctrl.Plaza">
+                                    <option value="">Selecciona</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <select name="SlcPeriodo" class="form-control input-sm" ng-model="$ctrl.Periodo">
+                                    <option value="">Selecciona</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <select name="SclTipoCobro" class="form-control input-sm" ng-model="$ctrl.TipoCobro">
+                                    <option value="">Selecciona</option>
+                                </select>
+                            </div>
+                            <div class="col-md-12">
+                                <br>
+                            </div>
+                            <div class="col-md-3">
+                                <p>Nombre:</p>
+                            </div>
+                            <div class="col-md-3">
+                                <p>Nombres adicionales:</p>
+                            </div>
+                            <div class="col-md-3">
+                                <p>Primer apellido:</p>
+                            </div>
+                            <div class="col-md-3">
+                                <p>Segundo apellido:</p>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" name="InpNombre" class="form-control input-sm" ng-model="$ctrl.Nombre">
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" name="InpNombreAdi" class="form-control input-sm" ng-model="$ctrl.NombreAdi">
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" name="InpPrimerApe" class="form-control input-sm" ng-model="$ctrl.PrimerApe">
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" name="InpSegundoApe" class="form-control input-sm" ng-model="$ctrl.SegundoApe">
+                            </div>
+                            <div class="col-md-12">
+                                <br>
+                            </div>
+                            <div class="col-md-4">
+                                <p>Clave de elector:</p>
+                            </div>
+                            <div class="col-md-4">
+                                <p>Número telefónico:</p>
+                            </div>
+                            <div class="col-md-4">
+                                <p>Número celular:</p>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" name="InpClaveElector" class="form-control input-sm" ng-model="$ctrl.ClaveElector">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="number" name="InpTelefono" class="form-control input-sm" ng-model="$ctrl.Telefono">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="number" name="InpCelular" class="form-control input-sm" ng-model="$ctrl.Celular">
+                            </div>
+                            <div class="col-md-12">
+                                <br>
+                            </div>
+                            <div class="col-md-4">
+                                <p>Email:</p>
+                            </div>
+                            <div class="col-md-4">
+                                <p>Tipo de persona:</p>
+                            </div>
+                            <div class="col-md-4">
+                                <p>Fecha de nacimiento:</p>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="email" name="InpEmail" class="form-control input-sm" ng-model="$ctrl.Email">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="radio-inline radio-styled">
+                                    <input type="radio" name="RdoTipoPersona" ng-model="$ctrl.TipoPersona"><span>Persona fisica</span>
+                                </label>
+                                <label class="radio-inline radio-styled">
+                                    <input type="radio" name="RdoTipoPersona" ng-model="$ctrl.TipoPersona"><span>Persona  moral</span>
+                                </label>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="date" name="InpFechaNac" class="form-control input-sm" ng-model="$ctrl.FechaNsc">
+                            </div>
+                            <div class="col-md-12">
+                                <br>
+                            </div>
+                            <div class="col-md-12" style="text-align:right">
+                                <button type="submit" class="btn btn-success btn-sm">Validar</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </uib-tab>
+
+            <uib-tab index="1">
+                <uib-tab-heading>
+                    <i class="md md-content-paste"></i> <small>Contrato</small>
+                </uib-tab-heading>
+                Vertical content 2
+            </uib-tab>
+
+            <uib-tab index="5">
+                <uib-tab-heading>
+                    <i class="md md-content-paste"></i> <small>Referencias personales</small>
+                </uib-tab-heading>
+                Vertical content 2
+            </uib-tab>
+        </uib-tabset>
+    </div>
+</div>

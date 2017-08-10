@@ -16,8 +16,8 @@
         </header>
     </div>
     <div class="card-body">
-        <div class="panel-group" id="accordion3">
-            <!--<div class="card panel">
+        <!--<div class="panel-group" id="accordion3">
+            <div class="card panel">
                 <div class="card-head card-head-xs collapsed" data-toggle="collapse" data-parent="#accordion3" data-target="#accordion3-1" aria-expanded="false">
                     <header><i class="fa fa-plus-circle"></i> Nueva Comisión</header>
                     <div class="tools">
@@ -76,24 +76,41 @@
                 </div>
             </div>
         </div>-->
+        <div class="row">
+			<div class="col-md-12">
+                <div class="col-md-7">
+                </div>
+                <div class="col-md-3" style="text-align:right">
+                    <div class="input-group">
+                        <input type="text" class="form-control input-sm" placeholder="Buscar Estado">
+                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                    </div>
+                </div>
+                <div class="col-md-2" style="text-align:right">
+				    <button type="button" class="btn btn-primary btn-sm" ng-click="" title="Crear un estado nuevo">NUEVO ESTADO</button>
+			    </div>
+			</div>
+        </div>
         <div class="col-md-12">
             <div class="col-md-12">
                 <table class="table">
                     <thead>
                         <tr>
-                            <th><b>Id</b></th>
-                            <th><b>Nombre del Estado</b></th>
-                            <th><b>Acciones</b></th>
+                            <th width="10%"><b>Id</b></th>
+                            <th width="60%"><b>Nombre del Estado</b></th>
+                            <th width="30%" colspan="2"><b>Acciones</b></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr ng-show="$ctrl.sinRegistros">
-							<td class="text-center" colspan="9">SIN REGISTROS</td>
+							<td class="text-center" colspan="4">SIN REGISTROS</td>
 						</tr>
-                        <tr dir-paginate="X in $ctrl.ComisionVLista|itemsPerPage:7" ng-show="$ctrl.conRegistros">
+                        <!--<tr dir-paginate="X in $ctrl.ComisionVLista|itemsPerPage:7" ng-show="$ctrl.conRegistros">-->
+                        <tr>
                             <td>{{ X.IdComision }}</td>
                             <td>{{ X.TipServ }}</td>
-                            <td><button type="button" class="btn btn-danger btn-xs" ng-click="$ctrl.ConfirmarEliminar(X.IdComision)" title="Eliminar comisión"><i class="fa fa-trash"></i> ELIMINAR</button></td>
+                            <td><button type="button" class="btn btn-danger btn-xs" ng-click="$ctrl.ConfirmarEliminar(X.IdComision)" title="Eliminar Estado"><i class="fa fa-trash"></i> ELIMINAR</button></td>
+                            <td><button type="button" class="btn btn-warning btn-xs" title="Editar Estado"><i class="fa fa-pencil-square-o"></i> EDITAR</button>
                         </tr>
                     </tbody>
                 </table>
@@ -103,5 +120,5 @@
 				</div>
             </div>
         </div>
-    </div>
+    <!--</div>-->
 </div>
