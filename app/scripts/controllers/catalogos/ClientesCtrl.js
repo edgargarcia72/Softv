@@ -2,9 +2,8 @@
 
 angular
     .module('softvApp')
-    .controller('ClienteNuevoCtrl', function($scope){
+    .controller('ClientesCtrl', function(){
 
         var vm = this;
-        vm.TipoPersona = 'F';
         
     });
