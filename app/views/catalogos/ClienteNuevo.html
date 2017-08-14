@@ -48,7 +48,7 @@
                                 <p>Tipo de Cobro:</p>
                             </div>
                             <div class="col-md-3">
-                                <input type="number" name="InpContrato" class="form-control input-sm" ng-model="$ctrl.Contrato" ng-disabled="true">
+                                <input type="number" name="InpContrato" class="form-control input-sm" ng-model="$ctrl.IdContrato" ng-disabled="true">
                             </div>
                             <div class="col-md-3">
                                 <select name="SlcPlaza" class="form-control input-sm" ng-model="$ctrl.Plaza" ng-options="P.Nombre for P in $ctrl.PlazaList track by P.IdPlaza" validate-on="dirty" required required-message="'Obligatorio'">
@@ -61,7 +61,7 @@
                                 </select>
                             </div>
                             <div class="col-md-3">
-                                <select name="SclTipoCobro" class="form-control input-sm" ng-model="$ctrl.TipoCobro" validate-on="dirty" required required-message="'Obligatorio'">
+                                <select name="SclTipoCobro" class="form-control input-sm" ng-model="$ctrl.TipoCobro" ng-options="T.Nombre for T in $ctrl.TipoCobroList track by T.IdTipoCliente" validate-on="dirty" required required-message="'Obligatorio'">
                                     <option value="">Selecciona</option>
                                 </select>
                             </div>
@@ -130,14 +130,14 @@
                             </div>
                             <div class="col-md-4">
                                 <label class="radio-inline radio-styled">
-                                    <input type="radio" name="RdoTipoPersona" ng-model="$ctrl.TipoPersona" value=1><span>Persona fisica</span>
+                                    <input type="radio" name="RdoTipoPersona" ng-model="$ctrl.TipoPersona" value="F"><span>Persona fisica</span>
                                 </label>
                                 <label class="radio-inline radio-styled">
-                                    <input type="radio" name="RdoTipoPersona" ng-model="$ctrl.TipoPersona" value=0><span>Persona  moral</span>
+                                    <input type="radio" name="RdoTipoPersona" ng-model="$ctrl.TipoPersona" value="M"><span>Persona  moral</span>
                                 </label>
                             </div>
                             <div class="col-md-4">
-                                <input type="date" name="InpFechaNac" class="form-control input-sm" ng-model="$ctrl.FechaNsc" invalid-message="'Inválido'">
+                                <input type="date" name="InpFechaNac" class="form-control input-sm" ng-model="$ctrl.FechaNac" invalid-message="'Inválido'">
                             </div>
                             <div class="col-md-12">
                                 <br>
@@ -166,12 +166,12 @@
                                 <p>Localidad:</p>
                             </div>
                             <div class="col-md-4">
-                                <select name="SltEstado" class="form-control input-sm" ng-model="$ctrl.Estado" validate-on="dirty" required required-message="'Obligatorio'">
+                                <select name="SltEstado" class="form-control input-sm" ng-model="$ctrl.Estado" ng-options="E.Nombre for E in $ctrl.EstadoList track by E.IdEstado" ng-change="$ctrl.GetCiudadMunicipio()" validate-on="dirty" required required-message="'Obligatorio'">
                                     <option value="">Selecciona</option>
                                 </select>
                             </div>
                             <div class="col-md-4">
-                                <select name="SltCiuMun" class="form-control input-sm" ng-model="$ctrl.CiuMun" validate-on="dirty" required required-message="'Obligatorio'">
+                                <select name="SltCiuMun" class="form-control input-sm" ng-model="$ctrl.CiuMun" ng-options="CM.Municipio.Nombre for CM in $ctrl.GetCiudadMunicipioList track by CM.Municipio.IdMunicipio" validate-on="dirty" required required-message="'Obligatorio'">
                                     <option value="">Selecciona</option>
                                 </select>
                             </div>
@@ -380,7 +380,7 @@
                                 <p>Dígitos en la tarjeta:</p>
                             </div>
                             <div class="col-md-2">
-                                <p>Código de seguridad:</p>
+                                <p>Código seguridad:</p>
                             </div>
                             <div class="col-md-3">
                                 <p>Mes de la fecha de vencimiento:</p>
@@ -389,10 +389,10 @@
                                 <p>Año de la fecha de vencimiento:</p>
                             </div>
                             <div class="col-md-4">
-                                <input name="InpNumTarjeta" type="text" class="form-control input-sm" maxlength="16" ng-pattern="/^[A-Z]{16}|\d{16}$/" ng-model="$ctrl.NumTarjeta" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 15 dígitos o 16 dígitos.'">
+                                <input name="InpNumTarjeta" type="text" class="form-control input-sm" ng-model="$ctrl.NumTarjeta" maxlength="16" ng-pattern="/^[A-Z]{16}|\d{16}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 15 dígitos o 16 dígitos.'">
                             </div>
                             <div class="col-md-2">
-                                <input name="InpCodigoSeg" type="text" class="form-control input-sm" maxlength="4" ng-pattern="/^[A-Z]{4}|\d{4}$/" ng-model="$ctrl.CodigoSeg" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 4 dígitos.'">
+                                <input name="InpCodigoSeg" type="text" class="form-control input-sm" ng-model="$ctrl.CodigoSeg" maxlength="4" ng-pattern="/^[A-Z]{4}|\d{4}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 4 dígitos.'">
                             </div>
                             <div class="col-md-3">
                                 <select name="InpMesVen" class="form-control input-sm" ng-model="$ctrl.MesVen" validate-on="dirty" required required-message="'Obligatorio'">
@@ -400,7 +400,7 @@
                                 </select>
                             </div>
                             <div class="col-md-3">
-                                <input name="InpYearVen" type="text" class="form-control input-sm" ng-model="$ctrl.YearVen" maxlength="4" ng-pattern="/^\d{4}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 4 dígitos.'">
+                                <input name="InpYearVen" type="text" class="form-control input-sm" ng-model="$ctrl.YearVen" maxlength="4" ng-pattern="/^\d{4}$/" validator= "$ctrl.YearVen >= 2016 && $ctrl.YearVen <= 2099" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 4 dígitos.'">
                             </div>
                             <div class="col-md-12">
                                 <br>
@@ -410,13 +410,13 @@
                             </div>
                             <div class="col-md-12">
                                 <label class="radio-inline radio-styled">
-                                    <input type="radio" name="RdoTipoPlastico" ng-model="$ctrl.TipoPlastico" value="0"><span>VISA</span>
+                                    <input type="radio" name="RdoTipoPlastico" ng-model="$ctrl.TipoPlastico" value="0" ng-disabled="true"><span>VISA</span>
                                 </label>
                                 <label class="radio-inline radio-styled">
-                                    <input type="radio" name="RdoTipoPlastico" ng-model="$ctrl.TipoPlastico" value="1"><span>American Express</span>
+                                    <input type="radio" name="RdoTipoPlastico" ng-model="$ctrl.TipoPlastico" value="1" ng-disabled="true"><span>American Express</span>
                                 </label>
                                 <label class="radio-inline radio-styled">
-                                    <input type="radio" name="RdoTipoPlastico" ng-model="$ctrl.TipoPlastico" value="2"><span>MasterCard</span>
+                                    <input type="radio" name="RdoTipoPlastico" ng-model="$ctrl.TipoPlastico" value="2" ng-disabled="true"><span>MasterCard</span>
                                 </label>
                             </div>
                             <div class="col-md-12">
@@ -424,6 +424,50 @@
                             </div>
                             <div class="col-md-12" style="text-align:right">
                                 <button type="submit" class="btn btn-success btn-sm">Validar</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </uib-tab>
+            <uib-tab index="4">
+                <uib-tab-heading>
+                    <i class="fa fa-users"></i> <small>Referencias personales</small>
+                </uib-tab-heading>
+                <form name="FormRefPersonales" angular-validator-submit="$ctrl.AddRefPersonales()" novalidate angular-validator>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="col-md-4">
+                                <p>Nombre:</p>
+                            </div>
+                            <div class="col-md-4">
+                                <p>Teléfono:</p>
+                            </div>
+                            <div class="col-md-4">
+                                <p>Email:</p>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" name="InpNombreRef" class="form-control input-sm" ng-model="$ctrl.NombreRef" validate-on="dirty" required required-message="'Obligatorio'">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" name="InpTelefonoRef" class="form-control input-sm" ng-model="$ctrl.TelefonoRef" maxlength="10" ng-pattern="/^\d{8}$|^\d{10}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa minimo 8 dígitos.'">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="email" name="InpEmailRef" class="form-control input-sm" ng-model="$ctrl.EmailRef" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido'">
+                            </div>
+                            <div class="col-md-12">
+                                <br>
+                            </div>
+                            <div class="col-md-12">
+                                <p>Dirección:</p>
+                            </div>
+                            <div class="col-md-12">
+                                <textarea name="InpDireccionRef" class="form-control" rows="4" ng-model="$ctrl.DireccionRef" validate-on="dirty" required required-message="'Obligatorio'"></textarea>
+                            </div>
+                            <div class="col-md-12">
+                                <br>
+                            </div>
+                            <div class="col-md-12" style="text-align:right">
+                                <button type="submit" class="btn btn-success btn-sm">Agregar</button>
                             </div>
                         </div>
                     </div>
