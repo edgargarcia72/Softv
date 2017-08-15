@@ -171,12 +171,12 @@
                                 </select>
                             </div>
                             <div class="col-md-4">
-                                <select name="SltCiuMun" class="form-control input-sm" ng-model="$ctrl.CiuMun" ng-options="CM.Municipio.Nombre for CM in $ctrl.GetCiudadMunicipioList track by CM.Municipio.IdMunicipio" validate-on="dirty" required required-message="'Obligatorio'">
+                                <select name="SltCiuMun" class="form-control input-sm" ng-model="$ctrl.CiuMun" ng-options="CM.Municipio.Nombre for CM in $ctrl.CiudadMunicipioList track by CM.Municipio.IdMunicipio" ng-change="$ctrl.GetLocalidad()" validate-on="dirty" required required-message="'Obligatorio'">
                                     <option value="">Selecciona</option>
                                 </select>
                             </div>
                             <div class="col-md-4">
-                                <select name="SltLocalidad" class="form-control input-sm" ng-model="$ctrl.Localidad" validate-on="dirty" required required-message="'Obligatorio'">
+                                <select name="SltLocalidad" class="form-control input-sm" ng-model="$ctrl.Localidad" ng-options="L.Localidad.Nombre for L in $ctrl.LocalidadList track by L.Localidad.IdLocalidad" ng-change="$ctrl.GetColonia()" validate-on="dirty" required required-message="'Obligatorio'">
                                     <option value="">Selecciona</option>
                                 </select>
                             </div>
@@ -193,12 +193,12 @@
                                 <p>Entre calles:</p>
                             </div>
                             <div class="col-md-4">
-                                <select name="SltColonia" class="form-control input-sm" ng-model="$ctrl.Colonia" validate-on="dirty" required required-message="'Obligatorio'">
+                                <select name="SltColonia" class="form-control input-sm" ng-model="$ctrl.Colonia" ng-options="C.Colonia.Nombre for C in $ctrl.ColoniaList track by C.Colonia.IdColonia" ng-change="$ctrl.GetCalle()" validate-on="dirty" required required-message="'Obligatorio'">
                                     <option value="">Selecciona</option>
                                 </select>
                             </div>
                             <div class="col-md-4">
-                                <select name="SltCalle" class="form-control input-sm" ng-model="$ctrl.Callle" validate-on="dirty" required required-message="'Obligatorio'">
+                                <select name="SltCalle" class="form-control input-sm" ng-model="$ctrl.Callle" ng-options="C.Calle.Nombre for C in $ctrl.CalleList track by C.Calle.IdCalle" validate-on="dirty" required required-message="'Obligatorio'">
                                     <option value="">Selecciona</option>
                                 </select>
                             </div>

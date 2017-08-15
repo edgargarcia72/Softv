@@ -15,7 +15,8 @@ angular
             GetEstadosRelMun: '/RelMunicipioEst/GetEstadosRelMun',
             GetLocalidadRelMun: '/RelLocalidadMunEst/GetLocalidadRelMun',
             GetColoniaRelLoc: '/RelColoniaLocMunEst/GetColoniaRelLoc',
-            GetCalleRelCol: '/RelCalleColonia/GetCalleRelCol'
+            GetCalleRelCol: '/RelCalleColonia/GetCalleRelCol',
+            UpdateClienteDPos: '/Cliente/UpdateClienteDPos'
         };
 
         factory.GetPlazaList = function(){
@@ -193,6 +194,36 @@ angular
                 'IdColonia': IdColonia
             };
             $http.post(globalService.getUrl() + paths.GetCalleRelCol, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.UpdateClienteDPos = function (ObjCliente) {
+            var deferred = $q.defer();
+            var config = {
+                headers: {
+                    'Authorization': $localStorage.currentUser.token
+                }
+            };
+            var Parametros = {
+                'lstClienteDP': {
+                    IdContrato: ObjCliente.IdContrato,
+                    IdEstado: ObjCliente.IdEstado,
+                    IdMunicipio: ObjCliente.IdMunicipio,
+                    IdLocalidad: ObjCliente.IdLocalidad,
+                    IdColonia: ObjCliente.IdColonia,
+                    IdCalle: ObjCliente.IdCalle,
+                    EntreCalles: ObjCliente.EntCalles,
+                    NumExt: ObjCliente.NumExt,
+                    NumInt: ObjCliente.NumInt,
+                    CP: ObjCliente.CodigoPos
+                }
+            };
+            console.log(Parametros);
+            $http.post(globalService.getUrl() + paths.UpdateClienteDPos, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);
