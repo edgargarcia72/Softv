@@ -16,7 +16,16 @@ angular
             GetLocalidadRelMun: '/RelLocalidadMunEst/GetLocalidadRelMun',
             GetColoniaRelLoc: '/RelColoniaLocMunEst/GetColoniaRelLoc',
             GetCalleRelCol: '/RelCalleColonia/GetCalleRelCol',
-            UpdateClienteDPos: '/Cliente/UpdateClienteDPos'
+            UpdateClienteDPos: '/Cliente/UpdateClienteDPos',
+            AddDatoFiscalCliente: '/Cliente/AddDatoFiscalCliente',
+            GetDeepDatoFiscal: '/DatoFiscal/GetDeepDatoFiscal',
+            GetBancoList: '/Banco/GetBancoList',
+            AddDatoBancarioCliente: '/Cliente/AddDatoBancarioCliente',
+            GetDatoBancarioDeep: '/DatoBancario/GetDatoBancarioDeep',
+            AddReferenciaClienteL: '/Cliente/AddReferenciaClienteL',
+            DeleteReferenciaCliente: '/ReferenciaCliente/DeleteReferenciaCliente',
+            UpdateReferencia: '/ReferenciaCliente/UpdateReferencia',
+            GetReferenciaClienteL: '/ReferenciaCliente/GetReferenciaClienteL'
         };
 
         factory.GetPlazaList = function(){
@@ -224,6 +233,168 @@ angular
             };
             console.log(Parametros);
             $http.post(globalService.getUrl() + paths.UpdateClienteDPos, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.AddDatoFiscalCliente = function (ObjCliente) {
+            var deferred = $q.defer();
+            var config = {
+                headers: {
+                    'Authorization': $localStorage.currentUser.token
+                }
+            };
+            var Parametros = {
+                'lstCliente': 
+                    {'IdContrato': ObjCliente.IdContrato},
+                    'DatoFiscalAdd': [{
+                        IVADesglosado: ObjCliente.IVADesglosado,
+                        RazonSocial: ObjCliente.RazonSoc,
+                        RFC: ObjCliente.RFC,
+                        CURP: ObjCliente.CURP,
+                        Calle: ObjCliente.CalleDF,
+                        NumExt: ObjCliente.NumExtDF,
+                        NumInt: ObjCliente.NumIntDF,
+                        EntreCalles: ObjCliente.EntCallesDF,
+                        Colonia: ObjCliente.ColoniaDF,
+                        Localidad: ObjCliente.LocalidadDF,
+                        Ciudad: ObjCliente.CiuMunDF,
+                        Estado: ObjCliente.EstadoDF,
+                        CP: ObjCliente.CodigoPosDF,
+                        Telefono: ObjCliente.TelefonoDF,
+                        Fax: ObjCliente.Fax,
+                        Email: ObjCliente.EmailDF,
+                        Tipo: ObjCliente.Tipo
+                    }]
+            };
+            $http.post(globalService.getUrl() + paths.AddDatoFiscalCliente, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.GetDeepDatoFiscal = function (IdContrato) {
+            var deferred = $q.defer();
+            var config = {
+                headers: {
+                    'Authorization': $localStorage.currentUser.token
+                }
+            };
+            var Parametros = {
+                'IdContrato': IdContrato
+            }
+            $http.post(globalService.getUrl() + paths.GetDeepDatoFiscal, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.GetBancoList = function(){
+            var deferred = $q.defer();
+            var config = {
+                headers: {
+                    'Authorization': $localStorage.currentUser.token
+                }
+            };
+            $http.get(globalService.getUrl() + paths.GetBancoList, config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.AddDatoBancarioCliente = function (ObjCliente) {
+            var deferred = $q.defer();
+            var config = {
+                headers: {
+                    'Authorization': $localStorage.currentUser.token
+                }
+            };
+            var Parametros = {
+                'lstCliente': 
+                    {'IdContrato': ObjCliente.IdContrato},
+                    'DatoBancarioAdd': [{
+                        IdBanco: ObjCliente.IdBanco,
+                        IdTipoTarjeta: ObjCliente.TipoPlastico,
+                        NombreTitular: ObjCliente.Titular,
+                        DigitosTarjeta: ObjCliente.NumTarjeta,
+                        CodigoSeguridad: ObjCliente.CodigoSeg,
+                        MesVencimiento: ObjCliente.IdMes,
+                        AnioVencimiento: ObjCliente.YearVen
+                    }]
+            };
+            console.log(Parametros);
+            $http.post(globalService.getUrl() + paths.AddDatoBancarioCliente, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.GetDatoBancarioDeep = function (IdContrato) {
+            var deferred = $q.defer();
+            var config = {
+                headers: {
+                    'Authorization': $localStorage.currentUser.token
+                }
+            };
+            var Parametros = {
+                'IdContrato': IdContrato
+            }
+            $http.post(globalService.getUrl() + paths.GetDatoBancarioDeep, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.AddReferenciaClienteL = function (ObjCliente) {
+            var deferred = $q.defer();
+            var config = {
+                headers: {
+                    'Authorization': $localStorage.currentUser.token
+                }
+            };
+            var Parametros = {
+                'lstCliente': 
+                    {'IdContrato': ObjCliente.IdContrato},
+                    'ReferenciaClienteAdd': [{
+                        Nombre: ObjCliente.NombreRef,
+                        Direccion: ObjCliente.DireccionRef,
+                        Email: ObjCliente.EmailRef,
+                        Telefono: ObjCliente.TelefonoRef,
+                        OpcionProspecto: ObjCliente.OpcionProspecto
+                    }]
+            };
+            $http.post(globalService.getUrl() + paths.AddReferenciaClienteL, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.GetReferenciaClienteL = function (IdContrato) {
+            var deferred = $q.defer();
+            var config = {
+                headers: {
+                    'Authorization': $localStorage.currentUser.token
+                }
+            };
+            var Parametros = {
+                'IdContrato': IdContrato
+            }
+            $http.post(globalService.getUrl() + paths.GetReferenciaClienteL, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);

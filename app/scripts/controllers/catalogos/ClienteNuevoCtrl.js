@@ -20,6 +20,10 @@ angular
             CatalogosFactory.GetEstadoList2_web().then(function(data){
                 vm.EstadoList = data.GetEstadoList2_webResult;
             });
+
+            CatalogosFactory.GetBancoList().then(function(data){
+                vm.BancoList = data.GetBancoListResult;
+            });
         }
 
         function AddDatosPersonales(){
@@ -100,16 +104,133 @@ angular
             }
         }
 
+        function AddDatosFiscales(){
+            if(vm.IdContrato != undefined){
+                var ObjCliente = {};
+                ObjCliente.IdContrato = vm.IdContrato;
+                ObjCliente.IVADesglosado = 10;
+                ObjCliente.RazonSoc = vm.RazonSoc;
+                ObjCliente.RFC = vm.RFC;
+                ObjCliente.CURP = vm.CURP;
+                ObjCliente.CalleDF = vm.CalleDF;
+                ObjCliente.NumExtDF = vm.NumExtDF;
+                ObjCliente.NumIntDF = vm.NumIntDF;
+                ObjCliente.EntCallesDF = vm.EntCallesDF;
+                ObjCliente.ColoniaDF = vm.ColoniaDF;
+                ObjCliente.LocalidadDF = 'Localidad';
+                ObjCliente.CiuMunDF = vm.CiuMunDF;
+                ObjCliente.EstadoDF = vm.EstadoDF;
+                ObjCliente.CodigoPosDF = vm.CodigoPosDF;
+                ObjCliente.TelefonoDF = vm.TelefonoDF;
+                ObjCliente.Fax = vm.Fax;
+                ObjCliente.EmailDF = vm.EmailDF;
+                ObjCliente.Tipo = 1;
+                CatalogosFactory.AddDatoFiscalCliente(ObjCliente).then(function(data){
+                    console.log(data);
+                    GetDatosClientes(vm.IdContrato);
+                    GetDatosFiscal(vm.IdContrato);
+                });
+            }else{
+                ngNotify.set('Aun no se han registrado los datos personales.', 'warn');
+            }
+        }
+
+        function GetDatosFiscal(IdContrato){
+            CatalogosFactory.GetDeepDatoFiscal(IdContrato).then(function(data){
+                console.log(data);
+            });
+        }
+
+        function AddDatosBancarios(){
+            if(vm.IdContrato != undefined){
+                for(var i = 0; i < vm.TipoTarjetaList.length; i ++){
+                    if(vm.TipoTarjetaList[i].Nombre == vm.TipoPlastico){
+                        vm.IdTipoTar = vm.TipoTarjetaList[i].IdTipoTarjeta;
+                        break;
+                    }
+                }
+                var ObjCliente = {};
+                ObjCliente.IdContrato = vm.IdContrato;
+                ObjCliente.IdBanco = vm.Banco.IdBanco;
+                ObjCliente.TipoPlastico = vm.IdTipoTar;
+                ObjCliente.Titular = vm.Titular;
+                ObjCliente.NumTarjeta = vm.NumTarjeta;
+                ObjCliente.CodigoSeg = vm.CodigoSeg;
+                ObjCliente.IdMes = vm.MesVen.IdMes;
+                ObjCliente.YearVen = vm.YearVen;
+                console.log(ObjCliente);
+                CatalogosFactory.AddDatoBancarioCliente(ObjCliente).then(function(data){
+                    console.log(data);
+                    GetDatosClientes(vm.IdContrato);
+                    GetDatosBancario(vm.IdContrato);
+                });
+            }else{
+                ngNotify.set('Aun no se han registrado los datos personales.', 'warn');
+            }
+        }
+
+        function GetDatosBancario(IdContrato){
+            CatalogosFactory.GetDatoBancarioDeep(IdContrato).then(function(data){
+                console.log(data);
+            });
+        }
+
+        function AddRefPersonales(){
+            vm.IdContrato = 29;
+            if(vm.IdContrato != undefined){
+                var ObjCliente = {};
+                ObjCliente.IdContrato = vm.IdContrato;
+                ObjCliente.NombreRef = vm.NombreRef;
+                ObjCliente.DireccionRef = vm.DireccionRef;
+                ObjCliente.EmailRef = vm.EmailRef;
+                ObjCliente.TelefonoRef = vm.TelefonoRef;
+                ObjCliente.OpcionProspecto = 1;
+                CatalogosFactory.AddReferenciaClienteL(ObjCliente).then(function(data){
+                    console.log(data);
+                    GetReferenciasPersonales(vm.IdContrato);
+                });
+            }else{
+                ngNotify.set('Aun no se han registrado los datos personales.', 'warn');
+            }
+        }
+
+        function GetReferenciasPersonales(IdContrato){
+            CatalogosFactory.GetReferenciaClienteL(IdContrato).then(function(data){
+                vm.RefPerList = data.GetReferenciaClienteLResult;
+            });
+        }
+
         var vm = this;
         vm.TipoPersona = "1";
         vm.ValidateRFC = /^[A-Z]{4}\d{6}[A-Z]{3}$|^[A-Z]{4}\d{6}\d{3}$|^[A-Z]{4}\d{6}[A-Z]{2}\d{1}$|^[A-Z]{4}\d{6}[A-Z]{1}\d{2}$|^[A-Z]{4}\d{6}\d{2}[A-Z]{1}$|^[A-Z]{4}\d{6}\d{1}[A-Z]{2}$/;
-        vm.MesList = {};
+        vm.MesList = [
+            { IdMes: 1, Nombre: 'Enero' },
+            { IdMes: 2, Nombre: 'Febrero' },
+            { IdMes: 3, Nombre: 'Marzo' },
+            { IdMes: 4, Nombre: 'Abril' },
+            { IdMes: 5, Nombre: 'Mayo' },
+            { IdMes: 6, Nombre: 'Junio' },
+            { IdMes: 7, Nombre: 'Julio' },
+            { IdMes: 8, Nombre: 'Agosto' },
+            { IdMes: 9, Nombre: 'Septiembre' },
+            { IdMes: 10, Nombre: 'Octubre' },
+            { IdMes: 11, Nombre: 'Noviembre' },
+            { IdMes: 12, Nombre: 'Diciembre' }
+        ];
+        vm.TipoTarjetaList = [
+            { IdTipoTarjeta: 1, Nombre: 'V' },
+            { IdTipoTarjeta: 2, Nombre: 'A' },
+            { IdTipoTarjeta: 3, Nombre: 'M' }
+        ]
         vm.AddDatosPersonales = AddDatosPersonales;
         vm.GetCiudadMunicipio = GetCiudadMunicipio;
         vm.GetLocalidad = GetLocalidad;
         vm.GetColonia = GetColonia;
         vm.GetCalle = GetCalle;
         vm.AddDatosPostales = AddDatosPostales;
+        vm.AddDatosFiscales = AddDatosFiscales;
+        vm.AddDatosBancarios = AddDatosBancarios;
+        vm.AddRefPersonales = AddRefPersonales;
         initData();
         
     });
