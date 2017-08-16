@@ -470,14 +470,42 @@
                                 <br>
                             </div>
                             <div class="col-md-12" style="text-align:right">
-                                <button type="submit" class="btn btn-success btn-sm">Agregar</button>
+                                <button type="submit" class="btn btn-success btn-sm" title="Agregar Referencia personal">Agregar</button>
                             </div>
                             <div class="col-md-12">
                                 <br>
                             </div>
                             <div class="col-md-12">
-                                <table>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th><b>Id</b></th>
+                                            <th><b>Nombre</b></th>
+                                            <th><b>Dirección</b></th>
+                                            <th><b>Teléfono</b></th>
+                                            <th><b>Email</b></th>
+                                            <th width="20%" colspan="2"><b>Acciones</b></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-show="$ctrl.SinRegistros">
+                                            <td class="text-center" colspan="7">SIN REGISTROS</td>
+                                        </tr>
+                                        <tr dir-paginate="X in $ctrl.RefPerList|itemsPerPage:7" ng-show="$ctrl.ConRegistros">
+                                            <td>{{ X.IdReferencia }}</td>
+                                            <td>{{ X.Nombre }}</td>
+                                            <td>{{ X.Direccion }}</td>
+                                            <td>{{ X.Telefono }}</td>
+                                            <td>{{ X.Email }}</td>
+                                            <td><button type="button" class="btn btn-warning btn-xs" ng-click="$ctrl.OpenEditRefPersonal(X)" title="Editar Referencia Personal"><i class="fa fa-pencil-square-o"></i> EDITAR</button></td>
+                                            <td><button type="button" class="btn btn-danger btn-xs" ng-click="$ctrl.OpenDeleteRefPersonal(X)" title="Eliminar Referencia Personal"><i class="fa fa-trash"></i> ELIMINAR</button></td>
+                                        </tr>
+                                    </tbody>
                                 </table>
+                                <div style="margin-top:-40px;">
+                                    <dir-pagination-controls max-size="7" direction-links="true" boundary-links="true" ng-if="$ctrl.RefPerList.length > 0">
+                                    </dir-pagination-controls>
+                                </div>
                             </div>
                         </div>
                     </div>

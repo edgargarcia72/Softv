@@ -2,7 +2,7 @@
 
 angular
     .module('softvApp')
-    .controller('ClienteNuevoCtrl', function(CatalogosFactory, ngNotify){
+    .controller('ClienteNuevoCtrl', function(CatalogosFactory, ngNotify, $uibModal, $rootScope){
 
         function initData(){
             CatalogosFactory.GetPlazaList().then(function(data){
@@ -24,6 +24,8 @@ angular
             CatalogosFactory.GetBancoList().then(function(data){
                 vm.BancoList = data.GetBancoListResult;
             });
+
+            GetReferenciasPersonales(vm.IdContrato);
         }
 
         function AddDatosPersonales(){
@@ -158,7 +160,6 @@ angular
                 ObjCliente.CodigoSeg = vm.CodigoSeg;
                 ObjCliente.IdMes = vm.MesVen.IdMes;
                 ObjCliente.YearVen = vm.YearVen;
-                console.log(ObjCliente);
                 CatalogosFactory.AddDatoBancarioCliente(ObjCliente).then(function(data){
                     console.log(data);
                     GetDatosClientes(vm.IdContrato);
@@ -176,7 +177,6 @@ angular
         }
 
         function AddRefPersonales(){
-            vm.IdContrato = 29;
             if(vm.IdContrato != undefined){
                 var ObjCliente = {};
                 ObjCliente.IdContrato = vm.IdContrato;
@@ -197,10 +197,64 @@ angular
         function GetReferenciasPersonales(IdContrato){
             CatalogosFactory.GetReferenciaClienteL(IdContrato).then(function(data){
                 vm.RefPerList = data.GetReferenciaClienteLResult;
+                if (vm.RefPerList.length == 0) {
+					vm.SinRegistros = true;
+					vm.ConRegistros = false;
+				} else {
+					vm.SinRegistros = false;
+					vm.ConRegistros = true;
+				}
+            });
+        }
+
+        function OpenEditRefPersonal(ObjRefCliente){
+            var ObjRefCliente = ObjRefCliente;
+            var modalInstance = $uibModal.open({
+                animation: true,
+                ariaLabelledBy: 'modal-title',
+                ariaDescribedBy: 'modal-body',
+                templateUrl: 'views/catalogos/ModalEditarRefCliente.html',
+                controller: 'ModalEditarRefClienteCtrl',
+                controllerAs: 'ctrl',
+                backdrop: 'static',
+                keyboard: false,
+                class: 'modal-backdrop fade',
+                size: 'lg',
+                resolve: {
+                    ObjRefCliente: function () {
+                        return ObjRefCliente;
+                    }
+                }
+            });
+        }
+
+        $rootScope.$on('LoadRefPersonal', function(e, IdContrato){
+            GetReferenciasPersonales(IdContrato);
+        });
+
+        function OpenDeleteRefPersonal(ObjRefCliente){
+            var ObjRefCliente = ObjRefCliente;
+            var modalInstance = $uibModal.open({
+                animation: true,
+                ariaLabelledBy: 'modal-title',
+                ariaDescribedBy: 'modal-body',
+                templateUrl: 'views/catalogos/ModalEliminarRefCliente.html',
+                controller: 'ModalEliminarRefClienteCtrl',
+                controllerAs: 'ctrl',
+                backdrop: 'static',
+                keyboard: false,
+                class: 'modal-backdrop fade',
+                size: 'sm',
+                resolve: {
+                    ObjRefCliente: function () {
+                        return ObjRefCliente;
+                    }
+                }
             });
         }
 
         var vm = this;
+        vm.IdContrato = 29;//Eliminar
         vm.TipoPersona = "1";
         vm.ValidateRFC = /^[A-Z]{4}\d{6}[A-Z]{3}$|^[A-Z]{4}\d{6}\d{3}$|^[A-Z]{4}\d{6}[A-Z]{2}\d{1}$|^[A-Z]{4}\d{6}[A-Z]{1}\d{2}$|^[A-Z]{4}\d{6}\d{2}[A-Z]{1}$|^[A-Z]{4}\d{6}\d{1}[A-Z]{2}$/;
         vm.MesList = [
@@ -231,6 +285,8 @@ angular
         vm.AddDatosFiscales = AddDatosFiscales;
         vm.AddDatosBancarios = AddDatosBancarios;
         vm.AddRefPersonales = AddRefPersonales;
+        vm.OpenEditRefPersonal = OpenEditRefPersonal;
+        vm.OpenDeleteRefPersonal = OpenDeleteRefPersonal;
         initData();
         
     });

@@ -231,7 +231,6 @@ angular
                     CP: ObjCliente.CodigoPos
                 }
             };
-            console.log(Parametros);
             $http.post(globalService.getUrl() + paths.UpdateClienteDPos, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -331,7 +330,6 @@ angular
                         AnioVencimiento: ObjCliente.YearVen
                     }]
             };
-            console.log(Parametros);
             $http.post(globalService.getUrl() + paths.AddDatoBancarioCliente, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -395,6 +393,50 @@ angular
                 'IdContrato': IdContrato
             }
             $http.post(globalService.getUrl() + paths.GetReferenciaClienteL, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.UpdateReferencia = function (ObjCliente) {
+            var deferred = $q.defer();
+            var config = {
+                headers: {
+                    'Authorization': $localStorage.currentUser.token
+                }
+            };
+            var Parametros = {
+                'lstReferencia': {
+                    Direccion: ObjCliente.DireccionRef,
+                    Email: ObjCliente.EmailRef,
+                    IdContrato: ObjCliente.IdContrato,
+                    IdReferencia: ObjCliente.IdReferencia,
+                    Nombre: ObjCliente.NombreRef,
+                    OpcionProspecto: ObjCliente.OpcionProspecto,
+                    Telefono: ObjCliente.TelefonoRef
+                }
+            };
+            $http.post(globalService.getUrl() + paths.UpdateReferencia, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.DeleteReferenciaCliente = function (IdReferencia) {
+            var deferred = $q.defer();
+            var config = {
+                headers: {
+                    'Authorization': $localStorage.currentUser.token
+                }
+            };
+            var Parametros = {
+                'IdReferencia': IdReferencia
+            };
+            $http.post(globalService.getUrl() + paths.DeleteReferenciaCliente, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);
