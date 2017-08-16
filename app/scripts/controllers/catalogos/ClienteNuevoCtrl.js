@@ -26,6 +26,8 @@ angular
             });
 
             GetReferenciasPersonales(vm.IdContrato);
+            GetNotas(vm.IdContrato);
+
         }
 
         function AddDatosPersonales(){
@@ -276,7 +278,7 @@ angular
         }
 
         var vm = this;
-        //vm.IdContrato = 28;//Eliminar
+        vm.IdContrato = 28;//Eliminar
         vm.TipoPersona = "1";
         vm.ValidateRFC = /^[A-Z]{4}\d{6}[A-Z]{3}$|^[A-Z]{4}\d{6}\d{3}$|^[A-Z]{4}\d{6}[A-Z]{2}\d{1}$|^[A-Z]{4}\d{6}[A-Z]{1}\d{2}$|^[A-Z]{4}\d{6}\d{2}[A-Z]{1}$|^[A-Z]{4}\d{6}\d{1}[A-Z]{2}$/;
         vm.MesList = [

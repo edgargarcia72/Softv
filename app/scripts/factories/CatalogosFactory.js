@@ -27,7 +27,8 @@ angular
             UpdateReferencia: '/ReferenciaCliente/UpdateReferencia',
             GetReferenciaClienteL: '/ReferenciaCliente/GetReferenciaClienteL',
             AddNotasClienteL: '/Cliente/AddNotasClienteL',
-            GetDeepListadoNotas: '/ListadoNotas/GetDeepListadoNotas'
+            GetDeepListadoNotas: '/ListadoNotas/GetDeepListadoNotas',
+            GetClientes: '/Cliente/GetClientes'
         };
 
         factory.GetPlazaList = function(){
@@ -479,6 +480,25 @@ angular
             }
             console.log(Parametros);
             $http.post(globalService.getUrl() + paths.GetDeepListadoNotas, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.GetClientes = function (Contrato) {
+            var deferred = $q.defer();
+            var config = {
+                headers: {
+                    'Authorization': $localStorage.currentUser.token
+                }
+            };
+            var Parametros = {
+                'lstCliente': {'IdCliente': Contrato},
+            };
+            console.log(Parametros);
+            $http.post(globalService.getUrl() + paths.GetClientes, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);

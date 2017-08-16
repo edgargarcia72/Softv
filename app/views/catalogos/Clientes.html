@@ -37,15 +37,110 @@
                                     <i class="md md-content-paste"></i> Contrato
                                 </uib-tab-heading>
                                 <br>
+                                <form name="FormSearchContrato" angular-validator-submit="$ctrl.SearchContrato()" novalidate angular-validator>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p>Ingrese el número de contrato</p>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <input type="text" name="InpContrato" class="form-control input-sm" ng-model="$ctrl.Contrato" ng-pattern="/^\d{1,9}-\d{1,9}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa un contrato.'">
+                                        </div>
+                                        <div class="col-md-2" style="text-align:left">
+                                            <button type="submit" class="btn btn-info btn-sm"><i class="fa fa-search"></i> Buscar</button>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <br>
+                                        </div>
+                                        <div class="col-md-12 note">
+                                            <p><small>El número de contrato está formado por 2 grupos de números con un guion intermedio p.e. (1234-1)</small></p>
+                                        </div>
+                                    </div>
+                                </form>
                                 <footer>
                                     <p class="text-right"></p>
                                 </footer>
                             </uib-tab>
                             <uib-tab index="1">
                                 <uib-tab-heading>
-                                    <i class="md fa fa-home"></i> Dirección
+                                    <i class="fa fa-home"></i> Dirección
                                 </uib-tab-heading>
                                 <br>
+                                <form name="FormSearchDireccion" angular-validator-submit="$ctrl.SearchDireccion()" novalidate angular-validator>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="col-md-3">
+                                                <p>Estado:</p>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <p>Ciudad:</p>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <p>Localidad:</p>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <p>Colonia:</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="col-md-3">
+                                                <select name="SltEstado" class="form-control input-sm" ng-model="$ctrl.Estado" ng-options="E.Nombre for E in $ctrl.EstadoList track by E.IdEstado" ng-change="$ctrl.GetCiudadMunicipio()" validate-on="dirty" required required-message="'Obligatorio'">
+                                                    <option value="">Selecciona</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <select name="CiuMun" class="form-control input-sm" ng-model="$ctrl.CiuMun" ng-options="CM.Municipio.Nombre for CM in $ctrl.CiudadMunicipioList track by CM.Municipio.IdMunicipio" ng-change="$ctrl.GetLocalidad()" validate-on="dirty" required required-message="'Obligatorio'">
+                                                    <option value="">Selecciona</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <select name="SltLocalida" class="form-control input-sm" ng-model="$ctrl.Localidad" ng-options="L.Localidad.Nombre for L in $ctrl.LocalidadList track by L.Localidad.IdLocalidad" ng-change="$ctrl.GetColonia()" validate-on="dirty" required required-message="'Obligatorio'">
+                                                    <option value="">Selecciona</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <select name="SltColonia" class="form-control input-sm" ng-model="$ctrl.Colonia" ng-options="C.Colonia.Nombre for C in $ctrl.ColoniaList track by C.Colonia.IdColonia" ng-change="$ctrl.GetCalle()" validate-on="dirty" required required-message="'Obligatorio'">
+                                                    <option value="">Selecciona</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="col-md-12">
+                                            <div class="col-md-3">
+                                                <p>Calle:</p>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <p>Número:</p>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <br>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <br>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="col-md-3">
+                                                <select name="InpCalle" class="form-control input-sm" ng-model="$ctrl.Calle" ng-options="C.Calle.Nombre for C in $ctrl.CalleList track by C.Calle.IdCalle" validate-on="dirty" required required-message="'Obligatorio'">
+                                                    <option value="">Selecciona</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <input name="InpNumero" type="text" class="form-control input-sm" ng-model="$ctrl.Numero">
+                                            </div>
+                                            <div class="col-md-3">
+                                            </div>
+                                            <div class="col-md-3">
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="col-md-12">
+                                            <div class="col-md-12" style="text-align:right">
+                                                <button type="submit" class="btn btn-info btn-sm"><i class="fa fa-search"></i> Buscar</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </form>
                                 <footer>
                                     <p class="text-right"></p>
                                 </footer>
@@ -74,49 +169,42 @@
 			</div>
         </div>
         <div class="col-md-12">
-            <div class="col-md-12">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th><b>Contrato</b></th>
-                            <th><b>Nombre</b></th>
-                            <th><b>A. Paterno</b></th>
-                            <th><b>A. Materno</b></th>
-                            <th><b>Calle</b></th>
-                            <th><b>Número</b></th>
-                            <th><b>Número Int</b></th>
-                            <th><b>Colonia</b></th>
-                            <th><b>Ciudad</b></th>
-                            <th><b>Teléfono</b></th>
-                            <th><b>¿Solo internet?</b></th>
-                            <th><b>Acciones</b></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-show="$ctrl.sinRegistros">
-							<td class="text-center" colspan="4">SIN REGISTROS</td>
-						</tr>
-                        <!--<tr dir-paginate="X in $ctrl.ComisionVLista|itemsPerPage:7" ng-show="$ctrl.conRegistros">-->
-                        <tr>
-                            <td>{{  }}</td>
-                            <td>{{  }}</td>
-                            <td>{{  }}</td>
-                            <td>{{  }}</td>
-                            <td>{{  }}</td>
-                            <td>{{  }}</td>
-                            <td>{{  }}</td>
-                            <td>{{  }}</td>
-                            <td>{{  }}</td>
-                            <td>{{  }}</td>
-                            <td>{{  }}</td>
-                            <td><button type="button" class="btn btn-danger btn-xs" ng-click="$ctrl.ConfirmarEliminar(X.IdComision)" title="Eliminar Ciudad"><i class="fa fa-trash"></i> ELIMINAR</button></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div style="margin-top:-40px;">
-					<dir-pagination-controls max-size="7" direction-links="true" boundary-links="true" ng-if="$ctrl.ComisionVLista.length > 0">
-					</dir-pagination-controls>
-				</div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th><b><small>ID</small></b></th>
+                        <th><b><small>Nombre completo</small></b></th>
+                        <th><b><small>Calle</small></b></th>
+                        <th><b><small>Número</small></b></th>
+                        <th><b><small>Número Int</small></b></th>
+                        <th><b><small>Colonia</small></b></th>
+                        <th><b><small>Ciudad</small></b></th>
+                        <th><b><small>Teléfono</small></b></th>
+                        <th><b><small>¿Solo internet?</small></b></th>
+                        <th><b><small>Acciones</small></b></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-show="$ctrl.SinRegistros">
+                        <td class="text-center" colspan="10">SIN REGISTROS</td>
+                    </tr>
+                    <tr dir-paginate="X in $ctrl.ClienteList|itemsPerPage:7" ng-show="$ctrl.ConRegistros">
+                        <td><small>{{ X.IdCliente }}</small></td>
+                        <td><small>{{ X.NomCompleto }}</small></td>
+                        <td><small>{{ X.Calle_ }}</small></td>
+                        <td><small>{{ X.NumExt }}</small></td>
+                        <td><small>{{ X.NumInt }}</small></td>
+                        <td><small>{{ X.Colonia_ }}</small></td>
+                        <td><small>{{ X.Ciudad_ }}</small></td>
+                        <td><small>{{ X.Telefono }}</small></td>
+                        <td><small>{{ X.SoloInternet }}</small></td>
+                        <td><button type="button" class="btn btn-danger btn-xs" ng-click="$ctrl.ConfirmarEliminar(X.IdComision)" title="Eliminar Ciudad"><i class="fa fa-trash"></i> ELIMINAR</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div style="margin-top:-40px;">
+                <dir-pagination-controls max-size="7" direction-links="true" boundary-links="true" ng-if="$ctrl.ClienteList.length > 0">
+                </dir-pagination-controls>
             </div>
         </div>
     </div>
