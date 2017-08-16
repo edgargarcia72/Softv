@@ -253,8 +253,30 @@ angular
             });
         }
 
+        function AddNotas(){
+             if(vm.IdContrato != undefined){
+                var ObjCliente = {};
+                ObjCliente.IdContrato = vm.IdContrato;
+                ObjCliente.Observaciones = vm.Observaciones;
+                ObjCliente.Notas = vm.Notas;
+                console.log(ObjCliente);
+                CatalogosFactory.AddReferenciaClienteL(ObjCliente).then(function(data){
+                    console.log(data);
+                    GetNotas(vm.IdContrato);
+                });
+            }else{
+                ngNotify.set('Aun no se han registrado los datos personales.', 'warn');
+            }
+        }
+
+        function GetNotas(IdContrato){
+            CatalogosFactory.GetDeepListadoNotas(IdContrato).then(function(data){
+                console.log(data);
+            });
+        }
+
         var vm = this;
-        vm.IdContrato = 29;//Eliminar
+        //vm.IdContrato = 28;//Eliminar
         vm.TipoPersona = "1";
         vm.ValidateRFC = /^[A-Z]{4}\d{6}[A-Z]{3}$|^[A-Z]{4}\d{6}\d{3}$|^[A-Z]{4}\d{6}[A-Z]{2}\d{1}$|^[A-Z]{4}\d{6}[A-Z]{1}\d{2}$|^[A-Z]{4}\d{6}\d{2}[A-Z]{1}$|^[A-Z]{4}\d{6}\d{1}[A-Z]{2}$/;
         vm.MesList = [
@@ -287,6 +309,7 @@ angular
         vm.AddRefPersonales = AddRefPersonales;
         vm.OpenEditRefPersonal = OpenEditRefPersonal;
         vm.OpenDeleteRefPersonal = OpenDeleteRefPersonal;
+        vm.AddNotas = AddNotas;
         initData();
         
     });

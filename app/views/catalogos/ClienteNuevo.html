@@ -513,12 +513,32 @@
             </uib-tab>
             <uib-tab index="5">
                 <uib-tab-heading>
-                    <i class="md md-content-paste"></i> <small>Referencias personales</small>
+                    <i class="fa fa-comment"></i> <small>Notas</small>
                 </uib-tab-heading>
-                <div class="row">
-                    <div class="col-md-10">
+                <form name="FormNotas" angular-validator-submit="$ctrl.AddNotas()" novalidate angular-validator>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="col-md-6">
+                                <p>Observaciones generales:</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p>Notas por robo de señal:</p>
+                            </div>
+                            <div class="col-md-6">
+                                <textarea name="TxaObservaciones" class="form-control" rows="4" ng-model="$ctrl.Observaciones" validate-on="dirty" required required-message="'Obligatorio'"></textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <textarea name="TxaDireccionRef" class="form-control" rows="4" ng-model="$ctrl.Notas" validate-on="dirty" required required-message="'Obligatorio'"></textarea>
+                            </div>
+                            <div class="col-md-12">
+                                <br>
+                            </div>
+                            <div class="col-md-12" style="text-align:right">
+                                <button type="submit" class="btn btn-success btn-sm">Validar</button>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </form>
             </uib-tab>
         </uib-tabset>
     </div>

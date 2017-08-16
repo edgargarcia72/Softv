@@ -25,7 +25,9 @@ angular
             AddReferenciaClienteL: '/Cliente/AddReferenciaClienteL',
             DeleteReferenciaCliente: '/ReferenciaCliente/DeleteReferenciaCliente',
             UpdateReferencia: '/ReferenciaCliente/UpdateReferencia',
-            GetReferenciaClienteL: '/ReferenciaCliente/GetReferenciaClienteL'
+            GetReferenciaClienteL: '/ReferenciaCliente/GetReferenciaClienteL',
+            AddNotasClienteL: '/Cliente/AddNotasClienteL',
+            GetDeepListadoNotas: '/ListadoNotas/GetDeepListadoNotas'
         };
 
         factory.GetPlazaList = function(){
@@ -437,6 +439,46 @@ angular
                 'IdReferencia': IdReferencia
             };
             $http.post(globalService.getUrl() + paths.DeleteReferenciaCliente, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.AddNotasClienteL = function (ObjCliente) {
+            var deferred = $q.defer();
+            var config = {
+                headers: {
+                    'Authorization': $localStorage.currentUser.token
+                }
+            };
+            var Parametros = {
+                'lstCliente': 
+                    {'IdContrato': ObjCliente.IdContrato},
+                    'ObservacionClienteAdd': [{ Observacion: ObjCliente.Observaciones }],
+                    'RoboDeSenalAdd': [{ Descripcion: ObjCliente.Notas }]
+            };
+            $http.post(globalService.getUrl() + paths.AddNotasClienteL, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.GetDeepListadoNotas = function (IdContrato) {
+            var deferred = $q.defer();
+            var config = {
+                headers: {
+                    'Authorization': $localStorage.currentUser.token
+                }
+            };
+            var Parametros = {
+                'IdContrato': IdContrato
+            }
+            console.log(Parametros);
+            $http.post(globalService.getUrl() + paths.GetDeepListadoNotas, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);
