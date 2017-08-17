@@ -25,9 +25,6 @@ angular
                 vm.BancoList = data.GetBancoListResult;
             });
 
-            GetReferenciasPersonales(vm.IdContrato);
-            GetNotas(vm.IdContrato);
-
         }
 
         function AddDatosPersonales(){
@@ -50,15 +47,14 @@ angular
             ObjCliente.FechaNac = FechaNacD + '/' + FechaNacM + '/' + FechaNacY;
             CatalogosFactory.AddClienteL(ObjCliente).then(function(data){
                 var IdContratoCliente = data.AddClienteLResult;
-                console.log(IdContratoCliente);
                 GetDatosClientes(IdContratoCliente);
             });
         }
 
         function GetDatosClientes(IdContratoCliente){
             CatalogosFactory.GetDeepCliente(IdContratoCliente).then(function(data){
-                console.log(data);
                 vm.IdContrato = data.GetDeepClienteResult.IdContrato;
+                vm.IdCliente = data.GetDeepClienteResult.IdCliente;
             });
         }
 
@@ -262,7 +258,7 @@ angular
                 ObjCliente.Observaciones = vm.Observaciones;
                 ObjCliente.Notas = vm.Notas;
                 console.log(ObjCliente);
-                CatalogosFactory.AddReferenciaClienteL(ObjCliente).then(function(data){
+                CatalogosFactory.AddNotasClienteL(ObjCliente).then(function(data){
                     console.log(data);
                     GetNotas(vm.IdContrato);
                 });
@@ -278,8 +274,8 @@ angular
         }
 
         var vm = this;
-        vm.IdContrato = 28;//Eliminar
         vm.TipoPersona = "1";
+        vm.Title = 'Cliente nuevo';
         vm.ValidateRFC = /^[A-Z]{4}\d{6}[A-Z]{3}$|^[A-Z]{4}\d{6}\d{3}$|^[A-Z]{4}\d{6}[A-Z]{2}\d{1}$|^[A-Z]{4}\d{6}[A-Z]{1}\d{2}$|^[A-Z]{4}\d{6}\d{2}[A-Z]{1}$|^[A-Z]{4}\d{6}\d{1}[A-Z]{2}$/;
         vm.MesList = [
             { IdMes: 1, Nombre: 'Enero' },

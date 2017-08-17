@@ -158,6 +158,16 @@ angular
                 templateUrl: 'views/catalogos/ClienteNuevo.html',
                 controller: 'ClienteNuevoCtrl',
                 controllerAs: '$ctrl'
+            },
+            {
+                name: 'home.catalogos.cliente_editar',
+                data: {
+                    pageTitle: 'SOFTV | EDITAR CLIENTE'
+                },
+                url: '/catalogo/clientes/Editar/:id',
+                templateUrl: 'views/catalogos/ClienteNuevo.html',
+                controller: 'ClienteEditarCtrl',
+                controllerAs: '$ctrl'
             }
         ];
         states.forEach(function (state) {

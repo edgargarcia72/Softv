@@ -10,11 +10,14 @@ angular
                 vm.EstadoList = data.GetEstadoList2_webResult;
             });
 
+            CatalogosFactory.GetPlazaList().then(function(data){
+                vm.PlazaList = data.GetPlazaListResult;
+            });
+
         }
 
         function SearchContrato(){
             CatalogosFactory.GetClientes(vm.Contrato).then(function(data){
-                console.log(data);
                 vm.ClienteList = data.GetClientesResult.Entities;
                 if (vm.ClienteList.length == 0) {
 					vm.SinRegistros = true;
@@ -23,7 +26,6 @@ angular
 					vm.SinRegistros = false;
 					vm.ConRegistros = true;
 				}
-                console.log(vm.ClienteList);
             });
         }
 
@@ -59,7 +61,42 @@ angular
             ObjDireccion.IdColonia = vm.Colonia.Colonia.IdColonia;
             ObjDireccion.IdCalle = vm.Calle.Calle.IdCalle;
             ObjDireccion.Numero = vm.Numero;
-            console.log(ObjDireccion);
+            CatalogosFactory.GetClientesByDireccion(ObjDireccion).then(function(data){
+                vm.ClienteList = data.GetClientesResult.Entities;
+                if (vm.ClienteList.length == 0) {
+					vm.SinRegistros = true;
+					vm.ConRegistros = false;
+				} else {
+					vm.SinRegistros = false;
+					vm.ConRegistros = true;
+				}
+            });
+        }
+
+        function SearchNombre(){
+            CatalogosFactory.GetClientesByNombre(vm.Nombre).then(function(data){
+                vm.ClienteList = data.GetClientesResult.Entities;
+                if (vm.ClienteList.length == 0) {
+					vm.SinRegistros = true;
+					vm.ConRegistros = false;
+				} else {
+					vm.SinRegistros = false;
+					vm.ConRegistros = true;
+				}
+            });
+        }
+
+        function SearchPlaza(){
+            CatalogosFactory.GetClientesByPlaza(vm.Plaza.IdPlaza).then(function(data){
+                vm.ClienteList = data.GetClientesResult.Entities;
+                if (vm.ClienteList.length == 0) {
+					vm.SinRegistros = true;
+					vm.ConRegistros = false;
+				} else {
+					vm.SinRegistros = false;
+					vm.ConRegistros = true;
+				}
+            });
         }
 
         var vm = this;
@@ -69,6 +106,8 @@ angular
         vm.GetColonia = GetColonia;
         vm.GetCalle = GetCalle;
         vm.SearchDireccion = SearchDireccion;
+        vm.SearchNombre = SearchNombre;
+        vm.SearchPlaza = SearchPlaza;
         initData();
 
     });

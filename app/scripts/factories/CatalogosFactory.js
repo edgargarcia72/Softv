@@ -28,7 +28,11 @@ angular
             GetReferenciaClienteL: '/ReferenciaCliente/GetReferenciaClienteL',
             AddNotasClienteL: '/Cliente/AddNotasClienteL',
             GetDeepListadoNotas: '/ListadoNotas/GetDeepListadoNotas',
-            GetClientes: '/Cliente/GetClientes'
+            GetClientes: '/Cliente/GetClientes',
+            GetClientesByDireccion: '/Cliente/GetClientes',
+            GetClientesByNombre: '/Cliente/GetClientes',
+            GetClientesByPlaza: '/Cliente/GetClientes',
+            UpdateClienteL: '/Cliente/UpdateClienteL'
         };
 
         factory.GetPlazaList = function(){
@@ -499,6 +503,105 @@ angular
             };
             console.log(Parametros);
             $http.post(globalService.getUrl() + paths.GetClientes, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.GetClientesByDireccion = function (ObjCliente) {
+            var deferred = $q.defer();
+            var config = {
+                headers: {
+                    'Authorization': $localStorage.currentUser.token
+                }
+            };
+            var Parametros = {
+                'lstCliente': {
+                    IdEstado: ObjCliente.IdEstado,
+                    IdMunicipio: ObjCliente.IdMunicipio,
+                    IdLocalidad: ObjCliente.IdLocalidad,
+                    IdColonia: ObjCliente.IdColonia,
+                    IdCalle: ObjCliente.IdCalle,
+                    Numero: ObjCliente.Numero
+                }
+            };
+            $http.post(globalService.getUrl() + paths.GetClientesByDireccion, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.GetClientesByNombre = function (NombreCompleto) {
+            var deferred = $q.defer();
+            var config = {
+                headers: {
+                    'Authorization': $localStorage.currentUser.token
+                }
+            };
+            var Parametros = {
+                'lstCliente': {
+                    NomCompleto: NombreCompleto
+                }
+            };
+            $http.post(globalService.getUrl() + paths.GetClientesByNombre, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.GetClientesByPlaza = function (IdPlaza) {
+            var deferred = $q.defer();
+            var config = {
+                headers: {
+                    'Authorization': $localStorage.currentUser.token
+                }
+            };
+            var Parametros = {
+                'lstCliente': {
+                    IdPlaza: IdPlaza
+                }
+            };
+            $http.post(globalService.getUrl() + paths.GetClientesByNombre, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.UpdateClienteL = function (ObjCliente) {
+            var deferred = $q.defer();
+            var config = {
+                headers: {
+                    'Authorization': $localStorage.currentUser.token
+                }
+            };
+            var Parametros = {
+                'lstCliente': {
+                    IdContrato: ObjCliente.IdContrato,
+                    Nombre1Er: ObjCliente.Nombre,
+                    Nombre2Do: ObjCliente.NombreAdi,
+                    ApePaterno: ObjCliente.PrimerApe,
+                    ApeMaterno: ObjCliente.SegundoApe,
+                    ClvElector: ObjCliente.ClaveElector,
+                    Telefono: ObjCliente.Telefono,
+                    Celular: ObjCliente.Celular,
+                    Email: ObjCliente.Email,
+                    IdPlaza: ObjCliente.IdPlaza,
+                    IdPeriodo: ObjCliente.IdPeriodo,
+                    IdTipoCliente: ObjCliente.IdTipoCliente,
+                    EsPersonaFisica: ObjCliente.TipoPersona,
+                    FechaNacimiento: ObjCliente.FechaNac
+                }
+            };
+            console.log(Parametros);
+            $http.post(globalService.getUrl() + paths.UpdateClienteL, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);
