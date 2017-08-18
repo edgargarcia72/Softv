@@ -2,7 +2,7 @@
 
 angular
     .module('softvApp')
-    .controller('ClienteEditarCtrl', function(CatalogosFactory, ngNotify, $uibModal, $stateParams){
+    .controller('ClienteEditarCtrl', function(CatalogosFactory, ngNotify, $uibModal, $stateParams, $rootScope){
 
         function initData(){
 
@@ -67,6 +67,7 @@ angular
                     for (var b = 0; b < vm.PlazaResult.length; b++) {
                         if (vm.PlazaResult[b].IdPlaza == vm.IdPlaza) {
                             vm.Plaza = vm.PlazaResult[b];
+                            vm.NombrePlaza = vm.PlazaResult[b].Nombre;
                         }
                     }
                 });
@@ -76,6 +77,7 @@ angular
                     for (var b = 0; b < vm.PeriodoResult.length; b++) {
                         if (vm.PeriodoResult[b].IdPeriodo == vm.IdPeriodo) {
                             vm.Periodo = vm.PeriodoResult[b];
+                            vm.NombrePeriodo = vm.PeriodoResult[b].Descripcion;
                         }
                     }
                 });
@@ -85,6 +87,7 @@ angular
                     for (var b = 0; b < vm.TipoCobroResult.length; b++) {
                         if (vm.TipoCobroResult[b].IdTipoCliente == vm.IdTipoCliente) {
                             vm.TipoCobro = vm.TipoCobroResult[b];
+                            vm.NombreTipoCobro = vm.TipoCobroResult[b].Nombre;
                         }
                     }
                 });
@@ -100,6 +103,7 @@ angular
                     for (var b = 0; b < vm.EstadoResult.length; b++) {
                         if (vm.EstadoResult[b].IdEstado == vm.IdEstado) {
                             vm.Estado = vm.EstadoResult[b];
+                            vm.NombreEstado = vm.EstadoResult[b].Nombre;
                         }
                     }
                 });
@@ -109,6 +113,7 @@ angular
                     for (var b = 0; b < vm.CiudadMunicipioList.length; b++) {
                         if (vm.CiudadMunicipioList[b].IdMunicipio == vm.IdMunicipio) {
                             vm.CiuMun = vm.CiudadMunicipioList[b];
+                            vm.NombreCiuMun = vm.CiudadMunicipioList[b].Municipio.Nombre;
                         }
                     }
                 });
@@ -118,6 +123,7 @@ angular
                     for (var b = 0; b < vm.LocalidadList.length; b++) {
                         if (vm.LocalidadList[b].IdLocalidad == vm.IdLocalidad) {
                             vm.Localidad = vm.LocalidadList[b];
+                            vm.NombreLocalidad = vm.LocalidadList[b].Localidad.Nombre;
                         }
                     }
                 });
@@ -127,6 +133,7 @@ angular
                     for (var b = 0; b < vm.ColoniaList.length; b++) {
                         if (vm.ColoniaList[b].IdColonia == vm.IdColonia) {
                             vm.Colonia = vm.ColoniaList[b];
+                            vm.NombreColonia = vm.ColoniaList[b].Colonia.Nombre;
                         }
                     }
                 });
@@ -136,6 +143,7 @@ angular
                     for (var b = 0; b < vm.CalleList.length; b++) {
                         if (vm.CalleList[b].IdCalle == vm.IdCalle) {
                             vm.Callle = vm.CalleList[b];
+                            vm.NombreCalle = vm.CalleList[b].Calle.Nombre;
                         }
                     }
                 });
@@ -175,27 +183,55 @@ angular
         }
 
         function GetCiudadMunicipio(){
-            CatalogosFactory.GetEstadosRelMun(vm.Estado.IdEstado).then(function(data){
-                vm.CiudadMunicipioList = data.GetEstadosRelMunResult;
-            });
+            if(vm.Estado != undefined){
+                CatalogosFactory.GetEstadosRelMun(vm.Estado.IdEstado).then(function(data){
+                    vm.CiudadMunicipioList = data.GetEstadosRelMunResult;
+                    vm.LocalidadList = null;
+                    vm.ColoniaList = null;
+                    vm.CalleList = null;
+                });
+            }else{
+                vm.CiudadMunicipioList = null;
+                vm.LocalidadList = null;
+                vm.ColoniaList = null;
+                vm.CalleList = null;
+            }
         }
 
         function GetLocalidad(){
-            CatalogosFactory.GetLocalidadRelMun(vm.CiuMun.Municipio.IdMunicipio).then(function(data){
-                vm.LocalidadList = data.GetLocalidadRelMunResult;
-            });
+            if(vm.CiuMun != undefined){
+                CatalogosFactory.GetLocalidadRelMun(vm.CiuMun.Municipio.IdMunicipio).then(function(data){
+                    vm.LocalidadList = data.GetLocalidadRelMunResult;
+                    vm.ColoniaList = null;
+                    vm.CalleList = null;
+                });
+            }else{
+                vm.LocalidadList = null;
+                vm.ColoniaList = null;
+                vm.CalleList = null;
+            }
         }
 
         function GetColonia(){
-            CatalogosFactory.GetColoniaRelLoc(vm.Localidad.IdLocalidad).then(function(data){
-                vm.ColoniaList = data.GetColoniaRelLocResult;
-            });
+            if(vm.Localidad != undefined){
+                CatalogosFactory.GetColoniaRelLoc(vm.Localidad.IdLocalidad).then(function(data){
+                    vm.ColoniaList = data.GetColoniaRelLocResult;
+                    vm.CalleList = null;
+                });
+            }else{
+                vm.ColoniaList = null;
+                vm.CalleList = null;
+            }
         }
 
         function GetCalle(){
-            CatalogosFactory.GetCalleRelCol(vm.Colonia.Colonia.IdColonia).then(function(data){
-                vm.CalleList = data.GetCalleRelColResult;
-            });
+            if(vm.Colonia != undefined){
+                CatalogosFactory.GetCalleRelCol(vm.Colonia.Colonia.IdColonia).then(function(data){
+                    vm.CalleList = data.GetCalleRelColResult;
+                });
+            }else{
+                vm.CalleList = null;
+            }
         }
 
         function GetDatosFiscal(IdContrato){
@@ -273,87 +309,6 @@ angular
             });
         }
 
-        var vm = this;
-        vm.Title = 'Cliente editar';
-        vm.IdContrato = $stateParams.id;
-        vm.ValidateRFC = /^[A-Z]{4}\d{6}[A-Z]{3}$|^[A-Z]{4}\d{6}\d{3}$|^[A-Z]{4}\d{6}[A-Z]{2}\d{1}$|^[A-Z]{4}\d{6}[A-Z]{1}\d{2}$|^[A-Z]{4}\d{6}\d{2}[A-Z]{1}$|^[A-Z]{4}\d{6}\d{1}[A-Z]{2}$/;
-        vm.MesList = [
-            { IdMes: 1, Nombre: 'Enero' },
-            { IdMes: 2, Nombre: 'Febrero' },
-            { IdMes: 3, Nombre: 'Marzo' },
-            { IdMes: 4, Nombre: 'Abril' },
-            { IdMes: 5, Nombre: 'Mayo' },
-            { IdMes: 6, Nombre: 'Junio' },
-            { IdMes: 7, Nombre: 'Julio' },
-            { IdMes: 8, Nombre: 'Agosto' },
-            { IdMes: 9, Nombre: 'Septiembre' },
-            { IdMes: 10, Nombre: 'Octubre' },
-            { IdMes: 11, Nombre: 'Noviembre' },
-            { IdMes: 12, Nombre: 'Diciembre' }
-        ];
-        vm.TipoTarjetaList = [
-            { IdTipoTarjeta: 1, Nombre: 'V' },
-            { IdTipoTarjeta: 2, Nombre: 'A' },
-            { IdTipoTarjeta: 3, Nombre: 'M' }
-        ]
-        vm.AddDatosPersonales = AddDatosPersonales;
-        vm.GetCiudadMunicipio = GetCiudadMunicipio;
-        vm.GetLocalidad = GetLocalidad;
-        vm.GetColonia = GetColonia;
-        vm.GetCalle = GetCalle;
-        initData();
-
-        /*function initData(){
-
-            
-
-            
-
-            
-
-            
-
-            
-            
-
-        }
-
-        function AddDatosPersonales(){
-            if(vm.IdContrato == 0){
-                var FechaNacD = vm.FechaNac.getDate();
-                var FechaNacM = vm.FechaNac.getMonth() + 1;
-                var FechaNacY = vm.FechaNac.getFullYear();
-                var ObjCliente = {};
-                ObjCliente.Nombre = vm.Nombre;
-                ObjCliente.NombreAdi = vm.NombreAdi;
-                ObjCliente.PrimerApe = vm.PrimerApe;
-                ObjCliente.SegundoApe = vm.SegundoApe;
-                ObjCliente.ClaveElector = vm.ClaveElector;
-                ObjCliente.Telefono = vm.Telefono;
-                ObjCliente.Celular = vm.Celular;
-                ObjCliente.Email = vm.Email;
-                ObjCliente.IdPlaza = vm.Plaza.IdPlaza;
-                ObjCliente.IdPeriodo = vm.Periodo.IdPeriodo;
-                ObjCliente.IdTipoCliente = vm.TipoCobro.IdTipoCliente;
-                ObjCliente.TipoPersona = (vm.TipoPersona == 'F') ? 1 : 0;
-                ObjCliente.FechaNac = FechaNacD + '/' + FechaNacM + '/' + FechaNacY;
-                CatalogosFactory.AddClienteL(ObjCliente).then(function(data){
-                    var IdContratoCliente = data.AddClienteLResult;
-                    console.log(IdContratoCliente);
-                    GetDatosClientes(IdContratoCliente);
-                });
-            }else{
-                
-            }
-            
-        }
-
-        
-
-        
-
-        
-
         function AddDatosPostales(){
             if(vm.IdContrato != undefined){
                 var ObjCliente = {};
@@ -389,7 +344,7 @@ angular
                 ObjCliente.NumIntDF = vm.NumIntDF;
                 ObjCliente.EntCallesDF = vm.EntCallesDF;
                 ObjCliente.ColoniaDF = vm.ColoniaDF;
-                ObjCliente.LocalidadDF = 'Localidad';
+                ObjCliente.LocalidadDF = vm.Pais;
                 ObjCliente.CiuMunDF = vm.CiuMunDF;
                 ObjCliente.EstadoDF = vm.EstadoDF;
                 ObjCliente.CodigoPosDF = vm.CodigoPosDF;
@@ -399,15 +354,12 @@ angular
                 ObjCliente.Tipo = 1;
                 CatalogosFactory.AddDatoFiscalCliente(ObjCliente).then(function(data){
                     console.log(data);
-                    GetDatosClientes(vm.IdContrato);
                     GetDatosFiscal(vm.IdContrato);
                 });
             }else{
                 ngNotify.set('Aun no se han registrado los datos personales.', 'warn');
             }
         }
-
-        
 
         function AddDatosBancarios(){
             if(vm.IdContrato != undefined){
@@ -428,15 +380,12 @@ angular
                 ObjCliente.YearVen = vm.YearVen;
                 CatalogosFactory.AddDatoBancarioCliente(ObjCliente).then(function(data){
                     console.log(data);
-                    GetDatosClientes(vm.IdContrato);
                     GetDatosBancario(vm.IdContrato);
                 });
             }else{
                 ngNotify.set('Aun no se han registrado los datos personales.', 'warn');
             }
         }
-
-        
 
         function AddRefPersonales(){
             if(vm.IdContrato != undefined){
@@ -518,16 +467,35 @@ angular
             }
         }
 
-        
-
         var vm = this;
-        //vm.IdContrato = 28;//Eliminar
-        vm.TipoPersona = "1";
-        vm.Title = 'Cliente nuevo';
-        
+        vm.Title = 'Cliente editar';
+        vm.ShowAccord = true;
+        vm.IdContrato = $stateParams.id;
+        vm.ValidateRFC = /^[A-Z]{4}\d{6}[A-Z]{3}$|^[A-Z]{4}\d{6}\d{3}$|^[A-Z]{4}\d{6}[A-Z]{2}\d{1}$|^[A-Z]{4}\d{6}[A-Z]{1}\d{2}$|^[A-Z]{4}\d{6}\d{2}[A-Z]{1}$|^[A-Z]{4}\d{6}\d{1}[A-Z]{2}$/;
+        vm.MesList = [
+            { IdMes: 1, Nombre: 'Enero' },
+            { IdMes: 2, Nombre: 'Febrero' },
+            { IdMes: 3, Nombre: 'Marzo' },
+            { IdMes: 4, Nombre: 'Abril' },
+            { IdMes: 5, Nombre: 'Mayo' },
+            { IdMes: 6, Nombre: 'Junio' },
+            { IdMes: 7, Nombre: 'Julio' },
+            { IdMes: 8, Nombre: 'Agosto' },
+            { IdMes: 9, Nombre: 'Septiembre' },
+            { IdMes: 10, Nombre: 'Octubre' },
+            { IdMes: 11, Nombre: 'Noviembre' },
+            { IdMes: 12, Nombre: 'Diciembre' }
+        ];
+        vm.TipoTarjetaList = [
+            { IdTipoTarjeta: 1, Nombre: 'V' },
+            { IdTipoTarjeta: 2, Nombre: 'A' },
+            { IdTipoTarjeta: 3, Nombre: 'M' }
+        ]
         vm.AddDatosPersonales = AddDatosPersonales;
-        
-        
+        vm.GetCiudadMunicipio = GetCiudadMunicipio;
+        vm.GetLocalidad = GetLocalidad;
+        vm.GetColonia = GetColonia;
+        vm.GetCalle = GetCalle;
         vm.AddDatosPostales = AddDatosPostales;
         vm.AddDatosFiscales = AddDatosFiscales;
         vm.AddDatosBancarios = AddDatosBancarios;
@@ -535,6 +503,6 @@ angular
         vm.OpenEditRefPersonal = OpenEditRefPersonal;
         vm.OpenDeleteRefPersonal = OpenDeleteRefPersonal;
         vm.AddNotas = AddNotas;
-        */
+        initData();
 
     });

@@ -27,8 +27,67 @@
         </div>
     </div>
     <div class="card-body">
-        <uib-tabset active="active" vertical="true" type="tabs">
+        <div class="panel-group" id="accordion3" ng-show="$ctrl.ShowAccord">
+			<div class="card panel">
+                <div class="card-head card-head-xs collapsed" data-toggle="collapse" data-parent="#accordion3" data-target="#accordion3-1" aria-expanded="false">
+					<header ng-if="$ctrl.NombreAdi != null && $ctrl.SegundoApe != null"><i class="fa fa-user"></i> {{ $ctrl.Nombre + ' ' + $ctrl.NombreAdi + ' ' + $ctrl.PrimerApe + ' ' + $ctrl.SegundoApe + ' ' + 'Contrato: ' + $ctrl.IdCliente }}</header>
+                    <header ng-if="$ctrl.NombreAdi == null && $ctrl.SegundoApe != null"><i class="fa fa-user"></i> {{ $ctrl.Nombre + ' ' + $ctrl.PrimerApe + ' ' + $ctrl.SegundoApe + ' ' + 'Contrato: ' + $ctrl.IdCliente }}</header>
+                    <header ng-if="$ctrl.NombreAdi != null && $ctrl.SegundoApe == null"><i class="fa fa-user"></i> {{ $ctrl.Nombre + ' ' + $ctrl.NombreAdi + ' ' + $ctrl.PrimerApe + ' ' + 'Contrato: ' + $ctrl.IdCliente }}</header>
+                    <header ng-if="$ctrl.NombreAdi == null && $ctrl.SegundoApe == null"><i class="fa fa-user"></i> {{ $ctrl.Nombre + ' ' + $ctrl.PrimerApe + ' ' + 'Contrato: ' + $ctrl.IdCliente }}</header>
+					<div class="tools">
+						<a class="btn btn-icon-toggle"><i class="fa fa-angle-down"></i></a>
+					</div>
+				</div>
+                <div id="accordion3-1" class="collapse buscarContrato" aria-expanded="false" style="height: 0px;">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-4">
+                                    <p><b>Plaza: </b>{{ $ctrl.NombrePlaza }}</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <p><b>Periodo: </b>{{ $ctrl.NombrePeriodo }}</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <p><b>Tipo de suscritor: </b>{{ $ctrl.NombreTipoCobro }}</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <p><i class="fa fa-phone"></i> {{ $ctrl.Telefono }}</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <p><i class="fa fa-mobile"></i> {{ $ctrl.Celular }}</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <p><i class="fa fa-credit-card"></i> {{ $ctrl.ClaveElector }}</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <p><i class="fa fa-envelope"></i> {{ $ctrl.Email }}</p>
+                                </div>
+                                <div class="col-md-12">
+                                    <p><i class="fa fa-globe"></i> <b>Estado: </b>{{ $ctrl.NombreEstado }} / <b>Ciudad: </b>{{ $ctrl.NombreCiuMun }} / <b>Localidad: </b>{{ $ctrl.NombreLocalidad}} / <b>Colonia: </b>{{ $ctrl.NombreColonia }}</p>
+                                </div>
+                                <div class="col-md-12">
+                                    <p><i class="fa fa-home"></i> <b>Calle: </b>{{ $ctrl.NombreCalle }} / <b>Número ext: </b>{{ $ctrl.NumExt }} / <b>Número int: </b>{{ $ctrl.NumInt }} / <b>C.P: </b>{{ $ctrl.CodigoPos }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+			</div>
+        </div>
+        <uib-tabset active="1" vertical="true" type="tabs">
             <uib-tab index="0">
+                <uib-tab-heading>
+                    <i class="fa fa-list-ol"></i>  <small>Servicios</small>
+                </uib-tab-heading>
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="col-md-12">
+                        </div>
+                    </div>
+                </div>
+            </uib-tab>
+            <uib-tab index="1">
                 <uib-tab-heading>
                     <i class="fa fa-user"></i>  <small>Datos Personales</small>
                 </uib-tab-heading>
@@ -149,7 +208,7 @@
                     </div>
                 </form>
             </uib-tab>
-            <uib-tab index="1">
+            <uib-tab index="2">
                 <uib-tab-heading>
                     <i class="fa fa-home"></i> <small>Datos Postales</small>
                 </uib-tab-heading>
@@ -236,7 +295,7 @@
                     </div>
                 </form>
             </uib-tab>
-            <uib-tab index="2">
+            <uib-tab index="3">
                 <uib-tab-heading>
                     <i class="fa fa-building"></i> <small>Datos Fiscales</small>
                 </uib-tab-heading>
@@ -352,7 +411,7 @@
                     </div>
                 </form>
             </uib-tab>
-            <uib-tab index="3">
+            <uib-tab index="4">
                 <uib-tab-heading>
                     <i class="fa fa-university"></i> <small>Datos Bancarios</small>
                 </uib-tab-heading>
@@ -404,7 +463,7 @@
                                     <span class="input-group-addon">20</span>
                                     <input name="InpYearVen" type="text" class="form-control input-sm" ng-model="$ctrl.YearVen" maxlength="2" ng-pattern="/^\d{2}$/" validator="$ctrl.YearVen >= 16" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa los 2 últimos dígitos.'">
                                 </div>-->
-                                <input name="InpYearVen" type="text" class="form-control input-sm" ng-model="$ctrl.YearVen" maxlength="4" ng-pattern="/^\d{4}$/" validator="$ctrl.YearVen >= 16" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa los 4 dígitos.'">
+                                <input name="InpYearVen" type="text" class="form-control input-sm" ng-model="$ctrl.YearVen" maxlength="4" ng-pattern="/^\d{4}$/" validator="$ctrl.YearVen >= 2016 && $ctrl.YearVen < 2100" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa los 4 dígitos.'">
                             </div>
                             <div class="col-md-12">
                                 <br>
@@ -433,7 +492,7 @@
                     </div>
                 </form>
             </uib-tab>
-            <uib-tab index="4">
+            <uib-tab index="5">
                 <uib-tab-heading>
                     <i class="fa fa-users"></i> <small>Referencias personales</small>
                 </uib-tab-heading>
@@ -503,16 +562,18 @@
                                         </tr>
                                     </tbody>
                                 </table>
+                                <br>
                                 <div style="margin-top:-40px;">
                                     <dir-pagination-controls max-size="7" direction-links="true" boundary-links="true" ng-if="$ctrl.RefPerList.length > 0">
                                     </dir-pagination-controls>
                                 </div>
+                                <br>
                             </div>
                         </div>
                     </div>
                 </form>
             </uib-tab>
-            <uib-tab index="5">
+            <uib-tab index="6">
                 <uib-tab-heading>
                     <i class="fa fa-comment"></i> <small>Notas</small>
                 </uib-tab-heading>

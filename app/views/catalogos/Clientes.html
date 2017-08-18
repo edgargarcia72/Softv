@@ -218,14 +218,18 @@
                     </tr>
                     <tr dir-paginate="X in $ctrl.ClienteList|itemsPerPage:7" ng-show="$ctrl.ConRegistros">
                         <td><small>{{ X.IdCliente }}</small></td>
-                        <td><small>{{ X.NomCompleto }}</small></td>
+                        <td ng-if="X.Nombre2Do != null && X.ApeMaterno != null"><small>{{ X.Nombre1Er + ' ' + X.Nombre2Do + ' ' + X.ApePaterno + ' ' + X.ApeMaterno }}</small></td>
+                        <td ng-if="X.Nombre2Do != null && X.ApeMaterno == null"><small>{{ X.Nombre1Er + ' ' + X.Nombre2Do + ' ' + X.ApePaterno }}</small></td>
+                        <td ng-if="X.Nombre2Do == null && X.ApeMaterno != null"><small>{{ X.Nombre1Er + ' ' + X.ApePaterno + ' ' + X.ApeMaterno }}</small></td>
+                        <td ng-if="X.Nombre2Do == null && X.ApeMaterno == null"><small>{{ X.Nombre1Er + ' ' + X.ApePaterno }}</small></td>
                         <td><small>{{ X.Calle_ }}</small></td>
                         <td><small>{{ X.NumExt }}</small></td>
                         <td><small>{{ X.NumInt }}</small></td>
                         <td><small>{{ X.Colonia_ }}</small></td>
                         <td><small>{{ X.Ciudad_ }}</small></td>
                         <td><small>{{ X.Telefono }}</small></td>
-                        <td><small>{{ X.SoloInternet }}</small></td>
+                        <td ng-if="X.SoloInternet == false"><small>{{ 'No' }}</small></td>
+                        <td ng-if="X.SoloInternet == true"><small>{{ 'Si' }}</small></td>
                         <td><a type="button" class="btn btn-warning btn-xs" ui-sref="home.catalogos.cliente_editar({ id: X.IdContrato })" title="Editar Cliente"><i class="fa fa-pencil-square-o"></i> EDITAR</a></td>
                     </tr>
                 </tbody>

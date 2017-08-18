@@ -2,7 +2,7 @@
 
 angular
     .module('softvApp')
-    .controller('ClienteNuevoCtrl', function(CatalogosFactory, ngNotify, $uibModal, $rootScope){
+    .controller('ClienteNuevoCtrl', function(CatalogosFactory, ngNotify, $uibModal, $rootScope, $state){
 
         function initData(){
             CatalogosFactory.GetPlazaList().then(function(data){
@@ -47,7 +47,8 @@ angular
             ObjCliente.FechaNac = FechaNacD + '/' + FechaNacM + '/' + FechaNacY;
             CatalogosFactory.AddClienteL(ObjCliente).then(function(data){
                 var IdContratoCliente = data.AddClienteLResult;
-                GetDatosClientes(IdContratoCliente);
+                $state.go('home.catalogos.cliente_editar', { id:IdContratoCliente });
+                //GetDatosClientes(IdContratoCliente);
             });
         }
 
@@ -59,27 +60,55 @@ angular
         }
 
         function GetCiudadMunicipio(){
-            CatalogosFactory.GetEstadosRelMun(vm.Estado.IdEstado).then(function(data){
-                vm.CiudadMunicipioList = data.GetEstadosRelMunResult;
-            })
+            if(vm.Estado != undefined){
+                CatalogosFactory.GetEstadosRelMun(vm.Estado.IdEstado).then(function(data){
+                    vm.CiudadMunicipioList = data.GetEstadosRelMunResult;
+                    vm.LocalidadList = null;
+                    vm.ColoniaList = null;
+                    vm.CalleList = null;
+                })
+            }else{
+                vm.CiudadMunicipioList = null;
+                vm.LocalidadList = null;
+                vm.ColoniaList = null;
+                vm.CalleList = null;
+            }
         }
 
         function GetLocalidad(){
-            CatalogosFactory.GetLocalidadRelMun(vm.CiuMun.Municipio.IdMunicipio).then(function(data){
-                vm.LocalidadList = data.GetLocalidadRelMunResult;
-            });
+            if(vm.CiuMun != undefined){
+                CatalogosFactory.GetLocalidadRelMun(vm.CiuMun.Municipio.IdMunicipio).then(function(data){
+                    vm.LocalidadList = data.GetLocalidadRelMunResult;
+                    vm.ColoniaList = null;
+                    vm.CalleList = null;
+                });
+            }else{
+                vm.LocalidadList = null;
+                vm.ColoniaList = null;
+                vm.CalleList = null;
+            }
         }
 
         function GetColonia(){
-            CatalogosFactory.GetColoniaRelLoc(vm.Localidad.IdLocalidad).then(function(data){
-                vm.ColoniaList = data.GetColoniaRelLocResult;
-            });
+            if(vm.Localidad != undefined){
+                CatalogosFactory.GetColoniaRelLoc(vm.Localidad.IdLocalidad).then(function(data){
+                    vm.ColoniaList = data.GetColoniaRelLocResult;
+                    vm.CalleList = null;
+                });
+            }else{
+                vm.ColoniaList = null;
+                vm.CalleList = null;
+            }
         }
 
         function GetCalle(){
-            CatalogosFactory.GetCalleRelCol(vm.Colonia.Colonia.IdColonia).then(function(data){
-                vm.CalleList = data.GetCalleRelColResult;
-            });
+            if(vm.Colonia != undefined){
+                CatalogosFactory.GetCalleRelCol(vm.Colonia.Colonia.IdColonia).then(function(data){
+                    vm.CalleList = data.GetCalleRelColResult;
+                });
+            }else{
+                vm.CalleList = null;
+            }
         }
 
         function AddDatosPostales(){
@@ -97,6 +126,7 @@ angular
                 ObjCliente.CodigoPos = vm.CodigoPos;
                 CatalogosFactory.UpdateClienteDPos(ObjCliente).then(function(data){
                     console.log(data);
+
                     GetDatosClientes(vm.IdContrato);
                 });
             }else{
@@ -117,7 +147,7 @@ angular
                 ObjCliente.NumIntDF = vm.NumIntDF;
                 ObjCliente.EntCallesDF = vm.EntCallesDF;
                 ObjCliente.ColoniaDF = vm.ColoniaDF;
-                ObjCliente.LocalidadDF = 'Localidad';
+                ObjCliente.LocalidadDF = vm.Pais;
                 ObjCliente.CiuMunDF = vm.CiuMunDF;
                 ObjCliente.EstadoDF = vm.EstadoDF;
                 ObjCliente.CodigoPosDF = vm.CodigoPosDF;
@@ -274,7 +304,8 @@ angular
         }
 
         var vm = this;
-        vm.TipoPersona = "1";
+        vm.ShowAccord = false;
+        vm.TipoPersona = "F";
         vm.Title = 'Cliente nuevo';
         vm.ValidateRFC = /^[A-Z]{4}\d{6}[A-Z]{3}$|^[A-Z]{4}\d{6}\d{3}$|^[A-Z]{4}\d{6}[A-Z]{2}\d{1}$|^[A-Z]{4}\d{6}[A-Z]{1}\d{2}$|^[A-Z]{4}\d{6}\d{2}[A-Z]{1}$|^[A-Z]{4}\d{6}\d{1}[A-Z]{2}$/;
         vm.MesList = [

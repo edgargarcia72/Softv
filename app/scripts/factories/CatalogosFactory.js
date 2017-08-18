@@ -337,6 +337,7 @@ angular
                         AnioVencimiento: ObjCliente.YearVen
                     }]
             };
+            console.log('AddBanco',Parametros);
             $http.post(globalService.getUrl() + paths.AddDatoBancarioCliente, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -482,7 +483,6 @@ angular
             var Parametros = {
                 'IdContrato': IdContrato
             }
-            console.log(Parametros);
             $http.post(globalService.getUrl() + paths.GetDeepListadoNotas, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -501,7 +501,6 @@ angular
             var Parametros = {
                 'lstCliente': {'IdCliente': Contrato},
             };
-            console.log(Parametros);
             $http.post(globalService.getUrl() + paths.GetClientes, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
