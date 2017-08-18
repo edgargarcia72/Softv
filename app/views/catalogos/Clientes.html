@@ -103,7 +103,9 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <br>
+                                    </div>
+                                    <br>
+                                    <div class="row">
                                         <div class="col-md-12">
                                             <div class="col-md-3">
                                                 <p>Calle:</p>
@@ -216,7 +218,7 @@
                     <tr ng-show="$ctrl.SinRegistros">
                         <td class="text-center" colspan="10">SIN REGISTROS</td>
                     </tr>
-                    <tr dir-paginate="X in $ctrl.ClienteList|itemsPerPage:7" ng-show="$ctrl.ConRegistros">
+                    <tr dir-paginate="X in $ctrl.ClienteList|orderBy:'IdContrato':true|itemsPerPage:7" ng-show="$ctrl.ConRegistros">
                         <td><small>{{ X.IdCliente }}</small></td>
                         <td ng-if="X.Nombre2Do != null && X.ApeMaterno != null"><small>{{ X.Nombre1Er + ' ' + X.Nombre2Do + ' ' + X.ApePaterno + ' ' + X.ApeMaterno }}</small></td>
                         <td ng-if="X.Nombre2Do != null && X.ApeMaterno == null"><small>{{ X.Nombre1Er + ' ' + X.Nombre2Do + ' ' + X.ApePaterno }}</small></td>

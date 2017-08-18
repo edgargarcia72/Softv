@@ -32,6 +32,7 @@ angular
             GetClientesByDireccion: '/Cliente/GetClientes',
             GetClientesByNombre: '/Cliente/GetClientes',
             GetClientesByPlaza: '/Cliente/GetClientes',
+            GetClientesAll: '/Cliente/GetClientes',
             UpdateClienteL: '/Cliente/UpdateClienteL'
         };
 
@@ -567,6 +568,40 @@ angular
                 }
             };
             $http.post(globalService.getUrl() + paths.GetClientesByNombre, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.GetClientesAll = function (ObjCliente) {
+            var deferred = $q.defer();
+            var config = {
+                headers: {
+                    'Authorization': $localStorage.currentUser.token
+                }
+            };
+            var Parametros = {
+                'lstCliente': {
+                    IdContrato: null,
+                    Nombre1Er: null,
+                    Nombre2Do: null,
+                    ApePaterno: null,
+                    ApeMaterno: null,
+                    ClvElector: null,
+                    Telefono: null,
+                    Celular: null,
+                    Email: null,
+                    IdPlaza: null,
+                    IdPeriodo: null,
+                    IdTipoCliente: null,
+                    EsPersonaFisica: null,
+                    FechaNacimiento: null
+                }
+            };
+            console.log(Parametros);
+            $http.post(globalService.getUrl() + paths.GetClientesAll, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);

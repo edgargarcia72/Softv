@@ -14,6 +14,17 @@ angular
                 vm.PlazaList = data.GetPlazaListResult;
             });
 
+            CatalogosFactory.GetClientesAll().then(function(data){
+                vm.ClienteList = data.GetClientesResult.Entities;
+                if (vm.ClienteList.length == 0) {
+					vm.SinRegistros = true;
+					vm.ConRegistros = false;
+				} else {
+					vm.SinRegistros = false;
+					vm.ConRegistros = true;
+				}
+            });
+
         }
 
         function SearchContrato(){
