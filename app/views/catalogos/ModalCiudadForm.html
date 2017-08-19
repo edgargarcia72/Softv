@@ -1,0 +1,29 @@
+<form name="FormCiudad" angular-validator-submit="ctrl.SaveCiudad()" novalidate angular-validator>
+    <div class="modal-header">
+        <button class="close" type="button" aria-label="close" ng-click="ctrl.cancel()">x</button>
+        <h4 class="modal-title"><i class="fa fa-plus"></i> {{ ctrl.Titulo }}</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <p><b>Nombre de la ciudad:</b></p>
+            </div>
+            <div class="col-md-12">
+                <input type="text" name="InpCiudad" class="form-control input-sm" ng-model="ctrl.Ciudad" validate-on="dirty" required required-message="'Obligatorio'">
+            </div>
+            <div class="col-md-12">
+                <br>
+            </div>
+            <div class="col-md-12">
+                <p><b>Estado(s):</b></p>
+            </div>
+            <div class="col-md-12">
+                <input type="text" name="InpEstado" class="form-control input-sm" ng-model="ctrl.Estado" validate-on="dirty" required required-message="'Obligatorio'">
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary btn-sm" title="Guardar ciudad">Guardar</button>
+        <button type="button" class="btn btn-default btn-sm" ng-click="ctrl.cancel()" title="Salir">Cancelar</button>
+    </div>
+</form>

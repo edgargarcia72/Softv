@@ -2,12 +2,13 @@
 
 angular
     .module('softvApp')
-    .controller('ModalEliminarRefClienteCtrl', function($uibModalInstance, $uibModal, ObjRefCliente, CatalogosFactory, $state, $rootScope){
+    .controller('ModalEliminarRefClienteCtrl', function($uibModalInstance, $uibModal, ObjRefCliente, CatalogosFactory, $state, $rootScope, ngNotify){
 
         function DeletRefPersonal(){
             var IdReferencia = vm.ObjRefCliente.IdReferencia;
             CatalogosFactory.DeleteReferenciaCliente(IdReferencia).then(function(data){
                 console.log(data);
+                ngNotify.set('CORRECTO, se eliminó referencia personal.', 'success');
                 $rootScope.$emit('LoadRefPersonal', vm.ObjRefCliente.IdContrato);
                 cancel();
             });

@@ -47,8 +47,8 @@ angular
             ObjCliente.FechaNac = FechaNacD + '/' + FechaNacM + '/' + FechaNacY;
             CatalogosFactory.AddClienteL(ObjCliente).then(function(data){
                 var IdContratoCliente = data.AddClienteLResult;
+                ngNotify.set('CORRECTO, se añadió cliente nuevo.', 'success');
                 $state.go('home.catalogos.cliente_editar', { id:IdContratoCliente });
-                //GetDatosClientes(IdContratoCliente);
             });
         }
 
@@ -126,8 +126,8 @@ angular
                 ObjCliente.CodigoPos = vm.CodigoPos;
                 CatalogosFactory.UpdateClienteDPos(ObjCliente).then(function(data){
                     console.log(data);
-
                     GetDatosClientes(vm.IdContrato);
+                    ngNotify.set('CORRECTO, se guardaron datos postales.', 'success');
                 });
             }else{
                 ngNotify.set('Aun no se han registrado los datos personales.', 'warn');
@@ -159,6 +159,7 @@ angular
                     console.log(data);
                     GetDatosClientes(vm.IdContrato);
                     GetDatosFiscal(vm.IdContrato);
+                    ngNotify.set('CORRECTO, se guardaron datos fiscales.', 'success');
                 });
             }else{
                 ngNotify.set('Aun no se han registrado los datos personales.', 'warn');
@@ -192,6 +193,7 @@ angular
                     console.log(data);
                     GetDatosClientes(vm.IdContrato);
                     GetDatosBancario(vm.IdContrato);
+                    ngNotify.set('CORRECTO, se guardaron datos bancarios.', 'success');
                 });
             }else{
                 ngNotify.set('Aun no se han registrado los datos personales.', 'warn');
@@ -216,6 +218,7 @@ angular
                 CatalogosFactory.AddReferenciaClienteL(ObjCliente).then(function(data){
                     console.log(data);
                     GetReferenciasPersonales(vm.IdContrato);
+                    ngNotify.set('CORRECTO, se guardó referencia personal.', 'success');
                 });
             }else{
                 ngNotify.set('Aun no se han registrado los datos personales.', 'warn');
@@ -291,6 +294,7 @@ angular
                 CatalogosFactory.AddNotasClienteL(ObjCliente).then(function(data){
                     console.log(data);
                     GetNotas(vm.IdContrato);
+                    ngNotify.set('CORRECTO, se guardaron notas.', 'success');
                 });
             }else{
                 ngNotify.set('Aun no se han registrado los datos personales.', 'warn');

@@ -2,7 +2,7 @@
 
 angular
     .module('softvApp')
-    .controller('ModalEditarRefClienteCtrl', function($uibModalInstance, $uibModal, ObjRefCliente, CatalogosFactory, $state, $rootScope){
+    .controller('ModalEditarRefClienteCtrl', function($uibModalInstance, $uibModal, ObjRefCliente, CatalogosFactory, $state, $rootScope, ngNotify){
 
         function UpdateRefPersonal(){
             var ObjCliente = {};
@@ -15,6 +15,7 @@ angular
             ObjCliente.TelefonoRef = vm.TelefonoRef;
             CatalogosFactory.UpdateReferencia(ObjCliente).then(function(data){
                 console.log(data);
+                ngNotify.set('CORRECTO, se guardó referencia personal.', 'success');
                 $rootScope.$emit('LoadRefPersonal', ObjCliente.IdContrato);
                 cancel();
             });

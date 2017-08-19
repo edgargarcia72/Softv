@@ -120,7 +120,7 @@
                                 </select>
                             </div>
                             <div class="col-md-3">
-                                <select name="SclTipoCobro" class="form-control input-sm" ng-model="$ctrl.TipoCobro" ng-options="T.Nombre for T in $ctrl.TipoCobroList track by T.IdTipoCliente" validate-on="dirty" required required-message="'Obligatorio'">
+                                <select name="SclTipoCobro" class="form-control input-sm" ng-model="$ctrl.TipoCobro" ng-options="T.Nombre for T in $ctrl.TipoCobroList track by T.IdTipoCliente" validate-on="dirty" required required-message="'Obligatorio'" ng-disabled="$ctrl.BlockInput">
                                     <option value="">Selecciona</option>
                                 </select>
                             </div>
@@ -473,7 +473,7 @@
                             </div>
                             <div class="col-md-12">
                                 <label class="radio-inline radio-styled">
-                                    <input type="radio" name="RdoTipoPlastico" ng-model="$ctrl.TipoPlastico" value="V" ng-disabled="false"><span>VISA</span>
+                                    <input type="radio" name="RdoTipoPlastico" ng-model="$ctrl.TipoPlastico" value="V" ng-disabled="false" required required-message="'Obligatorio'"><span>VISA</span>
                                 </label>
                                 <label class="radio-inline radio-styled">
                                     <input type="radio" name="RdoTipoPlastico" ng-model="$ctrl.TipoPlastico" value="A" ng-disabled="false"><span>American Express</span>

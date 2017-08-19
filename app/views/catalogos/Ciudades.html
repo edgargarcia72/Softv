@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 <div class="col-md-2" style="text-align:right">
-				    <button type="button" class="btn btn-primary btn-sm" ng-click="" title="Crear una ciudad nueva">NUEVO CIUDAD</button>
+				    <button type="button" class="btn btn-primary btn-sm" ng-click="$ctrl.OpenAddCiudad()" title="Crear una ciudad nueva">NUEVA CIUDAD</button>
 			    </div>
 			</div>
         </div>
@@ -49,8 +49,8 @@
                         <tr>
                             <td>{{ X.IdComision }}</td>
                             <td>{{ X.TipServ }}</td>
-                            <td><button type="button" class="btn btn-danger btn-xs" ng-click="$ctrl.ConfirmarEliminar(X.IdComision)" title="Eliminar Ciudad"><i class="fa fa-trash"></i> ELIMINAR</button></td>
-                            <td><button type="button" class="btn btn-warning btn-xs" title="Editar Ciudad"><i class="fa fa-pencil-square-o"></i> EDITAR</button></td>
+                            <td><button type="button" class="btn btn-warning btn-xs" ng-click="$ctrl.OpenUpdateCiudad()" title="Editar Ciudad"><i class="fa fa-pencil-square-o"></i> EDITAR</button></td>
+                            <td><button type="button" class="btn btn-danger btn-xs" ng-click="$ctrl.OpenDeleteCiudad()" title="Eliminar Ciudad"><i class="fa fa-trash"></i> ELIMINAR</button></td>
                         </tr>
                     </tbody>
                 </table>
