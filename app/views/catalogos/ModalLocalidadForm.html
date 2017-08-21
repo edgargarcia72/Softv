@@ -1,0 +1,86 @@
+<form name="FormPlaza" angular-validator-submit="ctrl.SavePlaza()" novalidate angular-validator>
+    <div class="modal-header">
+        <button class="close" type="button" aria-label="close" ng-click="ctrl.cancel()">x</button>
+        <h4 class="modal-title"><i class="fa fa-plus"></i> {{ ctrl.Titulo }}</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <p><b><small>Nombre de la Localidad:</small></b></p>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <input type="text" name="InpLocalidad" class="form-control input-sm" ng-model="ctrl.Localidad" validate-on="dirty" required required-message="'Obligatorio'">
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-5">
+                    <p><b><small>Estado:</small></b></p>
+                </div>
+                <div class="col-md-5">
+                    <p><b><small>Ciudades:</small></b></p>
+                </div>
+                <div class="col-md-5">
+                    <p><b><small></small></b></p>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-5">
+                    <select name="SltEstado" type="text" class="form-control input-sm" ng-model="$ctrl.Estado">
+                        <option value="">Selecciona</option>
+                    </select>
+                </div>
+                <div class="col-md-5">
+                    <select name="SltCiudad" type="text" class="form-control input-sm" ng-model="$ctrl.Ciudad">
+                        <option value="">Selecciona</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-success bt-sm" title="Agregar Ciudad">Agregar</button>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th><b>Estado</b></th>
+                                <th><b>Ciudad</b></th>
+                                <th><b>Acciones</b></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-show="$ctrl.sinRegistros">
+                                <td class="text-center" colspan="4">SIN REGISTROS</td>
+                            </tr>
+                            <!--<tr dir-paginate="X in $ctrl.ComisionVLista|itemsPerPage:7" ng-show="$ctrl.conRegistros">-->
+                            <tr>
+                                <td>{{ X.IdComision }}</td>
+                                <td>{{ X.TipServ }}</td>
+                                <td><button type="button" class="btn btn-warning btn-xs" title="Eliminar Ciudad">Eliminar</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br>
+                    <div style="margin-top:-40px;">
+                        <dir-pagination-controls max-size="7" direction-links="true" boundary-links="true" ng-if="$ctrl.ComisionVLista.length > 0">
+                        </dir-pagination-controls>
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary btn-sm" title="Guardar Localidad">Guardar</button>
+        <button type="button" class="btn btn-default btn-sm" ng-click="ctrl.cancel()" title="Salir">Cancelar</button>
+    </div>
+</form>
