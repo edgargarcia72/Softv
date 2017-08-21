@@ -31,12 +31,12 @@
             </div>
             <div class="col-md-12">
                 <div class="col-md-5">
-                    <select name="SltEstado" type="text" class="form-control input-sm" ng-model="$ctrl.Estado">
+                    <select name="SltEstado" type="text" class="form-control input-sm" ng-model="ctrl.Estado">
                         <option value="">Selecciona</option>
                     </select>
                 </div>
                 <div class="col-md-5">
-                    <select name="SltCiudad" type="text" class="form-control input-sm" ng-model="$ctrl.Ciudad">
+                    <select name="SltCiudad" type="text" class="form-control input-sm" ng-model="ctrl.Ciudad">
                         <option value="">Selecciona</option>
                     </select>
                 </div>
@@ -58,10 +58,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-show="$ctrl.sinRegistros">
+                            <tr ng-show="ctrl.sinRegistros">
                                 <td class="text-center" colspan="4">SIN REGISTROS</td>
                             </tr>
-                            <!--<tr dir-paginate="X in $ctrl.ComisionVLista|itemsPerPage:7" ng-show="$ctrl.conRegistros">-->
+                            <!--<tr dir-paginate="X in ctrl.ComisionVLista|itemsPerPage:7" ng-show="ctrl.conRegistros">-->
                             <tr>
                                 <td>{{ X.IdComision }}</td>
                                 <td>{{ X.TipServ }}</td>
@@ -71,7 +71,7 @@
                     </table>
                     <br>
                     <div style="margin-top:-40px;">
-                        <dir-pagination-controls max-size="7" direction-links="true" boundary-links="true" ng-if="$ctrl.ComisionVLista.length > 0">
+                        <dir-pagination-controls max-size="7" direction-links="true" boundary-links="true" ng-if="ctrl.ComisionVLista.length > 0">
                         </dir-pagination-controls>
                     </div>
                     <br>

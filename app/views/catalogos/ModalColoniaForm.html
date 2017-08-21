@@ -1,0 +1,150 @@
+<form name="FormColonia" angular-validator-submit="ctrl.SaveColonia()" novalidate angular-validator>
+    <div class="modal-header">
+        <button class="close" type="button" aria-label="close" ng-click="ctrl.cancel()">x</button>
+        <h4 class="modal-title"><i class="fa fa-plus"></i> {{ ctrl.Titulo }}</h4>
+    </div>
+    <div class="modal-body">
+        <uib-tabset active="active">
+            <uib-tab index="0">
+                <uib-tab-heading>
+                    Datos del registro
+                </uib-tab-heading>
+                <br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-9">
+                            <p><b><small>Nombre de la colonia</small></b></p>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-9">
+                            <input name="InpColonia" type="text" class="form-control input-sm" ng-model="ctrl.Colonia" validate-on="dirty" required required-message="'Obligatorio'">
+                        </div>
+                    </div>
+                </div>
+                <footer>
+                    <p class="text-right"></p>
+                </footer>
+            </uib-tab>
+            <uib-tab index="1">
+                <uib-tab-heading>
+                    Relación de la colonia con las localidades
+                </uib-tab-heading>
+                <br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <p><b><small>Estado:</small></b></p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><b><small>Ciudad:</small></b></p>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <select name="InpEstado" class="form-control input-sm" ng-model="ctrl.Estado" validate-on="dirty" required required-message="'Obligatorio'">
+                                <option value="">Selecciona</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <select name="InpCiudad" class="form-control input-sm" ng-model="ctrl.Ciudad" validate-on="dirty" required required-message="'Obligatorio'">
+                                <option value="">Selecciona</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <p><b><small>Localidad:</small></b></p>
+                        </div>
+                        <div class="col-md-3">
+                            <p><b><small>Código Postal:</small></b></p>
+                        </div>
+                        <div class="col-md-3">
+                            <p><b><small>Tipo de Colonia:</small></b></p>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <select name="InpLocalidad" class="form-control input-sm" ng-model="ctrl.Localidad" validate-on="dirty" required required-message="'Obligatorio'">
+                                <option value="">Selecciona</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <input name="InpCP" type="text" class="form-control input-sm" ng-model="ctrl.CP" maxlength="5" ng-pattern="/^\d{5}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 5 dígitos.'">
+                        </div>
+                        <div class="col-md-3">
+                            <select name="InpTipoColonia" class="form-control input-sm" ng-model="ctrl.TipoColonia" validate-on="dirty" required required-message="'Obligatorio'">
+                                <option value="">Selecciona</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-8">
+                            <p><b><small>Seleccione los servicios relacionados a esta colonia</small></b></p>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-8">
+                            <input name="InpServicios" type="text" class="form-control input-sm" ng-model="ctrl.Servicios" validate-on="dirty" required required-message="'Obligatorio'">
+                        </div>
+                        <div class="col-md-4" style="text-align:center">
+                            <button type="button" class="btn btn-success btn-sm" title="Agregar Relación">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th><b>Estado</b></th>
+                                        <th><b>Localidad</b></th>
+                                        <th><b>Ciudad</b></th>
+                                        <th><b>CP</b></th>
+                                        <th><b>Tipo Colonia</b></th>
+                                        <th><b>Acciones</b></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-show="ctrl.sinRegistros">
+                                        <td class="text-center" colspan="4">SIN REGISTROS</td>
+                                    </tr>
+                                    <!--<tr dir-paginate="X in ctrl.ComisionVLista|itemsPerPage:7" ng-show="ctrl.conRegistros">-->
+                                    <tr>
+                                        <td>{{ X.IdComision }}</td>
+                                        <td>{{ X.TipServ }}</td>
+                                        <td>{{ X.TipServ }}</td>
+                                        <td>{{ X.TipServ }}</td>
+                                        <td>{{ X.TipServ }}</td>
+                                        <td><button type="button" class="btn btn-danger btn-xs" title="Eliminar Ciudad">Eliminar</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <br>
+                            <div style="margin-top:-40px;">
+                                <dir-pagination-controls max-size="7" direction-links="true" boundary-links="true" ng-if="ctrl.ComisionVLista.length > 0">
+                                </dir-pagination-controls>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+                <footer>
+                    <p class="text-right"></p>
+                </footer>
+            </uib-tab>
+        </uib-tabset>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary btn-sm" title="Guardar Plaza">Guardar</button>
+        <button type="button" class="btn btn-default btn-sm" ng-click="ctrl.cancel()" title="Salir">Cancelar</button>
+    </div>
+</form>

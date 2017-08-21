@@ -2,13 +2,14 @@
 
 angular
     .module('softvApp')
-    .controller('ModalCiudadEliminarCtrl', function($uibModalInstance){
+    .controller('ModalCalleFormUpdateCtrl', function($uibModalInstance){
 
         function cancel() {
             $uibModalInstance.dismiss('cancel');
         }
 
         var vm = this;
+        vm.Titulo = 'Efitar Registro';
         vm.cancel = cancel;
 
     });

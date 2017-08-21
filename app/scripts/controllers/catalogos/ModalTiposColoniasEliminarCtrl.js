@@ -2,7 +2,7 @@
 
 angular
     .module('softvApp')
-    .controller('ModalCiudadEliminarCtrl', function($uibModalInstance){
+    .controller('ModalTiposColoniasEliminarCtrl', function($uibModalInstance){
 
         function cancel() {
             $uibModalInstance.dismiss('cancel');

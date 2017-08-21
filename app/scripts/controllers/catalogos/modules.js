@@ -110,8 +110,8 @@ angular
                     }
                 },
                 url: '/catalogo/tipos_colonias',
-                templateUrl: 'views/catalogos/Tipos_colonias.html',
-                controller: 'Tipos_coloniasCtrl',
+                templateUrl: 'views/catalogos/TiposColonias.html',
+                controller: 'TiposColoniasCtrl',
                 controllerAs: '$ctrl'
             },
             {

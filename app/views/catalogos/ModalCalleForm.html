@@ -1,0 +1,115 @@
+<form name="FormCalle" angular-validator-submit="ctrl.SaveCalle()" novalidate angular-validator>
+    <div class="modal-header">
+        <button class="close" type="button" aria-label="close" ng-click="ctrl.cancel()">x</button>
+        <h4 class="modal-title"><i class="fa fa-plus"></i> {{ ctrl.Titulo }}</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <p><b><small>Nombre de la calle</small></b></p>
+                </div>
+                <div class="col-md-12">
+                    <input name="InpCalles" type="text" class="form-control input-sm" ng-model="ctrl.Calle" validate-on="dirty" required required-message="'Obligatorio'">
+                </div>
+            </div>
+        </div>
+        <br>
+        <p>Relación de la calle con las colonias</p>
+        <hr style="border:1px dotted;">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <p><b><small>Estado:</small></b></p>
+                </div>
+                <div class="col-md-6">
+                    <p><b><small>Ciudad:</small></b></p>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <select name="SltEstado" class="form-control input-sm" ng-model="ctrl.Estado" validate-on="dirty" required required-message="'Obligatorio'">
+                        <option value="">Selecciona</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <select name="SltCiudad" class="form-control input-sm" ng-model="ctrl.Ciudad" validate-on="dirty" required required-message="'Obligatorio'">
+                        <option value="">Selecciona</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <p><b><small>Localidad:</small></b></p>
+                </div>
+                <div class="col-md-6">
+                    <p><b><small>Colonia:</small></b></p>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <select name="InpLocalidad" class="form-control input-sm" ng-model="ctrl.Localidad" validate-on="dirty" required required-message="'Obligatorio'">
+                        <option value="">Selecciona</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <select name="SltColonia" class="form-control input-sm" ng-model="ctrl.Colonia" validate-on="dirty" required required-message="'Obligatorio'">
+                        <option value="">Selecciona</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-12" style="text-align:right">
+                    <button type="button" class="btn btn-success btn-sm" title="Agregar Relacion">Agregar</button>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th><b>Estado</b></th>
+                                <th><b>Ciudad</b></th>
+                                <th><b>Localidad</b></th>
+                                <th><b>Tipo Colonia</b></th>
+                                <th><b>Acciones</b></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-show="ctrl.sinRegistros">
+                                <td class="text-center" colspan="4">SIN REGISTROS</td>
+                            </tr>
+                            <!--<tr dir-paginate="X in ctrl.ComisionVLista|itemsPerPage:7" ng-show="ctrl.conRegistros">-->
+                            <tr>
+                                <td>{{ X.IdComision }}</td>
+                                <td>{{ X.TipServ }}</td>
+                                <td>{{ X.TipServ }}</td>
+                                <td>{{ X.TipServ }}</td>
+                                <td><button type="button" class="btn btn-danger btn-xs" title="Eliminar Relación">Eliminar</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br>
+                    <div style="margin-top:-40px;">
+                        <dir-pagination-controls max-size="7" direction-links="true" boundary-links="true" ng-if="ctrl.ComisionVLista.length > 0">
+                        </dir-pagination-controls>
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary btn-sm" title="Guardar Calle">Guardar</button>
+        <button type="button" class="btn btn-default btn-sm" ng-click="ctrl.cancel()" title="Salir">Cancelar</button>
+    </div>
+</form>
