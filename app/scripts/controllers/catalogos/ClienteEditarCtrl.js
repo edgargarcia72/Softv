@@ -452,7 +452,6 @@ angular
                 ObjCliente.IdContrato = vm.IdContrato;
                 ObjCliente.Observaciones = vm.Observaciones;
                 ObjCliente.Notas = vm.Notas;
-                console.log(ObjCliente);
                 CatalogosFactory.AddNotasClienteL(ObjCliente).then(function(data){
                     console.log(data);
                     GetNotas(vm.IdContrato);

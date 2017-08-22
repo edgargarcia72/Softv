@@ -14,6 +14,7 @@
     .contect-tabs{
         float:left;
     }
+
 </style>
 <div class="card animated fadeIn" style="margin-top:20px;">
     <div class="card-head style-default-light" style="padding-top:10px; padding-left:10px;">
@@ -97,22 +98,22 @@
                     <div class="row">
                         <div class="col-md-9">
                             <div class="col-md-3">
-                                <p><small>Contrato:</small></p>
+                                <p><small><b>Contrato:</b></small></p>
                             </div>
                             <div class="col-md-3">
-                                <p><small>Plaza:</small></p>
+                                <p><small><b>Plaza:</b></small></p>
                             </div>
                             <div class="col-md-3">
-                                <p><small>Periodo:</small></p>
+                                <p><small><b>Periodo:</b></small></p>
                             </div>
                             <div class="col-md-3">
-                                <p><small>Tipo de Cobro:</small></p>
+                                <p><small><b>Tipo de Cobro:</b></small></p>
                             </div>
                             <div class="col-md-3">
                                 <input type="text" name="InpIdCliente" class="form-control input-sm" ng-model="$ctrl.IdCliente" ng-disabled="true">
                             </div>
                             <div class="col-md-3">
-                                <select name="SlcPlaza" class="form-control input-sm" ng-model="$ctrl.Plaza" ng-options="P.Nombre for P in $ctrl.PlazaList track by P.IdPlaza" validate-on="dirty" required required-message="'Obligatorio'" ng-disabled="$ctrl.BlockInput">
+                                <select name="SlcPlaza" class="form-control input-sm" ng-model="$ctrl.Plaza" ng-options="P.Nombre for P in $ctrl.PlazaList track by P.IdPlaza" ng-change="$ctrl.GetEstado()" validate-on="dirty" required required-message="'Obligatorio'" ng-disabled="$ctrl.BlockInput">
                                     <option value="">Selecciona</option>
                                 </select>
                             </div>
@@ -130,16 +131,16 @@
                                 <br>
                             </div>
                             <div class="col-md-3">
-                                <p><small>Nombre:</small></p>
+                                <p><small><b>Nombre:</b></small></p>
                             </div>
                             <div class="col-md-3">
-                                <p><small>Nombres adicionales:</small></p>
+                                <p><small><b>Nombres adicionales:</b></small></p>
                             </div>
                             <div class="col-md-3">
-                                <p><small>Primer apellido:</small></p>
+                                <p><small><b>Primer apellido:</b></small></p>
                             </div>
                             <div class="col-md-3">
-                                <p><small>Segundo apellido:</small></p>
+                                <p><small><b>Segundo apellido:</b></small></p>
                             </div>
                             <div class="col-md-3">
                                 <input type="text" name="InpNombre" class="form-control input-sm" ng-model="$ctrl.Nombre" validate-on="dirty" required required-message="'Obligatorio'">
@@ -157,13 +158,13 @@
                                 <br>
                             </div>
                             <div class="col-md-4">
-                                <p><small>Clave de elector:</small></p>
+                                <p><small><b>Clave de elector:</b></small></p>
                             </div>
                             <div class="col-md-4">
-                                <p><small>Número telefónico:</small></p>
+                                <p><small><b>Número telefónico:</b></small></p>
                             </div>
                             <div class="col-md-4">
-                                <p><small>Número celular:</small></p>
+                                <p><small><b>Número celular:</b></small></p>
                             </div>
                             <div class="col-md-4">
                                 <input type="text" name="InpClaveElector" class="form-control input-sm" ng-model="$ctrl.ClaveElector" validate-on="dirty" required required-message="'Obligatorio'">
@@ -178,20 +179,20 @@
                                 <br>
                             </div>
                             <div class="col-md-4">
-                                <p><small>Email:</small></p>
+                                <p><small><b>Email:</b></small></p>
                             </div>
                             <div class="col-md-4">
-                                <p><small>Tipo de persona:</small></p>
+                                <p><small><b>Tipo de persona:</b></small></p>
                             </div>
                             <div class="col-md-4">
-                                <p><small>Fecha de nacimiento:</small></p>
+                                <p><small><b>Fecha de nacimiento:</b></small></p>
                             </div>
                             <div class="col-md-4">
                                 <input type="email" name="InpEmail" class="form-control input-sm" ng-model="$ctrl.Email" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido'">
                             </div>
                             <div class="col-md-4">
-                                <label class="radio-inline radio-styled">
-                                    <input type="radio" name="RdoTipoPersona" ng-model="$ctrl.TipoPersona" value="F"><span><small>Persona fisica</small></span>
+                                <label class="radio-inline radio-styled" width="100px">
+                                    <input type="radio" name="RdoTipoPersona" ng-model="$ctrl.TipoPersona" value="F" style="width:40px; height:40px;"><span><small>Persona fisica</small></span>
                                 </label>
                                 <label class="radio-inline radio-styled">
                                     <input type="radio" name="RdoTipoPersona" ng-model="$ctrl.TipoPersona" value="M"><span><small>Persona  moral</small></span>
@@ -204,13 +205,13 @@
                                 <br>
                             </div>
                             <div class="col-md-4">
-                                <p><small>Estado:</small></p>
+                                <p><small><b>Estado:</b></small></p>
                             </div>
                             <div class="col-md-4">
-                                <p><small>Ciudad / Municipio:</small></p>
+                                <p><small><b>Ciudad / Municipio:</b></small></p>
                             </div>
                             <div class="col-md-4">
-                                <p><small>Localidad:</small></p>
+                                <p><small><b>Localidad:</b></small></p>
                             </div>
                             <div class="col-md-4">
                                 <select name="SltEstado" class="form-control input-sm" ng-model="$ctrl.Estado" ng-options="E.Nombre for E in $ctrl.EstadoList track by E.IdEstado" ng-change="$ctrl.GetCiudadMunicipio()" validate-on="dirty" required required-message="'Obligatorio'">
@@ -231,13 +232,13 @@
                                 <br>
                             </div>
                             <div class="col-md-4">
-                                <p><small>Colonia:</small></p>
+                                <p><small><b>Colonia:</b></small></p>
                             </div>
                             <div class="col-md-4">
-                                <p><small>Calle:</small></p>
+                                <p><small><b>Calle:</b></small></p>
                             </div>
                             <div class="col-md-4">
-                                <p><small>Entre calles:</small></p>
+                                <p><small><b>Entre calles:</b></small></p>
                             </div>
                             <div class="col-md-4">
                                 <select name="SltColonia" class="form-control input-sm" ng-model="$ctrl.Colonia" ng-options="C.Colonia.Nombre for C in $ctrl.ColoniaList track by C.Colonia.IdColonia" ng-change="$ctrl.GetCalle()" validate-on="dirty" required required-message="'Obligatorio'">
@@ -256,13 +257,13 @@
                                 <br>
                             </div>
                             <div class="col-md-4">
-                                <p><small>Número exterior:</small></p>
+                                <p><small><b>Número exterior:</b></small></p>
                             </div>
                             <div class="col-md-4">
-                                <p><small>Número interior:</small></p>
+                                <p><small><b>Número interior:</b></small></p>
                             </div>
                             <div class="col-md-4">
-                                <p><small>Código postal:</small></p>
+                                <p><small><b>Código postal:</b></small></p>
                             </div>
                             <div class="col-md-4">
                                 <input type="text" name="InpNumExt" class="form-control input-sm" ng-model="$ctrl.NumExt" maxlength="10" validate-on="dirty" required required-message="'Obligatorio'">
@@ -291,13 +292,13 @@
                     <div class="row">
                         <div class="col-md-9">
                             <div class="col-md-6">
-                                <p><small>Razón social:</small></p>
+                                <p><small><b>Razón social:</b></small></p>
                             </div>
                             <div class="col-md-3">
-                                <p><small>RFC:</small></p>
+                                <p><small><b>RFC:</b></small></p>
                             </div>
                             <div class="col-md-3">
-                                <p><small>CURP:</small></p>
+                                <p><small><b>CURP:</b></small></p>
                             </div>
                             <div class="col-md-6">
                                 <input type="text" name="InpRazonSoc" class="form-control input-sm" ng-model="$ctrl.RazonSoc" validate-on="dirty" required required-message="'Obligatorio'">
@@ -312,16 +313,16 @@
                                 <br>
                             </div>
                             <div class="col-md-3">
-                                <p>Calle:</p>
+                                <p><small><b>Calle:</b></small></p>
                             </div>
                             <div class="col-md-3">
-                                <p><small>Número exterior:</small></p>
+                                <p><small><b>Número exterior:</b></small></p>
                             </div>
                             <div class="col-md-3">
-                                <p><small>Número interior:</small></p>
+                                <p><small><b>Número interior:</b></small></p>
                             </div>
                             <div class="col-md-3">
-                                <p><small>Entre calles:</small></p>
+                                <p><small><b>Entre calles:</b></small></p>
                             </div>
                             <div class="col-md-3">
                                 <input type="text" name="InpCalleDF" class="form-control input-sm" ng-model="$ctrl.CalleDF" validate-on="dirty" required required-message="'Obligatorio'">
@@ -339,16 +340,16 @@
                                 <br>
                             </div>
                             <div class="col-md-3">
-                                <p><small>País:</small></p>
+                                <p><small><b>País:</b></small></p>
                             </div>
                             <div class="col-md-3">
-                                <p><small>Estado:</small></p>
+                                <p><small><b>Estado:</b></small></p>
                             </div>
                             <div class="col-md-3">
-                                <p><small>Ciudad / Municipio:</small></p>
+                                <p><small><b>Ciudad / Municipio:</b></small></p>
                             </div>
                             <div class="col-md-3">
-                                <p><small>Colonia:</small></p>
+                                <p><small><b>Colonia:</b></small></p>
                             </div>
                             <div class="col-md-3">
                                 <input type="text" name="InpPais" class="form-control input-sm"  ng-model="$ctrl.Pais" validate-on="dirty" required required-message="'Obligatorio'">
@@ -366,16 +367,16 @@
                                 <br>
                             </div>
                             <div class="col-md-3">
-                                <p><small>Código postal:</small></p>
+                                <p><small><b>Código postal:</b></small></p>
                             </div>
                             <div class="col-md-3">
-                                <p><small>Teléfono:</small></p>
+                                <p><small><b>Teléfono:</b></small></p>
                             </div>
                             <div class="col-md-3">
-                                <p><small>Fax:</small></p>
+                                <p><small><b>Fax:</b></small></p>
                             </div>
                             <div class="col-md-3">
-                                <p><small>Email:</small></p>
+                                <p><small><b>Email:</b></small></p>
                             </div>
                             <div class="col-md-3">
                                 <input type="text" name="InpCodigoPosDF" class="form-control input-sm" ng-model="$ctrl.CodigoPosDF" maxlength="5" ng-pattern="/^\d{5}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 5 dígitos.'">
@@ -407,10 +408,10 @@
                     <div class="row">
                         <div class="col-md-9">
                             <div class="col-md-4">
-                                <p><small>Institución Bancaria:</small></p>
+                                <p><small><b>Institución Bancaria:</b></small></p>
                             </div>
                             <div class="col-md-8">
-                                <p><small>Nombre del titular de la tarjeta bancaria:</small></p>
+                                <p><small><b>Nombre del titular de la tarjeta bancaria:</b></small></p>
                             </div>
                             <div class="col-md-4">
                                 <select name="SltBanco" class="form-control input-sm" ng-model="$ctrl.Banco" ng-options="B.Nombre for B in $ctrl.BancoList track by B.IdBanco" validate-on="dirty" required required-message="'Obligatorio'">
@@ -424,16 +425,16 @@
                                 <br>
                             </div>
                             <div class="col-md-4">
-                                <p><small>Dígitos en la tarjeta:</small></p>
+                                <p><small><b>Dígitos en la tarjeta:</b></small></p>
                             </div>
                             <div class="col-md-2">
-                                <p><small>Código seguridad:</small></p>
+                                <p><small><b>Código seguridad:</b></small></p>
                             </div>
                             <div class="col-md-3">
-                                <p><small>Mes de la fecha de vencimiento:</small></p>
+                                <p><small><b>Mes de la fecha de vencimiento:</b></small></p>
                             </div>
                             <div class="col-md-3">
-                                <p><small>Año de la fecha de vencimiento:</small></p>
+                                <p><small><b>Año de la fecha de vencimiento:</b></small></p>
                             </div>
                             <div class="col-md-4">
                                 <input name="InpNumTarjeta" type="text" class="form-control input-sm" ng-model="$ctrl.NumTarjeta" maxlength="16" ng-pattern="/^[A-Z]|[a-z]|\d$/" validator="$ctrl.NumTarjeta.length >= 15" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 15 dígitos o 16 dígitos.'">
@@ -457,17 +458,17 @@
                                 <br>
                             </div>
                             <div class="col-md-12">
-                                <p><small>Tipo de plástico:</small></p>
+                                <p><small><b>Tipo de plástico:</b></small></p>
                             </div>
                             <div class="col-md-12">
                                 <label class="radio-inline radio-styled">
-                                    <input type="radio" name="RdoTipoPlastico" ng-model="$ctrl.TipoPlastico" value="V" ng-disabled="false"><span>VISA</span>
+                                    <input type="radio" name="RdoTipoPlastico" ng-model="$ctrl.TipoPlastico" value="V" ng-disabled="false"><span><small>VISA</small></span>
                                 </label>
                                 <label class="radio-inline radio-styled">
-                                    <input type="radio" name="RdoTipoPlastico" ng-model="$ctrl.TipoPlastico" value="A" ng-disabled="false"><span>American Express</span>
+                                    <input type="radio" name="RdoTipoPlastico" ng-model="$ctrl.TipoPlastico" value="A" ng-disabled="false"><span><small>American Express</small></span>
                                 </label>
                                 <label class="radio-inline radio-styled">
-                                    <input type="radio" name="RdoTipoPlastico" ng-model="$ctrl.TipoPlastico" value="M" ng-disabled="false"><span>MasterCard</span>
+                                    <input type="radio" name="RdoTipoPlastico" ng-model="$ctrl.TipoPlastico" value="M" ng-disabled="false"><span><small>MasterCard</small></span>
                                 </label>
                             </div>
                             <div class="col-md-12">
@@ -488,13 +489,13 @@
                     <div class="row">
                         <div class="col-md-9">
                             <div class="col-md-4">
-                                <p><small>Nombre:</small></p>
+                                <p><small><b>Nombre:</b></small></p>
                             </div>
                             <div class="col-md-4">
-                                <p><small>Teléfono:</small></p>
+                                <p><small><b>Teléfono:</b></small></p>
                             </div>
                             <div class="col-md-4">
-                                <p><small>Email:</small></p>
+                                <p><small><b>Email:</b></small></p>
                             </div>
                             <div class="col-md-4">
                                 <input type="text" name="InpNombreRef" class="form-control input-sm" ng-model="$ctrl.NombreRef" validate-on="dirty" required required-message="'Obligatorio'">
@@ -509,7 +510,7 @@
                                 <br>
                             </div>
                             <div class="col-md-12">
-                                <p><small>Dirección:</small></p>
+                                <p><small><b>Dirección:</b></small></p>
                             </div>
                             <div class="col-md-12">
                                 <textarea name="InpDireccionRef" class="form-control input-sm" rows="4" ng-model="$ctrl.DireccionRef" validate-on="dirty" required required-message="'Obligatorio'"></textarea>
@@ -532,7 +533,7 @@
                                             <th><b><small>Dirección</small></b></th>
                                             <th><b><small>Teléfono</small></b></th>
                                             <th><b><small>Email</small></b></th>
-                                            <th width="20%" colspan="2"><b>Acciones</b></th>
+                                            <th width="20%" colspan="2"><b><small>Acciones</small></b></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -569,10 +570,10 @@
                     <div class="row">
                         <div class="col-md-9">
                             <div class="col-md-6">
-                                <p><small>Observaciones generales:</small></p>
+                                <p><small><b>Observaciones generales:</b></small></p>
                             </div>
                             <div class="col-md-6">
-                                <p><small>Notas por robo de señal:</small></p>
+                                <p><small><b>Notas por robo de señal:</b></small></p>
                             </div>
                             <div class="col-md-6">
                                 <textarea name="TxaObservaciones" class="form-control input-sm" rows="4" ng-model="$ctrl.Observaciones" validate-on="dirty" required required-message="'Obligatorio'"></textarea>

@@ -33,7 +33,8 @@ angular
             GetClientesByNombre: '/Cliente/GetClientes',
             GetClientesByPlaza: '/Cliente/GetClientes',
             GetClientesAll: '/Cliente/GetClientes',
-            UpdateClienteL: '/Cliente/UpdateClienteL'
+            UpdateClienteL: '/Cliente/UpdateClienteL',
+            GetEstadoList3_web: '/Estado/GetEstadoList3_web'
         };
 
         factory.GetPlazaList = function(){
@@ -636,6 +637,25 @@ angular
             };
             console.log(Parametros);
             $http.post(globalService.getUrl() + paths.UpdateClienteL, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.GetEstadoList3_web = function (IdPlaza) {
+            var deferred = $q.defer();
+            var config = {
+                headers: {
+                    'Authorization': $localStorage.currentUser.token
+                }
+            };
+            var Parametros = {
+                'IdPlaza': IdPlaza
+            };
+            console.log(Parametros);
+            $http.post(globalService.getUrl() + paths.GetEstadoList3_web, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);

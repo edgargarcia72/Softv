@@ -74,6 +74,24 @@ angular
             });
         }
 
+        function GetEstado(){
+            if(vm.Estado != undefined){
+                CatalogosFactory.GetEstadoList3_web(vm.Plaza.IdPlaza).then(function(data){
+                    console.log(data);
+                    //vm.CiudadMunicipioList = data.GetEstadoList3_webResult;
+                    vm.Estado = null;
+                    vm.LocalidadList = null;
+                    vm.ColoniaList = null;
+                    vm.CalleList = null;
+                });
+            }else{
+                vm.CiudadMunicipioList = null;
+                vm.LocalidadList = null;
+                vm.ColoniaList = null;
+                vm.CalleList = null;
+            }
+        }
+
         function GetCiudadMunicipio(){
             if(vm.Estado != undefined){
                 CatalogosFactory.GetEstadosRelMun(vm.Estado.IdEstado).then(function(data){
@@ -282,7 +300,6 @@ angular
                 ObjCliente.IdContrato = vm.IdContrato;
                 ObjCliente.Observaciones = vm.Observaciones;
                 ObjCliente.Notas = vm.Notas;
-                console.log(ObjCliente);
                 CatalogosFactory.AddNotasClienteL(ObjCliente).then(function(data){
                     console.log(data);
                     GetNotas(vm.IdContrato);
@@ -323,8 +340,9 @@ angular
             { IdTipoTarjeta: 1, Nombre: 'V' },
             { IdTipoTarjeta: 2, Nombre: 'A' },
             { IdTipoTarjeta: 3, Nombre: 'M' }
-        ]
+        ];
         vm.AddDatosPersonales = AddDatosPersonales;
+        vm.GetEstado = GetEstado;
         vm.GetCiudadMunicipio = GetCiudadMunicipio;
         vm.GetLocalidad = GetLocalidad;
         vm.GetColonia = GetColonia;

@@ -10,6 +10,7 @@ angular
 
         var vm = this;
         vm.Titulo = 'Nuevo Registro';
+        vm.Icono = 'fa fa-plus'
         vm.ValidateRFC = /^[A-Z]{4}\d{6}[A-Z]{3}$|^[A-Z]{4}\d{6}\d{3}$|^[A-Z]{4}\d{6}[A-Z]{2}\d{1}$|^[A-Z]{4}\d{6}[A-Z]{1}\d{2}$|^[A-Z]{4}\d{6}\d{2}[A-Z]{1}$|^[A-Z]{4}\d{6}\d{1}[A-Z]{2}$/;
         vm.cancel = cancel;
 

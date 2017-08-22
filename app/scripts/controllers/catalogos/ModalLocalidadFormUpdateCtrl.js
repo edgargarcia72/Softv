@@ -10,6 +10,7 @@ angular
 
         var vm = this;
         vm.Titulo = 'Editar Registro';
+        vm.Icono = 'fa fa-pencil-square-o';
         vm.cancel = cancel;
 
     });
