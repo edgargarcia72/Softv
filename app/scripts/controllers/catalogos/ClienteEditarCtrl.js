@@ -170,11 +170,24 @@ angular
             ObjCliente.IdTipoCliente = vm.TipoCobro.IdTipoCliente;
             ObjCliente.TipoPersona = (vm.TipoPersona == 'F') ? 1 : 0;
             ObjCliente.FechaNac = FechaNacD + '/' + FechaNacM + '/' + FechaNacY;
-            console.log(ObjCliente)
             CatalogosFactory.UpdateClienteL(ObjCliente).then(function(data){
                 console.log(data);
-                ngNotify.set('CORRECTO, se guardaron datos personales.', 'success');
-                GetDatosClientes(vm.IdContrato);
+                var ObjClienteDP = {};
+                ObjClienteDP.IdContrato = vm.IdContrato;
+                ObjClienteDP.IdEstado = vm.Estado.IdEstado;
+                ObjClienteDP.IdMunicipio = vm.CiuMun.Municipio.IdMunicipio;
+                ObjClienteDP.IdLocalidad = vm.Localidad.IdLocalidad;
+                ObjClienteDP.IdColonia = vm.Colonia.Colonia.IdColonia;
+                ObjClienteDP.IdCalle = vm.Callle.Calle.IdCalle;
+                ObjClienteDP.EntCalles = vm.EntCalles;
+                ObjClienteDP.NumExt = vm.NumExt;
+                ObjClienteDP.NumInt = vm.NumInt;
+                ObjClienteDP.CodigoPos = vm.CodigoPos;
+                CatalogosFactory.UpdateClienteDPos(ObjClienteDP).then(function(data){
+                    console.log(data);
+                    ngNotify.set('CORRECTO, se guardaron datos personales.', 'success');
+                    GetDatosClientes(vm.IdContrato);
+                });
             });
         }
 
@@ -308,29 +321,6 @@ angular
                 vm.Observaciones = DatosNotas.Observacion;
                 vm.Notas = DatosNotas.DescripcionRobo;
             });
-        }
-
-        function AddDatosPostales(){
-            if(vm.IdContrato != undefined){
-                var ObjCliente = {};
-                ObjCliente.IdContrato = vm.IdContrato;
-                ObjCliente.IdEstado = vm.Estado.IdEstado;
-                ObjCliente.IdMunicipio = vm.CiuMun.Municipio.IdMunicipio;
-                ObjCliente.IdLocalidad = vm.Localidad.IdLocalidad;
-                ObjCliente.IdColonia = vm.Colonia.Colonia.IdColonia;
-                ObjCliente.IdCalle = vm.Callle.Calle.IdCalle;
-                ObjCliente.EntCalles = vm.EntCalles;
-                ObjCliente.NumExt = vm.NumExt;
-                ObjCliente.NumInt = vm.NumInt;
-                ObjCliente.CodigoPos = vm.CodigoPos;
-                CatalogosFactory.UpdateClienteDPos(ObjCliente).then(function(data){
-                    console.log(data);
-                    ngNotify.set('CORRECTO, se guardaron datos postales.', 'success');
-                    GetDatosClientes(vm.IdContrato);
-                });
-            }else{
-                ngNotify.set('Aun no se han registrado los datos personales.', 'warn');
-            }
         }
 
         function AddDatosFiscales(){
@@ -503,7 +493,6 @@ angular
         vm.GetLocalidad = GetLocalidad;
         vm.GetColonia = GetColonia;
         vm.GetCalle = GetCalle;
-        vm.AddDatosPostales = AddDatosPostales;
         vm.AddDatosFiscales = AddDatosFiscales;
         vm.AddDatosBancarios = AddDatosBancarios;
         vm.AddRefPersonales = AddRefPersonales;

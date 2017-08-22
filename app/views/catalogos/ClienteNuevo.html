@@ -4,10 +4,12 @@
 		overflow: auto;
 		overflow-x: hidden;
 	}
-</style>
-<style>
+    .input-sm {
+        font-size: 12px;
+    }
     .nav-tabs{
         float:left;
+        font-size: 13px;
     }
     .contect-tabs{
         float:left;
@@ -78,7 +80,7 @@
         <uib-tabset active="1" vertical="true" type="tabs">
             <uib-tab index="0">
                 <uib-tab-heading>
-                    <i class="fa fa-list-ol"></i>  <small>Servicios</small>
+                    <i class="fa fa-list-ol"></i> Servicios
                 </uib-tab-heading>
                 <div class="row">
                     <div class="col-md-10">
@@ -89,22 +91,22 @@
             </uib-tab>
             <uib-tab index="1">
                 <uib-tab-heading>
-                    <i class="fa fa-user"></i>  <small>Datos Personales</small>
+                    <i class="fa fa-user"></i>  Datos Personales
                 </uib-tab-heading>
                 <form name="FormDatosPersonales" angular-validator-submit="$ctrl.AddDatosPersonales()" novalidate angular-validator>
                     <div class="row">
-                        <div class="col-md-10">
+                        <div class="col-md-9">
                             <div class="col-md-3">
-                                <p>Contrato:</p>
+                                <p><small>Contrato:</small></p>
                             </div>
                             <div class="col-md-3">
-                                <p>Plaza:</p>
+                                <p><small>Plaza:</small></p>
                             </div>
                             <div class="col-md-3">
-                                <p>Periodo:</p>
+                                <p><small>Periodo:</small></p>
                             </div>
                             <div class="col-md-3">
-                                <p>Tipo de Cobro:</p>
+                                <p><small>Tipo de Cobro:</small></p>
                             </div>
                             <div class="col-md-3">
                                 <input type="text" name="InpIdCliente" class="form-control input-sm" ng-model="$ctrl.IdCliente" ng-disabled="true">
@@ -128,16 +130,16 @@
                                 <br>
                             </div>
                             <div class="col-md-3">
-                                <p>Nombre:</p>
+                                <p><small>Nombre:</small></p>
                             </div>
                             <div class="col-md-3">
-                                <p>Nombres adicionales:</p>
+                                <p><small>Nombres adicionales:</small></p>
                             </div>
                             <div class="col-md-3">
-                                <p>Primer apellido:</p>
+                                <p><small>Primer apellido:</small></p>
                             </div>
                             <div class="col-md-3">
-                                <p>Segundo apellido:</p>
+                                <p><small>Segundo apellido:</small></p>
                             </div>
                             <div class="col-md-3">
                                 <input type="text" name="InpNombre" class="form-control input-sm" ng-model="$ctrl.Nombre" validate-on="dirty" required required-message="'Obligatorio'">
@@ -155,13 +157,13 @@
                                 <br>
                             </div>
                             <div class="col-md-4">
-                                <p>Clave de elector:</p>
+                                <p><small>Clave de elector:</small></p>
                             </div>
                             <div class="col-md-4">
-                                <p>Número telefónico:</p>
+                                <p><small>Número telefónico:</small></p>
                             </div>
                             <div class="col-md-4">
-                                <p>Número celular:</p>
+                                <p><small>Número celular:</small></p>
                             </div>
                             <div class="col-md-4">
                                 <input type="text" name="InpClaveElector" class="form-control input-sm" ng-model="$ctrl.ClaveElector" validate-on="dirty" required required-message="'Obligatorio'">
@@ -176,23 +178,23 @@
                                 <br>
                             </div>
                             <div class="col-md-4">
-                                <p>Email:</p>
+                                <p><small>Email:</small></p>
                             </div>
                             <div class="col-md-4">
-                                <p>Tipo de persona:</p>
+                                <p><small>Tipo de persona:</small></p>
                             </div>
                             <div class="col-md-4">
-                                <p>Fecha de nacimiento:</p>
+                                <p><small>Fecha de nacimiento:</small></p>
                             </div>
                             <div class="col-md-4">
                                 <input type="email" name="InpEmail" class="form-control input-sm" ng-model="$ctrl.Email" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido'">
                             </div>
                             <div class="col-md-4">
                                 <label class="radio-inline radio-styled">
-                                    <input type="radio" name="RdoTipoPersona" ng-model="$ctrl.TipoPersona" value="F"><span>Persona fisica</span>
+                                    <input type="radio" name="RdoTipoPersona" ng-model="$ctrl.TipoPersona" value="F"><span><small>Persona fisica</small></span>
                                 </label>
                                 <label class="radio-inline radio-styled">
-                                    <input type="radio" name="RdoTipoPersona" ng-model="$ctrl.TipoPersona" value="M"><span>Persona  moral</span>
+                                    <input type="radio" name="RdoTipoPersona" ng-model="$ctrl.TipoPersona" value="M"><span><small>Persona  moral</small></span>
                                 </label>
                             </div>
                             <div class="col-md-4">
@@ -201,28 +203,14 @@
                             <div class="col-md-12">
                                 <br>
                             </div>
-                            <div class="col-md-12" style="text-align:right">
-                                <button type="submit" class="btn btn-success btn-sm">Validar</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </uib-tab>
-            <uib-tab index="2">
-                <uib-tab-heading>
-                    <i class="fa fa-home"></i> <small>Datos Postales</small>
-                </uib-tab-heading>
-                <form name="FormDatosPostales" angular-validator-submit="$ctrl.AddDatosPostales()" novalidate angular-validator>
-                    <div class="row">
-                        <div class="col-md-10">
                             <div class="col-md-4">
-                                <p>Estado:</p>
+                                <p><small>Estado:</small></p>
                             </div>
                             <div class="col-md-4">
-                                <p>Ciudad / Municipio:</p>
+                                <p><small>Ciudad / Municipio:</small></p>
                             </div>
                             <div class="col-md-4">
-                                <p>Localidad:</p>
+                                <p><small>Localidad:</small></p>
                             </div>
                             <div class="col-md-4">
                                 <select name="SltEstado" class="form-control input-sm" ng-model="$ctrl.Estado" ng-options="E.Nombre for E in $ctrl.EstadoList track by E.IdEstado" ng-change="$ctrl.GetCiudadMunicipio()" validate-on="dirty" required required-message="'Obligatorio'">
@@ -243,13 +231,13 @@
                                 <br>
                             </div>
                             <div class="col-md-4">
-                                <p>Colonia:</p>
+                                <p><small>Colonia:</small></p>
                             </div>
                             <div class="col-md-4">
-                                <p>Calle:</p>
+                                <p><small>Calle:</small></p>
                             </div>
                             <div class="col-md-4">
-                                <p>Entre calles:</p>
+                                <p><small>Entre calles:</small></p>
                             </div>
                             <div class="col-md-4">
                                 <select name="SltColonia" class="form-control input-sm" ng-model="$ctrl.Colonia" ng-options="C.Colonia.Nombre for C in $ctrl.ColoniaList track by C.Colonia.IdColonia" ng-change="$ctrl.GetCalle()" validate-on="dirty" required required-message="'Obligatorio'">
@@ -268,13 +256,13 @@
                                 <br>
                             </div>
                             <div class="col-md-4">
-                                <p>Número exterior:</p>
+                                <p><small>Número exterior:</small></p>
                             </div>
                             <div class="col-md-4">
-                                <p>Número interior:</p>
+                                <p><small>Número interior:</small></p>
                             </div>
                             <div class="col-md-4">
-                                <p>Código postal:</p>
+                                <p><small>Código postal:</small></p>
                             </div>
                             <div class="col-md-4">
                                 <input type="text" name="InpNumExt" class="form-control input-sm" ng-model="$ctrl.NumExt" maxlength="10" validate-on="dirty" required required-message="'Obligatorio'">
@@ -297,19 +285,19 @@
             </uib-tab>
             <uib-tab index="3">
                 <uib-tab-heading>
-                    <i class="fa fa-building"></i> <small>Datos Fiscales</small>
+                    <i class="fa fa-building"></i> Datos Fiscales
                 </uib-tab-heading>
                 <form name="FormDatosFiscales" angular-validator-submit="$ctrl.AddDatosFiscales()" novalidate angular-validator>
                     <div class="row">
-                        <div class="col-md-10">
+                        <div class="col-md-9">
                             <div class="col-md-6">
-                                <p>Razón social:</p>
+                                <p><small>Razón social:</small></p>
                             </div>
                             <div class="col-md-3">
-                                <p>RFC:</p>
+                                <p><small>RFC:</small></p>
                             </div>
                             <div class="col-md-3">
-                                <p>CURP:</p>
+                                <p><small>CURP:</small></p>
                             </div>
                             <div class="col-md-6">
                                 <input type="text" name="InpRazonSoc" class="form-control input-sm" ng-model="$ctrl.RazonSoc" validate-on="dirty" required required-message="'Obligatorio'">
@@ -327,13 +315,13 @@
                                 <p>Calle:</p>
                             </div>
                             <div class="col-md-3">
-                                <p>Número exterior:</p>
+                                <p><small>Número exterior:</small></p>
                             </div>
                             <div class="col-md-3">
-                                <p>Número interior:</p>
+                                <p><small>Número interior:</small></p>
                             </div>
                             <div class="col-md-3">
-                                <p>Entre calles:</p>
+                                <p><small>Entre calles:</small></p>
                             </div>
                             <div class="col-md-3">
                                 <input type="text" name="InpCalleDF" class="form-control input-sm" ng-model="$ctrl.CalleDF" validate-on="dirty" required required-message="'Obligatorio'">
@@ -351,16 +339,16 @@
                                 <br>
                             </div>
                             <div class="col-md-3">
-                                <p>País:</p>
+                                <p><small>País:</small></p>
                             </div>
                             <div class="col-md-3">
-                                <p>Estado:</p>
+                                <p><small>Estado:</small></p>
                             </div>
                             <div class="col-md-3">
-                                <p>Ciudad / Municipio:</p>
+                                <p><small>Ciudad / Municipio:</small></p>
                             </div>
                             <div class="col-md-3">
-                                <p>Colonia:</p>
+                                <p><small>Colonia:</small></p>
                             </div>
                             <div class="col-md-3">
                                 <input type="text" name="InpPais" class="form-control input-sm"  ng-model="$ctrl.Pais" validate-on="dirty" required required-message="'Obligatorio'">
@@ -378,16 +366,16 @@
                                 <br>
                             </div>
                             <div class="col-md-3">
-                                <p>Código postal:</p>
+                                <p><small>Código postal:</small></p>
                             </div>
                             <div class="col-md-3">
-                                <p>Teléfono:</p>
+                                <p><small>Teléfono:</small></p>
                             </div>
                             <div class="col-md-3">
-                                <p>Fax:</p>
+                                <p><small>Fax:</small></p>
                             </div>
                             <div class="col-md-3">
-                                <p>Email:</p>
+                                <p><small>Email:</small></p>
                             </div>
                             <div class="col-md-3">
                                 <input type="text" name="InpCodigoPosDF" class="form-control input-sm" ng-model="$ctrl.CodigoPosDF" maxlength="5" ng-pattern="/^\d{5}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 5 dígitos.'">
@@ -413,16 +401,16 @@
             </uib-tab>
             <uib-tab index="4">
                 <uib-tab-heading>
-                    <i class="fa fa-university"></i> <small>Datos Bancarios</small>
+                    <i class="fa fa-university"></i> Datos Bancarios</small>
                 </uib-tab-heading>
                 <form name="FormDatosBancarios" angular-validator-submit="$ctrl.AddDatosBancarios()" novalidate angular-validator>
                     <div class="row">
-                        <div class="col-md-10">
+                        <div class="col-md-9">
                             <div class="col-md-4">
-                                <p>Institución Bancaria:</p>
+                                <p><small>Institución Bancaria:</small></p>
                             </div>
                             <div class="col-md-8">
-                                <p>Nombre del titular de la tarjeta bancaria:</p>
+                                <p><small>Nombre del titular de la tarjeta bancaria:</small></p>
                             </div>
                             <div class="col-md-4">
                                 <select name="SltBanco" class="form-control input-sm" ng-model="$ctrl.Banco" ng-options="B.Nombre for B in $ctrl.BancoList track by B.IdBanco" validate-on="dirty" required required-message="'Obligatorio'">
@@ -436,16 +424,16 @@
                                 <br>
                             </div>
                             <div class="col-md-4">
-                                <p>Dígitos en la tarjeta:</p>
+                                <p><small>Dígitos en la tarjeta:</small></p>
                             </div>
                             <div class="col-md-2">
-                                <p>Código seguridad:</p>
+                                <p><small>Código seguridad:</small></p>
                             </div>
                             <div class="col-md-3">
-                                <p>Mes de la fecha de vencimiento:</p>
+                                <p><small>Mes de la fecha de vencimiento:</small></p>
                             </div>
                             <div class="col-md-3">
-                                <p>Año de la fecha de vencimiento:</p>
+                                <p><small>Año de la fecha de vencimiento:</small></p>
                             </div>
                             <div class="col-md-4">
                                 <input name="InpNumTarjeta" type="text" class="form-control input-sm" ng-model="$ctrl.NumTarjeta" maxlength="16" ng-pattern="/^[A-Z]|[a-z]|\d$/" validator="$ctrl.NumTarjeta.length >= 15" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 15 dígitos o 16 dígitos.'">
@@ -469,7 +457,7 @@
                                 <br>
                             </div>
                             <div class="col-md-12">
-                                <p>Tipo de plástico:</p>
+                                <p><small>Tipo de plástico:</small></p>
                             </div>
                             <div class="col-md-12">
                                 <label class="radio-inline radio-styled">
@@ -494,19 +482,19 @@
             </uib-tab>
             <uib-tab index="5">
                 <uib-tab-heading>
-                    <i class="fa fa-users"></i> <small>Referencias personales</small>
+                    <i class="fa fa-users"></i> Referencias personales
                 </uib-tab-heading>
                 <form name="FormRefPersonales" angular-validator-submit="$ctrl.AddRefPersonales()" novalidate angular-validator>
                     <div class="row">
-                        <div class="col-md-10">
+                        <div class="col-md-9">
                             <div class="col-md-4">
-                                <p>Nombre:</p>
+                                <p><small>Nombre:</small></p>
                             </div>
                             <div class="col-md-4">
-                                <p>Teléfono:</p>
+                                <p><small>Teléfono:</small></p>
                             </div>
                             <div class="col-md-4">
-                                <p>Email:</p>
+                                <p><small>Email:</small></p>
                             </div>
                             <div class="col-md-4">
                                 <input type="text" name="InpNombreRef" class="form-control input-sm" ng-model="$ctrl.NombreRef" validate-on="dirty" required required-message="'Obligatorio'">
@@ -521,10 +509,10 @@
                                 <br>
                             </div>
                             <div class="col-md-12">
-                                <p>Dirección:</p>
+                                <p><small>Dirección:</small></p>
                             </div>
                             <div class="col-md-12">
-                                <textarea name="InpDireccionRef" class="form-control" rows="4" ng-model="$ctrl.DireccionRef" validate-on="dirty" required required-message="'Obligatorio'"></textarea>
+                                <textarea name="InpDireccionRef" class="form-control input-sm" rows="4" ng-model="$ctrl.DireccionRef" validate-on="dirty" required required-message="'Obligatorio'"></textarea>
                             </div>
                             <div class="col-md-12">
                                 <br>
@@ -539,11 +527,11 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th><b>Id</b></th>
-                                            <th><b>Nombre</b></th>
-                                            <th><b>Dirección</b></th>
-                                            <th><b>Teléfono</b></th>
-                                            <th><b>Email</b></th>
+                                            <th><b><small>Id</small></b></th>
+                                            <th><b><small>Nombre</small></b></th>
+                                            <th><b><small>Dirección</small></b></th>
+                                            <th><b><small>Teléfono</small></b></th>
+                                            <th><b><small>Email</small></b></th>
                                             <th width="20%" colspan="2"><b>Acciones</b></th>
                                         </tr>
                                     </thead>
@@ -552,11 +540,11 @@
                                             <td class="text-center" colspan="7">SIN REGISTROS</td>
                                         </tr>
                                         <tr dir-paginate="X in $ctrl.RefPerList|itemsPerPage:7" ng-show="$ctrl.ConRegistros">
-                                            <td>{{ X.IdReferencia }}</td>
-                                            <td>{{ X.Nombre }}</td>
-                                            <td>{{ X.Direccion }}</td>
-                                            <td>{{ X.Telefono }}</td>
-                                            <td>{{ X.Email }}</td>
+                                            <td><small>{{ X.IdReferencia }}</small></td>
+                                            <td><small>{{ X.Nombre }}</small></td>
+                                            <td><small>{{ X.Direccion }}</small></td>
+                                            <td><small>{{ X.Telefono }}</small></td>
+                                            <td><small>{{ X.Email }}</small></td>
                                             <td><button type="button" class="btn btn-warning btn-xs" ng-click="$ctrl.OpenEditRefPersonal(X)" title="Editar Referencia Personal"><i class="fa fa-pencil-square-o"></i> EDITAR</button></td>
                                             <td><button type="button" class="btn btn-danger btn-xs" ng-click="$ctrl.OpenDeleteRefPersonal(X)" title="Eliminar Referencia Personal"><i class="fa fa-trash"></i> ELIMINAR</button></td>
                                         </tr>
@@ -575,22 +563,22 @@
             </uib-tab>
             <uib-tab index="6">
                 <uib-tab-heading>
-                    <i class="fa fa-comment"></i> <small>Notas</small>
+                    <i class="fa fa-comment"></i> Notas
                 </uib-tab-heading>
                 <form name="FormNotas" angular-validator-submit="$ctrl.AddNotas()" novalidate angular-validator>
                     <div class="row">
-                        <div class="col-md-10">
+                        <div class="col-md-9">
                             <div class="col-md-6">
-                                <p>Observaciones generales:</p>
+                                <p><small>Observaciones generales:</small></p>
                             </div>
                             <div class="col-md-6">
-                                <p>Notas por robo de señal:</p>
+                                <p><small>Notas por robo de señal:</small></p>
                             </div>
                             <div class="col-md-6">
-                                <textarea name="TxaObservaciones" class="form-control" rows="4" ng-model="$ctrl.Observaciones" validate-on="dirty" required required-message="'Obligatorio'"></textarea>
+                                <textarea name="TxaObservaciones" class="form-control input-sm" rows="4" ng-model="$ctrl.Observaciones" validate-on="dirty" required required-message="'Obligatorio'"></textarea>
                             </div>
                             <div class="col-md-6">
-                                <textarea name="TxaDireccionRef" class="form-control" rows="4" ng-model="$ctrl.Notas" validate-on="dirty" required required-message="'Obligatorio'"></textarea>
+                                <textarea name="TxaDireccionRef" class="form-control input-sm" rows="4" ng-model="$ctrl.Notas" validate-on="dirty" required required-message="'Obligatorio'"></textarea>
                             </div>
                             <div class="col-md-12">
                                 <br>
