@@ -56,17 +56,9 @@ angular
                 ObjClienteDP.CodigoPos = vm.CodigoPos;
                 CatalogosFactory.UpdateClienteDPos(ObjClienteDP).then(function(data){
                     console.log(data);
-                    GetDatosClientes(vm.IdContrato);
                     ngNotify.set('CORRECTO, se añadió cliente nuevo.', 'success');
                     $state.go('home.catalogos.cliente_editar', { id:IdContratoCliente });
                 });
-            });
-        }
-
-        function GetDatosClientes(IdContratoCliente){
-            CatalogosFactory.GetDeepCliente(IdContratoCliente).then(function(data){
-                vm.IdContrato = data.GetDeepClienteResult.IdContrato;
-                vm.IdCliente = data.GetDeepClienteResult.IdCliente;
             });
         }
 
@@ -164,17 +156,11 @@ angular
                 CatalogosFactory.AddDatoFiscalCliente(ObjCliente).then(function(data){
                     console.log(data);
                     GetDatosClientes(vm.IdContrato);
-                    GetDatosFiscal(vm.IdContrato);
                     ngNotify.set('CORRECTO, se guardaron datos fiscales.', 'success');
                 });
             }else{
                 ngNotify.set('Aun no se han registrado los datos personales.', 'warn');
             }
-        }
-
-        function GetDatosFiscal(IdContrato){
-            CatalogosFactory.GetDeepDatoFiscal(IdContrato).then(function(data){
-            });
         }
 
         function AddDatosBancarios(){
@@ -197,17 +183,11 @@ angular
                 CatalogosFactory.AddDatoBancarioCliente(ObjCliente).then(function(data){
                     console.log(data);
                     GetDatosClientes(vm.IdContrato);
-                    GetDatosBancario(vm.IdContrato);
                     ngNotify.set('CORRECTO, se guardaron datos bancarios.', 'success');
                 });
             }else{
                 ngNotify.set('Aun no se han registrado los datos personales.', 'warn');
             }
-        }
-
-        function GetDatosBancario(IdContrato){
-            CatalogosFactory.GetDatoBancarioDeep(IdContrato).then(function(data){
-            });
         }
 
         function AddRefPersonales(){
@@ -227,19 +207,6 @@ angular
             }else{
                 ngNotify.set('Aun no se han registrado los datos personales.', 'warn');
             }
-        }
-
-        function GetReferenciasPersonales(IdContrato){
-            CatalogosFactory.GetReferenciaClienteL(IdContrato).then(function(data){
-                vm.RefPerList = data.GetReferenciaClienteLResult;
-                if (vm.RefPerList.length == 0) {
-					vm.SinRegistros = true;
-					vm.ConRegistros = false;
-				} else {
-					vm.SinRegistros = false;
-					vm.ConRegistros = true;
-				}
-            });
         }
 
         function OpenEditRefPersonal(ObjRefCliente){
@@ -262,10 +229,6 @@ angular
                 }
             });
         }
-
-        $rootScope.$on('LoadRefPersonal', function(e, IdContrato){
-            GetReferenciasPersonales(IdContrato);
-        });
 
         function OpenDeleteRefPersonal(ObjRefCliente){
             var ObjRefCliente = ObjRefCliente;
@@ -296,17 +259,11 @@ angular
                 ObjCliente.Notas = vm.Notas;
                 CatalogosFactory.AddNotasClienteL(ObjCliente).then(function(data){
                     console.log(data);
-                    GetNotas(vm.IdContrato);
                     ngNotify.set('CORRECTO, se guardaron notas.', 'success');
                 });
             }else{
                 ngNotify.set('Aun no se han registrado los datos personales.', 'warn');
             }
-        }
-
-        function GetNotas(IdContrato){
-            CatalogosFactory.GetDeepListadoNotas(IdContrato).then(function(data){
-            });
         }
 
         var vm = this;

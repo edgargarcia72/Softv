@@ -18,10 +18,6 @@ angular
                 vm.TipoCobroList = data.GetTipoClienteList_WebSoftvnewResult;
             });
 
-            /*CatalogosFactory.GetEstadoList2_web().then(function(data){
-                vm.EstadoList = data.GetEstadoList2_webResult;
-            });*/
-
             CatalogosFactory.GetBancoList().then(function(data){
                 vm.BancoList = data.GetBancoListResult;
             });
