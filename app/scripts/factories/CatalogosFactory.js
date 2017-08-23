@@ -34,7 +34,10 @@ angular
             GetClientesByPlaza: '/Cliente/GetClientes',
             GetClientesAll: '/Cliente/GetClientes',
             UpdateClienteL: '/Cliente/UpdateClienteL',
-            GetEstadoList3_web: '/Estado/GetEstadoList3_web'
+            GetEstadoList3_web: '/Estado/GetEstadoList3_web',
+            AddEstado2_web: '/Estado/AddEstado2_web',
+            UpdateEstado2_web: '/Estado/UpdateEstado2_web',
+            DeleteEstado2_web: '/Estado/DeleteEstado2_web'
         };
 
         factory.GetPlazaList = function(){
@@ -644,14 +647,69 @@ angular
         factory.GetEstadoList3_web = function (IdPlaza) {
             var deferred = $q.defer();
             var config = {
-                headers: {
-                    'Authorization': $localStorage.currentUser.token
-                }
+                headers: {'Authorization': $localStorage.currentUser.token}
             };
             var Parametros = {
                 'IdPlaza': IdPlaza
             };
             $http.post(globalService.getUrl() + paths.GetEstadoList3_web, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.AddEstado2_web = function (EstadoObj) {
+            var deferred = $q.defer();
+            var config = {
+                headers: {'Authorization': $localStorage.currentUser.token}
+            };
+            var Parametros = {
+                'objEstado': {
+                    Nombre: EstadoObj.Estado
+                    //id_compania: EstadoObj.IdPlaza
+                }
+            };
+            console.log(Parametros);
+            $http.post(globalService.getUrl() + paths.AddEstado2_web, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.UpdateEstado2_web = function (EstadoObj) {
+            var deferred = $q.defer();
+            var config = {
+                headers: {'Authorization': $localStorage.currentUser.token}
+            };
+            var Parametros = {
+                'objEstado': {
+                    IdEstado: EstadoObj.IdEstado,
+                    Nombre: EstadoObj.Estado
+                }
+            };
+            console.log(Parametros);
+            $http.post(globalService.getUrl() + paths.UpdateEstado2_web, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.DeleteEstado2_web = function (IdEstado) {
+            var deferred = $q.defer();
+            var config = {
+                headers: {'Authorization': $localStorage.currentUser.token}
+            };
+            var Parametros = {
+                'IdEstado': IdEstado
+            };
+            console.log(Parametros);
+            $http.post(globalService.getUrl() + paths.DeleteEstado2_web, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);

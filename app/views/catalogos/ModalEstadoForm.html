@@ -1,7 +1,7 @@
-<form name="FormEstado" angular-validator-submit="ctrl.SaveEstado()" novalidate angular-validator>
+<form name="FormEstado" angular-validator-submit="ctrl.SaveEstado()" novalidate angular-validator autocomplete="off">
     <div class="modal-header">
         <button class="close" type="button" aria-label="close" ng-click="ctrl.cancel()">x</button>
-        <h4 class="modal-title"><i ng-class="ctrl.Icono"></i> {{ ctrl.Titulo }}</h4>
+        <h4 class="modal-title"><i ng-class="ctrl.Icono"></i> {{ ctrl.Titulo }} </h4>
     </div>
     <div class="modal-body">
         <div class="row">
@@ -12,6 +12,19 @@
                 <input type="text" name="InpEstado" class="form-control input-sm" ng-model="ctrl.Estado" validate-on="dirty" required required-message="'Obligatorio'">
             </div>
         </div>
+        <!--
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <p><b>Plaza:</b></p>
+            </div>
+            <div class="col-md-12">
+                <select type="text" name="SltPlaza" class="form-control input-sm" ng-model="ctrl.Plaza" ng-options="P.Nombre for P in ctrl.PlazaList track by P.IdPlaza" validate-on="dirty" required required-message="'Obligatorio'">
+                    <option value="">Selecciona</option>
+                </select>
+            </div>
+        </div>
+        -->
     </div>
     <div class="modal-footer">
         <button type="submit" class="btn btn-primary btn-sm" title="Guardar estado">Guardar</button>

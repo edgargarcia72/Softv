@@ -2,7 +2,20 @@
 
 angular
     .module('softvApp')
-    .controller('EstadosCtrl', function($uibModal){
+    .controller('EstadosCtrl', function(CatalogosFactory, $uibModal){
+
+        function initData(){
+            CatalogosFactory.GetEstadoList2_web().then(function(data){
+                vm.EstadoList = data.GetEstadoList2_webResult;
+                if (vm.EstadoList.length == 0) {
+					vm.SinRegistros = true;
+					vm.ConRegistros = false;
+				} else {
+					vm.SinRegistros = false;
+					vm.ConRegistros = true;
+				}
+            });
+        }
 
         function OpenAddEstado(){
             var modalInstance = $uibModal.open({
@@ -15,16 +28,12 @@ angular
                 backdrop: 'static',
                 keyboard: false,
                 class: 'modal-backdrop fade',
-                size: 'md',
-                /*resolve: {
-                    ObjRefCliente: function () {
-                        return ObjRefCliente;
-                    }
-                }*/
+                size: 'md'
             });
         }
 
-        function OpenUpdateEstado(){
+        function OpenUpdateEstado(EstadoObj){
+            var EstadoObj = EstadoObj;
             var modalInstance = $uibModal.open({
                 animation: true,
                 ariaLabelledBy: 'modal-title',
@@ -36,15 +45,16 @@ angular
                 keyboard: false,
                 class: 'modal-backdrop fade',
                 size: 'md',
-                /*resolve: {
-                    ObjRefCliente: function () {
-                        return ObjRefCliente;
+                resolve: {
+                    EstadoObj: function () {
+                        return EstadoObj;
                     }
-                }*/
+                }
             });
         }
 
-        function OpenDeleteEstado(){
+        function OpenDeleteEstado(EstadoObj){
+            var EstadoObj = EstadoObj;
             var modalInstance = $uibModal.open({
                 animation: true,
                 ariaLabelledBy: 'modal-title',
@@ -56,11 +66,11 @@ angular
                 keyboard: false,
                 class: 'modal-backdrop fade',
                 size: 'sm',
-                /*resolve: {
-                    ObjRefCliente: function () {
-                        return ObjRefCliente;
+                resolve: {
+                    EstadoObj: function () {
+                        return EstadoObj;
                     }
-                }*/
+                }
             });
         }
 
@@ -69,4 +79,6 @@ angular
         vm.OpenUpdateEstado = OpenUpdateEstado;
         vm.OpenDeleteEstado = OpenDeleteEstado;
         
+        initData();
+
     });
