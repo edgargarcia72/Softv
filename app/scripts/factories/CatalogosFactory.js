@@ -339,7 +339,6 @@ angular
                         AnioVencimiento: ObjCliente.YearVen
                     }]
             };
-            console.log('AddBanco',Parametros);
             $http.post(globalService.getUrl() + paths.AddDatoBancarioCliente, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -601,7 +600,6 @@ angular
                     FechaNacimiento: null
                 }
             };
-            console.log(Parametros);
             $http.post(globalService.getUrl() + paths.GetClientesAll, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -635,7 +633,6 @@ angular
                     FechaNacimiento: ObjCliente.FechaNac
                 }
             };
-            console.log(Parametros);
             $http.post(globalService.getUrl() + paths.UpdateClienteL, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -654,7 +651,6 @@ angular
             var Parametros = {
                 'IdPlaza': IdPlaza
             };
-            console.log(Parametros);
             $http.post(globalService.getUrl() + paths.GetEstadoList3_web, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {

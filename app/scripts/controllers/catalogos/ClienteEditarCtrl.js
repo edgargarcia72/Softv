@@ -18,9 +18,9 @@ angular
                 vm.TipoCobroList = data.GetTipoClienteList_WebSoftvnewResult;
             });
 
-            CatalogosFactory.GetEstadoList2_web().then(function(data){
+            /*CatalogosFactory.GetEstadoList2_web().then(function(data){
                 vm.EstadoList = data.GetEstadoList2_webResult;
-            });
+            });*/
 
             CatalogosFactory.GetBancoList().then(function(data){
                 vm.BancoList = data.GetBancoListResult;
@@ -36,7 +36,6 @@ angular
 
         function GetDatosClientes(IdContratoCliente){
             CatalogosFactory.GetDeepCliente(IdContratoCliente).then(function(data){
-                console.log(data);
                 var DatosCliente = data.GetDeepClienteResult;
                 vm.IdCliente = DatosCliente.IdCliente;
                 vm.IdPlaza = DatosCliente.IdPlaza;
@@ -61,16 +60,6 @@ angular
                 vm.NumExt = DatosCliente.NumExt;
                 vm.NumInt = DatosCliente.NumInt;
                 vm.CodigoPos = DatosCliente.CP;
-
-                CatalogosFactory.GetPlazaList().then(function(data){
-                    vm.PlazaResult = data.GetPlazaListResult;
-                    for (var b = 0; b < vm.PlazaResult.length; b++) {
-                        if (vm.PlazaResult[b].IdPlaza == vm.IdPlaza) {
-                            vm.Plaza = vm.PlazaResult[b];
-                            vm.NombrePlaza = vm.PlazaResult[b].Nombre;
-                        }
-                    }
-                });
 
                 CatalogosFactory.GetPeriodoCobroList().then(function(data){
                     vm.PeriodoResult = data.GetPeriodoCobroListResult;
@@ -98,14 +87,23 @@ angular
                     vm.TipoPersona = "M";
                 }
 
-                CatalogosFactory.GetEstadoList2_web().then(function(data){
-                    vm.EstadoResult = data.GetEstadoList2_webResult;
-                    for (var b = 0; b < vm.EstadoResult.length; b++) {
-                        if (vm.EstadoResult[b].IdEstado == vm.IdEstado) {
-                            vm.Estado = vm.EstadoResult[b];
-                            vm.NombreEstado = vm.EstadoResult[b].Nombre;
+                CatalogosFactory.GetPlazaList().then(function(data){
+                    vm.PlazaResult = data.GetPlazaListResult;
+                    for (var b = 0; b < vm.PlazaResult.length; b++) {
+                        if (vm.PlazaResult[b].IdPlaza == vm.IdPlaza) {
+                            vm.Plaza = vm.PlazaResult[b];
+                            vm.NombrePlaza = vm.PlazaResult[b].Nombre;
                         }
                     }
+                    CatalogosFactory.GetEstadoList3_web(vm.IdPlaza).then(function(data){
+                        vm.EstadoList = data.GetEstadoList3_webResult;
+                        for (var b = 0; b < vm.EstadoList.length; b++) {
+                        if (vm.EstadoList[b].IdEstado == vm.IdEstado) {
+                                vm.Estado = vm.EstadoList[b];
+                                vm.NombreEstado = vm.EstadoList[b].Nombre;
+                            }
+                        }
+                    });
                 });
 
                 CatalogosFactory.GetEstadosRelMun(vm.IdEstado).then(function(data){
@@ -250,7 +248,6 @@ angular
 
         function GetDatosFiscal(IdContrato){
             CatalogosFactory.GetDeepDatoFiscal(IdContrato).then(function(data){
-                console.log(data);
                 var DatosFiscales = data.GetDeepDatoFiscalResult;
                 vm.RazonSoc = DatosFiscales.RazonSocial;
                 vm.RFC = DatosFiscales.RFC;
@@ -272,7 +269,6 @@ angular
 
         function GetDatosBancario(IdContrato){
             CatalogosFactory.GetDatoBancarioDeep(IdContrato).then(function(data){
-                console.log(data);
                 var DatosBancarios = data.GetDatoBancarioDeepResult;
                 vm.IdBanco = DatosBancarios.IdBanco;
                 vm.Titular = DatosBancarios.NombreTitular;

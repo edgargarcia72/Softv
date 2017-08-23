@@ -17,10 +17,6 @@ angular
                 vm.TipoCobroList = data.GetTipoClienteList_WebSoftvnewResult;
             });
 
-            CatalogosFactory.GetEstadoList2_web().then(function(data){
-                vm.EstadoList = data.GetEstadoList2_webResult;
-            });
-
             CatalogosFactory.GetBancoList().then(function(data){
                 vm.BancoList = data.GetBancoListResult;
             });
@@ -75,16 +71,16 @@ angular
         }
 
         function GetEstado(){
-            if(vm.Estado != undefined){
+            if(vm.Plaza != undefined){
                 CatalogosFactory.GetEstadoList3_web(vm.Plaza.IdPlaza).then(function(data){
-                    console.log(data);
-                    //vm.CiudadMunicipioList = data.GetEstadoList3_webResult;
-                    vm.Estado = null;
+                    vm.EstadoList = data.GetEstadoList3_webResult;
+                    vm.CiudadMunicipioList = null;
                     vm.LocalidadList = null;
                     vm.ColoniaList = null;
                     vm.CalleList = null;
                 });
             }else{
+                vm.EstadoList = null;
                 vm.CiudadMunicipioList = null;
                 vm.LocalidadList = null;
                 vm.ColoniaList = null;
@@ -99,7 +95,7 @@ angular
                     vm.LocalidadList = null;
                     vm.ColoniaList = null;
                     vm.CalleList = null;
-                })
+                });
             }else{
                 vm.CiudadMunicipioList = null;
                 vm.LocalidadList = null;
@@ -178,7 +174,6 @@ angular
 
         function GetDatosFiscal(IdContrato){
             CatalogosFactory.GetDeepDatoFiscal(IdContrato).then(function(data){
-                console.log(data);
             });
         }
 
@@ -212,7 +207,6 @@ angular
 
         function GetDatosBancario(IdContrato){
             CatalogosFactory.GetDatoBancarioDeep(IdContrato).then(function(data){
-                console.log(data);
             });
         }
 
@@ -312,7 +306,6 @@ angular
 
         function GetNotas(IdContrato){
             CatalogosFactory.GetDeepListadoNotas(IdContrato).then(function(data){
-                console.log(data);
             });
         }
 
