@@ -11,7 +11,7 @@ angular
             console.log(EstadoObj);
             CatalogosFactory.UpdateEstado2_web(EstadoObj).then(function(data){
                 console.log(data);
-                ngNotify.set('CORRECTO, se añadió estado nuevo.', 'success');
+                ngNotify.set('CORRECTO, se guardó el estado.', 'success');
                 $state.reload('home.catalogos.estados');
                 cancel();
             });

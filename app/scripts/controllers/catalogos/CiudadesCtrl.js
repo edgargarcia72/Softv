@@ -2,7 +2,20 @@
 
 angular
     .module('softvApp')
-    .controller('CiudadesCtrl', function($uibModal){
+    .controller('CiudadesCtrl', function(CatalogosFactory, $uibModal){
+
+        function initData(){
+            CatalogosFactory.GetMunicipioList().then(function(data){
+                vm.CiudadLista = data.GetMunicipioListResult;
+                if (vm.CiudadLista.length == 0) {
+					vm.SinRegistros = true;
+					vm.ConRegistros = false;
+				} else {
+					vm.SinRegistros = false;
+					vm.ConRegistros = true;
+				}
+            });
+        }
 
         function OpenAddCiudad(){
             var modalInstance = $uibModal.open({
@@ -15,16 +28,12 @@ angular
                 backdrop: 'static',
                 keyboard: false,
                 class: 'modal-backdrop fade',
-                size: 'md',
-                /*resolve: {
-                    ObjRefCliente: function () {
-                        return ObjRefCliente;
-                    }
-                }*/
+                size: 'md'
             });
         }
 
-        function OpenUpdateCiudad(){
+        function OpenUpdateCiudad(CiudadObj){
+            var CiudadObj = CiudadObj;
             var modalInstance = $uibModal.open({
                 animation: true,
                 ariaLabelledBy: 'modal-title',
@@ -36,15 +45,16 @@ angular
                 keyboard: false,
                 class: 'modal-backdrop fade',
                 size: 'md',
-                /*resolve: {
-                    ObjRefCliente: function () {
-                        return ObjRefCliente;
+                resolve: {
+                    CiudadObj: function () {
+                        return CiudadObj;
                     }
-                }*/
+                }
             });
         }
 
-        function OpenDeleteCiudad(){
+        function OpenDeleteCiudad(CiudadObj){
+            var CiudadObj = CiudadObj;
             var modalInstance = $uibModal.open({
                 animation: true,
                 ariaLabelledBy: 'modal-title',
@@ -56,11 +66,11 @@ angular
                 keyboard: false,
                 class: 'modal-backdrop fade',
                 size: 'sm',
-                /*resolve: {
-                    ObjRefCliente: function () {
-                        return ObjRefCliente;
+                resolve: {
+                    CiudadObj: function () {
+                        return CiudadObj;
                     }
-                }*/
+                }
             });
         }
 
@@ -68,5 +78,6 @@ angular
         vm.OpenAddCiudad = OpenAddCiudad;
         vm.OpenUpdateCiudad = OpenUpdateCiudad;
         vm.OpenDeleteCiudad = OpenDeleteCiudad;
+        initData();
         
     });
