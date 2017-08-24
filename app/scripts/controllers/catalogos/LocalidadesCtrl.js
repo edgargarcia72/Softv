@@ -2,8 +2,21 @@
 
 angular
     .module('softvApp')
-    .controller('LocalidadesCtrl', function($uibModal){
+    .controller('LocalidadesCtrl', function(CatalogosFactory, $uibModal){
 
+        function initData(){
+            CatalogosFactory.GetLocalidadList().then(function(data){
+                vm.LocalidadList = data.GetLocalidadListResult;
+                if (vm.LocalidadList.length == 0) {
+					vm.SinRegistros = true;
+					vm.ConRegistros = false;
+				} else {
+					vm.SinRegistros = false;
+					vm.ConRegistros = true;
+				}
+            });
+        }
+        
         function OpenAddLocalidad(){
             var modalInstance = $uibModal.open({
                 animation: true,
@@ -15,12 +28,7 @@ angular
                 backdrop: 'static',
                 keyboard: false,
                 class: 'modal-backdrop fade',
-                size: 'lg',
-                /*resolve: {
-                    ObjRefCliente: function () {
-                        return ObjRefCliente;
-                    }
-                }*/
+                size: 'lg'
             });
         }
 
@@ -68,5 +76,6 @@ angular
         vm.OpenAddLocalidad = OpenAddLocalidad;
         vm.OpenUpdateLocalidad = OpenUpdateLocalidad;
         vm.OpenDeleteLocalidad = OpenDeleteLocalidad;
+        initData();
         
     });

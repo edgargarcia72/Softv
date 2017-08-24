@@ -31,17 +31,17 @@
             </div>
             <div class="col-md-12">
                 <div class="col-md-5">
-                    <select name="SltEstado" type="text" class="form-control input-sm" ng-model="ctrl.Estado">
+                    <select name="SltEstado" class="form-control input-sm" ng-model="ctrl.Estado" ng-options="E.Nombre for E in ctrl.EstadoList track by E.IdEstado" ng-change="ctrl.GetCiudadMunicipio()">
                         <option value="">Selecciona</option>
                     </select>
                 </div>
                 <div class="col-md-5">
-                    <select name="SltCiudad" type="text" class="form-control input-sm" ng-model="ctrl.Ciudad">
+                    <select name="SltCiudad" class="form-control input-sm" ng-model="ctrl.Ciudad" ng-options="C.Municipio.Nombre for C in ctrl.CiudadMunicipioList track by C.Municipio.IdMunicipio">
                         <option value="">Selecciona</option>
                     </select>
                 </div>
                 <div class="col-md-2">
-                    <button type="button" class="btn btn-success bt-sm" title="Agregar Ciudad">Agregar</button>
+                    <button type="button" class="btn btn-success bt-sm" title="Agregar Ciudad" ng-click="ctrl.AddEstMun()">Agregar</button>
                 </div>
             </div>
         </div>

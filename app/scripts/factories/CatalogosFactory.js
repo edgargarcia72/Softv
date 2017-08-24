@@ -41,7 +41,9 @@ angular
             GetMunicipioList: '/Municipio/GetMunicipioList',
             AddMunicipio: '/Municipio/AddMunicipio',
             UpdateMunicipio: '/Municipio/UpdateMunicipio',
-            DeleteMunicipio: '/Municipio/DeleteMunicipio'
+            DeleteMunicipio: '/Municipio/DeleteMunicipio',
+            GetLocalidadList: '/Localidad/GetLocalidadList',
+            AddLocalidad: '/Localidad/AddLocalidad'
         };
 
         factory.GetPlazaList = function(){
@@ -731,9 +733,7 @@ angular
 
         factory.AddMunicipio = function (CiudadObj) {
             var deferred = $q.defer();
-            var config = {
-                headers: {'Authorization': $localStorage.currentUser.token}
-            };
+            var config = { headers: {'Authorization': $localStorage.currentUser.token} };
             var Parametros = {
                 'objMunicipio': {
                     Nombre: CiudadObj.Ciudad,
@@ -750,9 +750,7 @@ angular
 
         factory.UpdateMunicipio = function (CiudadObj) {
             var deferred = $q.defer();
-            var config = {
-                headers: {'Authorization': $localStorage.currentUser.token}
-            };
+            var config = { headers: {'Authorization': $localStorage.currentUser.token} };
             var Parametros = {
                 'objMunicipio': {
                     Nombre: CiudadObj.Ciudad,
@@ -769,13 +767,40 @@ angular
 
         factory.DeleteMunicipio = function (IdMunicipio) {
             var deferred = $q.defer();
-            var config = {
-                headers: {'Authorization': $localStorage.currentUser.token}
-            };
+            var config = { headers: {'Authorization': $localStorage.currentUser.token} };
             var Parametros = {
                 'IdMunicipio': IdMunicipio
             };
             $http.post(globalService.getUrl() + paths.DeleteMunicipio, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.GetLocalidadList = function(){
+            var deferred = $q.defer();
+            var config = { headers: {'Authorization': $localStorage.currentUser.token} };
+            $http.get(globalService.getUrl() + paths.GetLocalidadList, config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.AddLocalidad = function (LocalidadObj) {
+            var deferred = $q.defer();
+            var config = { headers: {'Authorization': $localStorage.currentUser.token} };
+            var Parametros = {
+                'objLocalidad': {
+                    Nombre: objLocalidad.Ciudad,
+                    IdEstado: objLocalidad.IdEstado,
+                    IdMunicipio: objLocalidad.IdMunicipio
+                }
+            };
+            $http.post(globalService.getUrl() + paths.AddLocalidad, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);
