@@ -32,7 +32,8 @@ angular
             });
         }
 
-        function OpenUpdateLocalidad(){
+        function OpenUpdateLocalidad(LocalidadObj){
+            var LocalidadObj = LocalidadObj;
             var modalInstance = $uibModal.open({
                 animation: true,
                 ariaLabelledBy: 'modal-title',
@@ -44,15 +45,16 @@ angular
                 keyboard: false,
                 class: 'modal-backdrop fade',
                 size: 'lg',
-                /*resolve: {
-                    ObjRefCliente: function () {
-                        return ObjRefCliente;
+                resolve: {
+                    LocalidadObj: function () {
+                        return LocalidadObj;
                     }
-                }*/
+                }
             });
         }
 
-        function OpenDeleteLocalidad(){
+        function OpenDeleteLocalidad(LocalidadObj){
+            var LocalidadObj = LocalidadObj;
             var modalInstance = $uibModal.open({
                 animation: true,
                 ariaLabelledBy: 'modal-title',
@@ -64,11 +66,11 @@ angular
                 keyboard: false,
                 class: 'modal-backdrop fade',
                 size: 'sm',
-                /*resolve: {
-                    ObjRefCliente: function () {
-                        return ObjRefCliente;
+                resolve: {
+                    LocalidadObj: function () {
+                        return LocalidadObj;
                     }
-                }*/
+                }
             });
         }
 

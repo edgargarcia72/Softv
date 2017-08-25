@@ -1,4 +1,4 @@
-<form name="FormPlaza" angular-validator-submit="ctrl.SavePlaza()" novalidate angular-validator>
+<form name="FormLocalidad" angular-validator-submit="ctrl.SaveLocalidad()" novalidate angular-validator>
     <div class="modal-header">
         <button class="close" type="button" aria-label="close" ng-click="ctrl.cancel()">x</button>
         <h4 class="modal-title"><i ng-class="ctrl.Icono"></i> {{ ctrl.Titulo }}</h4>
@@ -30,22 +30,25 @@
                 </div>
             </div>
             <div class="col-md-12">
-                <div class="col-md-5">
-                    <select name="SltEstado" class="form-control input-sm" ng-model="ctrl.Estado" ng-options="E.Nombre for E in ctrl.EstadoList track by E.IdEstado" ng-change="ctrl.GetCiudadMunicipio()">
+                <div class="col-md-6">
+                    <select name="SltEstado" class="form-control input-sm" ng-model="ctrl.Estado" ng-options="E.Nombre for E in ctrl.EstadoList track by E.IdEstado" ng-change="ctrl.GetCiudadMunicipio()" validate-on="dirty" required required-message="'Obligatorio'">
                         <option value="">Selecciona</option>
                     </select>
                 </div>
-                <div class="col-md-5">
-                    <select name="SltCiudad" class="form-control input-sm" ng-model="ctrl.Ciudad" ng-options="C.Municipio.Nombre for C in ctrl.CiudadMunicipioList track by C.Municipio.IdMunicipio">
+                <div class="col-md-6">
+                    <select name="SltCiudad" class="form-control input-sm" ng-model="ctrl.Ciudad" ng-options="C.Municipio.Nombre for C in ctrl.CiudadMunicipioList track by C.Municipio.IdMunicipio" validate-on="dirty" required required-message="'Obligatorio'">
                         <option value="">Selecciona</option>
                     </select>
                 </div>
+                <!--
                 <div class="col-md-2">
                     <button type="button" class="btn btn-success bt-sm" title="Agregar Ciudad" ng-click="ctrl.AddEstMun()">Agregar</button>
                 </div>
+                -->
             </div>
         </div>
         <br>
+        <!--
         <div class="row">
             <div class="col-md-12">
                 <div class="col-md-12">
@@ -58,26 +61,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-show="ctrl.sinRegistros">
-                                <td class="text-center" colspan="4">SIN REGISTROS</td>
-                            </tr>
-                            <!--<tr dir-paginate="X in ctrl.ComisionVLista|itemsPerPage:7" ng-show="ctrl.conRegistros">-->
-                            <tr>
-                                <td>{{ X.IdComision }}</td>
-                                <td>{{ X.TipServ }}</td>
+                            <tr dir-paginate="X in ctrl.EstMunList|itemsPerPage:7">
+                                <td>{{ X.Estado.Nombre }}</td>
+                                <td>{{ X.Ciudad.Nombre }}</td>
                                 <td><button type="button" class="btn btn-warning btn-xs" title="Eliminar Ciudad">Eliminar</button></td>
                             </tr>
                         </tbody>
                     </table>
                     <br>
                     <div style="margin-top:-40px;">
-                        <dir-pagination-controls max-size="7" direction-links="true" boundary-links="true" ng-if="ctrl.ComisionVLista.length > 0">
+                        <dir-pagination-controls max-size="7" direction-links="true" boundary-links="true" ng-if="ctrl.EstMunList.length > 0">
                         </dir-pagination-controls>
                     </div>
                     <br>
                 </div>
             </div>
         </div>
+        -->
     </div>
     <div class="modal-footer">
         <button type="submit" class="btn btn-primary btn-sm" title="Guardar Localidad">Guardar</button>
