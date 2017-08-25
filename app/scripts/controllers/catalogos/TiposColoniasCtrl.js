@@ -2,7 +2,20 @@
 
 angular
     .module('softvApp')
-    .controller('TiposColoniasCtrl', function($uibModal){
+    .controller('TiposColoniasCtrl', function(CatalogosFactory, $uibModal){
+
+        function initData(){
+            CatalogosFactory.GetTipoColoniaList().then(function(data){
+                vm.TipoColoniaList = data.GetTipoColoniaListResult;
+                if (vm.TipoColoniaList.length == 0) {
+					vm.SinRegistros = true;
+					vm.ConRegistros = false;
+				} else {
+					vm.SinRegistros = false;
+					vm.ConRegistros = true;
+				}
+            });
+        }
 
         function OpenAddTipoColonia(){
             var modalInstance = $uibModal.open({
@@ -15,16 +28,12 @@ angular
                 backdrop: 'static',
                 keyboard: false,
                 class: 'modal-backdrop fade',
-                size: 'md',
-                /*resolve: {
-                    ObjRefCliente: function () {
-                        return ObjRefCliente;
-                    }
-                }*/
+                size: 'md'
             });
         }
 
-        function OpenUpdateTipoColonia(){
+        function OpenUpdateTipoColonia(TipoColoniaObj){
+            var TipoColoniaObj = TipoColoniaObj;
             var modalInstance = $uibModal.open({
                 animation: true,
                 ariaLabelledBy: 'modal-title',
@@ -36,15 +45,16 @@ angular
                 keyboard: false,
                 class: 'modal-backdrop fade',
                 size: 'md',
-                /*resolve: {
-                    ObjRefCliente: function () {
-                        return ObjRefCliente;
+                resolve: {
+                    TipoColoniaObj: function () {
+                        return TipoColoniaObj;
                     }
-                }*/
+                }
             });
         }
 
-        function OpenDeleteTipoColonia(){
+        function OpenDeleteTipoColonia(TipoColoniaObj){
+            var TipoColoniaObj = TipoColoniaObj;
             var modalInstance = $uibModal.open({
                 animation: true,
                 ariaLabelledBy: 'modal-title',
@@ -56,11 +66,11 @@ angular
                 keyboard: false,
                 class: 'modal-backdrop fade',
                 size: 'sm',
-                /*resolve: {
-                    ObjRefCliente: function () {
-                        return ObjRefCliente;
+                resolve: {
+                    TipoColoniaObj: function () {
+                        return TipoColoniaObj;
                     }
-                }*/
+                }
             });
         }
 
@@ -68,5 +78,6 @@ angular
         vm.OpenAddTipoColonia = OpenAddTipoColonia;
         vm.OpenUpdateTipoColonia = OpenUpdateTipoColonia;
         vm.OpenDeleteTipoColonia = OpenDeleteTipoColonia;
+        initData();
         
     });

@@ -1,7 +1,7 @@
 <form name="FormTipoColonia" angular-validator-submit="ctrl.SaveTipoColonia()" novalidate angular-validator>
     <div class="modal-header">
         <button class="close" type="button" aria-label="close" ng-click="ctrl.cancel()">x</button>
-        <h4 class="modal-title"><i class="fa fa-plus"></i> {{ ctrl.Titulo }}</h4>
+        <h4 class="modal-title"><i ng-class="ctrl.Icono"></i> {{ ctrl.Titulo }}</h4>
     </div>
     <div class="modal-body">
         <div class="row">

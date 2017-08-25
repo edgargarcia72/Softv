@@ -45,7 +45,11 @@ angular
             GetLocalidadList: '/Localidad/GetLocalidadList',
             AddLocalidad: '/Localidad/AddLocalidad',
             UpdateLocalidad: '/Localidad/UpdateLocalidad',
-            DeleteLocalidad: '/Localidad/DeleteLocalidad'
+            DeleteLocalidad: '/Localidad/DeleteLocalidad',
+            GetTipoColoniaList: '/TipoColonia/GetTipoColoniaList',
+            AddTipoColonia: '/TipoColonia/AddTipoColonia',
+            UpdateTipoColonia: '/TipoColonia/UpdateTipoColonia',
+            DeleteTipoColonia: '/TipoColonia/DeleteTipoColonia'
         };
 
         factory.GetPlazaList = function(){
@@ -810,6 +814,64 @@ angular
                 IdLocalidad: IdLocalidad
             };
             $http.post(globalService.getUrl() + paths.DeleteLocalidad, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.GetTipoColoniaList = function(){
+            var deferred = $q.defer();
+            var config = { headers: {'Authorization': $localStorage.currentUser.token} };
+            $http.get(globalService.getUrl() + paths.GetTipoColoniaList, config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.AddTipoColonia = function (TipoColonia) {
+            var deferred = $q.defer();
+            var config = { headers: {'Authorization': $localStorage.currentUser.token} };
+            var Parametros = {
+                'objTipoColonia': {
+                    Nombre: TipoColonia
+                }
+            };
+            $http.post(globalService.getUrl() + paths.AddTipoColonia, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.UpdateTipoColonia = function (TipoColoniaObj) {
+            var deferred = $q.defer();
+            var config = { headers: {'Authorization': $localStorage.currentUser.token} };
+            var Parametros = {
+                'objTipoColonia': {
+                    IdTipoColonia: TipoColoniaObj.IdTipoColonia,
+                    Nombre: TipoColoniaObj.TipoColonia
+                }
+            };
+            $http.post(globalService.getUrl() + paths.UpdateTipoColonia, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.DeleteTipoColonia = function (IdTipoColonia) {
+            var deferred = $q.defer();
+            var config = { headers: {'Authorization': $localStorage.currentUser.token} };
+            var Parametros = {
+                IdTipoColonia: IdTipoColonia
+            };
+            $http.post(globalService.getUrl() + paths.DeleteTipoColonia, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);
