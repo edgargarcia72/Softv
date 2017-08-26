@@ -38,6 +38,9 @@ angular
         }
 
         var vm = this;
+        
+        vm.EstMunList = [];
+        vm.EstMunViewList = [];
         vm.IdLocalidad = LocalidadObj.IdLocalidad;
         vm.Localidad = LocalidadObj.Nombre
         vm.Titulo = 'Editar Registro - ' + vm.IdLocalidad;

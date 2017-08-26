@@ -30,54 +30,50 @@
                 </div>
             </div>
             <div class="col-md-12">
-                <div class="col-md-6">
-                    <select name="SltEstado" class="form-control input-sm" ng-model="ctrl.Estado" ng-options="E.Nombre for E in ctrl.EstadoList track by E.IdEstado" ng-change="ctrl.GetCiudadMunicipio()" validate-on="dirty" required required-message="'Obligatorio'">
+                <div class="col-md-5">
+                    <select name="SltEstado" class="form-control input-sm" ng-model="ctrl.Estado" ng-options="E.Nombre for E in ctrl.EstadoList track by E.IdEstado" ng-change="ctrl.GetCiudadMunicipio()">
                         <option value="">Selecciona</option>
                     </select>
                 </div>
-                <div class="col-md-6">
-                    <select name="SltCiudad" class="form-control input-sm" ng-model="ctrl.Ciudad" ng-options="C.Municipio.Nombre for C in ctrl.CiudadMunicipioList track by C.Municipio.IdMunicipio" validate-on="dirty" required required-message="'Obligatorio'">
+                <div class="col-md-5">
+                    <select name="SltCiudad" class="form-control input-sm" ng-model="ctrl.Ciudad" ng-options="C.Municipio.Nombre for C in ctrl.CiudadMunicipioList track by C.Municipio.IdMunicipio">
                         <option value="">Selecciona</option>
                     </select>
                 </div>
-                <!--
                 <div class="col-md-2">
-                    <button type="button" class="btn btn-success bt-sm" title="Agregar Ciudad" ng-click="ctrl.AddEstMun()">Agregar</button>
+                    <button type="button" class="btn btn-success bt-sm" title="Agregar Relación Estado y Ciudad" ng-click="ctrl.AddEstMun()">Agregar</button>
                 </div>
-                -->
             </div>
         </div>
         <br>
-        <!--
         <div class="row">
             <div class="col-md-12">
                 <div class="col-md-12">
                     <table class="table">
                         <thead>
                             <tr>
-                                <th><b>Estado</b></th>
-                                <th><b>Ciudad</b></th>
-                                <th><b>Acciones</b></th>
+                                <th width="45%"><b>Estado</b></th>
+                                <th width="45%"><b>Ciudad</b></th>
+                                <th width="10%"><b>Acciones</b></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr dir-paginate="X in ctrl.EstMunList|itemsPerPage:7">
-                                <td>{{ X.Estado.Nombre }}</td>
-                                <td>{{ X.Ciudad.Nombre }}</td>
-                                <td><button type="button" class="btn btn-warning btn-xs" title="Eliminar Ciudad">Eliminar</button></td>
+                            <tr dir-paginate="X in ctrl.EstMunViewList|itemsPerPage:7">
+                                <td>{{ X.Estado }}</td>
+                                <td>{{ X.Municipio }}</td>
+                                <td><button type="button" class="btn btn-warning btn-xs" title="Eliminar Ciudad" ng-click="ctrl.DeleteEstMun(X.IdEstado, X.IdMunicipio)">Eliminar</button></td>
                             </tr>
                         </tbody>
                     </table>
                     <br>
                     <div style="margin-top:-40px;">
-                        <dir-pagination-controls max-size="7" direction-links="true" boundary-links="true" ng-if="ctrl.EstMunList.length > 0">
+                        <dir-pagination-controls max-size="7" direction-links="true" boundary-links="true" ng-if="ctrl.EstMunViewList.length > 0">
                         </dir-pagination-controls>
                     </div>
                     <br>
                 </div>
             </div>
         </div>
-        -->
     </div>
     <div class="modal-footer">
         <button type="submit" class="btn btn-primary btn-sm" title="Guardar Localidad">Guardar</button>

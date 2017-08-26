@@ -10,47 +10,68 @@ angular
             });
         }
 
-        /*function AddEstMun(){
+        function AddEstMun(){
             if(vm.Estado != undefined && vm.Estado != 0 &&
                vm.Ciudad != undefined && vm.Ciudad != 0){
                 var EstMun = {};
-                EstMun.Estado = vm.Estado;
-                EstMun.Ciudad = vm.Ciudad.Municipio;
-                vm.EstMunList.push(EstMun);
-                console.log(vm.EstMunList);
+                EstMun.IdEstado = vm.Estado.IdEstado;
+                EstMun.IdMunicipio = vm.Ciudad.Municipio.IdMunicipio;
+                var EstMunView = {};
+                EstMunView.IdEstado = vm.Estado.IdEstado;
+                EstMunView.IdMunicipio = vm.Ciudad.Municipio.IdMunicipio;
+                EstMunView.Estado = vm.Estado.Nombre;
+                EstMunView.Municipio = vm.Ciudad.Municipio.Nombre;
+                if(ExistsEstMun(EstMun.IdEstado, EstMun.IdMunicipio) == false){
+                    vm.EstMunList.push(EstMun);
+                    vm.EstMunViewList.push(EstMunView);
+                    console.log(vm.EstMunList);
+                    console.log(vm.EstMunViewList);
+                }else{
+                    ngNotify.set('ERROR, Ya existe esta relación.', 'warn');
+                }
             }else{
                 ngNotify.set('ERROR, Selecciona un estado y una ciudad.', 'warn');
             }
-        }*/
+        }
+
+        function ExistsEstMun(IdEstado, IdMunicipio){
+            var ResultExists = 0;
+            for(var i = 0; vm.EstMunList.length > i; i ++){
+                console.log(i);
+                if(vm.EstMunList[0].IdEstado == IdEstado && vm.EstMunList[0].IdMunicipio == IdMunicipio){
+                    ResultExists = ResultExists + 1
+                }
+            }
+            return (ResultExists > 0)? true : false;
+        }
+
+        function DeleteEstMun(IdEstado, IdMunicipio){
+            for(var i = 0; vm.EstMunList.length > i; i ++){
+                console.log(i);
+                if(vm.EstMunList[0].IdEstado == IdEstado && vm.EstMunList[0].IdMunicipio == IdMunicipio){
+                    vm.EstMunList.splice(i, 1);
+                    vm.EstMunViewList.splice(i, 1);
+                }
+            }
+        }
 
         function SaveLocalidad(){
-            var LocalidadObj = {};
-            LocalidadObj.Localidad = vm.Localidad;
-            LocalidadObj.IdCiudad = vm.Ciudad.Municipio.IdMunicipio;
-            LocalidadObj.IdEstado = vm.Estado.IdEstado;
-            CatalogosFactory.AddLocalidad(LocalidadObj).then(function(data){
-                if(data.AddLocalidadResult > 0){
+            var lstRelLocalidad = {};
+            var RelLocalidadMunEstAdd = {};
+            lstRelLocalidad.Nombre = vm.Localidad;
+            if(vm.EstMunList.length > 0){
+                RelLocalidadMunEstAdd = vm.EstMunList;
+            }
+            console.log(lstRelLocalidad, RelLocalidadMunEstAdd);
+            CatalogosFactory.AddRelLocalidadL(lstRelLocalidad, RelLocalidadMunEstAdd).then(function(data){
+                if(data.AddRelLocalidadLResult > 0){
                     ngNotify.set('CORRECTO, se añadió una localidad nueva.', 'success');
-                    $state.reload('home.catalogos.localidades');
 				    cancel();
                 }else{
                     ngNotify.set('ERROR, al añadir una localidad nueva.', 'warn');
+                    cancel();
                 }
             });
-            /*var LocalidadObj = {};
-            if(vm.EstMunList.length > 0){
-                LocalidadObj.Localidad = vm.Localidad;
-                LocalidadObj.IdCiudad = vm.EstMunList[0].Ciudad.IdMunicipio;
-                LocalidadObj.IdEstado = vm.EstMunList[0].Estado.IdEstado;
-            }else{
-                LocalidadObj.Localidad = vm.Localidad;
-                LocalidadObj.IdCiudad = 0;
-                LocalidadObj.IdEstado = 0;
-            }
-            console.log(LocalidadObj);
-            CatalogosFactory.AddLocalidad(LocalidadObj).then(function(data){
-                console.log(data);
-            });*/
         }
 
         function GetCiudadMunicipio(){
@@ -61,15 +82,18 @@ angular
 
         function cancel() {
             $uibModalInstance.dismiss('cancel');
+            $state.reload('home.catalogos.localidades');
         }
 
         var vm = this;
         vm.Titulo = 'Nuevo Registro';
         vm.Icono = 'fa fa-plus';
-        vm.GetCiudadMunicipio = GetCiudadMunicipio;
-        //vm.AddEstMun = AddEstMun;
-        vm.SaveLocalidad = SaveLocalidad;
         vm.EstMunList = [];
+        vm.EstMunViewList = [];
+        vm.GetCiudadMunicipio = GetCiudadMunicipio;
+        vm.AddEstMun = AddEstMun;
+        vm.DeleteEstMun = DeleteEstMun;
+        vm.SaveLocalidad = SaveLocalidad;
         vm.cancel = cancel;
         initData();
         

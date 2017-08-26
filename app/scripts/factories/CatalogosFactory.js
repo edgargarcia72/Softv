@@ -45,6 +45,8 @@ angular
             DeleteMunicipio: '/Municipio/DeleteMunicipio',
             GetLocalidadList: '/Localidad/GetLocalidadList',
             AddLocalidad: '/Localidad/AddLocalidad',
+            AddRelLocalidadL: '/localidad/AddRelLocalidadL',
+            GetDeepLocalidad: '/localidad/GetDeepLocalidad',
             UpdateLocalidad: '/Localidad/UpdateLocalidad',
             DeleteLocalidad: '/Localidad/DeleteLocalidad',
             GetTipoColoniaList: '/TipoColonia/GetTipoColoniaList',
@@ -803,6 +805,37 @@ angular
             });
             return deferred.promise;
         };
+
+        factory.AddRelLocalidadL = function (lstRelLocalidad, RelLocalidadMunEstAdd) {
+            var deferred = $q.defer();
+            var config = {
+                headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = {
+                'lstRelLocalidad': lstRelLocalidad,
+                'RelLocalidadMunEstAdd': RelLocalidadMunEstAdd
+            };
+            console.log(Parametros);
+            $http.post(globalService.getUrl() + paths.AddRelLocalidadL, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        /*factory.GetDeepLocalidad = function (IdLocalidad) {
+            var deferred = $q.defer();
+            var config = { headers: {'Authorization': $localStorage.currentUser.token} };
+            var Parametros = {
+                'IdMunicipio': IdMunicipio
+            };
+            $http.post(globalService.getUrl() + paths.GetDeepLocalidad, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };*/
 
         factory.UpdateLocalidad = function (LocalidadObj) {
             var deferred = $q.defer();
