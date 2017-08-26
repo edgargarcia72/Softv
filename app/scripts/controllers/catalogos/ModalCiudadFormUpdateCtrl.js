@@ -7,6 +7,12 @@ angular
         function initData(){
             CatalogosFactory.GetEstadoList2_web().then(function(data){
                 vm.EstadoList = data.GetEstadoList2_webResult;
+                for(var i = 0; i < vm.EstadoList.length; i++){
+                    if(vm.EstadoList[i].IdEstado == vm.IdEstado){
+                        vm.Estado = vm.EstadoList[i];
+                        break;
+                    }
+                }
             });
         }
 

@@ -39,6 +39,7 @@ angular
             UpdateEstado2_web: '/Estado/UpdateEstado2_web',
             DeleteEstado2_web: '/Estado/DeleteEstado2_web',
             GetMunicipioList: '/Municipio/GetMunicipioList',
+            GetMunicipioList2: '/Municipio/GetMunicipioList2',
             AddMunicipio: '/Municipio/AddMunicipio',
             UpdateMunicipio: '/Municipio/UpdateMunicipio',
             DeleteMunicipio: '/Municipio/DeleteMunicipio',
@@ -706,6 +707,19 @@ angular
                 headers: {'Authorization': $localStorage.currentUser.token}
             };
             $http.get(globalService.getUrl() + paths.GetMunicipioList, config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.GetMunicipioList2 = function(){
+            var deferred = $q.defer();
+            var config = {
+                headers: {'Authorization': $localStorage.currentUser.token}
+            };
+            $http.get(globalService.getUrl() + paths.GetMunicipioList2, config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);
