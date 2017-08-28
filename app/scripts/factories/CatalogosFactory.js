@@ -659,7 +659,6 @@ angular
             var Parametros = {
                 'objEstado': {
                     Nombre: EstadoObj.Estado
-                    //id_compania: EstadoObj.IdPlaza
                 }
             };
             $http.post(globalService.getUrl() + paths.AddEstado2_web, JSON.stringify(Parametros), config).then(function (response) {

@@ -13,13 +13,16 @@ angular
         function SaveEstado(){
             var EstadoObj = {};
             EstadoObj.Estado = vm.Estado;
-            //EstadoObj.IdPlaza = vm.Plaza.IdPlaza;
-            console.log(EstadoObj);
             CatalogosFactory.AddEstado2_web(EstadoObj).then(function(data){
-                console.log(data);
-                ngNotify.set('CORRECTO, se añadió estado nuevo.', 'success');
-                $state.reload('home.catalogos.estados');
-				cancel();
+                if(data.AddEstado2_webResult > 0){
+                    ngNotify.set('CORRECTO, se añadió un estado nuevo.', 'success');
+                    $state.reload('home.catalogos.estados');
+                    cancel();
+                }else{
+                    ngNotify.set('ERROR, al añadir un estado nuevo.', 'warn');
+                    $state.reload('home.catalogos.estados');
+                    cancel();
+                }
             });
         }
 

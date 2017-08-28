@@ -6,10 +6,15 @@ angular
 
         function DeleteEstado(){
             CatalogosFactory.DeleteEstado2_web(vm.IdEstado).then(function(data){
-                console.log(data);
-                ngNotify.set('CORRECTO, se eliminó estado.', 'success');
-                $state.reload('home.catalogos.estados');
-                cancel();
+                if(data.DeleteEstado2_webResult == 1){
+                    ngNotify.set('CORRECTO, se eliminó el estado.', 'success');
+                    $state.reload('home.catalogos.estados');
+                    cancel();
+                }else{
+                    ngNotify.set('ERROR, al eliminar el estado.', 'warn');
+                    $state.reload('home.catalogos.estados');
+                    cancel();
+                }
             });
         }
 

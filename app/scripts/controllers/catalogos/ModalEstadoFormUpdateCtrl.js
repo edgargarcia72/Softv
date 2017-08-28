@@ -8,12 +8,16 @@ angular
             var EstadoObj = {};
             EstadoObj.IdEstado = vm.IdEstado;
             EstadoObj.Estado = vm.Estado;
-            console.log(EstadoObj);
             CatalogosFactory.UpdateEstado2_web(EstadoObj).then(function(data){
-                console.log(data);
-                ngNotify.set('CORRECTO, se guardó el estado.', 'success');
-                $state.reload('home.catalogos.estados');
-                cancel();
+                if(data.UpdateEstado2_webResult == 1){
+                    ngNotify.set('CORRECTO, se guardó el estado.', 'success');
+                    $state.reload('home.catalogos.estados');
+                    cancel();
+                }else{
+                    ngNotify.set('ERROR, al guardar el estado.', 'warn');
+                    $state.reload('home.catalogos.estados');
+                    cancel();
+                }
             });
         }
 
