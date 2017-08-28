@@ -2,11 +2,15 @@
 
 angular
     .module('softvApp')
-    .controller('ModalLocalidadFormUpdateCtrl', function(CatalogosFactory, $uibModalInstance, ngNotify, $state, LocalidadObj){
+    .controller('ModalLocalidadFormUpdateCtrl', function(CatalogosFactory, $uibModalInstance, ngNotify, $state, IdLocalidad){
 
         function initData(){
             CatalogosFactory.GetEstadoList2_web().then(function(data){
                 vm.EstadoList = data.GetEstadoList2_webResult;
+            });
+
+            CatalogosFactory.GetDeepLocalidad(vm.IdLocalidad).then(function(data){
+                console.log(data);
             });
         }
 
@@ -41,9 +45,11 @@ angular
         
         vm.EstMunList = [];
         vm.EstMunViewList = [];
-        vm.IdLocalidad = LocalidadObj.IdLocalidad;
-        vm.Localidad = LocalidadObj.Nombre
-        vm.Titulo = 'Editar Registro - ' + vm.IdLocalidad;
+        vm.IdLocalidad = IdLocalidad;
+        console.log(vm.IdLocalidad);
+        /*vm.IdLocalidad = LocalidadObj.IdLocalidad;
+        vm.Localidad = LocalidadObj.Nombre*/
+        vm.Titulo = 'Editar Registro - '/* + vm.IdLocalidad*/;
         vm.Icono = 'fa fa-pencil-square-o';
         vm.SaveLocalidad = SaveLocalidad;
         vm.GetCiudadMunicipio = GetCiudadMunicipio;

@@ -49,7 +49,7 @@
                         <tr dir-paginate="X in $ctrl.LocalidadList|filter:$ctrl.SearchLocalidad|itemsPerPage:7" ng-show="$ctrl.ConRegistros">
                             <td>{{ X.IdLocalidad }}</td>
                             <td>{{ X.Nombre }}</td>
-                            <td><button type="button" class="btn btn-warning btn-xs" ng-click="$ctrl.OpenUpdateLocalidad(X)" title="Editar Localidad"><i class="fa fa-pencil-square-o"></i> EDITAR</button></td>
+                            <td><button type="button" class="btn btn-warning btn-xs" ng-click="$ctrl.OpenUpdateLocalidad(X.IdLocalidad)" title="Editar Localidad"><i class="fa fa-pencil-square-o"></i> EDITAR</button></td>
                             <td><button type="button" class="btn btn-danger btn-xs" ng-click="$ctrl.OpenDeleteLocalidad(X)" title="Eliminar Localidad"><i class="fa fa-trash"></i> ELIMINAR</button></td>
                         </tr>
                     </tbody>

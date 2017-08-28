@@ -24,8 +24,6 @@ angular
                 if(ExistsEstMun(EstMun.IdEstado, EstMun.IdMunicipio) == false){
                     vm.EstMunList.push(EstMun);
                     vm.EstMunViewList.push(EstMunView);
-                    console.log(vm.EstMunList);
-                    console.log(vm.EstMunViewList);
                 }else{
                     ngNotify.set('ERROR, Ya existe esta relación.', 'warn');
                 }
@@ -37,7 +35,6 @@ angular
         function ExistsEstMun(IdEstado, IdMunicipio){
             var ResultExists = 0;
             for(var i = 0; vm.EstMunList.length > i; i ++){
-                console.log(i);
                 if(vm.EstMunList[0].IdEstado == IdEstado && vm.EstMunList[0].IdMunicipio == IdMunicipio){
                     ResultExists = ResultExists + 1
                 }
@@ -47,7 +44,6 @@ angular
 
         function DeleteEstMun(IdEstado, IdMunicipio){
             for(var i = 0; vm.EstMunList.length > i; i ++){
-                console.log(i);
                 if(vm.EstMunList[0].IdEstado == IdEstado && vm.EstMunList[0].IdMunicipio == IdMunicipio){
                     vm.EstMunList.splice(i, 1);
                     vm.EstMunViewList.splice(i, 1);
@@ -62,13 +58,14 @@ angular
             if(vm.EstMunList.length > 0){
                 RelLocalidadMunEstAdd = vm.EstMunList;
             }
-            console.log(lstRelLocalidad, RelLocalidadMunEstAdd);
             CatalogosFactory.AddRelLocalidadL(lstRelLocalidad, RelLocalidadMunEstAdd).then(function(data){
                 if(data.AddRelLocalidadLResult > 0){
                     ngNotify.set('CORRECTO, se añadió una localidad nueva.', 'success');
+                    $state.reload('home.catalogos.localidades');
 				    cancel();
                 }else{
                     ngNotify.set('ERROR, al añadir una localidad nueva.', 'warn');
+                    $state.reload('home.catalogos.localidades');
                     cancel();
                 }
             });
@@ -82,7 +79,6 @@ angular
 
         function cancel() {
             $uibModalInstance.dismiss('cancel');
-            $state.reload('home.catalogos.localidades');
         }
 
         var vm = this;

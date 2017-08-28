@@ -814,7 +814,6 @@ angular
                 'lstRelLocalidad': lstRelLocalidad,
                 'RelLocalidadMunEstAdd': RelLocalidadMunEstAdd
             };
-            console.log(Parametros);
             $http.post(globalService.getUrl() + paths.AddRelLocalidadL, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -823,11 +822,11 @@ angular
             return deferred.promise;
         };
 
-        /*factory.GetDeepLocalidad = function (IdLocalidad) {
+        factory.GetDeepLocalidad = function (IdLocalidad) {
             var deferred = $q.defer();
             var config = { headers: {'Authorization': $localStorage.currentUser.token} };
             var Parametros = {
-                'IdMunicipio': IdMunicipio
+                'IdLocalidad': IdLocalidad
             };
             $http.post(globalService.getUrl() + paths.GetDeepLocalidad, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
@@ -835,7 +834,7 @@ angular
                 deferred.reject(response);
             });
             return deferred.promise;
-        };*/
+        };
 
         factory.UpdateLocalidad = function (LocalidadObj) {
             var deferred = $q.defer();

@@ -32,8 +32,8 @@ angular
             });
         }
 
-        function OpenUpdateLocalidad(LocalidadObj){
-            var LocalidadObj = LocalidadObj;
+        function OpenUpdateLocalidad(IdLocalidad){
+            var IdLocalidad = IdLocalidad;
             var modalInstance = $uibModal.open({
                 animation: true,
                 ariaLabelledBy: 'modal-title',
@@ -46,10 +46,15 @@ angular
                 class: 'modal-backdrop fade',
                 size: 'lg',
                 resolve: {
+                    IdLocalidad: function () {
+                        return IdLocalidad;
+                    }
+                }
+                /*resolve: {
                     LocalidadObj: function () {
                         return LocalidadObj;
                     }
-                }
+                }*/
             });
         }
 

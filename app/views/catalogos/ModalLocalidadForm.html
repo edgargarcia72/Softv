@@ -1,3 +1,10 @@
+<style type="text/css">
+    .table-scroll {
+        height:150px;
+        overflow:auto;  
+        margin-top:20px;
+    }
+</style>
 <form name="FormLocalidad" angular-validator-submit="ctrl.SaveLocalidad()" novalidate angular-validator>
     <div class="modal-header">
         <button class="close" type="button" aria-label="close" ng-click="ctrl.cancel()">x</button>
@@ -48,7 +55,7 @@
         <br>
         <div class="row">
             <div class="col-md-12">
-                <div class="col-md-12">
+                <div class="col-md-12 table-scroll">
                     <table class="table">
                         <thead>
                             <tr>
@@ -58,19 +65,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr dir-paginate="X in ctrl.EstMunViewList|itemsPerPage:7">
+                                <tr ng-repeat="X in ctrl.EstMunViewList">
                                 <td>{{ X.Estado }}</td>
                                 <td>{{ X.Municipio }}</td>
                                 <td><button type="button" class="btn btn-warning btn-xs" title="Eliminar Ciudad" ng-click="ctrl.DeleteEstMun(X.IdEstado, X.IdMunicipio)">Eliminar</button></td>
                             </tr>
                         </tbody>
                     </table>
-                    <br>
-                    <div style="margin-top:-40px;">
-                        <dir-pagination-controls max-size="7" direction-links="true" boundary-links="true" ng-if="ctrl.EstMunViewList.length > 0">
-                        </dir-pagination-controls>
-                    </div>
-                    <br>
                 </div>
             </div>
         </div>
