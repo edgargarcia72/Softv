@@ -52,7 +52,11 @@ angular
             GetTipoColoniaList: '/TipoColonia/GetTipoColoniaList',
             AddTipoColonia: '/TipoColonia/AddTipoColonia',
             UpdateTipoColonia: '/TipoColonia/UpdateTipoColonia',
-            DeleteTipoColonia: '/TipoColonia/DeleteTipoColonia'
+            DeleteTipoColonia: '/TipoColonia/DeleteTipoColonia',
+            GetCalleList: '/Calle/GetCalleList',
+            AddCalleL: '/Calle/AddCalleL',
+            GetDeepCalle: '/Calle/GetDeepCalle',
+            DeleteCalle: '/Calle/DeleteCalle'
         };
 
         factory.GetPlazaList = function(){
@@ -917,6 +921,46 @@ angular
                 IdTipoColonia: IdTipoColonia
             };
             $http.post(globalService.getUrl() + paths.DeleteTipoColonia, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.GetCalleList = function(){
+            var deferred = $q.defer();
+            var config = { headers: {'Authorization': $localStorage.currentUser.token} };
+            $http.get(globalService.getUrl() + paths.GetCalleList, config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.AddCalleL = function (lstRelCalle, RelCalleAdd) {
+            var deferred = $q.defer();
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = {
+                'lstRelCalle': lstRelCalle,
+                'RelCalleAdd': RelCalleAdd
+            };
+            $http.post(globalService.getUrl() + paths.AddCalleL, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.DeleteCalle = function (IdCalle) {
+            var deferred = $q.defer();
+            var config = { headers: {'Authorization': $localStorage.currentUser.token} };
+            var Parametros = {
+                IdCalle: IdCalle
+            };
+            $http.post(globalService.getUrl() + paths.DeleteCalle, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);

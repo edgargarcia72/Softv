@@ -35,7 +35,7 @@ angular
         function ExistsEstMun(IdEstado, IdMunicipio){
             var ResultExists = 0;
             for(var i = 0; vm.EstMunList.length > i; i ++){
-                if(vm.EstMunList[0].IdEstado == IdEstado && vm.EstMunList[0].IdMunicipio == IdMunicipio){
+                if(vm.EstMunList[i].IdEstado == IdEstado && vm.EstMunList[i].IdMunicipio == IdMunicipio){
                     ResultExists = ResultExists + 1
                 }
             }
@@ -44,7 +44,7 @@ angular
 
         function DeleteEstMun(IdEstado, IdMunicipio){
             for(var i = 0; vm.EstMunList.length > i; i ++){
-                if(vm.EstMunList[0].IdEstado == IdEstado && vm.EstMunList[0].IdMunicipio == IdMunicipio){
+                if(vm.EstMunList[i].IdEstado == IdEstado && vm.EstMunList[i].IdMunicipio == IdMunicipio){
                     vm.EstMunList.splice(i, 1);
                     vm.EstMunViewList.splice(i, 1);
                 }

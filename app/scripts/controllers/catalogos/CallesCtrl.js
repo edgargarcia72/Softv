@@ -2,7 +2,20 @@
 
 angular
     .module('softvApp')
-    .controller('CallesCtrl', function($uibModal){
+    .controller('CallesCtrl', function(CatalogosFactory, $uibModal){
+
+        function initData(){
+            CatalogosFactory.GetCalleList().then(function(data){
+                vm.CalleList = data.GetCalleListResult;
+                if (vm.CalleList.length == 0) {
+					vm.SinRegistros = true;
+					vm.ConRegistros = false;
+				} else {
+					vm.SinRegistros = false;
+					vm.ConRegistros = true;
+				}
+            });
+        }
 
         function OpenAddCalle(){
             var modalInstance = $uibModal.open({
@@ -15,16 +28,12 @@ angular
                 backdrop: 'static',
                 keyboard: false,
                 class: 'modal-backdrop fade',
-                size: 'lg',
-                /*resolve: {
-                    ObjRefCliente: function () {
-                        return ObjRefCliente;
-                    }
-                }*/
+                size: 'lg'
             });
         }
 
-        function OpenUpdateCalle(){
+        function OpenUpdateCalle(CalleObj){
+            var CalleObj = CalleObj;
             var modalInstance = $uibModal.open({
                 animation: true,
                 ariaLabelledBy: 'modal-title',
@@ -36,15 +45,16 @@ angular
                 keyboard: false,
                 class: 'modal-backdrop fade',
                 size: 'lg',
-                /*resolve: {
-                    ObjRefCliente: function () {
-                        return ObjRefCliente;
+                resolve: {
+                    CalleObj: function () {
+                        return CalleObj;
                     }
-                }*/
+                }
             });
         }
 
-        function OpenDeleteCalle(){
+        function OpenDeleteCalle(CalleObj){
+            var CalleObj = CalleObj;
             var modalInstance = $uibModal.open({
                 animation: true,
                 ariaLabelledBy: 'modal-title',
@@ -56,11 +66,11 @@ angular
                 keyboard: false,
                 class: 'modal-backdrop fade',
                 size: 'sm',
-                /*resolve: {
-                    ObjRefCliente: function () {
-                        return ObjRefCliente;
+                resolve: {
+                    CalleObj: function () {
+                        return CalleObj;
                     }
-                }*/
+                }
             });
         }
 
@@ -68,5 +78,6 @@ angular
         vm.OpenAddCalle = OpenAddCalle;
         vm.OpenUpdateCalle = OpenUpdateCalle;
         vm.OpenDeleteCalle = OpenDeleteCalle;
+        initData();
         
     });
