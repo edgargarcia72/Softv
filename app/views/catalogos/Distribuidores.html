@@ -49,8 +49,8 @@
                         <tr dir-paginate="X in $ctrl.DistribuidoresList|filter:$ctrl.SearchDistribuidor|itemsPerPage:7" ng-show="$ctrl.ConRegistros">
                             <td>{{ X.IdDistribuidor }}</td>
                             <td>{{ X.Nombre }}</td>
-                            <td><button type="button" class="btn btn-warning btn-xs" ng-click="$ctrl.OpenUpdateDistribuidor()" title="Editar Distribuidor"><i class="fa fa-pencil-square-o"></i> EDITAR</button></td>
-                            <td><button type="button" class="btn btn-danger btn-xs" ng-click="$ctrl.OpenDeleteDistribuidor()" title="Eliminar Distribuidor"><i class="fa fa-trash"></i> ELIMINAR</button></td>
+                            <td><button type="button" class="btn btn-warning btn-xs" ng-click="$ctrl.OpenUpdateDistribuidor(X.IdDistribuidor)" title="Editar Distribuidor"><i class="fa fa-pencil-square-o"></i> EDITAR</button></td>
+                            <td><button type="button" class="btn btn-danger btn-xs" ng-click="$ctrl.OpenDeleteDistribuidor(X)" title="Eliminar Distribuidor"><i class="fa fa-trash"></i> ELIMINAR</button></td>
                         </tr>
                     </tbody>
                 </table>

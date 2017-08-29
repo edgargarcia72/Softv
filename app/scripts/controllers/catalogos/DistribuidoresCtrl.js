@@ -31,7 +31,8 @@ angular
             });
         }
 
-        function OpenUpdateDistribuidor(){
+        function OpenUpdateDistribuidor(IdDistribuidor){
+            var IdDistribuidor = IdDistribuidor;
             var modalInstance = $uibModal.open({
                 animation: true,
                 ariaLabelledBy: 'modal-title',
@@ -43,15 +44,16 @@ angular
                 keyboard: false,
                 class: 'modal-backdrop fade',
                 size: 'lg',
-                /*resolve: {
-                    ObjRefCliente: function () {
-                        return ObjRefCliente;
+                resolve: {
+                    IdDistribuidor: function () {
+                        return IdDistribuidor;
                     }
-                }*/
+                }
             });
         }
 
-        function OpenDeleteDistribuidor(){
+        function OpenDeleteDistribuidor(DistribuidorObj){
+            var DistribuidorObj = DistribuidorObj;
             var modalInstance = $uibModal.open({
                 animation: true,
                 ariaLabelledBy: 'modal-title',
@@ -63,11 +65,11 @@ angular
                 keyboard: false,
                 class: 'modal-backdrop fade',
                 size: 'sm',
-                /*resolve: {
-                    ObjRefCliente: function () {
-                        return ObjRefCliente;
+                resolve: {
+                    DistribuidorObj: function () {
+                        return DistribuidorObj;
                     }
-                }*/
+                }
             });
         }
 

@@ -1,7 +1,7 @@
 <form name="FormDistribuidor" angular-validator-submit="ctrl.SaveDistribuidor()" novalidate angular-validator>
     <div class="modal-header">
         <button class="close" type="button" aria-label="close" ng-click="ctrl.cancel()">x</button>
-        <h4 class="modal-title"><i ng-class="ctrl.Icono"></i> {{ ctrl.Titulo }}</h4>
+        <h4 class="modal-title"><i ng-class="ctrl.Icono"></i> {{ ctrl.Titulo }} {{ ctrl.IdDistribuidor }}</h4>
     </div>
     <div class="modal-body">
         <uib-tabset active="active">
@@ -74,7 +74,7 @@
                             <input name="InpCP" type="text" class="form-control input-sm" ng-model="ctrl.CP" maxlength="5" ng-pattern="/^\d{5}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 5 dígitos.'">
                         </div>
                         <div class="col-md-3">
-                            <input name="InpPagare" type="text" class="form-control input-sm" ng-model="ctrl.Pagare" ng-pattern="/^\d{1,9}.\d{1,9}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa (123.54).'">
+                            <input name="InpPagare" type="text" class="form-control input-sm" ng-model="ctrl.Pagare" ng-pattern="/^\d{1,9}.\d{1,9}$|\d{1,9}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa (123.54).'">
                         </div>
                     </div>
                 </div>

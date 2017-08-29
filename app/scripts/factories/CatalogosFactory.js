@@ -59,7 +59,10 @@ angular
             GetDeepCalle: '/Calle/GetDeepCalle',
             DeleteCalle: '/Calle/DeleteCalle',
             GetDistribuidorList: '/Distribuidor/GetDistribuidorList',
-            AddDistribuidor: '/Distribuidor/AddDistribuidor'
+            AddDistribuidor: '/Distribuidor/AddDistribuidor',
+            GetDeepDistribuidor: '/Distribuidor/GetDeepDistribuidor',
+            UpdateDistribuidor: '/Distribuidor/UpdateDistribuidor',
+            DeleteDistribuidor: '/Distribuidor/DeleteDistribuidor'
         };
 
         factory.GetPlazaList = function(){
@@ -178,6 +181,7 @@ angular
             var Parametros = {
                 'IdMunicipio': IdMunicipio
             };
+            console.log(IdMunicipio);
             $http.post(globalService.getUrl() + paths.GetLocalidadRelMun, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -1001,10 +1005,48 @@ angular
         factory.AddDistribuidor = function (DistribuidorObj) {
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
-            var Parametros = {
-                'objDistribuidor': DistribuidorObj
-            };
+            var Parametros = {'objDistribuidor': DistribuidorObj};
+            console.log(Parametros);
             $http.post(globalService.getUrl() + paths.AddDistribuidor, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.GetDeepDistribuidor = function (IdDistribuidor) {
+            var deferred = $q.defer();
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = {'IdDistribuidor': IdDistribuidor};
+            console.log(Parametros);
+            $http.post(globalService.getUrl() + paths.GetDeepDistribuidor, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.UpdateDistribuidor = function (DistribuidorObj) {
+            var deferred = $q.defer();
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = {'objDistribuidor': DistribuidorObj};
+            console.log(Parametros);
+            $http.post(globalService.getUrl() + paths.UpdateDistribuidor, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.DeleteDistribuidor = function (IdDistribuidor) {
+            var deferred = $q.defer();
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = {'IdDistribuidor': IdDistribuidor};
+            console.log(Parametros);
+            $http.post(globalService.getUrl() + paths.DeleteDistribuidor, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);

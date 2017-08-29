@@ -2,7 +2,7 @@
 
 angular
     .module('softvApp')
-    .controller('ModalDistribuidorFormAddCtrl', function($uibModalInstance){
+    .controller('ModalDistribuidorFormAddCtrl', function(CatalogosFactory, $uibModalInstance, ngNotify, $state){
 
         function SaveDistribuidor(){
             var DistribuidorObj = {};
@@ -22,7 +22,7 @@ angular
             DistribuidorObj.Email = vm.Email;
             DistribuidorObj.Telefono2 = vm.Telefono2;
             DistribuidorObj.ImportePagare = vm.Pagare;
-            //DistribuidorObj.IdAsociado = vm.;
+            DistribuidorObj.IdAsociado = 1;
             DistribuidorObj.NombreResGral = vm.NombreRG;
             DistribuidorObj.TelResGral = vm.TelefonoRG;
             DistribuidorObj.CelResGral = vm.CelularRG;
@@ -48,6 +48,17 @@ angular
             DistribuidorObj.NumeroCon = vm.NumeroDC;
             DistribuidorObj.CPCon = vm.CPDC;
             console.log(DistribuidorObj);
+            CatalogosFactory.AddDistribuidor(DistribuidorObj).then(function(data){
+                if(data.AddDistribuidorResult > 0){
+                    ngNotify.set('CORRECTO, se añadió un distribuidor nuevo.', 'success');
+                    $state.reload('home.catalogos.distribuidores');
+				    cancel();
+                }else{
+                    ngNotify.set('ERROR, al añadir un distribuidor nuevo.', 'warn');
+                    $state.reload('home.catalogos.distribuidores');
+                    cancel();
+                }
+            });
         }
 
         function cancel() {
