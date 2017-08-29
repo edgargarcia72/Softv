@@ -47,6 +47,7 @@ angular
             AddLocalidad: '/Localidad/AddLocalidad',
             AddRelLocalidadL: '/localidad/AddRelLocalidadL',
             GetDeepLocalidad: '/localidad/GetDeepLocalidad',
+            UpdateRellocalidadL: '/localidad/UpdateRellocalidadL',
             UpdateLocalidad: '/Localidad/UpdateLocalidad',
             DeleteLocalidad: '/Localidad/DeleteLocalidad',
             GetTipoColoniaList: '/TipoColonia/GetTipoColoniaList',
@@ -834,6 +835,22 @@ angular
                 'IdLocalidad': IdLocalidad
             };
             $http.post(globalService.getUrl() + paths.GetDeepLocalidad, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.UpdateRellocalidadL = function (lstRelLocalidad, RelLocalidadMunEstAdd) {
+            var deferred = $q.defer();
+            var config = {
+                headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = {
+                'lstRelLocalidad': lstRelLocalidad,
+                'RelLocalidadMunEstAdd': RelLocalidadMunEstAdd
+            };
+            $http.post(globalService.getUrl() + paths.UpdateRellocalidadL, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);
