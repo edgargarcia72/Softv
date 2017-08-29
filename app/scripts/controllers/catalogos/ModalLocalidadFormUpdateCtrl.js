@@ -9,7 +9,7 @@ angular
                 vm.EstadoList = data.GetEstadoList2_webResult;
             });
 
-            CatalogosFactory.GetDeepLocalidad(vm.IdLocalidad).then(function(data){
+            CatalogosFactory.GetDeepLocalidad(IdLocalidad).then(function(data){
                 console.log(data);
             });
         }
@@ -45,8 +45,7 @@ angular
         
         vm.EstMunList = [];
         vm.EstMunViewList = [];
-        vm.IdLocalidad = IdLocalidad;
-        console.log(vm.IdLocalidad);
+        console.log(IdLocalidad);
         /*vm.IdLocalidad = LocalidadObj.IdLocalidad;
         vm.Localidad = LocalidadObj.Nombre*/
         vm.Titulo = 'Editar Registro - '/* + vm.IdLocalidad*/;

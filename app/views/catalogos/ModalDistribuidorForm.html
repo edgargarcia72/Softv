@@ -24,7 +24,7 @@
                             <input name="InpNombre" type="text" class="form-control input-sm" ng-model="ctrl.Nombre" validate-on="dirty" required required-message="'Obligatorio'">
                         </div>
                         <div class="col-md-3">
-                            <input name="InpRFC" type="text" class="form-control input-sm" ng-model="ctrl.RFC" maxlength="13" ng-pattern="ctrl.ValidateRFC" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Error, Ingresa RFC válido.'">
+                            <input name="InpRFC" type="text" class="form-control input-sm" ng-model="ctrl.RFC" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="13" ng-pattern="ctrl.ValidateRFC" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Error, Ingresa RFC válido.'">
                         </div>
                     </div>
                 </div>
@@ -167,7 +167,7 @@
                     </div>
                     <div class="col-md-12">
                         <div class="col-md-6">
-                            <input name="InpNombreDC" type="text" class="form-control input-sm" ng-model="ctrl.CalleDC" validate-on="dirty" required required-message="'Obligatorio'">
+                            <input name="InpNombreDC" type="text" class="form-control input-sm" ng-model="ctrl.NombreDC" validate-on="dirty" required required-message="'Obligatorio'">
                         </div>
                         <div class="col-md-6">
                             <input name="InpCalleDC" type="text" class="form-control input-sm" ng-model="ctrl.CalleDC" validate-on="dirty" required required-message="'Obligatorio'">
@@ -189,13 +189,13 @@
                     </div>
                     <div class="col-md-12">
                         <div class="col-md-3">
-                            <input name="InpNumeroAlm" type="text" class="form-control input-sm" ng-model="ctrl.NumeroALm"  maxlength="6" validate-on="dirty" required required-message="'Obligatorio'">
+                            <input name="InpNumeroDC" type="text" class="form-control input-sm" ng-model="ctrl.NumeroDC"  maxlength="6" validate-on="dirty" required required-message="'Obligatorio'">
                         </div>
                         <div class="col-md-3">
-                            <input name="InpCPALm" type="text" class="form-control input-sm" ng-model="ctrl.CPAlm"  maxlength="5" ng-pattern="/^\d{5}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 5 dígitos.'">
+                            <input name="InpCPDC" type="text" class="form-control input-sm" ng-model="ctrl.CPDC"  maxlength="5" ng-pattern="/^\d{5}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 5 dígitos.'">
                         </div>
                         <div class="col-md-6">
-                            <input name="InpColoniaAlm" type="text" class="form-control input-sm" ng-model="ctrl.ColoniaALm" validate-on="dirty" required required-message="'Obligatorio'">
+                            <input name="InpColoniaDC" type="text" class="form-control input-sm" ng-model="ctrl.ColoniaDC" validate-on="dirty" required required-message="'Obligatorio'">
                         </div>
                     </div>
                 </div>
@@ -214,13 +214,13 @@
                     </div>
                     <div class="col-md-12">
                         <div class="col-md-4">
+                            <input name="InpLocalidadDC" type="text" class="form-control input-sm" ng-model="ctrl.LocalidadDC" validate-on="dirty" required required-message="'Obligatorio'">
+                        </div>
+                        <div class="col-md-4">
                             <input name="InpMunicipioDC" type="text" class="form-control input-sm" ng-model="ctrl.MunicipoDC" validate-on="dirty" required required-message="'Obligatorio'">
                         </div>
                         <div class="col-md-4">
                             <input name="InpEstadoDC" type="text" class="form-control input-sm" ng-model="ctrl.EstadoDC" validate-on="dirty" required required-message="'Obligatorio'">
-                        </div>
-                        <div class="col-md-4">
-                            <input name="InpLocalidadDC" type="text" class="form-control input-sm" ng-model="ctrl.LocalidadDC" validate-on="dirty" required required-message="'Obligatorio'">
                         </div>
                     </div>
                 </div>
@@ -230,7 +230,7 @@
             </uib-tab>
             <uib-tab index="2">
                 <uib-tab-heading>
-                    Ciudades de Contacto
+                    Datos de Contacto
                 </uib-tab-heading>
                 <br>
                 <p><b>Responsable General</b></p>

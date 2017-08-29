@@ -2,8 +2,20 @@
 
 angular
     .module('softvApp')
-    .controller('DistribuidoresCtrl', function($uibModal){
+    .controller('DistribuidoresCtrl', function(CatalogosFactory, $uibModal){
 
+        function initData(){
+            CatalogosFactory.GetDistribuidorList().then(function(data){
+                vm.DistribuidoresList = data.GetDistribuidorListResult;
+                if (vm.DistribuidoresList.length == 0) {
+					vm.SinRegistros = true;
+					vm.ConRegistros = false;
+				} else {
+					vm.SinRegistros = false;
+					vm.ConRegistros = true;
+				}
+            });
+        }
         function OpenAddDistribuidor(){
             var modalInstance = $uibModal.open({
                 animation: true,
@@ -15,12 +27,7 @@ angular
                 backdrop: 'static',
                 keyboard: false,
                 class: 'modal-backdrop fade',
-                size: 'lg',
-                /*resolve: {
-                    ObjRefCliente: function () {
-                        return ObjRefCliente;
-                    }
-                }*/
+                size: 'lg'
             });
         }
 
@@ -68,5 +75,6 @@ angular
         vm.OpenAddDistribuidor = OpenAddDistribuidor;
         vm.OpenUpdateDistribuidor = OpenUpdateDistribuidor;
         vm.OpenDeleteDistribuidor = OpenDeleteDistribuidor;
+        initData();
         
     });

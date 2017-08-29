@@ -56,7 +56,9 @@ angular
             GetCalleList: '/Calle/GetCalleList',
             AddCalleL: '/Calle/AddCalleL',
             GetDeepCalle: '/Calle/GetDeepCalle',
-            DeleteCalle: '/Calle/DeleteCalle'
+            DeleteCalle: '/Calle/DeleteCalle',
+            GetDistribuidorList: '/Distribuidor/GetDistribuidorList',
+            AddDistribuidor: '/Distribuidor/AddDistribuidor'
         };
 
         factory.GetPlazaList = function(){
@@ -961,6 +963,31 @@ angular
                 IdCalle: IdCalle
             };
             $http.post(globalService.getUrl() + paths.DeleteCalle, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.GetDistribuidorList = function(){
+            var deferred = $q.defer();
+            var config = { headers: {'Authorization': $localStorage.currentUser.token} };
+            $http.get(globalService.getUrl() + paths.GetDistribuidorList, config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.AddDistribuidor = function (DistribuidorObj) {
+            var deferred = $q.defer();
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = {
+                'objDistribuidor': DistribuidorObj
+            };
+            $http.post(globalService.getUrl() + paths.AddDistribuidor, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);
