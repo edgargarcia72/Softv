@@ -65,10 +65,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                                <tr ng-repeat="X in ctrl.EstMunViewList">
+                            <tr ng-repeat="X in ctrl.EstMunViewList">
                                 <td>{{ X.Estado }}</td>
                                 <td>{{ X.Municipio }}</td>
-                                <td><button type="button" class="btn btn-warning btn-xs" title="Eliminar Ciudad" ng-click="ctrl.DeleteEstMun(X.IdEstado, X.IdMunicipio)">Eliminar</button></td>
+                                <td><button type="button" class="btn btn-danger btn-xs" title="Eliminar Ciudad" ng-click="ctrl.DeleteEstMun(X.IdEstado, X.IdMunicipio)">Eliminar</button></td>
                             </tr>
                         </tbody>
                     </table>

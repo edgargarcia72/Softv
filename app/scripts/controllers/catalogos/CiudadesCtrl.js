@@ -5,9 +5,8 @@ angular
     .controller('CiudadesCtrl', function(CatalogosFactory, $uibModal){
 
         function initData(){
-            CatalogosFactory.GetMunicipioList2().then(function(data){
-                console.log(data);
-                vm.CiudadLista = data.GetMunicipioList2Result;
+            CatalogosFactory.GetMunicipioList().then(function(data){
+                vm.CiudadLista = data.GetMunicipioListResult;
                 if (vm.CiudadLista.length == 0) {
 					vm.SinRegistros = true;
 					vm.ConRegistros = false;
@@ -33,8 +32,8 @@ angular
             });
         }
 
-        function OpenUpdateCiudad(CiudadObj){
-            var CiudadObj = CiudadObj;
+        function OpenUpdateCiudad(IdMunicipio){
+            var IdMunicipio = IdMunicipio;
             var modalInstance = $uibModal.open({
                 animation: true,
                 ariaLabelledBy: 'modal-title',
@@ -47,8 +46,8 @@ angular
                 class: 'modal-backdrop fade',
                 size: 'md',
                 resolve: {
-                    CiudadObj: function () {
-                        return CiudadObj;
+                    IdMunicipio: function () {
+                        return IdMunicipio;
                     }
                 }
             });

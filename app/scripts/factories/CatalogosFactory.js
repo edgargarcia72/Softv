@@ -43,6 +43,8 @@ angular
             AddMunicipio: '/Municipio/AddMunicipio',
             UpdateMunicipio: '/Municipio/UpdateMunicipio',
             GetDeepMunicipio: '/Municipio/GetDeepMunicipio',
+            AddRelEstMunL: '/Municipio/AddRelEstMunL',
+            UpdateRelEstMunL: '/Municipio/UpdateRelEstMunL',
             DeleteMunicipio: '/Municipio/DeleteMunicipio',
             GetLocalidadList: '/Localidad/GetLocalidadList',
             AddLocalidad: '/Localidad/AddLocalidad',
@@ -751,6 +753,36 @@ angular
             var config = { headers: {'Authorization': $localStorage.currentUser.token} };
             var Parametros = {'IdMunicipio': IdMunicipio};
             $http.post(globalService.getUrl() + paths.GetDeepMunicipio, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.AddRelEstMunL = function (lstRelEstado, RelMunicipioEstAdd) {
+            var deferred = $q.defer();
+            var config = {headers:{'Authorization': $localStorage.currentUser.token}};
+            var Parametros = {
+                'lstRelEstado': lstRelEstado,
+                'RelMunicipioEstAdd': RelMunicipioEstAdd
+            };
+            $http.post(globalService.getUrl() + paths.AddRelEstMunL, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        }
+
+        factory.UpdateRelEstMunL = function (lstRelEstado, RelMunicipioEstAdd) {
+            var deferred = $q.defer();
+            var config = {headers:{'Authorization': $localStorage.currentUser.token}};
+            var Parametros = {
+                'lstRelEstado': lstRelEstado,
+                'RelMunicipioEstAdd': RelMunicipioEstAdd
+            };
+            $http.post(globalService.getUrl() + paths.UpdateRelEstMunL, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);
