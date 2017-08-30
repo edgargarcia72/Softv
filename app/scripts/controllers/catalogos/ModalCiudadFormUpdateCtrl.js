@@ -5,6 +5,9 @@ angular
     .controller('ModalCiudadFormUpdateCtrl', function(CatalogosFactory, $uibModalInstance, ngNotify, $state, CiudadObj){
 
         function initData(){
+            CatalogosFactory.GetDeepMunicipio(vm.IdCiudad).then(function(data){
+                console.log(data);
+            });
             CatalogosFactory.GetEstadoList2_web().then(function(data){
                 vm.EstadoList = data.GetEstadoList2_webResult;
                 for(var i = 0; i < vm.EstadoList.length; i++){

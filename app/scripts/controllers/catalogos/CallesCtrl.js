@@ -32,8 +32,8 @@ angular
             });
         }
 
-        function OpenUpdateCalle(CalleObj){
-            var CalleObj = CalleObj;
+        function OpenUpdateCalle(IdCalle){
+            var IdCalle = IdCalle;
             var modalInstance = $uibModal.open({
                 animation: true,
                 ariaLabelledBy: 'modal-title',
@@ -46,8 +46,8 @@ angular
                 class: 'modal-backdrop fade',
                 size: 'lg',
                 resolve: {
-                    CalleObj: function () {
-                        return CalleObj;
+                    IdCalle: function () {
+                        return IdCalle;
                     }
                 }
             });

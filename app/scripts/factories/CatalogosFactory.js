@@ -42,6 +42,7 @@ angular
             GetMunicipioList2: '/Municipio/GetMunicipioList2',
             AddMunicipio: '/Municipio/AddMunicipio',
             UpdateMunicipio: '/Municipio/UpdateMunicipio',
+            GetDeepMunicipio: '/Municipio/GetDeepMunicipio',
             DeleteMunicipio: '/Municipio/DeleteMunicipio',
             GetLocalidadList: '/Localidad/GetLocalidadList',
             AddLocalidad: '/Localidad/AddLocalidad',
@@ -57,6 +58,7 @@ angular
             GetCalleList: '/Calle/GetCalleList',
             AddCalleL: '/Calle/AddCalleL',
             GetDeepCalle: '/Calle/GetDeepCalle',
+            UpdateCalleL: '/Calle/UpdateCalleL',
             DeleteCalle: '/Calle/DeleteCalle',
             GetDistribuidorList: '/Distribuidor/GetDistribuidorList',
             AddDistribuidor: '/Distribuidor/AddDistribuidor',
@@ -100,8 +102,7 @@ angular
 
         factory.AddClienteL = function (ObjCliente) {
             var deferred = $q.defer();
-            var config = {
-                headers: {'Authorization': $localStorage.currentUser.token}};
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
             var Parametros = {
                 'lstCliente': {
                     Nombre1Er: ObjCliente.Nombre,
@@ -129,11 +130,8 @@ angular
 
         factory.GetDeepCliente = function (IdContrato) {
             var deferred = $q.defer();
-            var config = {
-                headers: {'Authorization': $localStorage.currentUser.token}};
-            var Parametros = {
-                'IdContrato': IdContrato
-            };
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = {'IdContrato': IdContrato};
             $http.post(globalService.getUrl() + paths.GetDeepCliente, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -155,14 +153,8 @@ angular
 
         factory.GetEstadosRelMun = function (IdEstado) {
             var deferred = $q.defer();
-            var config = {
-                headers: {
-                    'Authorization': $localStorage.currentUser.token
-                }
-            };
-            var Parametros = {
-                'IdEstado': IdEstado
-            };
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = {'IdEstado': IdEstado};
             $http.post(globalService.getUrl() + paths.GetEstadosRelMun, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -173,15 +165,8 @@ angular
 
         factory.GetLocalidadRelMun = function (IdMunicipio) {
             var deferred = $q.defer();
-            var config = {
-                headers: {
-                    'Authorization': $localStorage.currentUser.token
-                }
-            };
-            var Parametros = {
-                'IdMunicipio': IdMunicipio
-            };
-            console.log(IdMunicipio);
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = {'IdMunicipio': IdMunicipio};
             $http.post(globalService.getUrl() + paths.GetLocalidadRelMun, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -192,14 +177,8 @@ angular
 
         factory.GetColoniaRelLoc = function (IdLocalidad) {
             var deferred = $q.defer();
-            var config = {
-                headers: {
-                    'Authorization': $localStorage.currentUser.token
-                }
-            };
-            var Parametros = {
-                'IdLocalidad': IdLocalidad
-            };
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = {'IdLocalidad': IdLocalidad};
             $http.post(globalService.getUrl() + paths.GetColoniaRelLoc, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -210,14 +189,8 @@ angular
 
         factory.GetCalleRelCol = function (IdColonia) {
             var deferred = $q.defer();
-            var config = {
-                headers: {
-                    'Authorization': $localStorage.currentUser.token
-                }
-            };
-            var Parametros = {
-                'IdColonia': IdColonia
-            };
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = {'IdColonia': IdColonia};
             $http.post(globalService.getUrl() + paths.GetCalleRelCol, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -773,6 +746,18 @@ angular
             return deferred.promise;
         };
 
+        factory.GetDeepMunicipio = function (IdMunicipio) {
+            var deferred = $q.defer();
+            var config = { headers: {'Authorization': $localStorage.currentUser.token} };
+            var Parametros = {'IdMunicipio': IdMunicipio};
+            $http.post(globalService.getUrl() + paths.GetDeepMunicipio, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
         factory.DeleteMunicipio = function (IdMunicipio) {
             var deferred = $q.defer();
             var config = { headers: {'Authorization': $localStorage.currentUser.token} };
@@ -981,8 +966,22 @@ angular
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
             var Parametros = {'IdCalle': IdCalle};
-            console.log(Parametros);
             $http.post(globalService.getUrl() + paths.GetDeepCalle, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.UpdateCalleL = function (lstRelCalle, RelCalleAdd) {
+            var deferred = $q.defer();
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = {
+                'lstRelCalle': lstRelCalle,
+                'RelCalleAdd': RelCalleAdd
+            };
+            $http.post(globalService.getUrl() + paths.UpdateCalleL, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);
@@ -1019,7 +1018,6 @@ angular
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
             var Parametros = {'objDistribuidor': DistribuidorObj};
-            console.log(Parametros);
             $http.post(globalService.getUrl() + paths.AddDistribuidor, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -1032,7 +1030,6 @@ angular
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
             var Parametros = {'IdDistribuidor': IdDistribuidor};
-            console.log(Parametros);
             $http.post(globalService.getUrl() + paths.GetDeepDistribuidor, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -1045,7 +1042,6 @@ angular
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
             var Parametros = {'objDistribuidor': DistribuidorObj};
-            console.log(Parametros);
             $http.post(globalService.getUrl() + paths.UpdateDistribuidor, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -1058,7 +1054,6 @@ angular
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
             var Parametros = {'IdDistribuidor': IdDistribuidor};
-            console.log(Parametros);
             $http.post(globalService.getUrl() + paths.DeleteDistribuidor, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {

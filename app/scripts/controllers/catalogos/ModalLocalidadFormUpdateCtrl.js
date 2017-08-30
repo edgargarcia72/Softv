@@ -101,7 +101,7 @@ angular
                     }
                 });
             }else{
-                ngNotify.set('ERROR, Para guardar una localidad, se tiene que ingresar mínimo una relación.', 'warn');
+                ngNotify.set('ERROR, Para guardar la localidad, se tiene que ingresar mínimo una relación.', 'warn');
             }
         }
 
