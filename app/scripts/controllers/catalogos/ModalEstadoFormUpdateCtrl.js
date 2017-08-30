@@ -2,7 +2,7 @@
 
 angular
     .module('softvApp')
-    .controller('ModalEstadoFormUpdateCtrl', function(CatalogosFactory, $uibModalInstance, EstadoObj, ngNotify, $state){
+    .controller('ModalEstadoFormUpdateCtrl', function(CatalogosFactory, $uibModalInstance, ngNotify, $state, EstadoObj){
         
         function SaveEstado(){
             var EstadoObj = {};

@@ -977,6 +977,19 @@ angular
             return deferred.promise;
         };
 
+        factory.GetDeepCalle = function (IdCalle) {
+            var deferred = $q.defer();
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = {'IdCalle': IdCalle};
+            console.log(Parametros);
+            $http.post(globalService.getUrl() + paths.GetDeepCalle, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
         factory.DeleteCalle = function (IdCalle) {
             var deferred = $q.defer();
             var config = { headers: {'Authorization': $localStorage.currentUser.token} };
