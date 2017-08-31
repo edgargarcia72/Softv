@@ -2,7 +2,7 @@
 
 angular
     .module('softvApp')
-    .controller('ColoniasCtrl', function($uibModal){
+    .controller('ColoniasCtrl', function($uibModal, CatalogosFactory){
 
         function OpenAddColonia(){
             var modalInstance = $uibModal.open({
