@@ -55,6 +55,36 @@ angular
                 controllerAs: '$ctrl'
             },
             {
+                name: 'home.catalogos.plaza_nueva',
+                data: {
+                    pageTitle: 'SOFTV | NUEVA PLAZA',
+                    permissions: {
+                        options: {
+                            reload: false
+                        }
+                    }
+                },
+                url: '/catalogo/plazas/nueva',
+                templateUrl: 'views/catalogos/PlazaForm.html',
+                controller: 'PlazaAddCtrl',
+                controllerAs: '$ctrl'
+            },
+            {
+                name: 'home.catalogos.plaza_editar',
+                data: {
+                    pageTitle: 'SOFTV | EDITAR PLAZA',
+                    permissions: {
+                        options: {
+                            reload: false
+                        }
+                    }
+                },
+                url: '/catalogo/plazas/editar',
+                templateUrl: 'views/catalogos/PlazaForm.html',
+                controller: 'PlazaUpdateCtrl',
+                controllerAs: '$ctrl'
+            },
+            {
                 name: 'home.catalogos.localidades',
                 data: {
                     pageTitle: 'SOFTV | CATÁLOGO LOCALIDADES',

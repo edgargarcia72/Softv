@@ -18,27 +18,28 @@
     <div class="card-body">
         <div class="row">
 			<div class="col-md-12">
-                <div class="col-md-7">
-                </div>
                 <div class="col-md-3" style="text-align:right">
                     <div class="input-group">
                         <input type="text" class="form-control input-sm" placeholder="Buscar Plaza">
                         <span class="input-group-addon"><i class="fa fa-search"></i></span>
                     </div>
                 </div>
+                <div class="col-md-7">
+                </div>
                 <div class="col-md-2" style="text-align:right">
-				    <button type="button" class="btn btn-primary btn-sm" ng-click="$ctrl.OpenAddPlaza()" title="Crear una plaza nueva">NUEVA PLAZA</button>
+                    <button type="button" class="btn btn-primary btn-sm" ui-sref="home.catalogos.plaza_nueva" title="Crear una plaza nueva">NUEVA PLAZA</button>
 			    </div>
 			</div>
         </div>
+        <br>
         <div class="col-md-12">
             <div class="col-md-12">
                 <table class="table">
                     <thead>
                         <tr>
                             <th width="10%"><b>Id</b></th>
-                            <th width="60%"><b>Nombre de la plaza</b></th>
-                            <th width="30%" colspan="2"><b>Acciones</b></th>
+                            <th width="70%"><b>Nombre de la plaza</b></th>
+                            <th width="10%"><b>Acciones</b></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -49,8 +50,9 @@
                         <tr>
                             <td>{{ X.IdComision }}</td>
                             <td>{{ X.TipServ }}</td>
-                            <td><button type="button" class="btn btn-warning btn-xs" ng-click="$ctrl.OpenUpdatePlaza()" title="Editar Plaza"><i class="fa fa-pencil-square-o"></i> EDITAR</button></td>
-                            <td><button type="button" class="btn btn-danger btn-xs" ng-click="$ctrl.OpenDeletePlaza()" title="Eliminar Plaza"><i class="fa fa-trash"></i> ELIMINAR</button></td>
+                            <td>
+                                <button type="button" class="btn btn-warning btn-xs" ui-sref="home.catalogos.plaza_editar" title="Editar Plaza"><i class="fa fa-pencil-square-o"></i> EDITAR</button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
