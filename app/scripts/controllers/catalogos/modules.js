@@ -72,14 +72,9 @@ angular
             {
                 name: 'home.catalogos.plaza_editar',
                 data: {
-                    pageTitle: 'SOFTV | EDITAR PLAZA',
-                    permissions: {
-                        options: {
-                            reload: false
-                        }
-                    }
+                    pageTitle: 'SOFTV | EDITAR PLAZA'
                 },
-                url: '/catalogo/plazas/editar',
+                url: '/catalogo/plazas/editar/:id',
                 templateUrl: 'views/catalogos/PlazaForm.html',
                 controller: 'PlazaUpdateCtrl',
                 controllerAs: '$ctrl'

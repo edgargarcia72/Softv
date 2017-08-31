@@ -66,7 +66,10 @@ angular
             AddDistribuidor: '/Distribuidor/AddDistribuidor',
             GetDeepDistribuidor: '/Distribuidor/GetDeepDistribuidor',
             UpdateDistribuidor: '/Distribuidor/UpdateDistribuidor',
-            DeleteDistribuidor: '/Distribuidor/DeleteDistribuidor'
+            DeleteDistribuidor: '/Distribuidor/DeleteDistribuidor',
+            AddPlazaL: '/Plaza/AddPlazaL',
+            GetDeepPlaza: '/Plaza/GetDeepPlaza',
+            UpdatePlazaL: '/Plaza/UpdatePlazaL'
         };
 
         factory.GetPlazaList = function(){
@@ -1087,6 +1090,48 @@ angular
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
             var Parametros = {'IdDistribuidor': IdDistribuidor};
             $http.post(globalService.getUrl() + paths.DeleteDistribuidor, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.AddPlazaL = function (lstRelPlazaMunEst, RelPlazaEstMunAdd) {
+            var deferred = $q.defer();
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = {
+                'lstRelPlazaMunEst': lstRelPlazaMunEst,
+                'RelPlazaEstMunAdd': RelPlazaEstMunAdd
+            };
+            $http.post(globalService.getUrl() + paths.AddPlazaL, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.GetDeepPlaza = function (IdPlaza) {
+            var deferred = $q.defer();
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = {'IdPlaza': IdPlaza};
+            $http.post(globalService.getUrl() + paths.GetDeepPlaza, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.UpdatePlazaL = function (lstRelPlazaMunEst, RelPlazaEstMunAdd) {
+            var deferred = $q.defer();
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = {
+                'lstRelPlazaMunEst': lstRelPlazaMunEst,
+                'RelPlazaEstMunAdd': RelPlazaEstMunAdd
+            };
+            $http.post(globalService.getUrl() + paths.UpdatePlazaL, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);

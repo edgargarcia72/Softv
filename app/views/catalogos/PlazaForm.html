@@ -1,3 +1,11 @@
+<style type="text/css">
+    .table-scroll {
+        height:200px;
+        overflow:auto;  
+        margin-top:20px;
+    }
+</style>
+<form name="FormPlaza" angular-validator-submit="$ctrl.SavePlaza()" novalidate angular-validator>
 <div class="card animated fadeIn" style="margin-top:20px;">
     <div class="card-head style-default-light" style="padding-top:10px; padding-left:10px;">
         <header>
@@ -8,13 +16,11 @@
             </small>
         </header>
         <div class="tools">
-			<div class="btn-group">
-				<button type="button" class="btn btn-default-bright btn-sm" ui-sref="home.catalogos.plazas" title="Cancelar cambios">Cancelar</button>
-			</div>
+            <button type="submit" class="btn btn-primary btn-sm" title="Guardar Plaza">Guardar</button>
+			<button type="button" class="btn btn-default-bright btn-sm" ui-sref="home.catalogos.plazas" title="Cancelar cambios">Cancelar</button>
 		</div>
     </div>
     <div class="card-body">
-        <form name="FormPlaza" angular-validator-submit="$ctrl.SavePlaza()" novalidate angular-validator>
             <uib-tabset active="active">
                 <uib-tab index="0">
                     <uib-tab-heading>
@@ -38,7 +44,7 @@
                         </div>
                         <div class="col-md-12">
                             <div class="col-md-3">
-                                <select name="SltDistribuidor" class="form-control input-sm" ng-model="$ctrl.Distribuidor" validate-on="dirty" required required-message="'Obligatorio'">
+                                <select name="SltDistribuidor" class="form-control input-sm" ng-model="$ctrl.Distribuidor" ng-options="D.Nombre for D in $ctrl.DistribuidorList track by D.IdDistribuidor" validate-on="dirty" required required-message="'Obligatorio'">
                                     <option value="">Selecciona</option>
                                 </select>
                             </div>
@@ -264,24 +270,24 @@
                         </div>
                         <div class="col-md-12">
                             <div class="col-md-5">
-                                <select name="SltEstadoPla" type="text" class="form-control input-sm" ng-model="$ctrl.EstadoPla">
+                                <select name="SltEstadoPla" type="text" class="form-control input-sm" ng-model="$ctrl.EstadoPla" ng-options="E.Nombre for E in  $ctrl.EstadoList track by E.IdEstado" ng-change="$ctrl.GetCiudadMunicipio()">
                                     <option value="">Selecciona</option>
                                 </select>
                             </div>
                             <div class="col-md-5">
-                                <select name="SltCiudadPla" type="text" class="form-control input-sm" ng-model="$ctrl.CiudadPla">
+                                <select name="SltCiudadPla" type="text" class="form-control input-sm" ng-model="$ctrl.CiudadPla" ng-options="M.Municipio.Nombre for M in $ctrl.CiudadMunicipioList track by M.Municipio.IdMunicipio">
                                     <option value="">Selecciona</option>
                                 </select>
                             </div>
                             <div class="col-md-2">
-                                <button type="button" class="btn btn-success bt-xs" title="Agregar Ciudad">Agregar</button>
+                                <button type="button" class="btn btn-success bt-xs" title="Agregar Ciudad" ng-click="$ctrl.AddRelEstMun()">Agregar</button>
                             </div>
                         </div>
                     </div>
                     <br>
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="col-md-12">
+                            <div class="col-md-12 table-scroll">
                                 <table class="table">
                                     <thead>
                                         <tr>
@@ -291,22 +297,13 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr ng-show="$ctrl.sinRegistros">
-                                            <td class="text-center" colspan="3">SIN REGISTROS</td>
-                                        </tr>
-                                        <!--<tr dir-paginate="X in $ctrl.ComisionVLista|itemsPerPage:7" ng-show="$ctrl.conRegistros">-->
-                                        <tr>
-                                            <td>{{ X.IdComision }}</td>
-                                            <td>{{ X.TipServ }}</td>
-                                            <td><button type="button" class="btn btn-danger btn-xs" title="Eliminar Ciudad">Eliminar</button></td>
+                                        <tr ng-repeat="X in $ctrl.RelEstMunViewList">
+                                            <td>{{ X.Estado }}</td>
+                                            <td>{{ X.Municipio }}</td>
+                                            <td><button type="button" class="btn btn-danger btn-xs" title="Eliminar Ciudad" ng-click="$ctrl.DeleteRelEstMun(X)">Eliminar</button></td>
                                         </tr>
                                     </tbody>
                                 </table>
-                                <br>
-                                <div style="margin-top:-40px;">
-                                    <dir-pagination-controls max-size="7" direction-links="true" boundary-links="true" ng-if="$ctrl.ComisionVLista.length > 0">
-                                    </dir-pagination-controls>
-                                </div>
                                 <br>
                             </div>
                         </div>
@@ -319,10 +316,9 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="col-md-12" style="text-align:right">
-                        <button type="submit" class="btn btn-primary btn-sm" title="Guardar Plaza">Guardar</button>
                     </div>
                 </div>
             </div>
-        </form>
     </div>
 </div>
+</form>
