@@ -193,7 +193,52 @@ angular
                 templateUrl: 'views/catalogos/ClienteNuevo.html',
                 controller: 'ClienteEditarCtrl',
                 controllerAs: '$ctrl'
-            }
+            },
+            {
+                name: 'home.catalogos.servicios',
+                data: {
+                    pageTitle: 'SOFTV | CATÁLOGO SERVICIOS',
+                    permissions: {
+                        options: {
+                            reload: false
+                        }
+                    }
+                },
+                url: '/catalogo/servicios',
+                templateUrl: 'views/catalogos/Servicios.html',
+                controller: 'ServiciosCtrl',
+                controllerAs: '$ctrl'
+            },
+            {
+                name: 'home.catalogos.servicio_nuevo',
+                data: {
+                    pageTitle: 'SOFTV | NUEVO SERVICIO',
+                    permissions: {
+                        options: {
+                            reload: false
+                        }
+                    }
+                },
+                url: '/catalogo/servicios/nuevo',
+                templateUrl: 'views/catalogos/ServicioForm.html',
+                controller: 'ServicioAddCtrl',
+                controllerAs: '$ctrl'
+            },
+            {
+                name: 'home.catalogos.servicio_editar',
+                data: {
+                    pageTitle: 'SOFTV | EDITAR SERVICIO',
+                    permissions: {
+                        options: {
+                            reload: false
+                        }
+                    }
+                },
+                url: '/catalogo/servicios/editar/:id',
+                templateUrl: 'views/catalogos/ServicioForm.html',
+                controller: 'ServicioUpdateCtrl',
+                controllerAs: '$ctrl'
+            },
         ];
         states.forEach(function (state) {
             $stateProvider.state(state);
