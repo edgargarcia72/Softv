@@ -6,7 +6,6 @@ angular
 
         function initData(){
             CatalogosFactory.GetDeepDistribuidor(IdDistribuidor).then(function(data){
-                console.log(data);
                 var Distribuidor = data.GetDeepDistribuidorResult;
                 vm.IdDistribuidor = Distribuidor.IdDistribuidor;
                 vm.Nombre = Distribuidor.Nombre;
@@ -97,9 +96,7 @@ angular
             DistribuidorObj.CalleCon = vm.CalleDC;
             DistribuidorObj.NumeroCon = vm.NumeroDC;
             DistribuidorObj.CPCon = vm.CPDC;
-            console.log(DistribuidorObj);
             CatalogosFactory.UpdateDistribuidor(DistribuidorObj).then(function(data){
-                console.log(data);
                 if(data.UpdateDistribuidorResult == 1){
                     ngNotify.set('CORRECTO, al guardar el distribuidor.', 'success');
                     $state.reload('home.catalogos.distribuidores');

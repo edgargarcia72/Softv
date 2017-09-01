@@ -47,7 +47,6 @@ angular
             DistribuidorObj.CalleCon = vm.CalleDC;
             DistribuidorObj.NumeroCon = vm.NumeroDC;
             DistribuidorObj.CPCon = vm.CPDC;
-            console.log(DistribuidorObj);
             CatalogosFactory.AddDistribuidor(DistribuidorObj).then(function(data){
                 if(data.AddDistribuidorResult > 0){
                     ngNotify.set('CORRECTO, se añadió un distribuidor nuevo.', 'success');

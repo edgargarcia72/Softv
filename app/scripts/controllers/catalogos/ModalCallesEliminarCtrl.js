@@ -6,7 +6,7 @@ angular
         
         function DeleteCalle(){
             CatalogosFactory.DeleteCalle(vm.IdCalle).then(function(data){
-                if(data.DeleteCalleResult == 2){
+                if(data.DeleteCalleResult > 1){
                     ngNotify.set('CORRECTO, se eliminó la calle.', 'success');
                     $state.reload('home.catalogos.calles');
 				    cancel();

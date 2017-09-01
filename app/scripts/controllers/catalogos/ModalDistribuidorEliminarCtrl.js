@@ -6,8 +6,7 @@ angular
 
         function DeleteDistribuidor(){
             CatalogosFactory.DeleteDistribuidor(vm.IdDistribuidor).then(function(data){
-                console.log(data);
-                if(data.DeleteDistribuidorResult == 1){
+                if(data.DeleteDistribuidorResult > 0){
                     ngNotify.set('CORRECTO, se eliminó el distribuidor.', 'success');
                     $state.reload('home.catalogos.distribuidores');
 				    cancel();

@@ -6,7 +6,7 @@ angular
 
         function DeleteLocalidad(){
             CatalogosFactory.DeleteLocalidad(vm.IdLocalidad).then(function(data){
-                if(data.DeleteLocalidadResult == 2){
+                if(data.DeleteLocalidadResult > 1){
                     ngNotify.set('CORRECTO, se eliminó la localida.', 'success');
                     $state.reload('home.catalogos.localidades');
 				    cancel();

@@ -6,7 +6,7 @@ angular
 
         function DeleteCiudad(){
             CatalogosFactory.DeleteMunicipio(vm.IdCiudad).then(function(data){
-                if(data.DeleteMunicipioResult > 0){
+                if(data.DeleteMunicipioResult > 1){
                     ngNotify.set('CORRECTO, se eliminó la ciudad.', 'success');
                     $state.reload('home.catalogos.ciudades');
 				    cancel();

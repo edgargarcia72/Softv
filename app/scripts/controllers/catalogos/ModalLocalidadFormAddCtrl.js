@@ -52,23 +52,27 @@ angular
         }
 
         function SaveLocalidad(){
-            var lstRelLocalidad = {};
-            var RelLocalidadMunEstAdd = {};
-            lstRelLocalidad.Nombre = vm.Localidad;
             if(vm.EstMunList.length > 0){
-                RelLocalidadMunEstAdd = vm.EstMunList;
-            }
-            CatalogosFactory.AddRelLocalidadL(lstRelLocalidad, RelLocalidadMunEstAdd).then(function(data){
-                if(data.AddRelLocalidadLResult > 0){
-                    ngNotify.set('CORRECTO, se añadió una localidad nueva.', 'success');
-                    $state.reload('home.catalogos.localidades');
-				    cancel();
-                }else{
-                    ngNotify.set('ERROR, al añadir una localidad nueva.', 'warn');
-                    $state.reload('home.catalogos.localidades');
-                    cancel();
+                var lstRelLocalidad = {};
+                var RelLocalidadMunEstAdd = {};
+                lstRelLocalidad.Nombre = vm.Localidad;
+                if(vm.EstMunList.length > 0){
+                    RelLocalidadMunEstAdd = vm.EstMunList;
                 }
-            });
+                CatalogosFactory.AddRelLocalidadL(lstRelLocalidad, RelLocalidadMunEstAdd).then(function(data){
+                    if(data.AddRelLocalidadLResult > 0){
+                        ngNotify.set('CORRECTO, se añadió una localidad nueva.', 'success');
+                        $state.reload('home.catalogos.localidades');
+                        cancel();
+                    }else{
+                        ngNotify.set('ERROR, al añadir una localidad nueva.', 'warn');
+                        $state.reload('home.catalogos.localidades');
+                        cancel();
+                    }
+                });
+            }else{
+                ngNotify.set('ERROR, Para guardar la localidad, se tiene que ingresar mínimo una relación.', 'warn');
+            }
         }
 
         function GetCiudadMunicipio(){
