@@ -1,3 +1,10 @@
+<style type="text/css">
+    .table-scroll {
+        height:150px;
+        overflow:auto;  
+        margin-top:20px;
+    }
+</style>
 <form name="FormColonia" angular-validator-submit="ctrl.SaveColonia()" novalidate angular-validator>
     <div class="modal-header">
         <button class="close" type="button" aria-label="close" ng-click="ctrl.cancel()">x</button>
@@ -42,12 +49,12 @@
                     </div>
                     <div class="col-md-12">
                         <div class="col-md-6">
-                            <select name="InpEstado" class="form-control input-sm" ng-model="ctrl.Estado" validate-on="dirty" required required-message="'Obligatorio'">
+                            <select name="InpEstado" class="form-control input-sm" ng-model="ctrl.Estado" ng-options="E.Nombre for E in ctrl.EstadoList track by E.IdEstado" ng-change="ctrl.GetCiudadMunicipio()" validate-on="dirty" required required-message="'Obligatorio'">
                                 <option value="">Selecciona</option>
                             </select>
                         </div>
                         <div class="col-md-6">
-                            <select name="InpCiudad" class="form-control input-sm" ng-model="ctrl.Ciudad" validate-on="dirty" required required-message="'Obligatorio'">
+                            <select name="InpCiudad" class="form-control input-sm" ng-model="ctrl.Ciudad" ng-options="M.Municipio.Nombre for M in ctrl.CiudadMunicipioList track by M.Municipio.IdMunicipio" ng-change="ctrl.GetLocalidad()" validate-on="dirty" required required-message="'Obligatorio'">
                                 <option value="">Selecciona</option>
                             </select>
                         </div>
@@ -68,7 +75,7 @@
                     </div>
                     <div class="col-md-12">
                         <div class="col-md-6">
-                            <select name="InpLocalidad" class="form-control input-sm" ng-model="ctrl.Localidad" validate-on="dirty" required required-message="'Obligatorio'">
+                            <select name="InpLocalidad" class="form-control input-sm" ng-model="ctrl.Localidad" ng-options="L.Localidad.Nombre for L in ctrl.LocalidadList track by L.Localidad.IdLocalidad" validate-on="dirty" required required-message="'Obligatorio'">
                                 <option value="">Selecciona</option>
                             </select>
                         </div>
@@ -91,7 +98,9 @@
                     </div>
                     <div class="col-md-12">
                         <div class="col-md-8">
-                            <input name="InpServicios" type="text" class="form-control input-sm" ng-model="ctrl.Servicios" validate-on="dirty" required required-message="'Obligatorio'">
+                            <select name="SltServicios" class="form-control input-sm" ng-model="ctrl.TipoServicio" ng-options="T.Concepto for T in ctrl.TipoServicioList track by T.ClvTipSer" validate-on="dirty" required required-message="'Obligatorio'">
+                                <option value="">Selecciona</option>
+                            </select>
                         </div>
                         <div class="col-md-4" style="text-align:center">
                             <button type="button" class="btn btn-success btn-sm" title="Agregar Relación">Agregar</button>
@@ -101,7 +110,7 @@
                 <br>
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="col-md-12">
+                        <div class="col-md-12 table-scroll">
                             <table class="table">
                                 <thead>
                                     <tr>
@@ -114,11 +123,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-show="ctrl.sinRegistros">
-                                        <td class="text-center" colspan="4">SIN REGISTROS</td>
-                                    </tr>
-                                    <!--<tr dir-paginate="X in ctrl.ComisionVLista|itemsPerPage:7" ng-show="ctrl.conRegistros">-->
-                                    <tr>
+                                    <tr ng-repeat="X in ctrl.RelColViewList">
                                         <td>{{ X.IdComision }}</td>
                                         <td>{{ X.TipServ }}</td>
                                         <td>{{ X.TipServ }}</td>
@@ -128,11 +133,6 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <br>
-                            <div style="margin-top:-40px;">
-                                <dir-pagination-controls max-size="7" direction-links="true" boundary-links="true" ng-if="ctrl.ComisionVLista.length > 0">
-                                </dir-pagination-controls>
-                            </div>
                             <br>
                         </div>
                     </div>

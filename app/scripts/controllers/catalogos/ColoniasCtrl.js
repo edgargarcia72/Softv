@@ -4,6 +4,19 @@ angular
     .module('softvApp')
     .controller('ColoniasCtrl', function($uibModal, CatalogosFactory){
 
+        function initData(){
+            CatalogosFactory.GetColoniaList().then(function(data){
+                vm.ColoniaList = data.GetColoniaListResult;
+                if (vm.ColoniaList.length == 0) {
+					vm.SinRegistros = true;
+					vm.ConRegistros = false;
+				} else {
+					vm.SinRegistros = false;
+					vm.ConRegistros = true;
+				}
+            });
+        }
+
         function OpenAddColonia(){
             var modalInstance = $uibModal.open({
                 animation: true,
@@ -68,5 +81,5 @@ angular
         vm.OpenAddColonia = OpenAddColonia;
         vm.OpenUpdateColonia = OpenUpdateColonia;
         vm.OpenDeleteColonia = OpenDeleteColonia;
-        
+        initData();
     });

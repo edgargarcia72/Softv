@@ -64,7 +64,11 @@ angular
             GetPlazaList: '/Plaza/GetPlazaList',
             AddPlazaL: '/Plaza/AddPlazaL',
             GetDeepPlaza: '/Plaza/GetDeepPlaza',
-            UpdatePlazaL: '/Plaza/UpdatePlazaL'
+            UpdatePlazaL: '/Plaza/UpdatePlazaL',
+            
+            GetColoniaList: '/Colonia/GetColoniaList',
+            AddColoniaL: '/Colonia/AddColoniaL',
+            GetTipServList: '/TipServ/GetTipServList'
         };
 
         factory.GetPlazaList = function(){
@@ -924,6 +928,44 @@ angular
                 'RelPlazaEstMunAdd': RelPlazaEstMunAdd
             };
             $http.post(globalService.getUrl() + paths.UpdatePlazaL, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+        /********************************************/
+        factory.GetColoniaList = function(){
+            var deferred = $q.defer();
+            var config = { headers: {'Authorization': $localStorage.currentUser.token} };
+            $http.get(globalService.getUrl() + paths.GetColoniaList, config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.GetTipServList = function(){
+            var deferred = $q.defer();
+            var config = { headers: {'Authorization': $localStorage.currentUser.token} };
+            $http.get(globalService.getUrl() + paths.GetTipServList, config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.AddColoniaL = function (lstRelColonia, RelColoniaLocMunEstAdd, RelColoniaServicioAdd) {
+            var deferred = $q.defer();
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = {
+                'lstRelColonia': lstRelColonia,
+                'RelColoniaLocMunEstAdd': RelColoniaLocMunEstAdd,
+                'RelColoniaServicioAdd': RelColoniaServicioAdd
+            };
+            $http.post(globalService.getUrl() + paths.AddColoniaL, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);
