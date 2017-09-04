@@ -1,0 +1,72 @@
+<div class="card animated fadeIn" style="margin-top:20px;">
+    <div class="card-head style-default-light" style="padding-top:10px; padding-left:10px;">
+        <header>
+            <strong style="font-weight:bold; border:none; margin-left:10px;">{{ $ctrl.Titulo }}</strong>
+			<br>
+            <small class="text-muted" style="font-size:14px; margin-left:10px;">
+                <a href="#"><i class="fa fa-home" aria-hidden="true"></i> Inicio</a>><a href="#" class="paginaActiva">{{ $ctrl.Titulo }}</a>
+            </small>
+        </header>
+        <div class="tools">
+            <button type="button" class="btn btn-default-bright btn-sm" ui-sref="home.catalogos.servicios" title="Cancelar cambios">Cancelar</button>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+			<div class="col-md-12">
+                <div class="col-md-3">
+                    <label class="checkbox-inline checkbox-styled">
+                        <input type="checkbox" name="CbxCobroMensual" ng-model="$ctrl.CobroMensual" ng-true-value="'YES'" ng-false-value="'NO'" ng-change="$ctrl.buscarStatus()"><span>Proceso Automático</span>
+                    </label>
+			    </div>
+                <div class="col-md-3">
+                    <label class="checkbox-inline checkbox-styled">
+                        <input type="checkbox" name="CbxServicioMensual" ng-model="$ctrl.ServicioMensual" ng-true-value="'YES'" ng-false-value="'NO'" ng-change="$ctrl.buscarStatus()"><span>Servicio Mensual</span>
+                    </label>
+			    </div>
+                <div class="col-md-3">
+                    <label class="checkbox-inline checkbox-styled">
+                        <input type="checkbox" name="CbxAplicaComision" ng-model="$ctrl.AplicaComision" ng-true-value="'YES'" ng-false-value="'NO'" ng-change="$ctrl.buscarStatus()"><span>Aplica Comisión</span>
+                    </label>
+			    </div>
+                <div class="col-md-3">
+                    <label class="checkbox-inline checkbox-styled">
+                        <input type="checkbox" name="CbxGeneraOrden" ng-model="$ctrl.GeneraOrden" ng-true-value="'YES'" ng-false-value="'NO'" ng-change="$ctrl.buscarStatus()"><span>Proceso Genera Orden</span>
+                    </label>
+			    </div>
+			</div>
+        </div>
+        <br>
+        <div class="row">
+			<div class="col-md-12">
+                <div class="col-md-2">
+                    <p>Clave:</p>
+                </div>
+                <div class="col-md-2">
+                    <p>Precio:</p>
+                </div>
+                <div class="col-md-5">
+                    <p>Descripción:</p>
+                </div>
+                <div class="col-md-3">
+                    <p>Crea Orden:</p>
+                </div>
+			</div>
+            <div class="col-md-12">
+                <div class="col-md-2">
+                    <input type="text" name="" class="form-control input-sm" ng-model="Clave">
+                </div>
+                <div class="col-md-2">
+                    <input type="text" name="" class="form-control input-sm" ng-model="Precio">
+                </div>
+                <div class="col-md-5">
+                    <input type="text" name="" class="form-control input-sm" ng-model="Descripcion">
+                </div>
+                <div class="col-md-3">
+                    <input type="text" name="" class="form-control input-sm" ng-model="Orden">
+                </div>
+			</div>
+        </div>
+        <br>
+    </div>
+</div>

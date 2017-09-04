@@ -12,16 +12,16 @@
     </div>
   </div>
   <div class="card-body">
-    <div class="col-md-4">
+    <div class="col-md-12">
       <div class="btn-group">
         Selecciona un rol para asignar permisos:
-        <select class="selectpicker form-control" ng-model="$ctrl.Rol" ng-change="$ctrl.ObtenPermisos()" ng-options="option.Nombre for option in $ctrl.Roles track by option.IdRol">
+        <select class="selectpicker form-control" style="width: 80%" ng-model="$ctrl.Rol" ng-change="$ctrl.ObtenPermisos()" ng-options="option.Nombre for option in $ctrl.Roles track by option.IdRol">
               <option value="">Selecciona Rol</option>
               <option value="">Otro Rol</option>
           </select><br />
       </div>
     </div>
-    <div class="col-md-12">
+    <div class="col-md-12" style="max-height: 300px; overflow-y: scroll;">
       <table class="table" style="padding-left:15px;" id="datos">
         <thead style="color: #0aa89e;">
           <tr>
@@ -56,6 +56,13 @@
           </tr>
         </tbody>
       </table>
+      
     </div>
+    <div class="col-md-12">
+      <br>
+ <p class="text-center text-danger">(Todos los cambios se verán afectados una vez que el usuario vuelva a iniciar sesión)</p>
+
+    </div>
+   
   </div>
 </div>
