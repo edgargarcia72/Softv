@@ -1,3 +1,16 @@
+<style type="text/css">
+    .nav-tabs{
+        float:left;
+    }
+    .contect-tabs{
+        float:left;
+    }
+    .table-scroll {
+        height:150px;
+        overflow:auto;  
+        margin-top:20px;
+    }
+</style>
 <div class="card animated fadeIn" style="margin-top:20px;">
     <div class="card-head style-default-light" style="padding-top:10px; padding-left:10px;">
         <header>
@@ -16,22 +29,22 @@
 			<div class="col-md-12">
                 <div class="col-md-3">
                     <label class="checkbox-inline checkbox-styled">
-                        <input type="checkbox" name="CbxCobroMensual" ng-model="$ctrl.CobroMensual" ng-true-value="'YES'" ng-false-value="'NO'" ng-change="$ctrl.buscarStatus()"><span>Proceso Automático</span>
+                        <input type="checkbox" name="CbxCobroMensual" ng-model="$ctrl.CobroMensual" ng-true-value="'Y'" ng-false-value="'N'" ng-change="$ctrl.SetTipoCobro()"><span>Proceso Automático</span>
                     </label>
 			    </div>
                 <div class="col-md-3">
                     <label class="checkbox-inline checkbox-styled">
-                        <input type="checkbox" name="CbxServicioMensual" ng-model="$ctrl.ServicioMensual" ng-true-value="'YES'" ng-false-value="'NO'" ng-change="$ctrl.buscarStatus()"><span>Servicio Mensual</span>
+                        <input type="checkbox" name="CbxServicioMensual" ng-model="$ctrl.ServicioMensual" ng-true-value="'Y'" ng-false-value="'N'" ng-change="$ctrl.buscarStatus()"><span>Servicio Mensual</span>
                     </label>
 			    </div>
                 <div class="col-md-3">
-                    <label class="checkbox-inline checkbox-styled">
-                        <input type="checkbox" name="CbxAplicaComision" ng-model="$ctrl.AplicaComision" ng-true-value="'YES'" ng-false-value="'NO'" ng-change="$ctrl.buscarStatus()"><span>Aplica Comisión</span>
+                    <label class="checkbox-inline checkbox-styled" ng-show="$ctrl.HideCobroMensual">
+                        <input type="checkbox" name="CbxAplicaComision" ng-model="$ctrl.AplicaComision" ng-true-value="'Y'" ng-false-value="'N'"><span>Aplica Comisión</span>
                     </label>
 			    </div>
                 <div class="col-md-3">
-                    <label class="checkbox-inline checkbox-styled">
-                        <input type="checkbox" name="CbxGeneraOrden" ng-model="$ctrl.GeneraOrden" ng-true-value="'YES'" ng-false-value="'NO'" ng-change="$ctrl.buscarStatus()"><span>Proceso Genera Orden</span>
+                    <label class="checkbox-inline checkbox-styled" ng-show="$ctrl.HideCobroMensual">
+                        <input type="checkbox" name="CbxGeneraOrden" ng-model="$ctrl.GeneraOrden" ng-true-value="'Y'" ng-false-value="'N'"><span>Proceso Genera Orden</span>
                     </label>
 			    </div>
 			</div>
@@ -40,16 +53,16 @@
         <div class="row">
 			<div class="col-md-12">
                 <div class="col-md-2">
-                    <p>Clave:</p>
+                    <p><b>Clave:</b></p>
                 </div>
                 <div class="col-md-2">
-                    <p>Precio:</p>
+                    <p><b>Precio:</b></p>
                 </div>
                 <div class="col-md-5">
-                    <p>Descripción:</p>
+                    <p><b>Descripción:</b></p>
                 </div>
                 <div class="col-md-3">
-                    <p>Crea Orden:</p>
+                    <p><b>Crea Orden:</b></p>
                 </div>
 			</div>
             <div class="col-md-12">
@@ -67,6 +80,140 @@
                 </div>
 			</div>
         </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12" ng-show="$ctrl.ShowCobroMensual">
+                <div class="col-md-12">
+                    <uib-tabset active="active">
+                        <uib-tab index="0">
+                            <uib-tab-heading>
+                                Detalle del Servicio
+                            </uib-tab-heading>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-md-6">
+                                        <b>Tipo de cobro:</b>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="col-md-6">
+                                        <input type="text" name="InpTipoCobro" class="form-control input-sm" ng-model="TipoCobro">
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-md-12">
+                                         <uib-tabset vertical="true" type="tabs">
+                                            <uib-tab index="2">
+                                                <uib-tab-heading>
+                                                    Todos
+                                                </uib-tab-heading>
+                                                <div class="row">
+                                                    <div class="col-md-11">
+                                                        <div class="col-md-10" style="text-align:center">
+                                                            <b>Conceptos de todos los tipos de cobro</b>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <button type="button" class="btn btn-primary btn-sm" title="Agregar un concepto">Agregar Concepto</button>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <br>
+                                                        </div>
+                                                        <div class="col-md-12 table-scroll">
+                                                            <table class="table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th><b>Concepto</b></th>
+                                                                        <th><b>Precio</b></th>
+                                                                        <th><b>Adicional</b></th>
+                                                                        <th><b>Vigencia</b></th>
+                                                                        <th><b>Avanza mes</b></th>
+                                                                        <th><b>Comisión</b></th>
+                                                                        <th><b>Orden</b></th>
+                                                                        <th><b>Servicio al Cliente</b></th>
+                                                                        <th><b>Acciones</b></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <!--<tr ng-repeat="X in $ctrl.RelEstMunViewList">-->
+                                                                    </tr>
+                                                                        <td>{{ X.Estado }}</td>
+                                                                        <td>{{ X.Municipio }}</td>
+                                                                        <td>{{ X.Municipio }}</td>
+                                                                        <td>{{ X.Estado }}</td>
+                                                                        <td>{{ X.Municipio }}</td>
+                                                                        <td>{{ X.Municipio }}</td>
+                                                                        <td>{{ X.Estado }}</td>
+                                                                        <td>{{ X.Municipio }}</td>
+                                                                        <td><button type="button" class="btn btn-danger btn-xs" title="Eliminar Ciudad" ng-click="$ctrl.DeleteRelEstMun(X)">Eliminar</button></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </uib-tab>
+                                         </uib-tabset>
+                                    </div>
+                                </div>
+                            </div>
+                            <footer>
+                                <p class="text-right"></p>
+                            </footer>
+                        </uib-tab>
+                        <uib-tab index="1">
+                            <uib-tab-heading>
+                                Puntos de Descuento
+                            </uib-tab-heading>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-md-12" style="text-align:center">
+                                        <b>Descuento por pronto pago y pago a meses</b>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-md-3">
+                                        <b>Puntos por pronto pago:</b>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <b>Puntos de 3 a 5 meses:</b>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <b>Puntos de 6 a 11 meses:</b>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <b>Puntos por más de 11 meses:</b>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="col-md-3">
+                                        <input type="number" name="" class="form-control input-sm" ng-model="">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="number" name="" class="form-control input-sm" ng-model="">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="number" name="" class="form-control input-sm" ng-model="">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="number" name="" class="form-control input-sm" ng-model="">
+                                    </div>
+                                </div>
+                            </div>
+                            <footer>
+                                <p class="text-right"></p>
+                            </footer>
+                        </uib-tab>
+                    </uib-tabset>
+                </div>
+            </div>
         <br>
     </div>
 </div>

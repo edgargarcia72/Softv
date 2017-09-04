@@ -497,6 +497,7 @@ angular
                     FechaNacimiento: null
                 }
             };
+            console.log('user',$localStorage.currentUser);
             $http.post(globalService.getUrl() + paths.GetClientesAll, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
