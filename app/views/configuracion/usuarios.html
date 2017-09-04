@@ -6,13 +6,55 @@
 
     </header>
     <div class="tools">
-      <div class="btn-group" >
-         <button title="Crear un usuario nuevo" class="btn btn-primary btn-sm" type="button" ui-sref="home.configuracion.nuevousuario" permission permission-only="'usuariosAdd'"><i class="fa fa-plus" aria-hidden="true"></i> Crear usuario</button>
+      <div class="btn-group">
+        <button title="Crear un usuario nuevo" class="btn btn-primary btn-sm" type="button" ui-sref="home.configuracion.nuevousuario"
+          permission permission-only="'usuariosAdd'"><i class="fa fa-plus" aria-hidden="true"></i> Crear usuario</button>
       </div>
     </div>
   </div>
   <div class="card-body">
-   
-   
+
+    <div class="panel-group" id="accordion3">
+      <div class="card panel">
+        <div class="card-head card-head-xs collapsed" data-toggle="collapse" data-parent="#accordion3" data-target="#accordion3-1"
+          aria-expanded="false">
+          <header><i class="fa fa-search"></i> Buscar usuarios</header>
+          <div class="tools">
+            <a class="btn btn-icon-toggle"><i class="fa fa-angle-down"></i></a>
+          </div>
+        </div>
+
+        <div id="accordion3-1" class="collapse buscarContrato" aria-expanded="false" style="height: 0px;">
+          <div class="panel-body">
+
+            <div class="col-md-12">
+              <div class="col-md-3">
+                 Selecciona la plaza
+                <select name="" id=""
+                ng-options="item as item.razon_social for item in $ctrl.plazas track by item.id_compania" 
+                 ng-model="$ctrl.plaza" class="form-control input-sm">
+                 
+                <option value="">Selecciona</option>
+              </select>
+              </div>
+              <div class="col-md-1">
+                Clave:
+                <input type="text" class="input-sm form-control" ng-model="$ctrl.claveusuario">
+              </div>
+              <div class="col-md-3">
+                Nombre:
+                <input type="text" class="input-sm form-control" ng-model="$ctrl.nombreusuario">
+              </div>
+
+            </div>
+          </div>
+          <!-- panel body -->
+        </div>
+      </div>
+      <!--end .panel -->
+    </div>
+
+
+
   </div>
 </div>

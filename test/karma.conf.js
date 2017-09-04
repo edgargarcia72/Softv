@@ -59,6 +59,7 @@ module.exports = function(config) {
       'bower_components/angucomplete-alt/angucomplete-alt.js',
       'bower_components/angular-tree-control/angular-tree-control.js',
       'bower_components/angularMultipleSelect/build/multiple-select.min.js',
+      'bower_components/angular-base64/angular-base64.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',
