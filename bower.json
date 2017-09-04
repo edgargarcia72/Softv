@@ -25,7 +25,9 @@
     "angular-google-chart": "^0.1.0",
     "fusioncharts": "^3.12.1",
     "ZingChart-AngularJS": "zingchart-angularjs#^1.2.0",
-    "angucomplete-alt": "^3.0.0"
+    "angucomplete-alt": "^3.0.0",
+    "angular-tree-control": "^0.2.28",
+    "angularMultipleSelect": "angular-multiple-select#^1.1.2"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0",

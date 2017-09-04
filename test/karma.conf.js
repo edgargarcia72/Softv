@@ -57,6 +57,8 @@ module.exports = function(config) {
       'bower_components/zingchart/client/zingchart.min.js',
       'bower_components/ZingChart-AngularJS/src/zingchart-angularjs.js',
       'bower_components/angucomplete-alt/angucomplete-alt.js',
+      'bower_components/angular-tree-control/angular-tree-control.js',
+      'bower_components/angularMultipleSelect/build/multiple-select.min.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

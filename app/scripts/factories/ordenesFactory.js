@@ -67,7 +67,11 @@ angular
       GetDameCitaOrdenQueja: '/OrdSer/GetDameCitaOrdenQueja',
       GetSP_InsertaTbl_NoEntregados: '/SP_InsertaTbl_NoEntregados/GetSP_InsertaTbl_NoEntregados',
       GetValidarNuevo: '/ValidarNuevo/GetValidarNuevo',
-      Getsp_BorraArticulosAsignados: '/OrdSer/Getsp_BorraArticulosAsignados'
+      Getsp_BorraArticulosAsignados: '/OrdSer/Getsp_BorraArticulosAsignados',
+      MuestraMedioPorServicoContratado: '/MuestraMedioPorServicoContratado/GetMuestraMedioPorServicoContratadoList',
+      MuestraArbolServiciosAparatosPorinstalar: '/MuestraArbolServiciosAparatosPorinstalar/GetMuestraArbolServiciosAparatosPorinstalarList',
+      MuestraTipoAparato: '/MuestraTipoAparato/GetMuestraTipoAparatoList',
+      MuestraServiciosRelTipoAparato: '/MuestraServiciosRelTipoAparato/GetMuestraServiciosRelTipoAparatoList'
     };
 
 
@@ -1595,6 +1599,83 @@ angular
         }
       };
       $http.post(globalService.getUrl() + paths.getCalleCamdo, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response.data);
+      });
+
+      return deferred.promise;
+    };
+
+
+    factory.MuestraMedioPorServicoContratado = function (obj) {
+      var deferred = $q.defer();
+      var Parametros = {
+        'ClvUnicaNet': obj.ClvUnicaNet
+      };
+
+      var config = {
+        headers: {
+          'Authorization': $localStorage.currentUser.token
+        }
+      };
+      $http.post(globalService.getUrl() + paths.MuestraMedioPorServicoContratado, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response.data);
+      });
+
+      return deferred.promise;
+    };
+
+    factory.MuestraArbolServiciosAparatosPorinstalar = function (obj) {
+      var deferred = $q.defer();
+      var Parametros = {
+        'clv_orden': obj.clv_orden
+      };
+
+      var config = {
+        headers: {
+          'Authorization': $localStorage.currentUser.token
+        }
+      };
+      $http.post(globalService.getUrl() + paths.MuestraArbolServiciosAparatosPorinstalar, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response.data);
+      });
+
+      return deferred.promise;
+    };
+
+    factory.MuestraTipoAparato=function (obj) {
+      var deferred = $q.defer();
+      var Parametros = obj;
+
+      var config = {
+        headers: {
+          'Authorization': $localStorage.currentUser.token
+        }
+      };
+      $http.post(globalService.getUrl() + paths.MuestraTipoAparato, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response.data);
+      });
+
+      return deferred.promise;
+    };
+
+    factory.MuestraServiciosRelTipoAparato=function (obj) {
+      var deferred = $q.defer();
+      var Parametros = obj;
+
+      var config = {
+        headers: {
+          'Authorization': $localStorage.currentUser.token
+        }
+      };
+      $http.post(globalService.getUrl() + paths.MuestraServiciosRelTipoAparato, JSON.stringify(Parametros), config).then(function (response) {
         deferred.resolve(response.data);
       }).catch(function (response) {
         deferred.reject(response.data);
