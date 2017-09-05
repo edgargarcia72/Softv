@@ -44,7 +44,7 @@
 			    </div>
                 <div class="col-md-3">
                     <label class="checkbox-inline checkbox-styled" ng-show="$ctrl.HideCobroMensual">
-                        <input type="checkbox" name="CbxGeneraOrden" ng-model="$ctrl.GeneraOrden" ng-true-value="'Y'" ng-false-value="'N'"><span>Proceso Genera Orden</span>
+                        <input type="checkbox" name="CbxGeneraOrden" ng-model="$ctrl.GeneraOrden" ng-true-value="'Y'" ng-false-value="'N'" ng-change="$ctrl.SetOrden()"><span>Proceso Genera Orden</span>
                     </label>
 			    </div>
 			</div>
@@ -62,21 +62,21 @@
                     <p><b>Descripción:</b></p>
                 </div>
                 <div class="col-md-3">
-                    <p><b>Crea Orden:</b></p>
+                    <p ng-show="$ctrl.ShowOrden"><b>Crea Orden:</b></p>
                 </div>
 			</div>
             <div class="col-md-12">
                 <div class="col-md-2">
-                    <input type="text" name="" class="form-control input-sm" ng-model="Clave">
+                    <input type="text" name="" class="form-control input-sm" ng-model="$ctrl.Clave">
                 </div>
                 <div class="col-md-2">
-                    <input type="text" name="" class="form-control input-sm" ng-model="Precio">
+                    <input type="text" name="" class="form-control input-sm" ng-model="$ctrl.Precio">
                 </div>
                 <div class="col-md-5">
-                    <input type="text" name="" class="form-control input-sm" ng-model="Descripcion">
+                    <input type="text" name="" class="form-control input-sm" ng-model="$ctrl.Descripcion">
                 </div>
                 <div class="col-md-3">
-                    <input type="text" name="" class="form-control input-sm" ng-model="Orden">
+                    <input type="text" name="" class="form-control input-sm" ng-model="$ctrl.Orden" ng-show="$ctrl.ShowOrden">
                 </div>
 			</div>
         </div>
@@ -112,12 +112,12 @@
                                                     Todos
                                                 </uib-tab-heading>
                                                 <div class="row">
-                                                    <div class="col-md-11">
+                                                    <div class="col-md-10">
                                                         <div class="col-md-10" style="text-align:center">
                                                             <b>Conceptos de todos los tipos de cobro</b>
                                                         </div>
                                                         <div class="col-md-2">
-                                                            <button type="button" class="btn btn-primary btn-sm" title="Agregar un concepto">Agregar Concepto</button>
+                                                            <button type="button" class="btn btn-primary btn-sm" title="Agregar un concepto" ng-click="$ctrl.OpenAddConcepto()">Agregar Concepto</button>
                                                         </div>
                                                         <div class="col-md-12">
                                                             <br>
@@ -194,16 +194,16 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="col-md-3">
-                                        <input type="number" name="" class="form-control input-sm" ng-model="">
+                                        <input type="number" name="" class="form-control input-sm" ng-model="$ctrl.ProntoPago">
                                     </div>
                                     <div class="col-md-3">
-                                        <input type="number" name="" class="form-control input-sm" ng-model="">
+                                        <input type="number" name="" class="form-control input-sm" ng-model="$ctrl.Meses35">
                                     </div>
                                     <div class="col-md-3">
-                                        <input type="number" name="" class="form-control input-sm" ng-model="">
+                                        <input type="number" name="" class="form-control input-sm" ng-model="$ctrl.Meses611">
                                     </div>
                                     <div class="col-md-3">
-                                        <input type="number" name="" class="form-control input-sm" ng-model="">
+                                        <input type="number" name="" class="form-control input-sm" ng-model="$ctrl.Meses11">
                                     </div>
                                 </div>
                             </div>

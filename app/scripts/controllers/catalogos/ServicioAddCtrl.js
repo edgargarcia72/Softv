@@ -8,10 +8,24 @@ angular
             if(vm.CobroMensual == 'Y'){
                 vm.ShowCobroMensual = true;
                 vm.HideCobroMensual = false;
+                vm.ShowOrden = false;
+                vm.GeneraOrden = 'N';
             }
             else if(vm.CobroMensual == 'N'){
                 vm.ShowCobroMensual = false;
                 vm.HideCobroMensual = true;
+                vm.ShowOrden = false;
+                vm.GeneraOrden = 'N';
+            }
+        }
+
+        function SetOrden(){
+            console.log(vm.GeneraOrden);
+            if(vm.GeneraOrden == 'Y'){
+                vm.ShowOrden = true;
+            }
+            else if(vm.GeneraOrden == 'N'){
+                vm.ShowOrden = false;
             }
         }
         
@@ -26,7 +40,7 @@ angular
                 backdrop: 'static',
                 keyboard: false,
                 class: 'modal-backdrop fade',
-                size: 'lg'
+                size: 'md'
             });
         }
 
@@ -34,6 +48,8 @@ angular
         vm.Titulo = 'Servicio Nuevo';
         vm.ShowCobroMensual = false;
         vm.HideCobroMensual = true;
+        vm.ShowOrden = false;
         vm.SetTipoCobro = SetTipoCobro;
+        vm.SetOrden = SetOrden;
         vm.OpenAddConcepto = OpenAddConcepto;
     });
