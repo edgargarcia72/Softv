@@ -21,6 +21,8 @@
   <link rel="stylesheet" href="bower_components/pnotify/dist/pnotify.mobile.css" />
   <link rel="stylesheet" href="bower_components/pnotify/dist/pnotify.nonblock.css" />
   <link rel="stylesheet" href="bower_components/angucomplete-alt/angucomplete-alt.css" />
+  <link rel="stylesheet" href="bower_components/angular-tree-control/css/tree-control.css" />
+  <link rel="stylesheet" href="bower_components/angularMultipleSelect/build/multiple-select.min.css" />
   <!-- endbower -->
   <!-- endbuild -->
   <!-- build:css(.tmp) styles/main.css -->
@@ -84,6 +86,9 @@
   <script src="bower_components/zingchart/client/zingchart.min.js"></script>
   <script src="bower_components/ZingChart-AngularJS/src/zingchart-angularjs.js"></script>
   <script src="bower_components/angucomplete-alt/angucomplete-alt.js"></script>
+  <script src="bower_components/angular-tree-control/angular-tree-control.js"></script>
+  <script src="bower_components/angularMultipleSelect/build/multiple-select.min.js"></script>
+  <script src="bower_components/angular-base64/angular-base64.js"></script>
   <!-- endbower -->
   <!-- endbuild -->
 
@@ -182,6 +187,8 @@
   <script src="scripts/controllers/procesos/ordenes/ordenEjecutadaCtrl.js"></script>
   <script src="scripts/controllers/procesos/ordenes/ModalAgregarServicioCtrl.js"></script>
  <script src="scripts/controllers/procesos/ordenes/OrdenDetalleCtrl.js"></script>
+ <script src="scripts/controllers/procesos/ordenes/ModalInstalaServicioCtrl.js"></script>
+ <script src="scripts/controllers/procesos/ordenes/ModalAsignaMedioCtrl.js"></script>
   
   <script src="scripts/controllers/procesos/ordenes/BuscarNuevoCtrl.js"></script>
   <script src="scripts/controllers/procesos/ordenes/CambioDomicilioOrdenesCtrl.js"></script>
@@ -190,9 +197,13 @@
   <script src="scripts/controllers/configuracion/Permisos/PermisosCtrl.js"></script>
   <script src="scripts/controllers/configuracion/Roles/RolCtrl.js"></script>
   <script src="scripts/controllers/configuracion/Roles/ModalAddRolCtrl.js"></script>
+  <script src="scripts/controllers/configuracion/Usuarios/usuariosCtrl.js"></script>
+  <script src="scripts/controllers/configuracion/Usuarios/nuevoUsuarioCtrl.js"></script>
+  <script src="scripts/controllers/configuracion/Usuarios/editaUsuarioCtrl.js"></script>
   <script src="scripts/factories/rolFactory.js"></script>
   <script src="scripts/factories/permisosFactory.js"></script>
-  <script src="scripts/factories/ticketsFactory.js"></script>
+  <script src="scripts/factories/permisosFactory.js"></script>
+  <script src="scripts/factories/usuarioFactory.js"></script>
   <script src="scripts/controllers/facturacion/tickets/TicketsCtrl.js"></script>
   <script src="scripts/controllers/facturacion/tickets/ReimprimirCtrl.js"></script>
   <script src="scripts/controllers/facturacion/tickets/cancelarTicketCtrl.js"></script>
@@ -286,8 +297,52 @@
   <script src="scripts/factories/ComisionFactory.js"></script>
   <script src="scripts/controllers/comisiones/ModalEliminarComVenCtrl.js"></script>
     <script src="scripts/controllers/comisiones/ComisionTecnicoCtrl.js"></script>
+  
+  <!-- Catalogos -->
 
-
+  <script src="scripts/factories/CatalogosFactory.js"></script>
+  <script src="scripts/controllers/catalogos/modules.js"></script>
+  <script src="scripts/controllers/catalogos/EstadosCtrl.js"></script>
+  <script src="scripts/controllers/catalogos/CiudadesCtrl.js"></script>
+  <script src="scripts/controllers/catalogos/ClientesCtrl.js"></script>
+  <script src="scripts/controllers/catalogos/ClienteNuevoCtrl.js"></script>
+  <script src="scripts/controllers/catalogos/ClienteEditarCtrl.js"></script>
+  <script src="scripts/controllers/catalogos/ModalEditarRefClienteCtrl.js"></script>
+  <script src="scripts/controllers/catalogos/ModalEliminarRefClienteCtrl.js"></script>
+  <script src="scripts/controllers/catalogos/ModalEstadoFormAddCtrl.js"></script>
+  <script src="scripts/controllers/catalogos/ModalEstadoFormUpdateCtrl.js"></script>
+  <script src="scripts/controllers/catalogos/ModalEstadoEliminarCtrl.js"></script>
+  <script src="scripts/controllers/catalogos/ModalCiudadFormAddCtrl.js"></script>
+  <script src="scripts/controllers/catalogos/ModalCiudadFormUpdateCtrl.js"></script>
+  <script src="scripts/controllers/catalogos/ModalCiudadEliminarCtrl.js"></script>
+  <script src="scripts/controllers/catalogos/PlazasCtrl.js"></script>
+  <script src="scripts/controllers/catalogos/ModalPlazaFormAddCtrl.js"></script>
+  <script src="scripts/controllers/catalogos/ModalPlazaFormUpdateCtrl.js"></script>
+  <script src="scripts/controllers/catalogos/LocalidadesCtrl.js"></script>
+  <script src="scripts/controllers/catalogos/ModalLocalidadFormAddCtrl.js"></script>
+  <script src="scripts/controllers/catalogos/ModalLocalidadFormUpdateCtrl.js"></script>
+  <script src="scripts/controllers/catalogos/ModalLocalidadEliminarCtrl.js"></script>
+  <script src="scripts/controllers/catalogos/DistribuidoresCtrl.js"></script>
+  <script src="scripts/controllers/catalogos/ModalDistribuidorFormAddCtrl.js"></script>
+  <script src="scripts/controllers/catalogos/ModalDistribuidorFormUpdateCtrl.js"></script>
+  <script src="scripts/controllers/catalogos/ModalDistribuidorEliminarCtrl.js"></script>
+  <script src="scripts/controllers/catalogos/ColoniasCtrl.js"></script>
+  <script src="scripts/controllers/catalogos/ModalColoniaFormAddCtrl.js"></script>
+  <script src="scripts/controllers/catalogos/ModalColoniaFormUpdateCtrl.js"></script>
+  <script src="scripts/controllers/catalogos/TiposColoniasCtrl.js"></script>
+  <script src="scripts/controllers/catalogos/ModalTiposColoniasFormAddCtrl.js"></script>
+  <script src="scripts/controllers/catalogos/ModalTiposColoniasFormUpdateCtrl.js"></script>
+  <script src="scripts/controllers/catalogos/ModalTiposColoniasEliminarCtrl.js"></script>
+  <script src="scripts/controllers/catalogos/CallesCtrl.js"></script>
+  <script src="scripts/controllers/catalogos/ModalCallesFormAddCtrl.js"></script>
+  <script src="scripts/controllers/catalogos/ModalCallesFormUpdateCtrl.js"></script>
+  <script src="scripts/controllers/catalogos/ModalCallesEliminarCtrl.js"></script>
+  <script src="scripts/controllers/catalogos/PlazaAddCtrl.js"></script>
+  <script src="scripts/controllers/catalogos/PlazaUpdateCtrl.js"></script>
+  <script src="scripts/controllers/catalogos/ServiciosCtrl.js"></script>
+  <script src="scripts/controllers/catalogos/ServicioAddCtrl.js"></script>
+  <script src="scripts/controllers/catalogos/ServicioUpdateCtrl.js"></script>
+  
   <!-- endbuild -->
 </body>
 
