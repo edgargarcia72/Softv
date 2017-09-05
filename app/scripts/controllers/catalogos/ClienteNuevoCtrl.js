@@ -55,7 +55,6 @@ angular
                 ObjClienteDP.NumInt = vm.NumInt;
                 ObjClienteDP.CodigoPos = vm.CodigoPos;
                 CatalogosFactory.UpdateClienteDPos(ObjClienteDP).then(function(data){
-                    console.log(data);
                     ngNotify.set('CORRECTO, se añadió cliente nuevo.', 'success');
                     $state.go('home.catalogos.cliente_editar', { id:IdContratoCliente });
                 });
@@ -154,7 +153,6 @@ angular
                 ObjCliente.EmailDF = vm.EmailDF;
                 ObjCliente.Tipo = 1;
                 CatalogosFactory.AddDatoFiscalCliente(ObjCliente).then(function(data){
-                    console.log(data);
                     GetDatosClientes(vm.IdContrato);
                     ngNotify.set('CORRECTO, se guardaron datos fiscales.', 'success');
                 });
@@ -181,7 +179,6 @@ angular
                 ObjCliente.IdMes = vm.MesVen.IdMes;
                 ObjCliente.YearVen = vm.YearVen;
                 CatalogosFactory.AddDatoBancarioCliente(ObjCliente).then(function(data){
-                    console.log(data);
                     GetDatosClientes(vm.IdContrato);
                     ngNotify.set('CORRECTO, se guardaron datos bancarios.', 'success');
                 });
@@ -200,7 +197,6 @@ angular
                 ObjCliente.TelefonoRef = vm.TelefonoRef;
                 ObjCliente.OpcionProspecto = 1;
                 CatalogosFactory.AddReferenciaClienteL(ObjCliente).then(function(data){
-                    console.log(data);
                     GetReferenciasPersonales(vm.IdContrato);
                     ngNotify.set('CORRECTO, se guardó referencia personal.', 'success');
                 });
@@ -258,7 +254,6 @@ angular
                 ObjCliente.Observaciones = vm.Observaciones;
                 ObjCliente.Notas = vm.Notas;
                 CatalogosFactory.AddNotasClienteL(ObjCliente).then(function(data){
-                    console.log(data);
                     ngNotify.set('CORRECTO, se guardaron notas.', 'success');
                 });
             }else{

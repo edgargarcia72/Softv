@@ -354,6 +354,8 @@ angular
                         break;
                     }
                 }
+                var FechaVen = vm.MesVen.IdMes + '/' + vm.YearVen;
+                console.log(FechaVen);
                 var ObjCliente = {};
                 ObjCliente.IdContrato = vm.IdContrato;
                 ObjCliente.IdBanco = vm.Banco.IdBanco;

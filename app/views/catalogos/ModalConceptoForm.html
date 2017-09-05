@@ -35,7 +35,7 @@
             </div>
             <div class="col-md-12">
                 <div class="col-md-12">
-                    <input type="text" class="form-control input-sm">
+                    <input type="number" name="InpAlambrico" class="form-control input-sm" ng-model="ctrl.Alambrico" ng-pattern="/^\d{1,10}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
                 </div>
             </div>
         </div>
@@ -149,7 +149,7 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary btn-sm" type="button" ng-click="ctrl.AddConcepto()" title="Agregar Concepto">Agregar</button>
+        <button type="sumit" class="btn btn-primary btn-sm" title="Agregar Concepto">Agregar</button>
         <button class="btn bnt-default btn-sm" type="button" ng-click="ctrl.cancel()" title="Salir">Cancelar</button>
     </div>
 </form>

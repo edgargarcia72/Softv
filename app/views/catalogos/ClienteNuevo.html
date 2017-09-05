@@ -85,36 +85,36 @@
                 <form name="FormDatosPersonales" angular-validator-submit="$ctrl.AddDatosPersonales()" novalidate angular-validator autocomplete="off">
                     <div class="row">
                         <div class="col-md-9">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <p><small><b>Contrato:</b></small></p>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <p><small><b>Plaza:</b></small></p>
                             </div>
-                            <!--
+                            <!--Delete-->
                             <div class="col-md-3">
                                 <p><small><b>Periodo:</b></small></p>
                             </div>
-                            -->
-                            <div class="col-md-4">
+                            <!--Delete-->
+                            <div class="col-md-3">
                                 <p><small><b>Tipo de Cobro:</b></small></p>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <input type="text" name="InpIdCliente" class="form-control input-sm" ng-model="$ctrl.IdCliente" ng-disabled="true">
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <select name="SlcPlaza" class="form-control input-sm" ng-model="$ctrl.Plaza" ng-options="P.Nombre for P in $ctrl.PlazaList track by P.IdPlaza" ng-change="$ctrl.GetEstado()" validate-on="dirty" required required-message="'Obligatorio'" ng-disabled="$ctrl.BlockInput">
                                     <option value="">Selecciona</option>
                                 </select>
                             </div>
-                            <!--
+                            <!--Delete-->
                             <div class="col-md-3">
                                 <select name="SlcPeriodo" class="form-control input-sm" ng-model="$ctrl.Periodo" ng-options="PE.Descripcion for PE in $ctrl.PeriodoList track by PE.IdPeriodo" validate-on="dirty" required required-message="'Obligatorio'">
                                     <option value="">Selecciona</option>
                                 </select>
                             </div>
-                            -->
-                            <div class="col-md-4">
+                            <!--Delete-->
+                            <div class="col-md-3">
                                 <select name="SclTipoCobro" class="form-control input-sm" ng-model="$ctrl.TipoCobro" ng-options="T.Nombre for T in $ctrl.TipoCobroList track by T.IdTipoCliente" validate-on="dirty" required required-message="'Obligatorio'" ng-disabled="$ctrl.BlockInput">
                                     <option value="">Selecciona</option>
                                 </select>
@@ -440,7 +440,7 @@
                                 </select>
                             </div>
                             <div class="col-md-3">
-                                <input name="InpYearVen" type="text" class="form-control input-sm" ng-model="$ctrl.YearVen" maxlength="4" ng-pattern="/^\d{4}$/" validator="$ctrl.YearVen >= 2016 && $ctrl.YearVen < 2100" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa los 4 dígitos.'">
+                                <input name="InpYearVen" type="text" class="form-control input-sm" ng-model="$ctrl.YearVen" ui-mask="2099" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa mes y año.'">
                             </div>
                             <div class="col-md-12">
                                 <br>

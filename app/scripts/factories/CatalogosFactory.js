@@ -418,6 +418,7 @@ angular
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
             var Parametros = {'lstCliente': lstCliente};
+            console.log($localStorage.currentUser);
             $http.post(globalService.getUrl() + paths.GetClientes, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -855,7 +856,7 @@ angular
             });
             return deferred.promise;
         };
-        
+
         factory.GetColoniaList = function(){
             var deferred = $q.defer();
             var config = { headers: {'Authorization': $localStorage.currentUser.token} };
