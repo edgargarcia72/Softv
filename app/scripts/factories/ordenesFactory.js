@@ -71,7 +71,8 @@ angular
       MuestraMedioPorServicoContratado: '/MuestraMedioPorServicoContratado/GetMuestraMedioPorServicoContratadoList',
       MuestraArbolServiciosAparatosPorinstalar: '/MuestraArbolServiciosAparatosPorinstalar/GetMuestraArbolServiciosAparatosPorinstalarList',
       MuestraTipoAparato: '/MuestraTipoAparato/GetMuestraTipoAparatoList',
-      MuestraServiciosRelTipoAparato: '/MuestraServiciosRelTipoAparato/GetMuestraServiciosRelTipoAparatoList'
+      MuestraServiciosRelTipoAparato: '/MuestraServiciosRelTipoAparato/GetMuestraServiciosRelTipoAparatoList', 
+      MuestraAparatosDisponibles: '/MuestraAparatosDisponibles/GetMuestraAparatosDisponiblesList'
     };
 
 
@@ -1676,6 +1677,29 @@ angular
         }
       };
       $http.post(globalService.getUrl() + paths.MuestraServiciosRelTipoAparato, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response.data);
+      });
+
+      return deferred.promise;
+    };
+
+    factory.MuestraAparatosDisponibles= function (obj) {
+      var deferred = $q.defer();
+
+      var Parametros = {
+        'clv_orden': obj.clv_orden,
+        'Clv_Tecnico': obj.Clv_Tecnico,
+        'idArticulo':obj.idArticulo
+      };
+
+      var config = {
+        headers: {
+          'Authorization': $localStorage.currentUser.token
+        }
+      };
+      $http.post(globalService.getUrl() + paths.MuestraAparatosDisponibles, JSON.stringify(Parametros), config).then(function (response) {
         deferred.resolve(response.data);
       }).catch(function (response) {
         deferred.reject(response.data);

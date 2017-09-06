@@ -18,7 +18,7 @@
                 <label class="col-md-4 control-label blod">Tipo de Aparato:</label>
                 <div class="col-md-8" style="padding-left:-10px;">
                   <select class="form-control input-sm" name="TipoAparatos" validate-on="dirty" ng-model="ctrl.TipoAparato"
-                    ng-options="item as item.Nombre for item in ctrl.TipoAparatos track by item.IdArticulo" required-message="'Este campo es obligatorio.'" ng-change="ctrl.SeleccionaMedio()"
+                    ng-options="item as item.Nombre for item in ctrl.TipoAparatos track by item.IdArticulo" required-message="'Este campo es obligatorio.'" ng-change="ctrl.SeleccionaTipoAparato()"
                     required>
                         <option value="">selecciona</option>
                     </select>
@@ -27,7 +27,7 @@
 
                 <label class="col-md-4 control-label blod">Aparato:</label>
                 <div class="col-md-8" style="padding-left:-10px;">
-                  <select class="form-control input-sm" name="aparato" validate-on="dirty" ng-model="ctrl.aparato" ng-options="item as item.Descripcion for item in ctrl.aparatos track by item.ContratoAnt"
+                  <select class="form-control input-sm" name="AparatosDisponibles" validate-on="dirty" ng-model="ctrl.AparatoDisponible" ng-options="item as item.Descripcion for item in ctrl.AparatosDisponibles track by item.Clv_Aparato"
                     required-message="'Este aparato es obligatorio.'" ng-disabled="ctrl.Detalle" required>
                         <option value="">selecciona</option>
                     </select>
@@ -36,20 +36,16 @@
 
                 <label class="col-md-12 control-label blod">Servicios a los que se le instala el aparato:</label>
                 <div class="col-md-12" style="padding-left:-10px;">
-                  <multiple-autocomplete ng-model="ctrl.selectedList"
+                  <multiple-autocomplete ng-model="ctrl.selectedListServicios"
                      object-property="nombre"
-                     suggestions-arr="ctrl.AparatosPosibles">
+                     suggestions-arr="ctrl.ServiciosPosibles">
                   </multiple-autocomplete>
                 </div>
                 <br>
 
-                
-    
-
-
-
+                &nbsp;
                 <div class="tools" align="right">
-                  <button  title="Guardar orden de servicio" class="btn btn-primary btn-sm" ng-click="$ctrl.AsignaAparato()"><i class="glyphicon glyphicon-plus" aria-hidden="true" ></i> Agregar</button>    
+                  <button  title="Guardar orden de servicio" class="btn btn-primary btn-sm" ng-click="ctrl.AgregaAparato()"><i class="glyphicon glyphicon-plus" aria-hidden="true" ></i> Agregar</button>    
                 </div>
 
 
@@ -58,7 +54,7 @@
 
       <!--Preview de la instalación-->
       <div class="col-md-6">
-            <treecontrol class="tree-light" tree-model="ctrl.treedata" expanded-nodes="ctrl.expandedNodes" selected-node="ctrl.selectednode">
+            <treecontrol class="tree-light" tree-model="ctrl.treedata" expanded-nodes="ctrl.expandedNodes" on-selection="ctrl.SelecionaNodo(node, $parentNode)">
               <span ng-switch="" on="node.Type">
                <span ng-switch-when="folder" class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
                <span ng-switch-when="pic" class="glyphicon glyphicon-picture" aria-hidden="true"></span>
@@ -83,7 +79,7 @@
   </div>
   <div class="modal-footer">
     <button class="btn btn-default btn-sm" type="button" ng-click="ctrl.cancel()">Cancelar</button>
-    <button class="btn btn-primary btn-sm" ng-disabled="ctrl.Detalle" type="submit">Aceptar</button>
+    <button class="btn btn-primary btn-sm" ng-disabled="ctrl.Detalle" type="submit" ng-click="ctrl.guardar()">Aceptar</button>
   </div>
 </form>
 
