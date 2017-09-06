@@ -40,21 +40,91 @@ angular
 				controllerAs: '$ctrl'
 			},
 			{
-				name: 'home.configuracion.rolesweb',
+				name: 'home.configuracion.usuarios',
 				data: {
-					pageTitle: 'SAC | ROLES WEB',
+					pageTitle: 'SAC | ROLES',
 					permissions: {
-						//only: ['permisosSelect'],
+						only: ['usuariosSelect'],
 						options: {
 							reload: false
 						}
 					}
 				},
-				url: '/configuracion/roles_lista',
-				templateUrl: 'views/configuracion/RolesWeb.html',
-				controller: 'RolesWebCtrl',
+				url: '/configuracion/usuarios',
+				templateUrl: 'views/configuracion/usuarios.html',
+				controller: 'usuariosCtrl',
 				controllerAs: '$ctrl'
-			}
+			},
+			{
+				name: 'home.configuracion.nuevousuario',
+				data: {
+					pageTitle: 'SAC | USUARIOS',
+					permissions: {
+						only: ['usuariosSelect'],
+						options: {
+							reload: false
+						}
+					}
+				},
+				url: '/configuracion/nuevousuario',
+				templateUrl: 'views/configuracion/nuevoUsuario.html',
+				controller: 'nuevoUsuarioCtrl',
+				controllerAs: '$ctrl'
+			},
+			{
+				name: 'home.configuracion.detalleusuario',
+				data: {
+					pageTitle: 'SAC | DETALLE USUARIOS',
+					permissions: {
+						only: ['usuariosSelect'],
+						options: {
+							reload: false
+						}
+					}
+				},
+				url: '/configuracion/detalleusuario/:id',
+				templateUrl: 'views/configuracion/nuevoUsuario.html',
+				controller: 'detalleUsuarioCtrl',
+				controllerAs: '$ctrl'
+			},
+			{
+				name: 'home.configuracion.editausuario',
+				data: {
+					pageTitle: 'SAC | EDITA USUARIOS',
+					permissions: {
+						only: ['usuariosSelect'],
+						options: {
+							reload: false
+						}
+					}
+				},
+				url: '/configuracion/editausuario/:id',
+				templateUrl: 'views/configuracion/nuevoUsuario.html',
+				controller: 'editaUsuarioCtrl',
+				controllerAs: '$ctrl'
+			},
+{
+    name: 'home.configuracion.rolesweb',
+    data: {
+     pageTitle: 'SAC | ROLES WEB',
+     permissions: {
+      //only: ['permisosSelect'],
+      options: {
+       reload: false
+      }
+     }
+    },
+    url: '/configuracion/roles_lista',
+    templateUrl: 'views/configuracion/RolesWeb.html',
+    controller: 'RolesWebCtrl',
+    controllerAs: '$ctrl'
+   }
+
+
+
+			
+
+
 		];
 		states.forEach(function(state) {
 			$stateProvider.state(state);

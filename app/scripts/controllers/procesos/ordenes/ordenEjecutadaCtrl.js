@@ -412,6 +412,32 @@
             }
           }
         });
+      }else if(
+          x.Descripcion.toLowerCase().includes('isnet') ||
+          x.Descripcion.toLowerCase().includes('isdig') ||
+          x.Descripcion.toLowerCase().includes('isdtv')
+          ){
+          var items_ = {
+            'clv_orden': x.Clv_Orden,
+            'Clv_Tecnico': vm.selectedTecnico.CLV_TECNICO
+          };
+
+          var modalInstance = $uibModal.open({
+            animation: true,
+            ariaLabelledBy: 'modal-title',
+            ariaDescribedBy: 'modal-body',
+            templateUrl: 'views/procesos/ModalInstalaServicio.html',
+            controller: 'ModalInstalaServicioCtrl',
+            controllerAs: 'ctrl',
+            backdrop: 'static',
+            keyboard: false,
+            size: 'lg',
+            resolve: {
+              items: function () {
+                return items_;
+              }
+            }
+          });
       } else {
         console.log('este trabajo no esta implementado');
       }
