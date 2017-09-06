@@ -1,17 +1,14 @@
 'use strict';
 angular
   .module('softvApp')
-  .controller('nuevoUsuarioCtrl', function ($state, usuarioFactory, globalService, $uibModal, $filter, rolFactory, encuestasFactory) {
+  .controller('nuevoUsuarioCtrl', function ($state, usuarioFactory, globalService,ngNotify ,$uibModal, $filter, rolFactory, encuestasFactory) {
 
     this.$onInit = function () {
       rolFactory.GetRolList().then(function (data) {
         vm.Roles = data.GetRolListResult;
         usuarioFactory.GetConsultaIdentificacionUsuario(0, '').then(function (result) {
-          console.log(result);
           vm.Indentificaciones = result.GetConsultaIdentificacionUsuarioResult;
-
           encuestasFactory.GetMuestra_DistribuidoresEncList().then(function (data) {
-            console.log(data.GetMuestra_DistribuidoresEncListResult);
             vm.distribuidores = data.GetMuestra_DistribuidoresEncListResult;
           });
         });
@@ -25,10 +22,29 @@ angular
       });
 
     }
-    
-    function agregaRelacion(){
 
+    function agregaRelacion() {
 
+      usuarioFactory.GetAgregaEliminaRelCompaniaUsuario(vm.IdUser, vm.plaza.id_compania, 1)
+        .then(function (response) {
+          ngNotify.set('Relación agregada','success');
+          usuarioFactory.GetAgregaEliminaRelCompaniaUsuario(vm.IdUser, 0, 3)
+            .then(function (result) {
+              vm.relaciones = result.GetAgregaEliminaRelCompaniaUsuarioResult;
+            });
+        });
+    }
+
+    function eliminarelacion(x) {
+      usuarioFactory.GetAgregaEliminaRelCompaniaUsuario(vm.IdUser, x.id_compania, 2)
+        .then(function (response) {
+          ngNotify.set('Se eliminó la relación','warn');
+          usuarioFactory.GetAgregaEliminaRelCompaniaUsuario(vm.IdUser, 0, 3)
+            .then(function (result) {
+              vm.relaciones = result.GetAgregaEliminaRelCompaniaUsuarioResult;
+
+            });
+        });
     }
 
 
@@ -57,27 +73,25 @@ angular
       };
 
       usuarioFactory.GetAddUsuarioSoftv(Parametros).then(function (data) {
-       vm.IdUser=data.GetAddUsuarioSoftvResult.Clave;
+        vm.IdUser = data.GetAddUsuarioSoftvResult.Clave;
+        vm.blockForm=true;
+        vm.blockrelaciones=false;
+        vm.blocksave = true;
+
+        ngNotify.set('El usuario se ha guardado correctamente ,ahora puedes asignar el acesso a distribuidores/plazas','success');
       });
-
-
-      /*vm.Clave
-      vm.Nombre
-      vm.rol.IdRol
-      vm.pass2
-      vm.pass1
-      vm.identificacion
-      vm.fechaingreso
-      vm.fechabaja
-      vm.activo
-      vm.recibemensaje*/
     }
 
 
     var vm = this;
     vm.Guardar = Guardar;
     vm.muestraplazas = muestraplazas;
-    vm.agregaRelacion=agregaRelacion;
-    vm.IdUser=0;
+    vm.agregaRelacion = agregaRelacion;
+    vm.eliminarelacion = eliminarelacion;
+    vm.IdUser = 0;
+    vm.blockForm=false;
+    vm.blockrelaciones=true;
+    vm.titulo='Nuevo usuario';
+    vm.blocksave = false;
 
   });

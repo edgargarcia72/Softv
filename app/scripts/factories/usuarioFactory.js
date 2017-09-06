@@ -7,8 +7,51 @@ angular.module('softvApp')
       GetConsultaIdentificacionUsuario: '/Usuario/GetConsultaIdentificacionUsuario',
       GetAddUsuarioSoftv: '/Usuario/GetAddUsuarioSoftv',
       GetAgregaEliminaRelCompaniaUsuario: '/Usuario/GetAgregaEliminaRelCompaniaUsuario',
-      GetSoftvweb_GetUsuarioSoftvbyId: '/Usuario/GetSoftvweb_GetUsuarioSoftvbyId'
+      GetSoftvweb_GetUsuarioSoftvbyId: '/Usuario/GetSoftvweb_GetUsuarioSoftvbyId',
+      GetEditUsuarioSoftv: '/Usuario/GetEditUsuarioSoftv'
     };
+
+
+    factory.GetEditUsuarioSoftv = function (object) {
+      var deferred = $q.defer();
+      var config = {
+        headers: {
+          'Authorization': $localStorage.currentUser.token
+        }
+      };
+      var Parametros = {
+        'usuario': {
+          'Clave': object.Clave,
+          'Clv_Usuario': object.Clv_Usuario,
+          'Domicilio': object.Domicilio,
+          'Colonia': object.Colonia,
+          'FechaIngreso': object.FechaIngreso,
+          'FechaSalida': object.FechaSalida,
+          'Activo': object.Activo,
+          'Pasaporte': object.Pasaporte,
+          'Clv_TipoUsuario': object.Clv_TipoUsuario,
+          'CATV': object.CATV,
+          'Facturacion': object.Facturacion,
+          'Boletos': object.Boletos,
+          'Mizar_AN': object.Mizar_AN,
+          'RecibeMensaje': object.RecibeMensaje,
+          'NotaDeCredito': object.NotaDeCredito,
+          'Clv_IdentificacionUsuario': object.Clv_IdentificacionUsuario,
+          'RecibeMensajeDocumentos': object.RecibeMensajeDocumentos,
+          'Nombre': object.Nombre
+        }
+
+      };
+      console.log(Parametros);
+      $http.post(globalService.getUrl() + paths.GetEditUsuarioSoftv, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+
 
 
 

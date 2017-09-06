@@ -30,8 +30,8 @@
             <div class="col-md-12">
               <div class="col-md-3">
                 Selecciona la plaza
-                <select ng-change="$ctrl.op=2" ng-options="item as item.razon_social for item in $ctrl.plazas track by item.id_compania" ng-model="$ctrl.plaza"
-                  class="form-control input-sm">
+                <select ng-change="$ctrl.op=2" ng-options="item as item.razon_social for item in $ctrl.plazas track by item.id_compania"
+                  ng-model="$ctrl.plaza" class="form-control input-sm">
                  
                 <option value="">Selecciona</option>
               </select>
@@ -81,12 +81,9 @@
             <td>status</td>
             <td>rol</td>
             <td>
-              <button type="button " class="btn btn-info btn-xs"><i class="fa fa-eye"></i> Consultar</button>
-              <button type="button " class="btn btn-warning btn-xs"><i class="fa fa-edit"></i> Editar</button>
+              <button type="button " class="btn btn-info btn-xs" ui-sref="home.configuracion.detalleusuario({ id:x.Clave})"><i class="fa fa-eye"></i> Consultar</button>
+              <button type="button " ui-sref="home.configuracion.editausuario({ id:x.Clave})" class="btn btn-warning btn-xs"><i class="fa fa-edit"></i> Editar</button>
             </td>
-
-
-
           </tr>
         </tbody>
       </table>
