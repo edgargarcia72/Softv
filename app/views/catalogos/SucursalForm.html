@@ -1,0 +1,249 @@
+<style type="text/css">
+    .table-scroll {
+        height: 200px;
+        overflow: auto;
+        margin-top: 20px;
+    }
+</style>
+<form name="FormPlaza" angular-validator-submit="$ctrl.SavePlaza()" novalidate angular-validator autocomplete="off">
+    <div class="card animated fadeIn" style="margin-top:20px;">
+        <div class="card-head style-default-light" style="padding-top:10px; padding-left:10px;">
+            <header>
+                <strong style="font-weight:bold; border:none; margin-left:10px;">{{ $ctrl.Titulo }}</strong>
+                <br>
+                <small class="text-muted" style="font-size:14px; margin-left:10px;">
+                                    <a href="#"><i class="fa fa-home" aria-hidden="true"></i> Inicio</a>><a href="#" class="paginaActiva">{{ $ctrl.Titulo }}</a>
+                                </small>
+            </header>
+            <div class="tools">
+                <button type="submit" class="btn btn-primary btn-sm" title="Guardar Plaza">Guardar</button>
+                <button type="button" class="btn btn-default-bright btn-sm" ui-sref="home.catalogos.sucursal_nueva" title="Cancelar cambios">Cancelar</button>
+            </div>
+        </div>
+        <div class="card-body">
+            <uib-tabset active="active">
+                <uib-tab index="0">
+                    <uib-tab-heading>
+                        Datos de la Sucursal
+                    </uib-tab-heading>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-3">
+                                <p><b><small>Plaza:</small></b></p>
+                            </div>
+                            <div class="col-md-3">
+                                <p><b><small>Clave:</small></b></p>
+                            </div>
+                            <div class="col-md-3">
+                                <p><b><small>Descripcion:</small></b></p>
+                            </div>
+                            <div class="col-md-3">
+                                <p><b><small>IP:</small></b></p>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-3">
+                                <select name="SltPlaza" class="form-control input-sm" ng-model="$ctrl.Plaza" ng-options="D.Nombre for D in $ctrl.DistribuidorList track by D.IdDistribuidor"
+                                    validate-on="dirty" required required-message="'Obligatorio'">
+                                    <option value="">Selecciona</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <input name="InpClave" type="text" class="form-control input-sm" ng-model="$ctrl.Clave" validate-on="dirty" required required-message="'Obligatorio'">
+                            </div>
+                            <div class="col-md-3">
+                                <input name="InpDescripcion" type="text" class="form-control input-sm" ng-model="$ctrl.Descripcion" validate-on="dirty" required
+                                    required-message="'Obligatorio'">
+                            </div>
+                            <div class="col-md-3">
+                                <input name="InpIP" type="text" class="form-control input-sm" ng-model="$ctrl.IP" validate-on="dirty" required required-message="'Obligatorio'"
+                                    placeholder="192.168.('60').25">
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-3">
+                                <p><b><small>Impresora Facturas Fiscales:</small></b></p>
+                            </div>
+                            <div class="col-md-3">
+                                <p><b><small>Serie:</small></b></p>
+                            </div>
+                            <div class="col-md-3">
+                                <p><b><small>Ultimo Folio Usado:</small></b></p>
+                            </div>
+                            <div class="col-md-3">
+                                <p><b><small>Impresora Tarjetas:</small></b></p>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-3">
+                                <input name="InpFaFiscales" type="text" class="form-control input-sm" ng-model="$ctrl.NumExt" maxlength="6" validate-on="dirty"
+                                    required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 6 dígitos.'">
+                            </div>
+                            <div class="col-md-3">
+                                <input name="InpSerie" type="text" class="form-control input-sm" ng-model="$ctrl.NumInt" maxlength="6" invalid-message="'Inválido, Ingresa 6 dígitos.'">
+                            </div>
+                            <div class="col-md-3">
+                                <input name="InpUltFolio" type="text" class="form-control input-sm" ng-model="$ctrl.CP" maxlength="5" ng-pattern="/^\d{5}$/"
+                                    validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 5 dígitos.'">
+                            </div>
+                            <div class="col-md-3">
+                                <input name="InpImpTarjeta" type="text" class="form-control input-sm" ng-model="$ctrl.Colonia" validate-on="dirty" required
+                                    required-message="'Obligatorio'">
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-3">
+                                <p><b><small>Impresora Contratos:</small></b></p>
+                            </div>
+                            <div class="col-md-3">
+                                <p><b><small>Impresora Tickets:</small></b></p>
+                            </div>
+                            <div class="col-md-3">
+                                <p><b><small>Horario de Atencion:</small></b></p>
+                            </div>
+                            <div class="col-md-3">
+                                <p><b><small>Referencia Bancaria:</small></b></p>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-3">
+                                <input name="InpImpContratos" type="text" class="form-control input-sm" ng-model="$ctrl.Localidad" validate-on="dirty" required
+                                    required-message="'Obligatorio'">
+                            </div>
+                            <div class="col-md-3">
+                                <input name="InpImpTickets" type="text" class="form-control input-sm" ng-model="$ctrl.Municipio" validate-on="dirty" required
+                                    required-message="'Obligatorio'">
+                            </div>
+                            <div class="col-md-3">
+                                <input name="InpHorario" type="text" class="form-control input-sm" ng-model="$ctrl.Estado" validate-on="dirty" required required-message="'Obligatorio'">
+                            </div>
+                            <div class="col-md-3">
+                                <input name="InpRefBancaria" type="text" class="form-control input-sm" ng-model="$ctrl.Pais" validate-on="dirty" required
+                                    required-message="'Obligatorio'">
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-4">
+                                <p><b><small>Contacto :</small></b></p>
+                            </div>
+                            <div class="col-md-4">
+                                <p><b><small>Email :</small></b></p>
+                            </div>
+
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-4">
+                                <input name="InpContacto" type="text" class="form-control input-sm" ng-model="$ctrl.Telefono" maxlength="10" ng-pattern="/^\d{10}$/"
+                                    validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 10 dígitos.'">
+                            </div>
+                            <div class="col-md-4">
+                                <input name="InpEmail" type="text" class="form-control input-sm" ng-model="$ctrl.Telefono2" maxlength="10" ng-pattern="/^\d{10}$/"
+                                    invalid-message="'Inválido, Ingresa 10 dígitos.'">
+                            </div>
+                            <div class="col-md-4">
+                                   Es Matriz <input name="InpMatriz" type="checkbox"  ng-model="#">
+                                </div>
+
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <footer>
+                        <p class="text-right"></p>
+                    </footer>
+                </uib-tab>
+                <uib-tab index="1">
+                    <uib-tab-heading>
+                        Direccion Sucursal
+                    </uib-tab-heading>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-3">
+                                <p><b><small>Calle:</small></b></p>
+                            </div>
+                            <div class="col-md-3">
+                                <p><b><small>Número:</small></b></p>
+                            </div>
+                            <div class="col-md-3">
+                                <p><b><small>Colonia:</small></b></p>
+                            </div>
+                           
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-3">
+                                <input name="InpCalleSuc" type="text" class="form-control input-sm" ng-model="$ctrl.CalleSuc" validate-on="dirty" required
+                                    required-message="'Obligatorio'">
+                            </div>
+                            <div class="col-md-3">
+                                <input name="InpNumeroSuc" type="text" class="form-control input-sm" ng-model="$ctrl.NumeroSuc" validate-on="dirty" required
+                                    required-message="'Obligatorio'">
+                            </div>
+                            <div class="col-md-3">
+                                <input name="InpColSuc" type="text" class="form-control input-sm" ng-model="$ctrl.CPSuc" validate-on="dirty" required required-message="'Obligatorio'">
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-3">
+                                <p><b><small>Municipio:</small></b></p>
+                            </div>
+                            <div class="col-md-3">
+                                <p><b><small>Telefono:</small></b></p>
+                            </div>
+                            <div class="col-md-3">
+                                <p><b><small>Ciudad:</small></b></p>
+                            </div>
+                            <div class="col-md-3">
+                                    <p><b><small>CP:</small></b></p>
+                                </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-3">
+                                <input name="InpMunicipioSuc" type="text" class="form-control input-sm" ng-model="$ctrl.ColoniaALm" validate-on="dirty" required
+                                    required-message="'Obligatorio'">
+                            </div>
+                            <div class="col-md-3">
+                                <input name="InpTelefonoSuc" type="text" class="form-control input-sm" ng-model="$ctrl.LocalidadAlm" validate-on="dirty"
+                                    required required-message="'Obligatorio'">
+                            </div>
+                            <div class="col-md-3">
+                                <input name="InpCiudadSuc" type="text" class="form-control input-sm" ng-model="$ctrl.LocalidadAlm" validate-on="dirty" required
+                                    required-message="'Obligatorio'">
+                            </div>
+                            <div class="col-md-3">
+                                    <input name="InpCPSuc" type="text" class="form-control input-sm" ng-model="$ctrl.CPAlm" maxlength="5" ng-pattern="/^\d{5}$/"
+                                        validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 5 dígitos.'">
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <footer>
+                        <p class="text-right"></p>
+                    </footer>
+                </uib-tab>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12" style="text-align:right">
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</form>
