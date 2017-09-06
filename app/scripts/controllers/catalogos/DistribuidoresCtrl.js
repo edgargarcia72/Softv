@@ -16,41 +16,6 @@ angular
 				}
             });
         }
-        function OpenAddDistribuidor(){
-            var modalInstance = $uibModal.open({
-                animation: true,
-                ariaLabelledBy: 'modal-title',
-                ariaDescribedBy: 'modal-body',
-                templateUrl: 'views/catalogos/ModalDistribuidorForm.html',
-                controller: 'ModalDistribuidorFormAddCtrl',
-                controllerAs: 'ctrl',
-                backdrop: 'static',
-                keyboard: false,
-                class: 'modal-backdrop fade',
-                size: 'lg'
-            });
-        }
-
-        function OpenUpdateDistribuidor(IdDistribuidor){
-            var IdDistribuidor = IdDistribuidor;
-            var modalInstance = $uibModal.open({
-                animation: true,
-                ariaLabelledBy: 'modal-title',
-                ariaDescribedBy: 'modal-body',
-                templateUrl: 'views/catalogos/ModalDistribuidorForm.html',
-                controller: 'ModalDistribuidorFormUpdateCtrl',
-                controllerAs: 'ctrl',
-                backdrop: 'static',
-                keyboard: false,
-                class: 'modal-backdrop fade',
-                size: 'lg',
-                resolve: {
-                    IdDistribuidor: function () {
-                        return IdDistribuidor;
-                    }
-                }
-            });
-        }
 
         function OpenDeleteDistribuidor(DistribuidorObj){
             var DistribuidorObj = DistribuidorObj;
@@ -74,8 +39,6 @@ angular
         }
 
         var vm = this;
-        vm.OpenAddDistribuidor = OpenAddDistribuidor;
-        vm.OpenUpdateDistribuidor = OpenUpdateDistribuidor;
         vm.OpenDeleteDistribuidor = OpenDeleteDistribuidor;
         initData();
         

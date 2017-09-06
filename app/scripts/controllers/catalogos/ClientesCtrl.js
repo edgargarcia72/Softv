@@ -14,7 +14,8 @@ angular
                 vm.PlazaList = data.GetPlazaListResult;
             });
 
-            CatalogosFactory.GetClientesAll().then(function(data){
+            var lstCliente = {};
+            CatalogosFactory.GetClientes(lstCliente).then(function(data){
                 vm.ClienteList = data.GetClientesResult.Entities;
                 if (vm.ClienteList.length == 0) {
 					vm.SinRegistros = true;
@@ -28,7 +29,9 @@ angular
         }
 
         function SearchContrato(){
-            CatalogosFactory.GetClientes(vm.Contrato).then(function(data){
+            var lstCliente = {};
+            lstCliente.IdCliente = vm.Contrato;
+            CatalogosFactory.GetClientes(lstCliente).then(function(data){
                 vm.ClienteList = data.GetClientesResult.Entities;
                 if (vm.ClienteList.length == 0) {
 					vm.SinRegistros = true;
@@ -65,14 +68,14 @@ angular
         }
 
         function SearchDireccion(){
-            var ObjDireccion = {};
-            ObjDireccion.IdEstado = vm.Estado.IdEstado;
-            ObjDireccion.IdMunicipio = vm.CiuMun.Municipio.IdMunicipio;
-            ObjDireccion.IdLocalidad = vm.Localidad.IdLocalidad;
-            ObjDireccion.IdColonia = vm.Colonia.Colonia.IdColonia;
-            ObjDireccion.IdCalle = vm.Calle.Calle.IdCalle;
-            ObjDireccion.Numero = vm.Numero;
-            CatalogosFactory.GetClientesByDireccion(ObjDireccion).then(function(data){
+            var lstCliente = {};
+            lstCliente.IdEstado = vm.Estado.IdEstado;
+            lstCliente.IdMunicipio = vm.CiuMun.Municipio.IdMunicipio;
+            lstCliente.IdLocalidad = vm.Localidad.IdLocalidad;
+            lstCliente.IdColonia = vm.Colonia.Colonia.IdColonia;
+            lstCliente.IdCalle = vm.Calle.Calle.IdCalle;
+            lstCliente.Numero = vm.Numero;
+            CatalogosFactory.GetClientes(lstCliente).then(function(data){
                 vm.ClienteList = data.GetClientesResult.Entities;
                 if (vm.ClienteList.length == 0) {
 					vm.SinRegistros = true;
@@ -85,7 +88,9 @@ angular
         }
 
         function SearchNombre(){
-            CatalogosFactory.GetClientesByNombre(vm.Nombre).then(function(data){
+            var lstCliente = {};
+            lstCliente.NomCompleto = vm.Nombre;
+            CatalogosFactory.GetClientes(lstCliente).then(function(data){
                 vm.ClienteList = data.GetClientesResult.Entities;
                 if (vm.ClienteList.length == 0) {
 					vm.SinRegistros = true;
@@ -98,7 +103,9 @@ angular
         }
 
         function SearchPlaza(){
-            CatalogosFactory.GetClientesByPlaza(vm.Plaza.IdPlaza).then(function(data){
+            var lstCliente = {};
+            lstCliente.IdPlaza = vm.Plaza.IdPlaza;
+            CatalogosFactory.GetClientes(lstCliente).then(function(data){
                 vm.ClienteList = data.GetClientesResult.Entities;
                 if (vm.ClienteList.length == 0) {
 					vm.SinRegistros = true;

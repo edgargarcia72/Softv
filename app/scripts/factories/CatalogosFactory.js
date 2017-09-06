@@ -10,10 +10,10 @@ angular
             GetTipoClienteList_WebSoftvnew: '/TipoCliente/GetTipoClienteList_WebSoftvnew',
             AddClienteL: '/Cliente/AddClienteL',
             GetDeepCliente: '/Cliente/GetDeepCliente',
-            GetEstadosRelMun: '/RelMunicipioEst/GetEstadosRelMun',
-            GetLocalidadRelMun: '/RelLocalidadMunEst/GetLocalidadRelMun',
-            GetColoniaRelLoc: '/RelColoniaLocMunEst/GetColoniaRelLoc',
-            GetCalleRelCol: '/RelCalleColonia/GetCalleRelCol',
+            GetMuestraCiudadesEstadoList: '/MuestraCiudadesEstado/GetMuestraCiudadesEstadoList',
+            GetMuestraLocalidadCiudadList: '/MuestraLocalidadCiudad/GetMuestraLocalidadCiudadList',
+            GetMuestraColoniaLocalidadList: '/MuestraColoniaLocalidad/GetMuestraColoniaLocalidadList',
+            GetMuestraCalleColoniaList: '/MuestraCalleColonia/GetMuestraCalleColoniaList',
             UpdateClienteDPos: '/Cliente/UpdateClienteDPos',
             AddDatoFiscalCliente: '/Cliente/AddDatoFiscalCliente',
             GetDeepDatoFiscal: '/DatoFiscal/GetDeepDatoFiscal',
@@ -27,13 +27,9 @@ angular
             AddNotasClienteL: '/Cliente/AddNotasClienteL',
             GetDeepListadoNotas: '/ListadoNotas/GetDeepListadoNotas',
             GetClientes: '/Cliente/GetClientes',
-            GetClientesByDireccion: '/Cliente/GetClientes',
-            GetClientesByNombre: '/Cliente/GetClientes',
-            GetClientesByPlaza: '/Cliente/GetClientes',
-            GetClientesAll: '/Cliente/GetClientes',
             UpdateClienteL: '/Cliente/UpdateClienteL',
             GetEstadoList2_web: '/Estado/GetEstadoList2_web',
-            GetEstadoList3_web: '/Estado/GetEstadoList3_web',
+            GetMuestraEstadosCompaniaList: '/MuestraEstadosCompania/GetMuestraEstadosCompaniaList',
             AddEstado2_web: '/Estado/AddEstado2_web',
             UpdateEstado2_web: '/Estado/UpdateEstado2_web',
             DeleteEstado2_web: '/Estado/DeleteEstado2_web',
@@ -65,16 +61,17 @@ angular
             AddPlazaL: '/Plaza/AddPlazaL',
             GetDeepPlaza: '/Plaza/GetDeepPlaza',
             UpdatePlazaL: '/Plaza/UpdatePlazaL',
-            
             GetColoniaList: '/Colonia/GetColoniaList',
             AddColoniaL: '/Colonia/AddColoniaL',
-            GetTipServList: '/TipServ/GetTipServList'
+            GetTipServList: '/TipServ/GetTipServList',
+            GetmuestraCP_ColoniaLocalidadList: '/muestraCP_ColoniaLocalidad/GetmuestraCP_ColoniaLocalidadList'
         };
 
-        factory.GetPlazaList = function(){
+        factory.GetPlazaList = function(IdUsuario) {
             var deferred = $q.defer();
-            var config = { headers: {'Authorization': $localStorage.currentUser.token} };
-            $http.get(globalService.getUrl() + paths.GetPlazaList, config).then(function (response) {
+            var config = {headers:{'Authorization': $localStorage.currentUser.token}};
+            var Parametros = {'IdUsuario': IdUsuario};
+            $http.post(globalService.getUrl() + paths.GetPlazaList, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);
@@ -95,7 +92,7 @@ angular
 
         factory.GetTipoClienteList_WebSoftvnew = function(){
             var deferred = $q.defer();
-            var config = { headers: {'Authorization': $localStorage.currentUser.token} };
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
             $http.get(globalService.getUrl() + paths.GetTipoClienteList_WebSoftvnew, config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -155,11 +152,12 @@ angular
             return deferred.promise;
         };
 
-        factory.GetEstadosRelMun = function (IdEstado) {
+        factory.GetMuestraCiudadesEstadoList = function (RelEstMun) {
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
-            var Parametros = {'IdEstado': IdEstado};
-            $http.post(globalService.getUrl() + paths.GetEstadosRelMun, JSON.stringify(Parametros), config).then(function (response) {
+            var Parametros = RelEstMun;
+            console.log(Parametros);
+            $http.post(globalService.getUrl() + paths.GetMuestraCiudadesEstadoList, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);
@@ -167,11 +165,11 @@ angular
             return deferred.promise;
         };
 
-        factory.GetLocalidadRelMun = function (IdMunicipio) {
+        factory.GetMuestraLocalidadCiudadList = function (clv_ciudad) {
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
-            var Parametros = {'IdMunicipio': IdMunicipio};
-            $http.post(globalService.getUrl() + paths.GetLocalidadRelMun, JSON.stringify(Parametros), config).then(function (response) {
+            var Parametros = {'clv_ciudad': clv_ciudad};
+            $http.post(globalService.getUrl() + paths.GetMuestraLocalidadCiudadList, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);
@@ -179,11 +177,11 @@ angular
             return deferred.promise;
         };
 
-        factory.GetColoniaRelLoc = function (IdLocalidad) {
+        factory.GetMuestraColoniaLocalidadList = function (clv_localidad) {
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
-            var Parametros = {'IdLocalidad': IdLocalidad};
-            $http.post(globalService.getUrl() + paths.GetColoniaRelLoc, JSON.stringify(Parametros), config).then(function (response) {
+            var Parametros = {'clv_localidad': clv_localidad};
+            $http.post(globalService.getUrl() + paths.GetMuestraColoniaLocalidadList, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);
@@ -191,11 +189,23 @@ angular
             return deferred.promise;
         };
 
-        factory.GetCalleRelCol = function (IdColonia) {
+        factory.GetmuestraCP_ColoniaLocalidadList = function (Clv_Colonia) {
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
-            var Parametros = {'IdColonia': IdColonia};
-            $http.post(globalService.getUrl() + paths.GetCalleRelCol, JSON.stringify(Parametros), config).then(function (response) {
+            var Parametros = {'Clv_Colonia': Clv_Colonia};
+            $http.post(globalService.getUrl() + paths.GetmuestraCP_ColoniaLocalidadList, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.GetMuestraCalleColoniaList = function (clv_colonia) {
+            var deferred = $q.defer();
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = {'clv_colonia': clv_colonia};
+            $http.post(globalService.getUrl() + paths.GetMuestraCalleColoniaList, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);
@@ -419,85 +429,12 @@ angular
             return deferred.promise;
         };
 
-        factory.GetClientes = function (Contrato) {
+        factory.GetClientes = function (lstCliente) {
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
-            var Parametros = {'lstCliente': {'IdCliente': Contrato},};
+            var Parametros = {'lstCliente': lstCliente};
+            console.log($localStorage.currentUser);
             $http.post(globalService.getUrl() + paths.GetClientes, JSON.stringify(Parametros), config).then(function (response) {
-                deferred.resolve(response.data);
-            }).catch(function (response) {
-                deferred.reject(response);
-            });
-            return deferred.promise;
-        };
-
-        factory.GetClientesByDireccion = function (ObjCliente) {
-            var deferred = $q.defer();
-            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
-            var Parametros = {
-                'lstCliente': {
-                    IdEstado: ObjCliente.IdEstado,
-                    IdMunicipio: ObjCliente.IdMunicipio,
-                    IdLocalidad: ObjCliente.IdLocalidad,
-                    IdColonia: ObjCliente.IdColonia,
-                    IdCalle: ObjCliente.IdCalle,
-                    Numero: ObjCliente.Numero
-                }
-            };
-            $http.post(globalService.getUrl() + paths.GetClientesByDireccion, JSON.stringify(Parametros), config).then(function (response) {
-                deferred.resolve(response.data);
-            }).catch(function (response) {
-                deferred.reject(response);
-            });
-            return deferred.promise;
-        };
-
-        factory.GetClientesByNombre = function (NombreCompleto) {
-            var deferred = $q.defer();
-            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
-            var Parametros = {'lstCliente': {NomCompleto: NombreCompleto}};
-            $http.post(globalService.getUrl() + paths.GetClientesByNombre, JSON.stringify(Parametros), config).then(function (response) {
-                deferred.resolve(response.data);
-            }).catch(function (response) {
-                deferred.reject(response);
-            });
-            return deferred.promise;
-        };
-
-        factory.GetClientesByPlaza = function (IdPlaza) {
-            var deferred = $q.defer();
-            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
-            var Parametros = {'lstCliente': {IdPlaza: IdPlaza}};
-            $http.post(globalService.getUrl() + paths.GetClientesByNombre, JSON.stringify(Parametros), config).then(function (response) {
-                deferred.resolve(response.data);
-            }).catch(function (response) {
-                deferred.reject(response);
-            });
-            return deferred.promise;
-        };
-
-        factory.GetClientesAll = function (ObjCliente) {
-            var deferred = $q.defer();
-            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
-            var Parametros = {
-                'lstCliente': {
-                    IdContrato: null,
-                    Nombre1Er: null,
-                    Nombre2Do: null,
-                    ApePaterno: null,
-                    ApeMaterno: null,
-                    ClvElector: null,
-                    Telefono: null,
-                    Celular: null,
-                    Email: null,
-                    IdPlaza: null,
-                    IdPeriodo: null,
-                    IdTipoCliente: null,
-                    EsPersonaFisica: null,
-                    FechaNacimiento: null
-                }
-            };
-            $http.post(globalService.getUrl() + paths.GetClientesAll, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);
@@ -534,11 +471,11 @@ angular
             return deferred.promise;
         };
 
-        factory.GetEstadoList3_web = function (IdPlaza) {
+        factory.GetMuestraEstadosCompaniaList = function (idcompania) {
             var deferred = $q.defer();
             var config = { headers: {'Authorization': $localStorage.currentUser.token} };
-            var Parametros = {'IdPlaza': IdPlaza};
-            $http.post(globalService.getUrl() + paths.GetEstadoList3_web, JSON.stringify(Parametros), config).then(function (response) {
+            var Parametros = {'idcompania': idcompania};
+            $http.post(globalService.getUrl() + paths.GetMuestraEstadosCompaniaList, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);
@@ -934,7 +871,7 @@ angular
             });
             return deferred.promise;
         };
-        /********************************************/
+
         factory.GetColoniaList = function(){
             var deferred = $q.defer();
             var config = { headers: {'Authorization': $localStorage.currentUser.token} };

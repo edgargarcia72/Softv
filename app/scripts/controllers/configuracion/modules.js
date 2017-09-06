@@ -102,7 +102,23 @@ angular
 				templateUrl: 'views/configuracion/nuevoUsuario.html',
 				controller: 'editaUsuarioCtrl',
 				controllerAs: '$ctrl'
-			}
+			},
+{
+    name: 'home.configuracion.rolesweb',
+    data: {
+     pageTitle: 'SAC | ROLES WEB',
+     permissions: {
+      //only: ['permisosSelect'],
+      options: {
+       reload: false
+      }
+     }
+    },
+    url: '/configuracion/roles_lista',
+    templateUrl: 'views/configuracion/RolesWeb.html',
+    controller: 'RolesWebCtrl',
+    controllerAs: '$ctrl'
+   }
 
 
 
