@@ -38,6 +38,22 @@ angular
 				templateUrl: 'views/configuracion/roles.html',
 				controller: 'RolCtrl',
 				controllerAs: '$ctrl'
+			},
+			{
+				name: 'home.configuracion.rolesweb',
+				data: {
+					pageTitle: 'SAC | ROLES WEB',
+					permissions: {
+						//only: ['permisosSelect'],
+						options: {
+							reload: false
+						}
+					}
+				},
+				url: '/configuracion/roles_lista',
+				templateUrl: 'views/configuracion/RolesWeb.html',
+				controller: 'RolesWebCtrl',
+				controllerAs: '$ctrl'
 			}
 		];
 		states.forEach(function(state) {
