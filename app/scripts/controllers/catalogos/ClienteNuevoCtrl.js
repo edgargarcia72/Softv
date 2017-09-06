@@ -2,10 +2,11 @@
 
 angular
     .module('softvApp')
-    .controller('ClienteNuevoCtrl', function(CatalogosFactory, ngNotify, $uibModal, $rootScope, $state){
+    .controller('ClienteNuevoCtrl', function(CatalogosFactory, ngNotify, $uibModal, $rootScope, $state, $localStorage){
 
         function initData(){
-            CatalogosFactory.GetPlazaList().then(function(data){
+            CatalogosFactory.GetPlazaList($localStorage.currentUser.idUsuario).then(function(data){
+                console.log(data);
                 vm.PlazaList = data.GetPlazaListResult;
             });
 
@@ -55,7 +56,6 @@ angular
                 ObjClienteDP.NumInt = vm.NumInt;
                 ObjClienteDP.CodigoPos = vm.CodigoPos;
                 CatalogosFactory.UpdateClienteDPos(ObjClienteDP).then(function(data){
-                    console.log(data);
                     ngNotify.set('CORRECTO, se añadió cliente nuevo.', 'success');
                     $state.go('home.catalogos.cliente_editar', { id:IdContratoCliente });
                 });
@@ -64,8 +64,8 @@ angular
 
         function GetEstado(){
             if(vm.Plaza != undefined){
-                CatalogosFactory.GetEstadoList3_web(vm.Plaza.IdPlaza).then(function(data){
-                    vm.EstadoList = data.GetEstadoList3_webResult;
+                CatalogosFactory.GetMuestraEstadosCompaniaList(vm.Plaza.id_compania).then(function(data){
+                    vm.EstadoList = data.GetMuestraEstadosCompaniaListResult;
                     vm.CiudadMunicipioList = null;
                     vm.LocalidadList = null;
                     vm.ColoniaList = null;
@@ -81,9 +81,12 @@ angular
         }
 
         function GetCiudadMunicipio(){
+            var RelEstMun = {};
+            RelEstMun.clv_estado = vm.Estado.Clv_Estado;
+            RelEstMun.idcompania = vm.Plaza.id_compania;
             if(vm.Estado != undefined){
-                CatalogosFactory.GetEstadosRelMun(vm.Estado.IdEstado).then(function(data){
-                    vm.CiudadMunicipioList = data.GetEstadosRelMunResult;
+                CatalogosFactory.GetMuestraCiudadesEstadoList(RelEstMun).then(function(data){
+                    vm.CiudadMunicipioList = data.GetMuestraCiudadesEstadoListResult;
                     vm.LocalidadList = null;
                     vm.ColoniaList = null;
                     vm.CalleList = null;
@@ -98,8 +101,8 @@ angular
 
         function GetLocalidad(){
             if(vm.CiuMun != undefined){
-                CatalogosFactory.GetLocalidadRelMun(vm.CiuMun.Municipio.IdMunicipio).then(function(data){
-                    vm.LocalidadList = data.GetLocalidadRelMunResult;
+                CatalogosFactory.GetMuestraLocalidadCiudadList(vm.CiuMun.Clv_Ciudad).then(function(data){
+                    vm.LocalidadList = data.GetMuestraLocalidadCiudadListResult;
                     vm.ColoniaList = null;
                     vm.CalleList = null;
                 });
@@ -112,8 +115,8 @@ angular
 
         function GetColonia(){
             if(vm.Localidad != undefined){
-                CatalogosFactory.GetColoniaRelLoc(vm.Localidad.IdLocalidad).then(function(data){
-                    vm.ColoniaList = data.GetColoniaRelLocResult;
+                CatalogosFactory.GetMuestraColoniaLocalidadList(vm.Localidad.Clv_Localidad).then(function(data){
+                    vm.ColoniaList = data.GetMuestraColoniaLocalidadListResult;
                     vm.CalleList = null;
                 });
             }else{
@@ -124,8 +127,11 @@ angular
 
         function GetCalle(){
             if(vm.Colonia != undefined){
-                CatalogosFactory.GetCalleRelCol(vm.Colonia.Colonia.IdColonia).then(function(data){
-                    vm.CalleList = data.GetCalleRelColResult;
+                CatalogosFactory.GetmuestraCP_ColoniaLocalidadList(vm.Colonia.CLV_COLONIA).then(function(data){
+                    vm.CodigoPos = data.GetmuestraCP_ColoniaLocalidadListResult[0].CodigoPostal;
+                });
+                CatalogosFactory.GetMuestraCalleColoniaList(vm.Colonia.CLV_COLONIA).then(function(data){
+                    vm.CalleList = data.GetMuestraCalleColoniaListResult;
                 });
             }else{
                 vm.CalleList = null;
@@ -154,7 +160,6 @@ angular
                 ObjCliente.EmailDF = vm.EmailDF;
                 ObjCliente.Tipo = 1;
                 CatalogosFactory.AddDatoFiscalCliente(ObjCliente).then(function(data){
-                    console.log(data);
                     GetDatosClientes(vm.IdContrato);
                     ngNotify.set('CORRECTO, se guardaron datos fiscales.', 'success');
                 });
@@ -181,7 +186,6 @@ angular
                 ObjCliente.IdMes = vm.MesVen.IdMes;
                 ObjCliente.YearVen = vm.YearVen;
                 CatalogosFactory.AddDatoBancarioCliente(ObjCliente).then(function(data){
-                    console.log(data);
                     GetDatosClientes(vm.IdContrato);
                     ngNotify.set('CORRECTO, se guardaron datos bancarios.', 'success');
                 });
@@ -200,7 +204,6 @@ angular
                 ObjCliente.TelefonoRef = vm.TelefonoRef;
                 ObjCliente.OpcionProspecto = 1;
                 CatalogosFactory.AddReferenciaClienteL(ObjCliente).then(function(data){
-                    console.log(data);
                     GetReferenciasPersonales(vm.IdContrato);
                     ngNotify.set('CORRECTO, se guardó referencia personal.', 'success');
                 });
@@ -258,7 +261,6 @@ angular
                 ObjCliente.Observaciones = vm.Observaciones;
                 ObjCliente.Notas = vm.Notas;
                 CatalogosFactory.AddNotasClienteL(ObjCliente).then(function(data){
-                    console.log(data);
                     ngNotify.set('CORRECTO, se guardaron notas.', 'success');
                 });
             }else{
@@ -271,7 +273,7 @@ angular
         vm.BlockInput = false;
         vm.TipoPersona = "F";
         vm.Title = 'Cliente nuevo';
-        vm.ValidateRFC = /^[A-Z]{4}\d{6}[A-Z]{3}$|^[A-Z]{4}\d{6}\d{3}$|^[A-Z]{4}\d{6}[A-Z]{2}\d{1}$|^[A-Z]{4}\d{6}[A-Z]{1}\d{2}$|^[A-Z]{4}\d{6}\d{2}[A-Z]{1}$|^[A-Z]{4}\d{6}\d{1}[A-Z]{2}$/;
+        vm.ValidateRFC = /^[A-Z]{4}\d{6}[A-Z]{3}$|^[A-Z]{4}\d{6}\d{3}$|^[A-Z]{4}\d{6}[A-Z]{2}\d{1}$|^[A-Z]{4}\d{6}[A-Z]{1}\d{2}$|^[A-Z]{4}\d{6}\d{2}[A-Z]{1}$|^[A-Z]{4}\d{6}\d{1}[A-Z]{2}$|^[A-Z]{4}\d{6}\d{1}[A-Z]{1}\d{1}$|^[A-Z]{4}\d{6}[A-Z]{1}\d{1}[A-Z]{1}$/;
         vm.MesList = [
             { IdMes: 1, Nombre: 'Enero' },
             { IdMes: 2, Nombre: 'Febrero' },

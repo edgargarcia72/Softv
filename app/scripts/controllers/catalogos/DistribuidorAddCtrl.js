@@ -2,7 +2,7 @@
 
 angular
     .module('softvApp')
-    .controller('ModalDistribuidorFormAddCtrl', function(CatalogosFactory, $uibModalInstance, ngNotify, $state){
+    .controller('DistribuidorAddCtrl', function(CatalogosFactory, ngNotify, $state){
 
         function SaveDistribuidor(){
             var DistribuidorObj = {};
@@ -50,25 +50,18 @@ angular
             CatalogosFactory.AddDistribuidor(DistribuidorObj).then(function(data){
                 if(data.AddDistribuidorResult > 0){
                     ngNotify.set('CORRECTO, se añadió un distribuidor nuevo.', 'success');
-                    $state.reload('home.catalogos.distribuidores');
-				    cancel();
+                    $state.go('home.catalogos.distribuidores');
                 }else{
                     ngNotify.set('ERROR, al añadir un distribuidor nuevo.', 'warn');
-                    $state.reload('home.catalogos.distribuidores');
-                    cancel();
+                    $state.go('home.catalogos.distribuidores');
                 }
             });
-        }
-
-        function cancel() {
-            $uibModalInstance.dismiss('cancel');
         }
 
         var vm = this;
         vm.Titulo = 'Nuevo Registro';
         vm.Icono = 'fa fa-plus'
-        vm.ValidateRFC = /^[A-Z]{4}\d{6}[A-Z]{3}$|^[A-Z]{4}\d{6}\d{3}$|^[A-Z]{4}\d{6}[A-Z]{2}\d{1}$|^[A-Z]{4}\d{6}[A-Z]{1}\d{2}$|^[A-Z]{4}\d{6}\d{2}[A-Z]{1}$|^[A-Z]{4}\d{6}\d{1}[A-Z]{2}$/;
+        vm.ValidateRFC = /^[A-Z]{4}\d{6}[A-Z]{3}$|^[A-Z]{4}\d{6}\d{3}$|^[A-Z]{4}\d{6}[A-Z]{2}\d{1}$|^[A-Z]{4}\d{6}[A-Z]{1}\d{2}$|^[A-Z]{4}\d{6}\d{2}[A-Z]{1}$|^[A-Z]{4}\d{6}\d{1}[A-Z]{2}$|^[A-Z]{4}\d{6}\d{1}[A-Z]{1}\d{1}$|^[A-Z]{4}\d{6}[A-Z]{1}\d{1}[A-Z]{1}$/;
         vm.SaveDistribuidor = SaveDistribuidor;
-        vm.cancel = cancel;
 
     });

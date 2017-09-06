@@ -1,15 +1,17 @@
 'use strict';
-
 angular
     .module('softvApp')
-    .controller('ModalPlazaFormUpdateCtrl', function($uibModalInstance){
+    .controller('ModalRolDeleteCtrl', function($uibModalInstance, ngNotify, $state){
+        
+        function DeleteRol(){
+
+        }
 
         function cancel() {
             $uibModalInstance.dismiss('cancel');
         }
 
         var vm = this;
-        vm.Titulo = 'Editar Registro';
+        vm.DeleteRol = DeleteRol;
         vm.cancel = cancel;
-
     });
