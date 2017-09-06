@@ -16,9 +16,9 @@ angular
     'ngSanitize',
     'ngCsv',
     'googlechart',   
-    'angucomplete-alt',
-    'treeControl',
-    'multipleSelect',
+   // 'angucomplete-alt',
+   // 'treeControl',
+   // 'multipleSelect',
     'base64'
      ])
   .config(['$provide','$urlRouterProvider', '$httpProvider' ,'cfpLoadingBarProvider', '$qProvider', 'blockUIConfig', function ($provide, $urlRouterProvider, $httpProvider ,cfpLoadingBarProvider, $qProvider, blockUIConfig) {

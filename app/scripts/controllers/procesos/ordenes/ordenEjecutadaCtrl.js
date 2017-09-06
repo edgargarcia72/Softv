@@ -418,7 +418,8 @@
           x.Descripcion.toLowerCase().includes('isdtv')
           ){
           var items_ = {
-            'clv_orden': x.Clv_Orden
+            'clv_orden': x.Clv_Orden,
+            'Clv_Tecnico': vm.selectedTecnico.CLV_TECNICO
           };
 
           var modalInstance = $uibModal.open({

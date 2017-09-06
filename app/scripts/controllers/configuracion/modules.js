@@ -70,7 +70,59 @@ angular
 				templateUrl: 'views/configuracion/nuevoUsuario.html',
 				controller: 'nuevoUsuarioCtrl',
 				controllerAs: '$ctrl'
-			}
+			},
+			{
+				name: 'home.configuracion.detalleusuario',
+				data: {
+					pageTitle: 'SAC | DETALLE USUARIOS',
+					permissions: {
+						only: ['usuariosSelect'],
+						options: {
+							reload: false
+						}
+					}
+				},
+				url: '/configuracion/detalleusuario/:id',
+				templateUrl: 'views/configuracion/nuevoUsuario.html',
+				controller: 'detalleUsuarioCtrl',
+				controllerAs: '$ctrl'
+			},
+			{
+				name: 'home.configuracion.editausuario',
+				data: {
+					pageTitle: 'SAC | EDITA USUARIOS',
+					permissions: {
+						only: ['usuariosSelect'],
+						options: {
+							reload: false
+						}
+					}
+				},
+				url: '/configuracion/editausuario/:id',
+				templateUrl: 'views/configuracion/nuevoUsuario.html',
+				controller: 'editaUsuarioCtrl',
+				controllerAs: '$ctrl'
+			},
+{
+    name: 'home.configuracion.rolesweb',
+    data: {
+     pageTitle: 'SAC | ROLES WEB',
+     permissions: {
+      //only: ['permisosSelect'],
+      options: {
+       reload: false
+      }
+     }
+    },
+    url: '/configuracion/roles_lista',
+    templateUrl: 'views/configuracion/RolesWeb.html',
+    controller: 'RolesWebCtrl',
+    controllerAs: '$ctrl'
+   }
+
+
+
+			
 
 
 		];

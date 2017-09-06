@@ -1,0 +1,45 @@
+<form name="FormRol" angular-validator-submit="ctrl.SaveRol()" novalidate angular-validator autocomplete="off">
+    <div class="modal-header">
+        <button class="close" type="button" aria-label="close" ng-click="ctrl.cancel()">x</button>
+        <h3 class="modal-title"><i ng-class="ctrl.Icono"></i> {{ ctrl.Titulo }} </h3>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <b>Nombre:</b>
+                </div>
+                <div class="col-md-12">
+                    <input type="text" name="InpRol" class="form-control input-sm" ng-model="ctrl.Rol" validate-on="dirty" required required-message="'Obligatorio'">
+                </div>
+                <div class="col-md-12">
+                    <br>
+                </div>
+                <div class="col-md-12">
+                    <b>Descripción:</b>
+                </div>
+                <div class="col-md-12">
+                    <textarea name="InpDescripcion" class="form-control input-sm" rows="2" ng-model="ctrl.Descripcion" validate-on="dirty" required required-message="'Obligatorio'"></textarea>
+                </div>
+                <div class="col-md-12">
+                    <br>
+                </div>
+                <div class="col-md-12">
+                    <b>Estado:</b>
+                </div>
+                <div class="col-md-12">
+                    <label class="radio-inline radio-styled" width="100px">
+                        <input type="radio" name="RdoEstado" ng-model="ctrl.Estado" value="T"><span>Activo</span>
+                    </label>
+                    <label class="radio-inline radio-styled">
+                        <input type="radio" name="RdoEstado" ng-model="ctrl.Estado" value="F"><span>Inactivo</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary btn-sm" title="Guardar estado">Guardar</button>
+        <button type="button" class="btn btn-default btn-sm" ng-click="ctrl.cancel()" title="Salir">Cancelar</button>
+    </div>
+</form>

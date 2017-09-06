@@ -110,6 +110,31 @@ angular
                 controllerAs: '$ctrl'
             },
             {
+                name: 'home.catalogos.distribuidor_nuevo',
+                data: {
+                    pageTitle: 'SOFTV | NUEVO DISTRIBUIDOR',
+                    permissions: {
+                        options: {
+                            reload: false
+                        }
+                    }
+                },
+                url: '/catalogo/distribuidores/nuevo',
+                templateUrl: 'views/catalogos/DistribuidorForm.html',
+                controller: 'DistribuidorAddCtrl',
+                controllerAs: '$ctrl'
+            },
+            {
+                name: 'home.catalogos.distribuidor_editar',
+                data: {
+                    pageTitle: 'SOFTV | EDITAR DISTRIBUIDOR'
+                },
+                url: '/catalogo/distribuidores/editar/:id',
+                templateUrl: 'views/catalogos/DistribuidorForm.html',
+                controller: 'DistribuidorUpdateCtrl',
+                controllerAs: '$ctrl'
+            },
+            {
                 name: 'home.catalogos.colonias',
                 data: {
                     pageTitle: 'SOFTV | CATÁLOGO COLONIAS',

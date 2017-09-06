@@ -2,7 +2,7 @@
 
 angular
     .module('softvApp')
-    .controller('ModalDistribuidorFormUpdateCtrl', function(CatalogosFactory, $uibModalInstance, ngNotify, $state, IdDistribuidor){
+    .controller('DistribuidorUpdateCtrl', function(CatalogosFactory, ngNotify, $state, $stateParams){
 
         function initData(){
             CatalogosFactory.GetDeepDistribuidor(IdDistribuidor).then(function(data){
@@ -99,26 +99,20 @@ angular
             CatalogosFactory.UpdateDistribuidor(DistribuidorObj).then(function(data){
                 if(data.UpdateDistribuidorResult == 1){
                     ngNotify.set('CORRECTO, al guardar el distribuidor.', 'success');
-                    $state.reload('home.catalogos.distribuidores');
-				    cancel();
+                    $state.go('home.catalogos.distribuidores');
                 }else{
                     ngNotify.set('ERROR, al guardar el distribuidor.', 'warn');
-                    $state.reload('home.catalogos.distribuidores');
-                    cancel();
+                    $state.go('home.catalogos.distribuidores');
                 }
             });
         }
 
-        function cancel() {
-            $uibModalInstance.dismiss('cancel');
-        }
-
         var vm = this;
+        var IdDistribuidor = $stateParams.id;
         vm.Titulo = 'Editar Registro - ';
         vm.Icono = 'fa fa-pencil-square-o'
-        vm.ValidateRFC = /^[A-Z]{4}\d{6}[A-Z]{3}$|^[A-Z]{4}\d{6}\d{3}$|^[A-Z]{4}\d{6}[A-Z]{2}\d{1}$|^[A-Z]{4}\d{6}[A-Z]{1}\d{2}$|^[A-Z]{4}\d{6}\d{2}[A-Z]{1}$|^[A-Z]{4}\d{6}\d{1}[A-Z]{2}$/;
+        vm.ValidateRFC = /^[A-Z]{4}\d{6}[A-Z]{3}$|^[A-Z]{4}\d{6}\d{3}$|^[A-Z]{4}\d{6}[A-Z]{2}\d{1}$|^[A-Z]{4}\d{6}[A-Z]{1}\d{2}$|^[A-Z]{4}\d{6}\d{2}[A-Z]{1}$|^[A-Z]{4}\d{6}\d{1}[A-Z]{2}$|^[A-Z]{4}\d{6}\d{1}[A-Z]{1}\d{1}$|^[A-Z]{4}\d{6}[A-Z]{1}\d{1}[A-Z]{1}$/;
         vm.SaveDistribuidor = SaveDistribuidor;
-        vm.cancel = cancel;
         initData();
 
     });
