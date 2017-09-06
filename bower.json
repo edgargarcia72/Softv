@@ -27,7 +27,8 @@
     "ZingChart-AngularJS": "zingchart-angularjs#^1.2.0",
     "angucomplete-alt": "^3.0.0",
     "angular-tree-control": "^0.2.28",
-    "angularMultipleSelect": "angular-multiple-select#^1.1.2"
+    "angularMultipleSelect": "angular-multiple-select#^1.1.2",
+    "angular-base64": "^2.0.5"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0",
