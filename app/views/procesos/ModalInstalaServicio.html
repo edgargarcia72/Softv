@@ -1,0 +1,89 @@
+<form angular-validator-submit="ctrl.guardar()" name="contratoForm" novalidate angular-validator>
+  <div class="modal-header">
+    <button class="close" aria-label="Close" type="button" ng-click="ctrl.cancel()">×</button>
+    <h4 class="modal-title">Instala Servicios</h4>
+  </div>
+  <div class="modal-body">
+      <div class="tools" align="right"> 
+        <button type="button" title="Eliminar orden de servicio" class="btn btn-danger btn-sm" ng-click="ctrl.Eliminar();"><i class="fa fa-trash"></i> Eliminar</button>
+      </div>
+
+
+    <div class="row">
+
+      <div class="col-md-6">
+        <b style="font-size: 14px; color: #06599a;"><i class="glyphicon glyphicon-plus"></i>Asignación de Aparatos</b><br><br>
+
+
+                <label class="col-md-4 control-label blod">Tipo de Aparato:</label>
+                <div class="col-md-8" style="padding-left:-10px;">
+                  <select class="form-control input-sm" name="TipoAparatos" validate-on="dirty" ng-model="ctrl.TipoAparato"
+                    ng-options="item as item.Nombre for item in ctrl.TipoAparatos track by item.IdArticulo" required-message="'Este campo es obligatorio.'" ng-change="ctrl.SeleccionaMedio()"
+                    required>
+                        <option value="">selecciona</option>
+                    </select>
+                </div>
+
+
+                <label class="col-md-4 control-label blod">Aparato:</label>
+                <div class="col-md-8" style="padding-left:-10px;">
+                  <select class="form-control input-sm" name="aparato" validate-on="dirty" ng-model="ctrl.aparato" ng-options="item as item.Descripcion for item in ctrl.aparatos track by item.ContratoAnt"
+                    required-message="'Este aparato es obligatorio.'" ng-disabled="ctrl.Detalle" required>
+                        <option value="">selecciona</option>
+                    </select>
+                </div>
+                <br>
+
+                <label class="col-md-12 control-label blod">Servicios a los que se le instala el aparato:</label>
+                <div class="col-md-12" style="padding-left:-10px;">
+                  <multiple-autocomplete ng-model="ctrl.selectedList"
+                     object-property="nombre"
+                     suggestions-arr="ctrl.AparatosPosibles">
+                  </multiple-autocomplete>
+                </div>
+                <br>
+
+                
+    
+
+
+
+                <div class="tools" align="right">
+                  <button  title="Guardar orden de servicio" class="btn btn-primary btn-sm" ng-click="$ctrl.AsignaAparato()"><i class="glyphicon glyphicon-plus" aria-hidden="true" ></i> Agregar</button>    
+                </div>
+
+
+        
+      </div>
+
+      <!--Preview de la instalación-->
+      <div class="col-md-6">
+            <treecontrol class="tree-light" tree-model="ctrl.treedata" expanded-nodes="ctrl.expandedNodes" selected-node="ctrl.selectednode">
+              <span ng-switch="" on="node.Type">
+               <span ng-switch-when="folder" class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
+               <span ng-switch-when="pic" class="glyphicon glyphicon-picture" aria-hidden="true"></span>
+               <span ng-switch-when="doc" class="glyphicon glyphicon-file" aria-hidden="true"></span>
+               <span ng-switch-when="file" class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
+               <span ng-switch-when="movie" class="glyphicon glyphicon-film" aria-hidden="true"></span>
+               <span ng-switch-when="email" class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+               <span ng-switch-when="home" class="glyphicon glyphicon-home" aria-hidden="true"></span>
+               <span ng-switch-when="trash" class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+              </span> 
+
+              {{node.Nombre}} ({{node.Detalle}})
+              <button ng-click="ctrl.seleccionaMedio(node)" class="btn btn-info btn-xs" ng-if='node.Clv_UnicaNet>0 && node.IdMedio=="0"'>Medio</button>
+            </treecontrol>
+      </div>
+
+    </div>
+
+
+
+
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-default btn-sm" type="button" ng-click="ctrl.cancel()">Cancelar</button>
+    <button class="btn btn-primary btn-sm" ng-disabled="ctrl.Detalle" type="submit">Aceptar</button>
+  </div>
+</form>
+

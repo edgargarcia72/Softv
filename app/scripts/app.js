@@ -16,7 +16,10 @@ angular
     'ngSanitize',
     'ngCsv',
     'googlechart',   
-    'angucomplete-alt'
+   // 'angucomplete-alt',
+   // 'treeControl',
+   // 'multipleSelect',
+    'base64'
      ])
   .config(['$provide','$urlRouterProvider', '$httpProvider' ,'cfpLoadingBarProvider', '$qProvider', 'blockUIConfig', function ($provide, $urlRouterProvider, $httpProvider ,cfpLoadingBarProvider, $qProvider, blockUIConfig) {
     $urlRouterProvider.otherwise(function ($injector) {
