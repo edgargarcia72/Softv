@@ -4,7 +4,6 @@ angular
     .factory('RolesFactory', function($http, $q, globalService, $localStorage){
 
         var factory = {};
-
         var paths ={
             GetRolList: '/Role/GetRolList'
         };

@@ -5,14 +5,8 @@ angular
     .controller('ClienteNuevoCtrl', function(CatalogosFactory, ngNotify, $uibModal, $rootScope, $state, $localStorage){
 
         function initData(){
-            console.log($localStorage.currentUser.idUsuario);
             CatalogosFactory.GetPlazaList($localStorage.currentUser.idUsuario).then(function(data){
-                console.log(data);
                 vm.PlazaList = data.GetPlazaListResult;
-            });
-
-            CatalogosFactory.GetPeriodoCobroList().then(function(data){
-                vm.PeriodoList = data.GetPeriodoCobroListResult;
             });
 
             CatalogosFactory.GetTipoClienteList_WebSoftvnew().then(function(data){
@@ -29,37 +23,40 @@ angular
             var FechaNacD = vm.FechaNac.getDate();
             var FechaNacM = vm.FechaNac.getMonth() + 1;
             var FechaNacY = vm.FechaNac.getFullYear();
-            var ObjCliente = {};
-            ObjCliente.Nombre = vm.Nombre;
-            ObjCliente.NombreAdi = vm.NombreAdi;
-            ObjCliente.PrimerApe = vm.PrimerApe;
-            ObjCliente.SegundoApe = vm.SegundoApe;
-            ObjCliente.ClaveElector = vm.ClaveElector;
-            ObjCliente.Telefono = vm.Telefono;
-            ObjCliente.Celular = vm.Celular;
-            ObjCliente.Email = vm.Email;
-            ObjCliente.IdPlaza = vm.Plaza.IdPlaza;
-            ObjCliente.IdPeriodo = vm.Periodo.IdPeriodo;
-            ObjCliente.IdTipoCliente = vm.TipoCobro.IdTipoCliente;
-            ObjCliente.TipoPersona = (vm.TipoPersona == 'F') ? 1 : 0;
-            ObjCliente.FechaNac = FechaNacD + '/' + FechaNacM + '/' + FechaNacY;
-            CatalogosFactory.AddClienteL(ObjCliente).then(function(data){
-                var IdContratoCliente = data.AddClienteLResult;
-                var ObjClienteDP = {};
-                ObjClienteDP.IdContrato = IdContratoCliente;
-                ObjClienteDP.IdEstado = vm.Estado.IdEstado;
-                ObjClienteDP.IdMunicipio = vm.CiuMun.Municipio.IdMunicipio;
-                ObjClienteDP.IdLocalidad = vm.Localidad.IdLocalidad;
-                ObjClienteDP.IdColonia = vm.Colonia.Colonia.IdColonia;
-                ObjClienteDP.IdCalle = vm.Callle.Calle.IdCalle;
-                ObjClienteDP.EntCalles = vm.EntCalles;
-                ObjClienteDP.NumExt = vm.NumExt;
-                ObjClienteDP.NumInt = vm.NumInt;
-                ObjClienteDP.CodigoPos = vm.CodigoPos;
-                CatalogosFactory.UpdateClienteDPos(ObjClienteDP).then(function(data){
-                    ngNotify.set('CORRECTO, se añadió cliente nuevo.', 'success');
-                    $state.go('home.catalogos.cliente_editar', { id:IdContratoCliente });
-                });
+            var ObjCliente = {
+                'Nombre': vm.Nombre, 
+                'SegundoNombre': vm.NombreAdi,
+                'Apellido_Paterno': vm.PrimerApe,
+                'Apellido_Materno': vm.SegundoApe,
+                'FechaNacimiento': FechaNacD + '/' + FechaNacM + '/' + FechaNacY,
+                'EsFisica': (vm.TipoPersona == 'F') ? 1 : 0,
+                'TELEFONO': vm.Telefono, 
+                'CELULAR': vm.Celular, 
+                'Email': vm.Email, 
+                'ClaveElector': vm.ClaveElector, 
+                'IdCompania': vm.Plaza.id_compania, 
+                'Clv_Estado': vm.Estado.Clv_Estado, 
+                'Clv_Ciudad': vm.CiuMun.Clv_Ciudad, 
+                'Clv_Localidad': vm.Localidad.Clv_Localidad, 
+                'Clv_Colonia': vm.Colonia.CLV_COLONIA, 
+                'Clv_Calle': vm.Calle.Clv_Calle, 
+                'ENTRECALLES': vm.EntCalles,
+                'NUMERO': vm.NumExt, 
+                'NumInt': vm.NumInt, 
+                'CodigoPostal': vm.CodigoPos, 
+                'IdUsuario': $localStorage.currentUser.idUsuario,
+                'TipoCliente': vm.TipoCobro.CLV_TIPOCLIENTE
+            };
+            CatalogosFactory.GetCLIENTES_NewList(ObjCliente).then(function(data){
+                vm.Cliente = data.GetCLIENTES_NewListResult;
+                if(vm.Cliente.length == 1){
+                    var IdCliente = vm.Cliente[0].CONTRATO;
+                    ngNotify.set('CORRECTO, se añadió un cliente nuevo.', 'success');
+                    $state.go('home.catalogos.cliente_editar', { id:IdCliente });
+                }else{
+                    ngNotify.set('ERROR, al añadir un cliente nuevo.', 'warn');
+                    $state.go('home.catalogos.clientes');
+                }
             });
         }
 
@@ -82,10 +79,11 @@ angular
         }
 
         function GetCiudadMunicipio(){
-            var RelEstMun = {};
-            RelEstMun.clv_estado = vm.Estado.Clv_Estado;
-            RelEstMun.idcompania = vm.Plaza.id_compania;
             if(vm.Estado != undefined){
+                var RelEstMun = {
+                    'clv_estado' : vm.Estado.Clv_Estado,
+                    'idcompania' : vm.Plaza.id_compania
+                };
                 CatalogosFactory.GetMuestraCiudadesEstadoList(RelEstMun).then(function(data){
                     vm.CiudadMunicipioList = data.GetMuestraCiudadesEstadoListResult;
                     vm.LocalidadList = null;
@@ -136,136 +134,7 @@ angular
                 });
             }else{
                 vm.CalleList = null;
-            }
-        }
-
-        function AddDatosFiscales(){
-            if(vm.IdContrato != undefined){
-                var ObjCliente = {};
-                ObjCliente.IdContrato = vm.IdContrato;
-                ObjCliente.IVADesglosado = 10;
-                ObjCliente.RazonSoc = vm.RazonSoc;
-                ObjCliente.RFC = vm.RFC;
-                ObjCliente.CURP = vm.CURP;
-                ObjCliente.CalleDF = vm.CalleDF;
-                ObjCliente.NumExtDF = vm.NumExtDF;
-                ObjCliente.NumIntDF = vm.NumIntDF;
-                ObjCliente.EntCallesDF = vm.EntCallesDF;
-                ObjCliente.ColoniaDF = vm.ColoniaDF;
-                ObjCliente.LocalidadDF = vm.Pais;
-                ObjCliente.CiuMunDF = vm.CiuMunDF;
-                ObjCliente.EstadoDF = vm.EstadoDF;
-                ObjCliente.CodigoPosDF = vm.CodigoPosDF;
-                ObjCliente.TelefonoDF = vm.TelefonoDF;
-                ObjCliente.Fax = vm.Fax;
-                ObjCliente.EmailDF = vm.EmailDF;
-                ObjCliente.Tipo = 1;
-                CatalogosFactory.AddDatoFiscalCliente(ObjCliente).then(function(data){
-                    GetDatosClientes(vm.IdContrato);
-                    ngNotify.set('CORRECTO, se guardaron datos fiscales.', 'success');
-                });
-            }else{
-                ngNotify.set('Aun no se han registrado los datos personales.', 'warn');
-            }
-        }
-
-        function AddDatosBancarios(){
-            if(vm.IdContrato != undefined){
-                for(var i = 0; i < vm.TipoTarjetaList.length; i ++){
-                    if(vm.TipoTarjetaList[i].Nombre == vm.TipoPlastico){
-                        vm.IdTipoTar = vm.TipoTarjetaList[i].IdTipoTarjeta;
-                        break;
-                    }
-                }
-                var ObjCliente = {};
-                ObjCliente.IdContrato = vm.IdContrato;
-                ObjCliente.IdBanco = vm.Banco.IdBanco;
-                ObjCliente.TipoPlastico = vm.IdTipoTar;
-                ObjCliente.Titular = vm.Titular;
-                ObjCliente.NumTarjeta = vm.NumTarjeta;
-                ObjCliente.CodigoSeg = vm.CodigoSeg;
-                ObjCliente.IdMes = vm.MesVen.IdMes;
-                ObjCliente.YearVen = vm.YearVen;
-                CatalogosFactory.AddDatoBancarioCliente(ObjCliente).then(function(data){
-                    GetDatosClientes(vm.IdContrato);
-                    ngNotify.set('CORRECTO, se guardaron datos bancarios.', 'success');
-                });
-            }else{
-                ngNotify.set('Aun no se han registrado los datos personales.', 'warn');
-            }
-        }
-
-        function AddRefPersonales(){
-            if(vm.IdContrato != undefined){
-                var ObjCliente = {};
-                ObjCliente.IdContrato = vm.IdContrato;
-                ObjCliente.NombreRef = vm.NombreRef;
-                ObjCliente.DireccionRef = vm.DireccionRef;
-                ObjCliente.EmailRef = vm.EmailRef;
-                ObjCliente.TelefonoRef = vm.TelefonoRef;
-                ObjCliente.OpcionProspecto = 1;
-                CatalogosFactory.AddReferenciaClienteL(ObjCliente).then(function(data){
-                    GetReferenciasPersonales(vm.IdContrato);
-                    ngNotify.set('CORRECTO, se guardó referencia personal.', 'success');
-                });
-            }else{
-                ngNotify.set('Aun no se han registrado los datos personales.', 'warn');
-            }
-        }
-
-        function OpenEditRefPersonal(ObjRefCliente){
-            var ObjRefCliente = ObjRefCliente;
-            var modalInstance = $uibModal.open({
-                animation: true,
-                ariaLabelledBy: 'modal-title',
-                ariaDescribedBy: 'modal-body',
-                templateUrl: 'views/catalogos/ModalEditarRefCliente.html',
-                controller: 'ModalEditarRefClienteCtrl',
-                controllerAs: 'ctrl',
-                backdrop: 'static',
-                keyboard: false,
-                class: 'modal-backdrop fade',
-                size: 'lg',
-                resolve: {
-                    ObjRefCliente: function () {
-                        return ObjRefCliente;
-                    }
-                }
-            });
-        }
-
-        function OpenDeleteRefPersonal(ObjRefCliente){
-            var ObjRefCliente = ObjRefCliente;
-            var modalInstance = $uibModal.open({
-                animation: true,
-                ariaLabelledBy: 'modal-title',
-                ariaDescribedBy: 'modal-body',
-                templateUrl: 'views/catalogos/ModalEliminarRefCliente.html',
-                controller: 'ModalEliminarRefClienteCtrl',
-                controllerAs: 'ctrl',
-                backdrop: 'static',
-                keyboard: false,
-                class: 'modal-backdrop fade',
-                size: 'sm',
-                resolve: {
-                    ObjRefCliente: function () {
-                        return ObjRefCliente;
-                    }
-                }
-            });
-        }
-
-        function AddNotas(){
-             if(vm.IdContrato != undefined){
-                var ObjCliente = {};
-                ObjCliente.IdContrato = vm.IdContrato;
-                ObjCliente.Observaciones = vm.Observaciones;
-                ObjCliente.Notas = vm.Notas;
-                CatalogosFactory.AddNotasClienteL(ObjCliente).then(function(data){
-                    ngNotify.set('CORRECTO, se guardaron notas.', 'success');
-                });
-            }else{
-                ngNotify.set('Aun no se han registrado los datos personales.', 'warn');
+                vm.CodigoPos = null;
             }
         }
 
@@ -290,23 +159,12 @@ angular
             { IdMes: 11, Nombre: 'Noviembre' },
             { IdMes: 12, Nombre: 'Diciembre' }
         ];
-        vm.TipoTarjetaList = [
-            { IdTipoTarjeta: 1, Nombre: 'V' },
-            { IdTipoTarjeta: 2, Nombre: 'A' },
-            { IdTipoTarjeta: 3, Nombre: 'M' }
-        ];
         vm.AddDatosPersonales = AddDatosPersonales;
         vm.GetEstado = GetEstado;
         vm.GetCiudadMunicipio = GetCiudadMunicipio;
         vm.GetLocalidad = GetLocalidad;
         vm.GetColonia = GetColonia;
         vm.GetCalle = GetCalle;
-        vm.AddDatosFiscales = AddDatosFiscales;
-        vm.AddDatosBancarios = AddDatosBancarios;
-        vm.AddRefPersonales = AddRefPersonales;
-        vm.OpenEditRefPersonal = OpenEditRefPersonal;
-        vm.OpenDeleteRefPersonal = OpenDeleteRefPersonal;
-        vm.AddNotas = AddNotas;
         initData();
         
     });
