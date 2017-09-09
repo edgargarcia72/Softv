@@ -12,13 +12,17 @@ angular
                     vm.TipoCobroList = data.GetTipoClienteList_WebSoftvnewResult;
                     CatalogosFactory.GetBancoList().then(function(data){
                         vm.BancoList = data.GetBancoListResult;
-                        GetDatosClientes(vm.IdContrato);
-                        GetDatosFiscal(vm.IdContrato);
+                        CatalogosFactory.GetMUESTRATIPOSDECUENTAList().then(function(data){
+                            vm.TipoCuentaList = data.GetMUESTRATIPOSDECUENTAListResult;
+                            GetDatosClientes(vm.IdContrato);
+                            GetDatosFiscal(vm.IdContrato);
+                            GetDatosBancario(vm.IdContrato)
+                        });
                     });
                 });
             });
 
-            /*GetDatosBancario(vm.IdContrato);
+            /*;
             GetReferenciasPersonales(vm.IdContrato);
             GetNotas(vm.IdContrato);*/
 
@@ -221,6 +225,25 @@ angular
             return new Date(parts[2], parts[1] - 1, parts[0]);
         }
 
+        function ValidateFechaVen(dateStr) {
+            if(dateStr != undefined){
+                if(dateStr.length == 4){
+                    //get
+                    var P1 = String(dateStr[0]) + String(dateStr[1]);
+                    var P2 = String(dateStr[2]) + String(dateStr[3]);
+                    if(parseInt(P1) <= 12 && parseInt(P1) > 0 && parseInt(P2) >= 17){
+                        return true;
+                    }else{
+                        return false;
+                    }
+                }else{
+                    return false;
+                }
+            }else{
+                return false;
+            }
+        }
+
         function GetDatosFiscal(IdContrato){
             CatalogosFactory.GetDatosFiscalesList(IdContrato).then(function(data){
                 console.log(data);
@@ -243,31 +266,30 @@ angular
         }
 
         function GetDatosBancario(IdContrato){
-            CatalogosFactory.GetDatoBancarioDeep(IdContrato).then(function(data){
-                var DatosBancarios = data.GetDatoBancarioDeepResult;
-                vm.IdBanco = DatosBancarios.IdBanco;
-                vm.Titular = DatosBancarios.NombreTitular;
-                vm.NumTarjeta = DatosBancarios.DigitosTarjeta;
-                vm.CodigoSeg = DatosBancarios.CodigoSeguridad;
-                vm.IdMes = DatosBancarios.MesVencimiento;
-                vm.YearVen = DatosBancarios.AnioVencimiento;
-                vm.IdTipoTarjeta = DatosBancarios.IdTipoTarjeta;
-                CatalogosFactory.GetBancoList().then(function(data){
-                    vm.BancoResult = data.GetBancoListResult;
-                    for (var b = 0; b < vm.BancoResult.length; b++) {
-                        if (vm.BancoResult[b].IdBanco == vm.IdBanco) {
-                            vm.Banco = vm.BancoResult[b];
-                        }
-                    }
-                });
-                for (var b = 0; b < vm.MesList.length; b++) {
-                    if (vm.MesList[b].IdMes == vm.IdMes) {
-                        vm.MesVen = vm.MesList[b];
+            CatalogosFactory.GetRELCLIBANCOList(IdContrato).then(function(data){
+                console.log(data);
+                var DatosBancariosL = data.GetRELCLIBANCOListResult;
+                if(DatosBancariosL.length > 0){
+                    vm.UpdateDB = true;
+                }else{
+                    vm.UpdateDB = false;
+                }
+                var DatosBancarios = DatosBancariosL[0];
+                vm.IdBanco = DatosBancarios.CLV_BANCO;
+                vm.Titular = DatosBancarios.NOMBRE;
+                vm.NumTarjeta = DatosBancarios.CUENTA_BANCO;
+                vm.CodigoSeg = DatosBancarios.CODIGOSEGURIDAD;
+                vm.FechaVen = DatosBancarios.VENCIMIENTO;
+                vm.NombreTipoCuenta = DatosBancarios.TIPO_CUENTA;
+                console.log(vm.FechaVen);
+                for(var b = 0; vm.TipoCuentaList.length > b; b++){
+                    if(vm.TipoCuentaList[b].Nombre = vm.NombreTipoCuenta){
+                        vm.TipoCuenta = vm.TipoCuentaList[b];
                     }
                 }
-                for (var b = 0; b < vm.TipoTarjetaList.length; b++) {
-                    if (vm.TipoTarjetaList[b].IdTipoTarjeta == vm.IdTipoTarjeta) {
-                        vm.TipoPlastico = vm.TipoTarjetaList[b].Nombre;
+                for (var b = 0; b < vm.BancoList.length; b++) {
+                    if (vm.BancoList[b].IdBanco == vm.IdBanco) {
+                        vm.Banco = vm.BancoList[b];
                     }
                 }
             });
@@ -319,11 +341,9 @@ angular
                     var DatosFiscales = data.AddDatosFiscalesResult;
                     if(DatosFiscales == -1){
                         ngNotify.set('CORRECTO, se guardaron datos fiscales.', 'success');
-                        $state.go('home.catalogos.cliente_editar', { id:IdCliente });
                         GetDatosFiscal(vm.IdContrato);
                     }else{
                         ngNotify.set('ERROR, al guardar datos fiscales.', 'warn');
-                        $state.go('home.catalogos.clientes');
                     }
                 });
             }else{
@@ -333,28 +353,39 @@ angular
 
         function AddDatosBancarios(){
             if(vm.IdContrato != undefined){
-                for(var i = 0; i < vm.TipoTarjetaList.length; i ++){
-                    if(vm.TipoTarjetaList[i].Nombre == vm.TipoPlastico){
-                        vm.IdTipoTar = vm.TipoTarjetaList[i].IdTipoTarjeta;
-                        break;
-                    }
-                }
-                var FechaVen = vm.MesVen.IdMes + '/' + vm.YearVen;
+                var FechaVen = String(vm.FechaVen[0]) + String(vm.FechaVen[1]) + '/' + String(vm.FechaVen[2]) + String(vm.FechaVen[3]);
                 console.log(FechaVen);
-                var ObjCliente = {};
-                ObjCliente.IdContrato = vm.IdContrato;
-                ObjCliente.IdBanco = vm.Banco.IdBanco;
-                ObjCliente.TipoPlastico = vm.IdTipoTar;
-                ObjCliente.Titular = vm.Titular;
-                ObjCliente.NumTarjeta = vm.NumTarjeta;
-                ObjCliente.CodigoSeg = vm.CodigoSeg;
-                ObjCliente.IdMes = vm.MesVen.IdMes;
-                ObjCliente.YearVen = vm.YearVen;
-                CatalogosFactory.AddDatoBancarioCliente(ObjCliente).then(function(data){
-                    console.log(data);
-                    GetDatosBancario(vm.IdContrato);
-                    ngNotify.set('CORRECTO, se guardaron datos bancarios.', 'success');
-                });
+                var objRELCLIBANCO = {
+                    'Contrato': vm.IdContrato,
+                    'CLV_BANCO': vm.Banco.IdBanco,
+                    'CUENTA_BANCO': vm.NumTarjeta,
+                    'TIPO_CUENTA': vm.TipoCuenta.NOMBRE,
+                    'VENCIMIENTO': FechaVen,
+                    'CODIGOSEGURIDAD': vm.CodigoSeg,
+                    'NOMBRE': vm.Titular
+                };
+                if(vm.UpdateDB == false){
+                    CatalogosFactory.AddRELCLIBANCO(objRELCLIBANCO).then(function(data){
+                        console.log(data);
+                        if(data.AddRELCLIBANCOResult == 1){
+                            ngNotify.set('CORRECTO, se guardaron datos bancarios.', 'success');
+                            GetDatosBancario(vm.IdContrato);
+                        }else{
+                            ngNotify.set('ERROR, al guardar datos bancarios.', 'warn');
+                        }
+                    });
+                }else if(vm.UpdateDB == true){
+                    CatalogosFactory.UpdateRELCLIBANCO(objRELCLIBANCO).then(function(data){
+                        console.log(data);
+                        if(data.UpdateRELCLIBANCOResult == 1){
+                            ngNotify.set('CORRECTO, se guardaron datos bancarios.', 'success');
+                            GetDatosBancario(vm.IdContrato);
+                        }else{
+                            ngNotify.set('ERROR, al guardar datos bancarios.', 'warn');
+                        }
+                    });
+                }
+
             }else{
                 ngNotify.set('Aun no se han registrado los datos personales.', 'warn');
             }
@@ -448,30 +479,12 @@ angular
         vm.BlockInput = true;
         vm.DisableInput = false;
         vm.ValidateRFC = /^[A-Z]{4}\d{6}[A-Z]{3}$|^[A-Z]{4}\d{6}\d{3}$|^[A-Z]{4}\d{6}[A-Z]{2}\d{1}$|^[A-Z]{4}\d{6}[A-Z]{1}\d{2}$|^[A-Z]{4}\d{6}\d{2}[A-Z]{1}$|^[A-Z]{4}\d{6}\d{1}[A-Z]{2}$|^[A-Z]{4}\d{6}\d{1}[A-Z]{1}\d{1}$|^[A-Z]{4}\d{6}[A-Z]{1}\d{1}[A-Z]{1}$/;
-        vm.MesList = [
-            { IdMes: 1, Nombre: 'Enero' },
-            { IdMes: 2, Nombre: 'Febrero' },
-            { IdMes: 3, Nombre: 'Marzo' },
-            { IdMes: 4, Nombre: 'Abril' },
-            { IdMes: 5, Nombre: 'Mayo' },
-            { IdMes: 6, Nombre: 'Junio' },
-            { IdMes: 7, Nombre: 'Julio' },
-            { IdMes: 8, Nombre: 'Agosto' },
-            { IdMes: 9, Nombre: 'Septiembre' },
-            { IdMes: 10, Nombre: 'Octubre' },
-            { IdMes: 11, Nombre: 'Noviembre' },
-            { IdMes: 12, Nombre: 'Diciembre' }
-        ];
-        vm.TipoTarjetaList = [
-            { IdTipoTarjeta: 1, Nombre: 'V' },
-            { IdTipoTarjeta: 2, Nombre: 'A' },
-            { IdTipoTarjeta: 3, Nombre: 'M' }
-        ]
         vm.AddDatosPersonales = AddDatosPersonales;
         vm.GetCiudadMunicipio = GetCiudadMunicipio;
         vm.GetLocalidad = GetLocalidad;
         vm.GetColonia = GetColonia;
         vm.GetCalle = GetCalle;
+        vm.ValidateFechaVen = ValidateFechaVen;
         vm.AddDatosFiscales = AddDatosFiscales;
         vm.AddDatosBancarios = AddDatosBancarios;
         vm.AddRefPersonales = AddRefPersonales;

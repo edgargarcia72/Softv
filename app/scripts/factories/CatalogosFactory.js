@@ -16,8 +16,10 @@ angular
             AddDatosFiscales: '/DatosFiscales/AddDatosFiscales',
             GetDatosFiscalesList: '/DatosFiscales/GetDatosFiscalesList',
             GetBancoList: '/Banco/GetBancoList',
-            AddDatoBancarioCliente: '/Cliente/AddDatoBancarioCliente',
-            GetDatoBancarioDeep: '/DatoBancario/GetDatoBancarioDeep',
+            GetMUESTRATIPOSDECUENTAList: '/MUESTRATIPOSDECUENTA/GetMUESTRATIPOSDECUENTAList',
+            AddRELCLIBANCO: '/RELCLIBANCO/AddRELCLIBANCO',
+            UpdateRELCLIBANCO: '/RELCLIBANCO/UpdateRELCLIBANCO',
+            GetRELCLIBANCOList: '/RELCLIBANCO/GetRELCLIBANCOList',
             AddReferenciaClienteL: '/Cliente/AddReferenciaClienteL',
             DeleteReferenciaCliente: '/ReferenciaCliente/DeleteReferenciaCliente',
             UpdateReferencia: '/ReferenciaCliente/UpdateReferencia',
@@ -222,23 +224,10 @@ angular
             return deferred.promise;
         };
 
-        factory.AddDatoBancarioCliente = function (ObjCliente) {
+        factory.GetMUESTRATIPOSDECUENTAList = function(){
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
-            var Parametros = {
-                'lstCliente': 
-                    {'IdContrato': ObjCliente.IdContrato},
-                    'DatoBancarioAdd': [{
-                        IdBanco: ObjCliente.IdBanco,
-                        IdTipoTarjeta: ObjCliente.TipoPlastico,
-                        NombreTitular: ObjCliente.Titular,
-                        DigitosTarjeta: ObjCliente.NumTarjeta,
-                        CodigoSeguridad: ObjCliente.CodigoSeg,
-                        MesVencimiento: ObjCliente.IdMes,
-                        AnioVencimiento: ObjCliente.YearVen
-                    }]
-            };
-            $http.post(globalService.getUrl() + paths.AddDatoBancarioCliente, JSON.stringify(Parametros), config).then(function (response) {
+            $http.get(globalService.getUrl() + paths.GetMUESTRATIPOSDECUENTAList, config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);
@@ -246,11 +235,37 @@ angular
             return deferred.promise;
         };
 
-        factory.GetDatoBancarioDeep = function (IdContrato) {
+        factory.AddRELCLIBANCO = function (objRELCLIBANCO) {
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
-            var Parametros = {'IdContrato': IdContrato}
-            $http.post(globalService.getUrl() + paths.GetDatoBancarioDeep, JSON.stringify(Parametros), config).then(function (response) {
+            var Parametros = {'objRELCLIBANCO': objRELCLIBANCO};
+            console.log(Parametros);
+            $http.post(globalService.getUrl() + paths.AddRELCLIBANCO, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.UpdateRELCLIBANCO = function (objRELCLIBANCO) {
+            var deferred = $q.defer();
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = {'objRELCLIBANCO': objRELCLIBANCO};
+            console.log(Parametros);
+            $http.post(globalService.getUrl() + paths.UpdateRELCLIBANCO, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.GetRELCLIBANCOList = function (Contrato) {
+            var deferred = $q.defer();
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = {'Contrato': Contrato}
+            $http.post(globalService.getUrl() + paths.GetRELCLIBANCOList, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);

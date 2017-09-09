@@ -145,20 +145,6 @@ angular
         vm.TipoPersona = "F";
         vm.Title = 'Cliente nuevo';
         vm.ValidateRFC = /^[A-Z]{4}\d{6}[A-Z]{3}$|^[A-Z]{4}\d{6}\d{3}$|^[A-Z]{4}\d{6}[A-Z]{2}\d{1}$|^[A-Z]{4}\d{6}[A-Z]{1}\d{2}$|^[A-Z]{4}\d{6}\d{2}[A-Z]{1}$|^[A-Z]{4}\d{6}\d{1}[A-Z]{2}$|^[A-Z]{4}\d{6}\d{1}[A-Z]{1}\d{1}$|^[A-Z]{4}\d{6}[A-Z]{1}\d{1}[A-Z]{1}$/;
-        vm.MesList = [
-            { IdMes: 1, Nombre: 'Enero' },
-            { IdMes: 2, Nombre: 'Febrero' },
-            { IdMes: 3, Nombre: 'Marzo' },
-            { IdMes: 4, Nombre: 'Abril' },
-            { IdMes: 5, Nombre: 'Mayo' },
-            { IdMes: 6, Nombre: 'Junio' },
-            { IdMes: 7, Nombre: 'Julio' },
-            { IdMes: 8, Nombre: 'Agosto' },
-            { IdMes: 9, Nombre: 'Septiembre' },
-            { IdMes: 10, Nombre: 'Octubre' },
-            { IdMes: 11, Nombre: 'Noviembre' },
-            { IdMes: 12, Nombre: 'Diciembre' }
-        ];
         vm.AddDatosPersonales = AddDatosPersonales;
         vm.GetEstado = GetEstado;
         vm.GetCiudadMunicipio = GetCiudadMunicipio;

@@ -445,13 +445,13 @@
                                 <input name="InpNumTarjeta" type="text" class="form-control input-sm" ng-model="$ctrl.NumTarjeta" maxlength="16" ng-pattern="/^[A-Z]|[a-z]|\d$/" validator="$ctrl.NumTarjeta.length >= 15" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 15 o 16 dígitos.'">
                             </div>
                             <div class="col-md-3">
-                                <input name="InpNumTarjetaC" type="text" class="form-control input-sm" ng-model="$ctrl.NumTarjetaC" maxlength="16" ng-show="(FormDatosBancarios.InpNumTarjeta.$dirty)" ng-pattern="/^[A-Z]|[a-z]|\d$/" validator="$ctrl.NumTarjetaC.length >= 15" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 15 o 16 dígitos.'">
+                                <input name="InpNumTarjetaC" type="text" class="form-control input-sm" ng-model="$ctrl.NumTarjetaC" maxlength="16" ng-show="(FormDatosBancarios.InpNumTarjeta.$dirty)" ng-pattern="/^[A-Z]|[a-z]|\d$/" validator="$ctrl.NumTarjetaC.length >= 15 && $ctrl.NumTarjeta == $ctrl.NumTarjetaC" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Debe ser igual al anterior.'">
                             </div>
                             <div class="col-md-3">
-                                <input name="InpCodigoSeg" type="text" class="form-control input-sm" ng-model="$ctrl.CodigoSeg" maxlength="4" ng-pattern="/^[A-Z]|[a-z]|\d$/" validator="$ctrl.CodigoSeg.length >= 3" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa mínimo 3 dígitos.'">
+                                <input name="InpCodigoSeg" type="password" class="form-control input-sm" ng-model="$ctrl.CodigoSeg" maxlength="4" ng-pattern="/^[A-Z]|[a-z]|\d$/" validator="$ctrl.CodigoSeg.length >= 3" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa mínimo 3 dígitos.'">
                             </div>
                             <div class="col-md-3">
-                                <input name="InpCodigoSegC" type="text" class="form-control input-sm" ng-model="$ctrl.CodigoSegC" maxlength="4" ng-show="(FormDatosBancarios.InpCodigoSeg.$dirty)" ng-pattern="/^[A-Z]|[a-z]|\d$/" validator="$ctrl.CodigoSegC.length >= 3" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa mínimo 3 dígitos.'">
+                                <input name="InpCodigoSegC" type="password" class="form-control input-sm" ng-model="$ctrl.CodigoSegC" maxlength="4" ng-show="(FormDatosBancarios.InpCodigoSeg.$dirty)" ng-pattern="/^[A-Z]|[a-z]|\d$/" validator="$ctrl.CodigoSegC.length >= 3 && $ctrl.CodigoSeg == $ctrl.CodigoSegC" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Debe ser igual al anterior.'">
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -460,39 +460,34 @@
                             </div>
                         </div>
                         <div class="col-md-12">
+                            <!--
                             <div class="col-md-3">
                                 <p><small><b>Mes de la fecha de vencimiento:</b></small></p>
                             </div>
+                            -->
                             <div class="col-md-3">
-                                <p><small><b>Año de la fecha de vencimiento:</b></small></p>
+                                <p><small><b>Fecha de vencimiento:</b></small></p>
                             </div>
                             <div class="col-md-6">
-                                <!--
-                                <p><small><b>Tipo de plástico:</b></small></p>
-                                -->
+                                <p><small><b>Tipo de cuenta:</b></small></p>
                             </div>
                         </div>
                         <div class="col-md-12">
+                            <!--
                             <div class="col-md-3">
                                 <select name="InpMesVen" class="form-control input-sm" ng-model="$ctrl.MesVen" ng-options="M.Nombre for M in $ctrl.MesList track by M.IdMes" validate-on="dirty" required required-message="'Obligatorio'">
                                     <option value="">Selecciona</option>
                                 </select>
                             </div>
+                            -->
                             <div class="col-md-3">
-                                <input name="InpYearVen" type="text" class="form-control input-sm" ng-model="$ctrl.YearVen" ui-mask="2099" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa mes y año.'">
+                                <!--<input name="InpYearVen" type="text" class="form-control input-sm" ng-model="$ctrl.YearVen" ui-mask="2099" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa mes y año.'">-->
+                                <input name="InpFechaVen" type="text" class="form-control input-sm" ng-model="$ctrl.FechaVen" ui-mask="99/99" validator="$ctrl.ValidateFechaVen($ctrl.FechaVen)" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa mes y año.'">
                             </div>
                             <div class="col-md-6">
-                                <!--
-                                <label class="radio-inline radio-styled">
-                                    <input type="radio" name="RdoTipoPlastico" ng-model="$ctrl.TipoPlastico" value="V" ng-disabled="false"><span><small>VISA</small></span>
-                                </label>
-                                <label class="radio-inline radio-styled">
-                                    <input type="radio" name="RdoTipoPlastico" ng-model="$ctrl.TipoPlastico" value="A" ng-disabled="false"><span><small>American Express</small></span>
-                                </label>
-                                <label class="radio-inline radio-styled">
-                                    <input type="radio" name="RdoTipoPlastico" ng-model="$ctrl.TipoPlastico" value="M" ng-disabled="false"><span><small>MasterCard</small></span>
-                                </label>
-                                -->
+                                <select name="SlcTipoCuenta" class="form-control input-sm" ng-model="$ctrl.TipoCuenta" ng-options="TC.NOMBRE for TC in $ctrl.TipoCuentaList track by TC.NOMBRE" validate-on="dirty" required required-message="'Obligatorio'">
+                                    <option value="">Selleciona</option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -500,6 +495,7 @@
                                 <br>
                             </div>
                         </div>
+                        <!--
                         <div class="col-md-12">
                             <div class="col-md-12">
                                 <p><small><b>Tipo de plástico:</b></small></p>
@@ -523,9 +519,10 @@
                                 <br>
                             </div>
                         </div>
+                        -->
                         <div class="col-md-12">
                             <div class="col-md-12" style="text-align:right">
-                                <button type="submit" class="btn btn-success btn-sm" ng-disabled="$ctrl.DisableInput">Validar</button>
+                                <button type="submit" class="btn btn-success btn-sm" ng-disabled="$ctrl.DisableInput" >Validar</button>
                             </div>
                         </div>
                         </div>
