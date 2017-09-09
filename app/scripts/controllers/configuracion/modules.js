@@ -24,6 +24,38 @@ angular
         controllerAs: '$ctrl'
       },
       {
+        name: 'home.configuracion.generalsistema',
+        data: {
+          pageTitle: 'SAC | GENERALES DEL SISTEMA',
+          permissions: {
+            only: ['generalesdelsistemaSelect'],
+            options: {
+              reload: false
+            }
+          }
+        },
+        url: '/configuracion/generalesdelsistema',
+        templateUrl: 'views/configuracion/generalesdelsistema.html',
+        controller: 'generalesSistemaCtrl',
+        controllerAs: '$ctrl'
+      },
+      {
+        name: 'home.configuracion.generalsistemadistribuidor',
+        data: {
+          pageTitle: 'SAC | GENERALES DEL SISTEMA',
+          permissions: {
+            only: ['generalesdeldistribuidorSelect'],
+            options: {
+              reload: false
+            }
+          }
+        },
+        url: '/configuracion/generalesdeldistribuidor',
+        templateUrl: 'views/configuracion/generalesdeldistribuidor.html',
+        controller: 'generalesDistribuidorCtrl',
+        controllerAs: '$ctrl'
+      },
+      {
         name: 'home.configuracion.roles',
         data: {
           pageTitle: 'SAC | ROLES',
