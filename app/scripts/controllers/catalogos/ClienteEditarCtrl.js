@@ -16,21 +16,17 @@ angular
                             vm.TipoCuentaList = data.GetMUESTRATIPOSDECUENTAListResult;
                             GetDatosClientes(vm.IdContrato);
                             GetDatosFiscal(vm.IdContrato);
-                            GetDatosBancario(vm.IdContrato)
+                            GetDatosBancario(vm.IdContrato);
+                            GetReferenciasPersonales(vm.IdContrato);
+                            GetNotas(vm.IdContrato);
                         });
                     });
                 });
             });
-
-            /*;
-            GetReferenciasPersonales(vm.IdContrato);
-            GetNotas(vm.IdContrato);*/
-
         }
 
         function GetDatosClientes(IdContratoCliente){
             CatalogosFactory.GetConsultaClientesList(IdContratoCliente).then(function(data){
-                console.log(data);
                 var DatosCliente = data.GetConsultaClientesListResult[0];
                 vm.CONTRATO = DatosCliente.CONTRATO;
                 vm.IdCliente = DatosCliente.ContratoCom;
@@ -210,7 +206,6 @@ angular
                 'TipoCliente': vm.TipoCobro.CLV_TIPOCLIENTE
             };
             CatalogosFactory.UpdateCLIENTES_New(objCLIENTES_New).then(function(data){
-                console.log(data);
                 if(data.UpdateCLIENTES_NewResult == -1){
                     ngNotify.set('CORRECTO, se guardaron datos personales.', 'success');
                     GetDatosClientes(vm.IdContrato);
@@ -246,7 +241,6 @@ angular
 
         function GetDatosFiscal(IdContrato){
             CatalogosFactory.GetDatosFiscalesList(IdContrato).then(function(data){
-                console.log(data);
                 var DatosFiscales = data.GetDatosFiscalesListResult[0];
                 vm.RazonSoc = DatosFiscales.RAZON_SOCIAL;
                 vm.RFC = DatosFiscales.RFC;
@@ -267,7 +261,6 @@ angular
 
         function GetDatosBancario(IdContrato){
             CatalogosFactory.GetRELCLIBANCOList(IdContrato).then(function(data){
-                console.log(data);
                 var DatosBancariosL = data.GetRELCLIBANCOListResult;
                 if(DatosBancariosL.length > 0){
                     vm.UpdateDB = true;
@@ -275,13 +268,17 @@ angular
                     vm.UpdateDB = false;
                 }
                 var DatosBancarios = DatosBancariosL[0];
+                var P1 = String(DatosBancarios.VENCIMIENTO[0]) + String(DatosBancarios.VENCIMIENTO[1]);
+                var P2 = String(DatosBancarios.VENCIMIENTO[3]) + String(DatosBancarios.VENCIMIENTO[4]);
+                var FechaVen = String(P1) + String(P2);
                 vm.IdBanco = DatosBancarios.CLV_BANCO;
                 vm.Titular = DatosBancarios.NOMBRE;
                 vm.NumTarjeta = DatosBancarios.CUENTA_BANCO;
                 vm.CodigoSeg = DatosBancarios.CODIGOSEGURIDAD;
-                vm.FechaVen = DatosBancarios.VENCIMIENTO;
+                vm.NumTarjetaC = DatosBancarios.CUENTA_BANCO;
+                vm.CodigoSegC = DatosBancarios.CODIGOSEGURIDAD;
+                vm.FechaVen = FechaVen;
                 vm.NombreTipoCuenta = DatosBancarios.TIPO_CUENTA;
-                console.log(vm.FechaVen);
                 for(var b = 0; vm.TipoCuentaList.length > b; b++){
                     if(vm.TipoCuentaList[b].Nombre = vm.NombreTipoCuenta){
                         vm.TipoCuenta = vm.TipoCuentaList[b];
@@ -296,8 +293,12 @@ angular
         }
 
         function GetReferenciasPersonales(IdContrato){
-            CatalogosFactory.GetReferenciaClienteL(IdContrato).then(function(data){
-                vm.RefPerList = data.GetReferenciaClienteLResult;
+            var ObjRef = {
+                'contrato': IdContrato,
+                'tipo': 'C'
+            };
+            CatalogosFactory.GettblReferenciasClietesList(ObjRef).then(function(data){
+                vm.RefPerList = data.GettblReferenciasClietesListResult;
                 if (vm.RefPerList.length == 0) {
 					vm.SinRegistros = true;
 					vm.ConRegistros = false;
@@ -309,10 +310,24 @@ angular
         }
 
         function GetNotas(IdContrato){
-            CatalogosFactory.GetDeepListadoNotas(IdContrato).then(function(data){
-                var DatosNotas = data.GetDeepListadoNotasResult;
-                vm.Observaciones = DatosNotas.Observacion;
-                vm.Notas = DatosNotas.DescripcionRobo;
+            CatalogosFactory.GetDeepRELCLIENTEOBS(IdContrato).then(function(data){
+                var DataObser = data.GetDeepRELCLIENTEOBSResult;
+                vm.Observaciones = DataObser.Obs;
+                if(DataObser.Obs != null){
+                    vm.UpdateObs = true;
+                }else{
+                    vm.UpdateObs = false;
+                }
+            });
+
+            CatalogosFactory.GetDeepRoboDeSeñal_New(IdContrato).then(function(data){
+                var DataNota = data.GetDeepRoboDeSeñal_NewResult;
+                if(DataNota != null){
+                    vm.Notas = DataNota.Descripcion;
+                    vm.UpdateNot = true;
+                }else{
+                    vm.UpdateNot = false;
+                }
             });
         }
 
@@ -335,9 +350,7 @@ angular
                     "FAX_RS" : vm.Fax,
                     "Email" : vm.EmailDF
                 };
-                console.log(objDatosFiscales);
                 CatalogosFactory.AddDatosFiscales(objDatosFiscales).then(function(data){
-                    console.log(data);
                     var DatosFiscales = data.AddDatosFiscalesResult;
                     if(DatosFiscales == -1){
                         ngNotify.set('CORRECTO, se guardaron datos fiscales.', 'success');
@@ -354,7 +367,6 @@ angular
         function AddDatosBancarios(){
             if(vm.IdContrato != undefined){
                 var FechaVen = String(vm.FechaVen[0]) + String(vm.FechaVen[1]) + '/' + String(vm.FechaVen[2]) + String(vm.FechaVen[3]);
-                console.log(FechaVen);
                 var objRELCLIBANCO = {
                     'Contrato': vm.IdContrato,
                     'CLV_BANCO': vm.Banco.IdBanco,
@@ -366,7 +378,6 @@ angular
                 };
                 if(vm.UpdateDB == false){
                     CatalogosFactory.AddRELCLIBANCO(objRELCLIBANCO).then(function(data){
-                        console.log(data);
                         if(data.AddRELCLIBANCOResult == 1){
                             ngNotify.set('CORRECTO, se guardaron datos bancarios.', 'success');
                             GetDatosBancario(vm.IdContrato);
@@ -376,7 +387,6 @@ angular
                     });
                 }else if(vm.UpdateDB == true){
                     CatalogosFactory.UpdateRELCLIBANCO(objRELCLIBANCO).then(function(data){
-                        console.log(data);
                         if(data.UpdateRELCLIBANCOResult == 1){
                             ngNotify.set('CORRECTO, se guardaron datos bancarios.', 'success');
                             GetDatosBancario(vm.IdContrato);
@@ -393,17 +403,23 @@ angular
 
         function AddRefPersonales(){
             if(vm.IdContrato != undefined){
-                var ObjCliente = {};
-                ObjCliente.IdContrato = vm.IdContrato;
-                ObjCliente.NombreRef = vm.NombreRef;
-                ObjCliente.DireccionRef = vm.DireccionRef;
-                ObjCliente.EmailRef = vm.EmailRef;
-                ObjCliente.TelefonoRef = vm.TelefonoRef;
-                ObjCliente.OpcionProspecto = 1;
-                CatalogosFactory.AddReferenciaClienteL(ObjCliente).then(function(data){
-                    console.log(data);
-                    GetReferenciasPersonales(vm.IdContrato);
-                    ngNotify.set('CORRECTO, se guardó referencia personal.', 'success');
+                var objtblReferenciasClietes = {
+                    'contrato': vm.IdContrato,
+                    'nombre': vm.NombreRef,
+                    'direccion': vm.DireccionRef,
+                    'email': vm.EmailRef,
+                    'telefono': vm.TelefonoRef,
+                    'id_referencia': 0,
+                    'op': 0,
+                    'tipo': 'C'
+                };
+                CatalogosFactory.AddtblReferenciasClietes(objtblReferenciasClietes).then(function(data){
+                    if(data.AddtblReferenciasClietesResult == -1){
+                        ngNotify.set('CORRECTO, se guardó la referencia personal.', 'success');
+                        GetReferenciasPersonales(vm.IdContrato);
+                    }else{
+                        ngNotify.set('ERROR, al guardar la referencia personal.', 'warn');
+                    }
                 });
             }else{
                 ngNotify.set('Aun no se han registrado los datos personales.', 'warn');
@@ -458,15 +474,49 @@ angular
 
         function AddNotas(){
              if(vm.IdContrato != undefined){
-                var ObjCliente = {};
-                ObjCliente.IdContrato = vm.IdContrato;
-                ObjCliente.Observaciones = vm.Observaciones;
-                ObjCliente.Notas = vm.Notas;
-                CatalogosFactory.AddNotasClienteL(ObjCliente).then(function(data){
-                    console.log(data);
-                    GetNotas(vm.IdContrato);
-                    ngNotify.set('CORRECTO, se guardaron notas.', 'success');
-                });
+                var objRELCLIENTEOBS = {
+                    'Contrato': vm.IdContrato,
+                    'Obs': vm.Observaciones
+                };
+                var objRoboDeSeñal_New = {
+                    'Contrato': vm.IdContrato,
+                    'Descripcion': vm.Notas
+                };
+                if(vm.UpdateObs == false && vm.UpdateNot == false){
+                   CatalogosFactory.AddRELCLIENTEOBS(objRELCLIENTEOBS).then(function(data){
+                        if(data.AddRELCLIENTEOBSResult == -1){
+                            CatalogosFactory.AddRoboDeSeñal_New(objRoboDeSeñal_New).then(function(data){
+                                if(data.AddRoboDeSeñal_NewResult == -1){
+                                    ngNotify.set('CORRECTO, se guardó observaciones y notas.', 'success');
+                                    GetNotas(vm.IdContrato);;
+                                }else{
+                                    ngNotify.set('ERROR, al guardar observaciones y notas.', 'warn');
+                                    GetNotas(vm.IdContrato);
+                                }
+                            });
+                        }else{
+                            ngNotify.set('ERROR, al guardar observaciones y notas.', 'warn');
+                            GetNotas(vm.IdContrato);
+                        }
+                    });
+                }else if(vm.UpdateObs == true && vm.UpdateNot == true){
+                    CatalogosFactory.UpdateRELCLIENTEOBS(objRELCLIENTEOBS).then(function(data){
+                        if(data.UpdateRELCLIENTEOBSResult == -1){
+                            CatalogosFactory.UpdateRoboDeSeñal_New(objRoboDeSeñal_New).then(function(data){
+                                if(data.UpdateRoboDeSeñal_NewResult == -1){
+                                    ngNotify.set('CORRECTO, se guardó observaciones y notas.', 'success');
+                                    GetNotas(vm.IdContrato);
+                                }else{
+                                    ngNotify.set('ERROR, al guardar observaciones y notas.', 'warn');
+                                    GetNotas(vm.IdContrato);
+                                }
+                            });
+                        }else{
+                            ngNotify.set('ERROR, al guardar observaciones y notas.', 'warn');
+                            GetNotas(vm.IdContrato);
+                        }
+                    });
+                }
             }else{
                 ngNotify.set('Aun no se han registrado los datos personales.', 'warn');
             }

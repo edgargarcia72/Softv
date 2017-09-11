@@ -5,19 +5,26 @@ angular
     .controller('ModalEditarRefClienteCtrl', function($uibModalInstance, $uibModal, ObjRefCliente, CatalogosFactory, $state, $rootScope, ngNotify){
 
         function UpdateRefPersonal(){
-            var ObjCliente = {};
-            ObjCliente.DireccionRef = vm.DireccionRef;
-            ObjCliente.EmailRef = vm.EmailRef;
-            ObjCliente.IdContrato = vm.ObjRefCliente.IdContrato;
-            ObjCliente.IdReferencia = vm.ObjRefCliente.IdReferencia;
-            ObjCliente.NombreRef = vm.NombreRef;
-            ObjCliente.OpcionProspecto = vm.ObjRefCliente.OpcionProspecto;
-            ObjCliente.TelefonoRef = vm.TelefonoRef;
-            CatalogosFactory.UpdateReferencia(ObjCliente).then(function(data){
-                console.log(data);
-                ngNotify.set('CORRECTO, se guardó referencia personal.', 'success');
-                $rootScope.$emit('LoadRefPersonal', ObjCliente.IdContrato);
-                cancel();
+            var objtblReferenciasClietes = {
+                'contrato': vm.IdContrato,
+                'nombre': vm.NombreRef,
+                'direccion': vm.DireccionRef,
+                'email': vm.EmailRef,
+                'telefono': vm.TelefonoRef,
+                'id_referencia': vm.IdReferencia,
+                'op': 1,
+                'tipo': 'C'
+            };
+            CatalogosFactory.UpdatetblReferenciasClietes(objtblReferenciasClietes).then(function(data){
+                if(data.UpdatetblReferenciasClietesResult == -1){
+                    ngNotify.set('CORRECTO, se guardó la referencia personal.', 'success');
+                    $rootScope.$emit('LoadRefPersonal', vm.IdContrato);
+                    cancel();
+                }else{
+                    ngNotify.set('ERROR, al guardar la referencia personal.', 'warn');
+                    $rootScope.$emit('LoadRefPersonal', vm.IdContrato);
+                    cancel();
+                }
             });
         }
 
@@ -26,11 +33,12 @@ angular
         }
 
         var vm = this;
-        vm.ObjRefCliente = ObjRefCliente;
-        vm.NombreRef = ObjRefCliente.Nombre;
-        vm.TelefonoRef = ObjRefCliente.Telefono;
-        vm.EmailRef = ObjRefCliente.Email;
-        vm.DireccionRef = ObjRefCliente.Direccion;
+        vm.IdReferencia = ObjRefCliente.id_referencia;
+        vm.IdContrato = ObjRefCliente.contrato;
+        vm.NombreRef = ObjRefCliente.nombre;
+        vm.TelefonoRef = ObjRefCliente.telefono;
+        vm.EmailRef = ObjRefCliente.email;
+        vm.DireccionRef = ObjRefCliente.direccion;
         vm.cancel = cancel;
         vm.UpdateRefPersonal = UpdateRefPersonal;
         

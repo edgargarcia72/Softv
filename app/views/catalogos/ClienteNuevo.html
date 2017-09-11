@@ -32,10 +32,10 @@
         <div class="panel-group" id="accordion3" ng-show="$ctrl.ShowAccord">
 			<div class="card panel">
                 <div class="card-head card-head-xs collapsed" data-toggle="collapse" data-parent="#accordion3" data-target="#accordion3-1" aria-expanded="false">
-					<header ng-if="$ctrl.NombreAdi != null && $ctrl.SegundoApe != null"><i class="fa fa-user"></i> {{ $ctrl.Nombre + ' ' + $ctrl.NombreAdi + ' ' + $ctrl.PrimerApe + ' ' + $ctrl.SegundoApe + ' ' + 'Contrato: ' + $ctrl.IdCliente }}</header>
-                    <header ng-if="$ctrl.NombreAdi == null && $ctrl.SegundoApe != null"><i class="fa fa-user"></i> {{ $ctrl.Nombre + ' ' + $ctrl.PrimerApe + ' ' + $ctrl.SegundoApe + ' ' + 'Contrato: ' + $ctrl.IdCliente }}</header>
-                    <header ng-if="$ctrl.NombreAdi != null && $ctrl.SegundoApe == null"><i class="fa fa-user"></i> {{ $ctrl.Nombre + ' ' + $ctrl.NombreAdi + ' ' + $ctrl.PrimerApe + ' ' + 'Contrato: ' + $ctrl.IdCliente }}</header>
-                    <header ng-if="$ctrl.NombreAdi == null && $ctrl.SegundoApe == null"><i class="fa fa-user"></i> {{ $ctrl.Nombre + ' ' + $ctrl.PrimerApe + ' ' + 'Contrato: ' + $ctrl.IdCliente }}</header>
+					<header ng-if="$ctrl.NombreAdi != null && $ctrl.SegundoApe != null"><i class="fa fa-user"></i> {{ $ctrl.Nombre + ' ' + $ctrl.NombreAdi + ' ' + $ctrl.PrimerApe + ' ' + $ctrl.SegundoApe + ', ' + 'Contrato: ' + $ctrl.IdCliente }}</header>
+                    <header ng-if="$ctrl.NombreAdi == null && $ctrl.SegundoApe != null"><i class="fa fa-user"></i> {{ $ctrl.Nombre + ' ' + $ctrl.PrimerApe + ' ' + $ctrl.SegundoApe + ', ' + 'Contrato: ' + $ctrl.IdCliente }}</header>
+                    <header ng-if="$ctrl.NombreAdi != null && $ctrl.SegundoApe == null"><i class="fa fa-user"></i> {{ $ctrl.Nombre + ' ' + $ctrl.NombreAdi + ' ' + $ctrl.PrimerApe + ', ' + 'Contrato: ' + $ctrl.IdCliente }}</header>
+                    <header ng-if="$ctrl.NombreAdi == null && $ctrl.SegundoApe == null"><i class="fa fa-user"></i> {{ $ctrl.Nombre + ' ' + $ctrl.PrimerApe + ', ' + 'Contrato: ' + $ctrl.IdCliente }}</header>
 					<div class="tools">
 						<a class="btn btn-icon-toggle"><i class="fa fa-angle-down"></i></a>
 					</div>
@@ -44,13 +44,15 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <p><b>Plaza: </b>{{ $ctrl.NombrePlaza }}</p>
                                 </div>
+                                <!--
                                 <div class="col-md-4">
                                     <p><b>Periodo: </b>{{ $ctrl.NombrePeriodo }}</p>
                                 </div>
-                                <div class="col-md-4">
+                                -->
+                                <div class="col-md-6">
                                     <p><b>Tipo de suscriptor: </b>{{ $ctrl.NombreTipoCobro }}</p>
                                 </div>
                                 <div class="col-md-3">
@@ -296,7 +298,7 @@
                                 <input type="text" name="InpRazonSoc" class="form-control input-sm" ng-model="$ctrl.RazonSoc" validate-on="dirty" required required-message="'Obligatorio'">
                             </div>
                             <div class="col-md-3">
-                                <input type="text" name="InpRFC" class="form-control input-sm" ng-model="$ctrl.RFC" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="13" ng-pattern="$ctrl.ValidateRFC" placeholder="AAAA1111111AAA" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Error, Ingresa RFC válido.'">
+                                <input type="text" name="InpRFC" class="form-control input-sm" ng-model="$ctrl.RFC" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="13" ng-pattern="$ctrl.ValidateRFC" placeholder="AAAA111111AAA" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Error, Ingresa RFC válido.'">
                             </div>
                             <div class="col-md-3">
                                 <input type="text" name="InpCURP" class="form-control input-sm" ng-model="$ctrl.CURP" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="18" ng-pattern="/^[A-Z]{4}\d{6}[A-Z]{6}\d{2}$/" placeholder="AAAA111111AAAAAA11" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Error, Ingresa CURP válido.'">
@@ -381,7 +383,7 @@
                                 <input type="text" name="InpTelefonoDF" class="form-control input-sm" ng-model="$ctrl.TelefonoDF" maxlength="10" ng-pattern="/^\d{10}/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 10 dígitos.'">
                             </div>
                             <div class="col-md-3">
-                                <input type="text" name="InpFax" class="form-control input-sm" ng-model="$ctrl.Fax" maxlength="10" ng-pattern="/^[A-Z]|[a-z]|\d$/" validator="$ctrl.Fax.length >= 7" validate-on="dirty" invalid-message="'Inválido, Ingresa mínimo 7 dígitos.'">
+                                <input type="text" name="InpFax" class="form-control input-sm" ng-model="$ctrl.Fax" maxlength="10" ng-pattern="/^[0-9]+$/" validator="$ctrl.Fax.length >= 7" validate-on="dirty" invalid-message="'Inválido, Ingresa mínimo 7 dígitos.'">
                             </div>
                             <div class="col-md-3">
                                 <input type="email" name="InpEmailDF" class="form-control input-sm" ng-model="$ctrl.EmailDF" ng-pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa un correo válido'">
@@ -431,13 +433,13 @@
                                 <p><small><b>Dígitos en la tarjeta:</b></small></p>
                             </div>
                              <div class="col-md-3">
-                                <p ng-show="(FormDatosBancarios.InpNumTarjeta.$dirty)"><small><b>Confirmar dígitos en la tarjeta:</b></small></p>
+                                <p ng-show="(FormDatosBancarios.InpNumTarjeta.$dirty || $ctrl.NumTarjeta != undefined)"><small><b>Confirmar dígitos en la tarjeta:</b></small></p>
                             </div>
                             <div class="col-md-3">
                                 <p><small><b>Código seguridad:</b></small></p>
                             </div>
                             <div class="col-md-3">
-                                <p ng-show="(FormDatosBancarios.InpCodigoSeg.$dirty)"><small><b>Confirmar código seguridad:</b></small></p>
+                                <p ng-show="(FormDatosBancarios.InpCodigoSeg.$dirty || $ctrl.CodigoSeg != undefined)"><small><b>Confirmar código seguridad:</b></small></p>
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -445,13 +447,13 @@
                                 <input name="InpNumTarjeta" type="text" class="form-control input-sm" ng-model="$ctrl.NumTarjeta" maxlength="16" ng-pattern="/^[A-Z]|[a-z]|\d$/" validator="$ctrl.NumTarjeta.length >= 15" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 15 o 16 dígitos.'">
                             </div>
                             <div class="col-md-3">
-                                <input name="InpNumTarjetaC" type="text" class="form-control input-sm" ng-model="$ctrl.NumTarjetaC" maxlength="16" ng-show="(FormDatosBancarios.InpNumTarjeta.$dirty)" ng-pattern="/^[A-Z]|[a-z]|\d$/" validator="$ctrl.NumTarjetaC.length >= 15 && $ctrl.NumTarjeta == $ctrl.NumTarjetaC" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Debe ser igual al anterior.'">
+                                <input name="InpNumTarjetaC" type="text" class="form-control input-sm" ng-model="$ctrl.NumTarjetaC" maxlength="16" ng-show="(FormDatosBancarios.InpNumTarjeta.$dirty || $ctrl.NumTarjeta != undefined)" ng-pattern="/^[A-Z]|[a-z]|\d$/" validator="$ctrl.NumTarjetaC.length >= 15 && $ctrl.NumTarjeta == $ctrl.NumTarjetaC" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Debe ser igual al anterior.'">
                             </div>
                             <div class="col-md-3">
                                 <input name="InpCodigoSeg" type="password" class="form-control input-sm" ng-model="$ctrl.CodigoSeg" maxlength="4" ng-pattern="/^[A-Z]|[a-z]|\d$/" validator="$ctrl.CodigoSeg.length >= 3" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa mínimo 3 dígitos.'">
                             </div>
                             <div class="col-md-3">
-                                <input name="InpCodigoSegC" type="password" class="form-control input-sm" ng-model="$ctrl.CodigoSegC" maxlength="4" ng-show="(FormDatosBancarios.InpCodigoSeg.$dirty)" ng-pattern="/^[A-Z]|[a-z]|\d$/" validator="$ctrl.CodigoSegC.length >= 3 && $ctrl.CodigoSeg == $ctrl.CodigoSegC" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Debe ser igual al anterior.'">
+                                <input name="InpCodigoSegC" type="password" class="form-control input-sm" ng-model="$ctrl.CodigoSegC" maxlength="4" ng-show="(FormDatosBancarios.InpCodigoSeg.$dirty || $ctrl.CodigoSeg != undefined)" ng-pattern="/^[A-Z]|[a-z]|\d$/" validator="$ctrl.CodigoSegC.length >= 3 && $ctrl.CodigoSeg == $ctrl.CodigoSegC" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Debe ser igual al anterior.'">
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -482,7 +484,7 @@
                             -->
                             <div class="col-md-3">
                                 <!--<input name="InpYearVen" type="text" class="form-control input-sm" ng-model="$ctrl.YearVen" ui-mask="2099" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa mes y año.'">-->
-                                <input name="InpFechaVen" type="text" class="form-control input-sm" ng-model="$ctrl.FechaVen" ui-mask="99/99" validator="$ctrl.ValidateFechaVen($ctrl.FechaVen)" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa mes y año.'">
+                                <input name="InpFechaVen" type="text" class="form-control input-sm" ng-model="$ctrl.FechaVen" placeholder="MM/YY" ui-mask="99/99" validator="$ctrl.ValidateFechaVen($ctrl.FechaVen)" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa mes y año.'">
                             </div>
                             <div class="col-md-6">
                                 <select name="SlcTipoCuenta" class="form-control input-sm" ng-model="$ctrl.TipoCuenta" ng-options="TC.NOMBRE for TC in $ctrl.TipoCuentaList track by TC.NOMBRE" validate-on="dirty" required required-message="'Obligatorio'">
@@ -589,11 +591,11 @@
                                             <td class="text-center" colspan="7">SIN REGISTROS</td>
                                         </tr>
                                         <tr dir-paginate="X in $ctrl.RefPerList|itemsPerPage:7" ng-show="$ctrl.ConRegistros">
-                                            <td><small>{{ X.IdReferencia }}</small></td>
-                                            <td><small>{{ X.Nombre }}</small></td>
-                                            <td><small>{{ X.Direccion }}</small></td>
-                                            <td><small>{{ X.Telefono }}</small></td>
-                                            <td><small>{{ X.Email }}</small></td>
+                                            <td><small>{{ X.id_referencia }}</small></td>
+                                            <td><small>{{ X.nombre }}</small></td>
+                                            <td><small>{{ X.direccion }}</small></td>
+                                            <td><small>{{ X.telefono }}</small></td>
+                                            <td><small>{{ X.email }}</small></td>
                                             <td><button type="button" class="btn btn-warning btn-xs" ng-click="$ctrl.OpenEditRefPersonal(X)" title="Editar Referencia Personal"><i class="fa fa-pencil-square-o"></i> EDITAR</button></td>
                                             <td><button type="button" class="btn btn-danger btn-xs" ng-click="$ctrl.OpenDeleteRefPersonal(X)" title="Eliminar Referencia Personal"><i class="fa fa-trash"></i> ELIMINAR</button></td>
                                         </tr>
