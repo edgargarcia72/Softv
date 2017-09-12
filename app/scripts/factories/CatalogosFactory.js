@@ -7,6 +7,7 @@ angular
         var factory = {};
         var paths = {
             GetTipoClienteList_WebSoftvnew: '/TipoCliente/GetTipoClienteList_WebSoftvnew',
+            GetClientesFiltosNew: '/CLIENTES_New/GetClientesFiltosNew',
             GetCLIENTES_NewList: '/CLIENTES_New/GetCLIENTES_NewList',
             GetConsultaClientesList: '/CLIENTES_New/GetConsultaClientesList',
             GetMuestraCiudadesEstadoList: '/MuestraCiudadesEstado/GetMuestraCiudadesEstadoList',
@@ -30,13 +31,14 @@ angular
             AddRoboDeSeñal_New: '/RoboDeSeñal_New/AddRoboDeSeñal_New',
             GetDeepRoboDeSeñal_New: '/RoboDeSeñal_New/GetDeepRoboDeSeñal_New',
             UpdateRoboDeSeñal_New: '/RoboDeSeñal_New/UpdateRoboDeSeñal_New',
-            GetClientes: '/Cliente/GetClientes',
             UpdateCLIENTES_New: '/CLIENTES_New/UpdateCLIENTES_New',
-            GetEstadoList2_web: '/Estado/GetEstadoList2_web',
+            GetEstados_NewList: '/Estados_New/GetEstados_NewList',
             GetMuestraEstadosCompaniaList: '/MuestraEstadosCompania/GetMuestraEstadosCompaniaList',
-            AddEstado2_web: '/Estado/AddEstado2_web',
-            UpdateEstado2_web: '/Estado/UpdateEstado2_web',
-            DeleteEstado2_web: '/Estado/DeleteEstado2_web',
+            GetValidaNomEdo: '/Estados_New/GetValidaNomEdo',
+            AddEstados_New: '/Estados_New/AddEstados_New',
+            GetDeepEstados_New: '/Estados_New/GetDeepEstados_New',
+            UpdateEstados_New: '/Estados_New/UpdateEstados_New',
+            DeleteEstados_New: '/Estados_New/DeleteEstados_New',
             GetMunicipioList: '/Municipio/GetMunicipioList',
             GetDeepMunicipio: '/Municipio/GetDeepMunicipio',
             AddRelEstMunL: '/Municipio/AddRelEstMunL',
@@ -47,10 +49,11 @@ angular
             GetDeepLocalidad: '/localidad/GetDeepLocalidad',
             UpdateRellocalidadL: '/localidad/UpdateRellocalidadL',
             DeleteLocalidad: '/Localidad/DeleteLocalidad',
-            GetTipoColoniaList: '/TipoColonia/GetTipoColoniaList',
-            AddTipoColonia: '/TipoColonia/AddTipoColonia',
-            UpdateTipoColonia: '/TipoColonia/UpdateTipoColonia',
-            DeleteTipoColonia: '/TipoColonia/DeleteTipoColonia',
+            GetTipo_Colonias1_NewList: '/Tipo_Colonias1_New/GetTipo_Colonias1_NewList',
+            AddTipo_Colonias1_New: '/Tipo_Colonias1_New/AddTipo_Colonias1_New',
+            GetDeepTipo_Colonias1_New: '/Tipo_Colonias1_New/GetDeepTipo_Colonias1_New',
+            UpdateTipo_Colonias1_New: '/Tipo_Colonias1_New/UpdateTipo_Colonias1_New',
+            DeleteTipo_Colonias1_New: '/Tipo_Colonias1_New/DeleteTipo_Colonias1_New',
             GetCalleList: '/Calle/GetCalleList',
             AddCalleL: '/Calle/AddCalleL',
             GetDeepCalle: '/Calle/GetDeepCalle',
@@ -117,11 +120,12 @@ angular
             });
             return deferred.promise;
         };
-        
-        factory.GetEstadoList2_web = function(){
+
+        factory.GetEstados_NewList = function () {
             var deferred = $q.defer();
-            var config = { headers: {'Authorization': $localStorage.currentUser.token}};
-            $http.get(globalService.getUrl() + paths.GetEstadoList2_web, config).then(function (response) {
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = {'opcion': 0, 'Nombre': ''};
+            $http.post(globalService.getUrl() + paths.GetEstados_NewList, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);
@@ -391,11 +395,11 @@ angular
             return deferred.promise;
         };
 
-        factory.GetClientes = function (lstCliente) {
+        factory.GetClientesFiltosNew = function (lstCliente) {
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
             var Parametros = {'lstCliente': lstCliente};
-            $http.post(globalService.getUrl() + paths.GetClientes, JSON.stringify(Parametros), config).then(function (response) {
+            $http.post(globalService.getUrl() + paths.GetClientesFiltosNew, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);
@@ -427,11 +431,11 @@ angular
             return deferred.promise;
         };
 
-        factory.AddEstado2_web = function (EstadoObj) {
+        factory.AddEstados_New = function (objEstados_New) {
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
-            var Parametros = {'objEstado': {Nombre: EstadoObj.Estado}};
-            $http.post(globalService.getUrl() + paths.AddEstado2_web, JSON.stringify(Parametros), config).then(function (response) {
+            var Parametros = {'objEstados_New': objEstados_New};
+            $http.post(globalService.getUrl() + paths.AddEstados_New, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);
@@ -439,16 +443,11 @@ angular
             return deferred.promise;
         };
 
-        factory.UpdateEstado2_web = function (EstadoObj) {
+        factory.GetValidaNomEdo = function (ObjEstado) {
             var deferred = $q.defer();
             var config = { headers: {'Authorization': $localStorage.currentUser.token} };
-            var Parametros = {
-                'objEstado': {
-                    IdEstado: EstadoObj.IdEstado,
-                    Nombre: EstadoObj.Estado
-                }
-            };
-            $http.post(globalService.getUrl() + paths.UpdateEstado2_web, JSON.stringify(Parametros), config).then(function (response) {
+            var Parametros = ObjEstado;
+            $http.post(globalService.getUrl() + paths.GetValidaNomEdo, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);
@@ -456,11 +455,35 @@ angular
             return deferred.promise;
         };
 
-        factory.DeleteEstado2_web = function (IdEstado) {
+        factory.GetDeepEstados_New = function (Clv_Estado) {
+            var deferred = $q.defer();
+            var config = { headers: {'Authorization': $localStorage.currentUser.token} };
+            var Parametros = {'Clv_Estado': Clv_Estado};
+            $http.post(globalService.getUrl() + paths.GetDeepEstados_New, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.UpdateEstados_New = function (objEstados_New) {
+            var deferred = $q.defer();
+            var config = { headers: {'Authorization': $localStorage.currentUser.token} };
+            var Parametros = {'objEstados_New': objEstados_New};
+            $http.post(globalService.getUrl() + paths.UpdateEstados_New, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.DeleteEstados_New = function (objEstado) {
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
-            var Parametros = {'IdEstado': IdEstado};
-            $http.post(globalService.getUrl() + paths.DeleteEstado2_web, JSON.stringify(Parametros), config).then(function (response) {
+            var Parametros = objEstado;
+            $http.post(globalService.getUrl() + paths.DeleteEstados_New, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);
@@ -598,10 +621,10 @@ angular
             return deferred.promise;
         };
 
-        factory.GetTipoColoniaList = function(){
+        factory.GetTipo_Colonias1_NewList = function(){
             var deferred = $q.defer();
             var config = { headers: {'Authorization': $localStorage.currentUser.token} };
-            $http.get(globalService.getUrl() + paths.GetTipoColoniaList, config).then(function (response) {
+            $http.get(globalService.getUrl() + paths.GetTipo_Colonias1_NewList, config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);
@@ -609,11 +632,11 @@ angular
             return deferred.promise;
         };
 
-        factory.AddTipoColonia = function (TipoColonia) {
+        factory.AddTipo_Colonias1_New = function (objTipo_Colonias1_New) {
             var deferred = $q.defer();
             var config = { headers: {'Authorization': $localStorage.currentUser.token} };
-            var Parametros = {'objTipoColonia': {Nombre: TipoColonia}};
-            $http.post(globalService.getUrl() + paths.AddTipoColonia, JSON.stringify(Parametros), config).then(function (response) {
+            var Parametros = {'objTipo_Colonias1_New': objTipo_Colonias1_New};
+            $http.post(globalService.getUrl() + paths.AddTipo_Colonias1_New, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);
@@ -621,16 +644,11 @@ angular
             return deferred.promise;
         };
 
-        factory.UpdateTipoColonia = function (TipoColoniaObj) {
+        factory.GetDeepTipo_Colonias1_New = function (Clave) {
             var deferred = $q.defer();
             var config = { headers: {'Authorization': $localStorage.currentUser.token} };
-            var Parametros = {
-                'objTipoColonia': {
-                    IdTipoColonia: TipoColoniaObj.IdTipoColonia,
-                    Nombre: TipoColoniaObj.TipoColonia
-                }
-            };
-            $http.post(globalService.getUrl() + paths.UpdateTipoColonia, JSON.stringify(Parametros), config).then(function (response) {
+            var Parametros = {Clave: Clave};
+            $http.post(globalService.getUrl() + paths.GetDeepTipo_Colonias1_New, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);
@@ -638,11 +656,23 @@ angular
             return deferred.promise;
         };
 
-        factory.DeleteTipoColonia = function (IdTipoColonia) {
+        factory.UpdateTipo_Colonias1_New = function (objTipo_Colonias1_New) {
             var deferred = $q.defer();
             var config = { headers: {'Authorization': $localStorage.currentUser.token} };
-            var Parametros = {IdTipoColonia: IdTipoColonia};
-            $http.post(globalService.getUrl() + paths.DeleteTipoColonia, JSON.stringify(Parametros), config).then(function (response) {
+            var Parametros = {'objTipo_Colonias1_New': objTipo_Colonias1_New};
+            $http.post(globalService.getUrl() + paths.UpdateTipo_Colonias1_New, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.DeleteTipo_Colonias1_New = function (Clave) {
+            var deferred = $q.defer();
+            var config = { headers: {'Authorization': $localStorage.currentUser.token} };
+            var Parametros = {Clave: Clave};
+            $http.post(globalService.getUrl() + paths.DeleteTipo_Colonias1_New, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);

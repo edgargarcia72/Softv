@@ -2,26 +2,32 @@
 
 angular
     .module('softvApp')
-    .controller('ClienteEditarCtrl', function(CatalogosFactory, ngNotify, $uibModal, $stateParams, $rootScope, $localStorage){
+    .controller('ClienteEditarCtrl', function(CatalogosFactory, ngNotify, $uibModal, $state, $stateParams, $rootScope, $localStorage){
 
         function initData(){
-
-            CatalogosFactory.GetPlazaList($localStorage.currentUser.idUsuario).then(function(data){
-                vm.PlazaList = data.GetPlazaListResult;
-                CatalogosFactory.GetTipoClienteList_WebSoftvnew().then(function(data){
-                    vm.TipoCobroList = data.GetTipoClienteList_WebSoftvnewResult;
-                    CatalogosFactory.GetBancoList().then(function(data){
-                        vm.BancoList = data.GetBancoListResult;
-                        CatalogosFactory.GetMUESTRATIPOSDECUENTAList().then(function(data){
-                            vm.TipoCuentaList = data.GetMUESTRATIPOSDECUENTAListResult;
-                            GetDatosClientes(vm.IdContrato);
-                            GetDatosFiscal(vm.IdContrato);
-                            GetDatosBancario(vm.IdContrato);
-                            GetReferenciasPersonales(vm.IdContrato);
-                            GetNotas(vm.IdContrato);
+            CatalogosFactory.GetConsultaClientesList(vm.IdContrato).then(function(data){
+                if(data.GetConsultaClientesListResult.length > 0){
+                    CatalogosFactory.GetPlazaList($localStorage.currentUser.idUsuario).then(function(data){
+                        vm.PlazaList = data.GetPlazaListResult;
+                        CatalogosFactory.GetTipoClienteList_WebSoftvnew().then(function(data){
+                            vm.TipoCobroList = data.GetTipoClienteList_WebSoftvnewResult;
+                            CatalogosFactory.GetBancoList().then(function(data){
+                                vm.BancoList = data.GetBancoListResult;
+                                CatalogosFactory.GetMUESTRATIPOSDECUENTAList().then(function(data){
+                                    vm.TipoCuentaList = data.GetMUESTRATIPOSDECUENTAListResult;
+                                    GetDatosClientes(vm.IdContrato);
+                                    GetDatosFiscal(vm.IdContrato);
+                                    GetDatosBancario(vm.IdContrato);
+                                    GetReferenciasPersonales(vm.IdContrato);
+                                    GetNotas(vm.IdContrato);
+                                });
+                            });
                         });
                     });
-                });
+                }else{
+                    ngNotify.set('ERROR, No se encontró el contrato seleccionado.', 'warn');
+                    $state.go('home.catalogos.clientes');
+                }
             });
         }
 

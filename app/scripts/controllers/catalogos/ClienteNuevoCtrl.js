@@ -64,18 +64,14 @@ angular
             if(vm.Plaza != undefined){
                 CatalogosFactory.GetMuestraEstadosCompaniaList(vm.Plaza.id_compania).then(function(data){
                     vm.EstadoList = data.GetMuestraEstadosCompaniaListResult;
-                    vm.CiudadMunicipioList = null;
-                    vm.LocalidadList = null;
-                    vm.ColoniaList = null;
-                    vm.CalleList = null;
                 });
             }else{
                 vm.EstadoList = null;
-                vm.CiudadMunicipioList = null;
-                vm.LocalidadList = null;
-                vm.ColoniaList = null;
-                vm.CalleList = null;
             }
+            vm.CiudadMunicipioList = null;
+            vm.LocalidadList = null;
+            vm.ColoniaList = null;
+            vm.CalleList = null;
         }
 
         function GetCiudadMunicipio(){
@@ -86,42 +82,36 @@ angular
                 };
                 CatalogosFactory.GetMuestraCiudadesEstadoList(RelEstMun).then(function(data){
                     vm.CiudadMunicipioList = data.GetMuestraCiudadesEstadoListResult;
-                    vm.LocalidadList = null;
-                    vm.ColoniaList = null;
-                    vm.CalleList = null;
                 });
             }else{
                 vm.CiudadMunicipioList = null;
-                vm.LocalidadList = null;
-                vm.ColoniaList = null;
-                vm.CalleList = null;
             }
+            vm.LocalidadList = null;
+            vm.ColoniaList = null;
+            vm.CalleList = null;
         }
 
         function GetLocalidad(){
             if(vm.CiuMun != undefined){
                 CatalogosFactory.GetMuestraLocalidadCiudadList(vm.CiuMun.Clv_Ciudad).then(function(data){
                     vm.LocalidadList = data.GetMuestraLocalidadCiudadListResult;
-                    vm.ColoniaList = null;
-                    vm.CalleList = null;
                 });
             }else{
                 vm.LocalidadList = null;
-                vm.ColoniaList = null;
-                vm.CalleList = null;
             }
+            vm.ColoniaList = null;
+            vm.CalleList = null;
         }
 
         function GetColonia(){
             if(vm.Localidad != undefined){
                 CatalogosFactory.GetMuestraColoniaLocalidadList(vm.Localidad.Clv_Localidad).then(function(data){
                     vm.ColoniaList = data.GetMuestraColoniaLocalidadListResult;
-                    vm.CalleList = null;
                 });
             }else{
                 vm.ColoniaList = null;
-                vm.CalleList = null;
             }
+            vm.CalleList = null;
         }
 
         function GetCalle(){
