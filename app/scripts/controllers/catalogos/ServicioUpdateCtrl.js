@@ -3,6 +3,14 @@ angular
     .module('softvApp')
     .controller('ServicioUpdateCtrl', function(){
 
+
+        
+
+
+
+
+
         var vm = this;
-        vm.Titulo = 'Servicio Editar';
+        vm.Titulo = 'Servicio Editar';  
+        
     });

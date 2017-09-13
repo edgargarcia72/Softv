@@ -2,82 +2,46 @@
 
 angular
     .module('softvApp')
-    .controller('SucursalesCtrl', function(CatalogosFactory, $uibModal){
+    .controller('SucursalesCtrl', function (CatalogosFactory, atencionFactory) {
 
-        function initData(){
-            CatalogosFactory.GetMunicipioList().then(function(data){
-                vm.CiudadLista = data.GetMunicipioListResult;
-                if (vm.CiudadLista.length == 0) {
-					vm.SinRegistros = true;
-					vm.ConRegistros = false;
-				} else {
-					vm.SinRegistros = false;
-					vm.ConRegistros = true;
-				}
+        function initData() {
+
+
+            atencionFactory.getPlazas().then(function (data) {
+                console.log(data.GetMuestra_Compania_RelUsuarioListResult);
+                vm.plazas = data.GetMuestra_Compania_RelUsuarioListResult;
+               // vm.plaza = vm.plazas[0];
+               // buscar(2);
             });
+
         }
 
-        function OpenAddSucursal(){
-            var modalInstance = $uibModal.open({
-               // animation: true,
-                //ariaLabelledBy: 'modal-title',
-                //ariaDescribedBy: 'modal-body',
-                templateUrl: 'views/catalogos/SucursalForm.html',
-                controller: 'ModalSucursalFormCtrl',
-                controllerAs: 'ctrl',
-                backdrop: 'static',
-                keyboard: false,
-                class: 'modal-backdrop fade',
-                size: 'md'
-            });
+        function buscar(op) {
+            var OP = op;
+            var Clv_Sucursal = (vm.clave == undefined) ? 0 : vm.clave;
+            var Nombre = (vm.descripcion === null || vm.descripcion === '') ? '' : vm.descripcion;
+            var idcompania = (vm.Plaza == undefined) ? 0 : vm.Plaza.id_compania
+            CatalogosFactory.GetSucursalList(Clv_Sucursal, Nombre, OP, idcompania)
+                .then(function (data) {
+                    console.log(data);
+                     vm.SucursalList = data.GetSUCURSALESListResult;
+                    if (vm.SucursalList.length == 0) {
+                        vm.SinRegistros = true;
+                        vm.ConRegistros = false;
+                    } else {
+                        vm.SinRegistros = false;
+                        vm.ConRegistros = true;
+                    } 
+                });
+
         }
 
-        function OpenUpdateCiudad(IdMunicipio){
-            var IdMunicipio = IdMunicipio;
-            var modalInstance = $uibModal.open({
-                animation: true,
-                ariaLabelledBy: 'modal-title',
-                ariaDescribedBy: 'modal-body',
-                templateUrl: 'views/catalogos/ModalCiudadForm.html',
-                controller: 'ModalCiudadFormUpdateCtrl',
-                controllerAs: 'ctrl',
-                backdrop: 'static',
-                keyboard: false,
-                class: 'modal-backdrop fade',
-                size: 'md',
-                resolve: {
-                    IdMunicipio: function () {
-                        return IdMunicipio;
-                    }
-                }
-            });
-        }
 
-        function OpenDeleteCiudad(CiudadObj){
-            var CiudadObj = CiudadObj;
-            var modalInstance = $uibModal.open({
-                animation: true,
-                ariaLabelledBy: 'modal-title',
-                ariaDescribedBy: 'modal-body',
-                templateUrl: 'views/catalogos/ModalCiudadEliminar.html',
-                controller: 'ModalCiudadEliminarCtrl',
-                controllerAs: 'ctrl',
-                backdrop: 'static',
-                keyboard: false,
-                class: 'modal-backdrop fade',
-                size: 'sm',
-                resolve: {
-                    CiudadObj: function () {
-                        return CiudadObj;
-                    }
-                }
-            });
-        }
+
+
 
         var vm = this;
-        vm.OpenAddSucursal = OpenAddSucursal;
-        vm.OpenUpdateCiudad = OpenUpdateCiudad;
-        vm.OpenDeleteCiudad = OpenDeleteCiudad;
         initData();
-        
+        vm.buscar=buscar;
+
     });
