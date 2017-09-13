@@ -8,7 +8,7 @@ angular
         vm.servicios = data.GetMuestraTipSerPrincipal2ListResult;
         vm.selectedServicio = vm.servicios[0];
         MuestraTrabajos(vm.selectedServicio.Clv_TipSerPrincipal);
-        GetClasificacionProblemas();
+
       });
     }
 
@@ -33,6 +33,9 @@ angular
     function MuestraTrabajos(tipo) {
       atencionFactory.MuestraTrabajos(tipo).then(function (data) {
         vm.Trabajos = data.GetMUESTRATRABAJOSQUEJASListResult;
+        atencionFactory.GetClasificacionProblemas().then(function (data) {
+          vm.clasificacionProblemas = data.GetuspConsultaTblClasificacionProblemasListResult;
+        });
       });
     }
 
@@ -145,7 +148,7 @@ angular
       if (vm.GlobalContrato != null) {
         PreguntaAtencion(2);
       } else {
-       ModalClientes();
+        ModalClientes();
       }
     }
 
@@ -377,7 +380,7 @@ angular
 
 
     $rootScope.$on('verContratos', function () {
-      LimpiaInformacion();      
+      LimpiaInformacion();
       ModalClientes();
 
     });
@@ -483,4 +486,3 @@ angular
 
     LimpiaInformacion();
   });
-

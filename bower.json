@@ -28,7 +28,8 @@
     "angucomplete-alt": "^3.0.0",
     "angular-tree-control": "^0.2.28",
     "angularMultipleSelect": "angular-multiple-select#^1.1.2",
-    "angular-base64": "^2.0.5"
+    "angular-base64": "^2.0.5",
+    "angular-bootstrap-colorpicker": "^3.0.31"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0",
