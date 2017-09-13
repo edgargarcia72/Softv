@@ -1,7 +1,7 @@
 <form name="FormEstado" angular-validator-submit="ctrl.SaveEstado()" novalidate angular-validator autocomplete="off">
     <div class="modal-header">
         <button class="close" type="button" aria-label="close" ng-click="ctrl.cancel()">x</button>
-        <h4 class="modal-title"><i ng-class="ctrl.Icono"></i> {{ ctrl.Titulo }} </h4>
+        <h4 class="modal-title"><i ng-class="ctrl.Icono"></i> {{ ctrl.Titulo }} {{ ctrl.IdEstado }}</h4>
     </div>
     <div class="modal-body">
         <div class="row">
@@ -9,7 +9,7 @@
                 <p><b>Nombre del estado:</b></p>
             </div>
             <div class="col-md-12">
-                <input type="text" name="InpEstado" class="form-control input-sm" ng-model="ctrl.Estado" validate-on="dirty" required required-message="'Obligatorio'">
+                <input type="text" name="InpEstado" class="form-control input-sm" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" ng-model="ctrl.Estado" validate-on="dirty" required required-message="'Obligatorio'">
             </div>
         </div>
     </div>

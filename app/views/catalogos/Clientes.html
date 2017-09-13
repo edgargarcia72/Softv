@@ -40,19 +40,16 @@
                                 <form name="FormSearchContrato" angular-validator-submit="$ctrl.SearchContrato()" novalidate angular-validator autocomplete="off">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <p>Ingrese el número de contrato</p>
+                                            Ingrese el número de contrato
                                         </div>
                                         <div class="col-md-10">
                                             <input type="text" name="InpContrato" class="form-control input-sm" ng-model="$ctrl.Contrato" ng-pattern="/^\d{1,9}-\d{1,9}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa un contrato.'">
                                         </div>
-                                        <div class="col-md-2" style="text-align:left">
+                                        <div class="col-md-2" style="text-align:center">
                                             <button type="submit" class="btn btn-info btn-sm"><i class="fa fa-search"></i> Buscar</button>
                                         </div>
-                                        <div class="col-md-12">
-                                            <br>
-                                        </div>
                                         <div class="col-md-12 note">
-                                            <p><small>El número de contrato está formado por 2 grupos de números con un guion intermedio p.e. (1234-1)</small></p>
+                                            <small>El número de contrato está formado por 2 grupos de números con un guion intermedio p.e. (1234-1)</small>
                                         </div>
                                     </div>
                                 </form>
@@ -69,36 +66,36 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="col-md-3">
-                                                <p>Estado:</p>
+                                                Estado:
                                             </div>
                                             <div class="col-md-3">
-                                                <p>Ciudad:</p>
+                                                Ciudad:
                                             </div>
                                             <div class="col-md-3">
-                                                <p>Localidad:</p>
+                                                Localidad:
                                             </div>
                                             <div class="col-md-3">
-                                                <p>Colonia:</p>
+                                                Colonia:
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="col-md-3">
-                                                <select name="SltEstado" class="form-control input-sm" ng-model="$ctrl.Estado" ng-options="E.Nombre for E in $ctrl.EstadoList track by E.IdEstado" ng-change="$ctrl.GetCiudadMunicipio()" validate-on="dirty" required required-message="'Obligatorio'">
+                                                <select name="SltEstado" class="form-control input-sm" ng-model="$ctrl.Estado" ng-options="E.Nombre for E in $ctrl.EstadoList track by E.Clv_Estado" ng-change="$ctrl.GetCiudadMunicipio()" validate-on="dirty" required required-message="'Obligatorio'">
                                                     <option value="">Selecciona</option>
                                                 </select>
                                             </div>
                                             <div class="col-md-3">
-                                                <select name="CiuMun" class="form-control input-sm" ng-model="$ctrl.CiuMun" ng-options="CM.Municipio.Nombre for CM in $ctrl.CiudadMunicipioList track by CM.Municipio.IdMunicipio" ng-change="$ctrl.GetLocalidad()" validate-on="dirty" required required-message="'Obligatorio'">
+                                                <select name="CiuMun" class="form-control input-sm" ng-model="$ctrl.CiuMun" ng-options="CM.Nombre for CM in $ctrl.CiudadMunicipioList track by CM.Clv_Ciudad" ng-change="$ctrl.GetLocalidad()" validate-on="dirty" required required-message="'Obligatorio'">
                                                     <option value="">Selecciona</option>
                                                 </select>
                                             </div>
                                             <div class="col-md-3">
-                                                <select name="SltLocalida" class="form-control input-sm" ng-model="$ctrl.Localidad" ng-options="L.Localidad.Nombre for L in $ctrl.LocalidadList track by L.Localidad.IdLocalidad" ng-change="$ctrl.GetColonia()" validate-on="dirty" required required-message="'Obligatorio'">
+                                                <select name="SltLocalida" class="form-control input-sm" ng-model="$ctrl.Localidad" ng-options="L.NOMBRE for L in $ctrl.LocalidadList track by L.Clv_Localidad" ng-change="$ctrl.GetColonia()" validate-on="dirty" required required-message="'Obligatorio'">
                                                     <option value="">Selecciona</option>
                                                 </select>
                                             </div>
                                             <div class="col-md-3">
-                                                <select name="SltColonia" class="form-control input-sm" ng-model="$ctrl.Colonia" ng-options="C.Colonia.Nombre for C in $ctrl.ColoniaList track by C.Colonia.IdColonia" ng-change="$ctrl.GetCalle()" validate-on="dirty" required required-message="'Obligatorio'">
+                                                <select name="SltColonia" class="form-control input-sm" ng-model="$ctrl.Colonia" ng-options="C.Nombre for C in $ctrl.ColoniaList track by C.CLV_COLONIA" ng-change="$ctrl.GetCalle()" validate-on="dirty" required required-message="'Obligatorio'">
                                                     <option value="">Selecciona</option>
                                                 </select>
                                             </div>
@@ -108,21 +105,19 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="col-md-3">
-                                                <p>Calle:</p>
+                                                Calle:
                                             </div>
                                             <div class="col-md-3">
-                                                <p>Número:</p>
+                                                Número:
                                             </div>
                                             <div class="col-md-3">
-                                                <br>
                                             </div>
                                             <div class="col-md-3">
-                                                <br>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="col-md-3">
-                                                <select name="SltCalle" class="form-control input-sm" ng-model="$ctrl.Calle" ng-options="C.Calle.Nombre for C in $ctrl.CalleList track by C.Calle.IdCalle" validate-on="dirty" required required-message="'Obligatorio'">
+                                                <select name="SltCalle" class="form-control input-sm" ng-model="$ctrl.Calle" ng-options="C.Nombre for C in $ctrl.CalleList track by C.Clv_Calle" validate-on="dirty" required required-message="'Obligatorio'">
                                                     <option value="">Selecciona</option>
                                                 </select>
                                             </div>
@@ -131,16 +126,10 @@
                                             </div>
                                             <div class="col-md-3">
                                             </div>
-                                            <div class="col-md-3">
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <div class="col-md-12">
-                                            <div class="col-md-12" style="text-align:right">
+                                            <div class="col-md-3" style="text-align:center">
                                                 <button type="submit" class="btn btn-info btn-sm"><i class="fa fa-search"></i> Buscar</button>
                                             </div>
                                         </div>
-
                                     </div>
                                 </form>
                                 <footer>
@@ -155,12 +144,12 @@
                                 <form name="FormSearchNombre" angular-validator-submit="$ctrl.SearchNombre()" novalidate angular-validator autocomplete="off">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <p>Nombre completo</p>
+                                            Nombre completo:
                                         </div>
                                         <div class="col-md-10">
                                             <input type="text" name="InpNombre" class="form-control input-sm" ng-model="$ctrl.Nombre" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa un nombre.'">
                                         </div>
-                                        <div class="col-md-2" style="text-align:left">
+                                        <div class="col-md-2" style="text-align:center">
                                             <button type="submit" class="btn btn-info btn-sm"><i class="fa fa-search"></i> Buscar</button>
                                         </div>
                                     </div>
@@ -177,14 +166,14 @@
                                 <form name="FormSearchPlaza" angular-validator-submit="$ctrl.SearchPlaza()" novalidate angular-validator autocomplete="off">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <p>Nombre completo</p>
+                                            Plaza:
                                         </div>
                                         <div class="col-md-10">
-                                            <select type="text" name="SltPlaza" class="form-control input-sm" ng-model="$ctrl.Plaza" ng-options="P.Nombre for P in $ctrl.PlazaList track by P.IdPlaza" validate-on="dirty" required required-message="'Obligatorio'">
+                                            <select type="text" name="SltPlaza" class="form-control input-sm" ng-model="$ctrl.Plaza" ng-options="P.razon_social for P in $ctrl.PlazaList track by P.id_compania" ng-change="$ctrl.GetEstado()" validate-on="dirty" required required-message="'Obligatorio'">
                                                 <option value="">Selecciona</option>
                                             </select>
                                         </div>
-                                        <div class="col-md-2" style="text-align:left">
+                                        <div class="col-md-2" style="text-align:center">
                                             <button type="submit" class="btn btn-info btn-sm"><i class="fa fa-search"></i> Buscar</button>
                                         </div>
                                     </div>
@@ -210,8 +199,8 @@
                         <th><b><small>Colonia</small></b></th>
                         <th><b><small>Ciudad</small></b></th>
                         <th><b><small>Teléfono</small></b></th>
-                        <th><b><small>¿Solo internet?</small></b></th>
-                        <th><b><small>Acciones</small></b></th>
+                        <th width="9%"><b><small>¿Solo internet?</small></b></th>
+                        <th width="8%"><b><small>Acciones</small></b></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -219,20 +208,20 @@
                         <td class="text-center" colspan="10">SIN REGISTROS</td>
                     </tr>
                     <tr dir-paginate="X in $ctrl.ClienteList|orderBy:'IdContrato':true|itemsPerPage:7" ng-show="$ctrl.ConRegistros">
-                        <td><small>{{ X.IdCliente }}</small></td>
-                        <td ng-if="X.Nombre2Do != null && X.ApeMaterno != null"><small>{{ X.Nombre1Er + ' ' + X.Nombre2Do + ' ' + X.ApePaterno + ' ' + X.ApeMaterno }}</small></td>
-                        <td ng-if="X.Nombre2Do != null && X.ApeMaterno == null"><small>{{ X.Nombre1Er + ' ' + X.Nombre2Do + ' ' + X.ApePaterno }}</small></td>
-                        <td ng-if="X.Nombre2Do == null && X.ApeMaterno != null"><small>{{ X.Nombre1Er + ' ' + X.ApePaterno + ' ' + X.ApeMaterno }}</small></td>
-                        <td ng-if="X.Nombre2Do == null && X.ApeMaterno == null"><small>{{ X.Nombre1Er + ' ' + X.ApePaterno }}</small></td>
-                        <td><small>{{ X.Calle_ }}</small></td>
-                        <td><small>{{ X.NumExt }}</small></td>
+                        <td><small>{{ X.ContratoCom }}</small></td>
+                        <td ng-if="X.SegundoNombre != null && X.Apellido_Materno != null"><small>{{ X.Nombre + ' ' + X.SegundoNombre + ' ' + X.Apellido_Paterno + ' ' + X.Apellido_Materno }}</small></td>
+                        <td ng-if="X.SegundoNombre != null && X.Apellido_Materno == null"><small>{{ X.Nombre + ' ' + X.SegundoNombre + ' ' + X.Apellido_Paterno }}</small></td>
+                        <td ng-if="X.SegundoNombre == null && X.Apellido_Materno != null"><small>{{ X.Nombre + ' ' + X.Apellido_Paterno + ' ' + X.Apellido_Materno }}</small></td>
+                        <td ng-if="X.SegundoNombre == null && X.Apellido_Materno == null"><small>{{ X.Nombre + ' ' + X.Apellido_Paterno }}</small></td>
+                        <td><small>{{ X.Calle }}</small></td>
+                        <td><small>{{ X.NUMERO }}</small></td>
                         <td><small>{{ X.NumInt }}</small></td>
-                        <td><small>{{ X.Colonia_ }}</small></td>
-                        <td><small>{{ X.Ciudad_ }}</small></td>
-                        <td><small>{{ X.Telefono }}</small></td>
+                        <td><small>{{ X.Col }}</small></td>
+                        <td><small>{{ X.Cd_Mun }}</small></td>
+                        <td><small>{{ X.TELEFONO }}</small></td>
                         <td ng-if="X.SoloInternet == false"><small>{{ 'No' }}</small></td>
                         <td ng-if="X.SoloInternet == true"><small>{{ 'Si' }}</small></td>
-                        <td><a type="button" class="btn btn-warning btn-xs" ui-sref="home.catalogos.cliente_editar({ id: X.IdContrato })" title="Editar Cliente"><i class="fa fa-pencil-square-o"></i> EDITAR</a></td>
+                        <td><a type="button" class="btn btn-warning btn-xs" ui-sref="home.catalogos.cliente_editar({ id: X.CONTRATO })" title="Editar Cliente"><i class="fa fa-pencil-square-o"></i> EDITAR</a></td>
                     </tr>
                 </tbody>
             </table>

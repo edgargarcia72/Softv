@@ -274,7 +274,7 @@ angular
                 data: {
                     pageTitle: 'SOFTV | EDITAR CLIENTE'
                 },
-                url: '/catalogo/clientes/Editar/:id',
+                url: '/catalogo/clientes/editar/:id',
                 templateUrl: 'views/catalogos/ClienteNuevo.html',
                 controller: 'ClienteEditarCtrl',
                 controllerAs: '$ctrl'

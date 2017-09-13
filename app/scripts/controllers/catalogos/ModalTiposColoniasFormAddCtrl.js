@@ -5,13 +5,18 @@ angular
     .controller('ModalTiposColoniasFormAddCtrl', function(CatalogosFactory, $uibModalInstance, ngNotify, $state){
 
         function SaveTipoColonia(){
-            CatalogosFactory.AddTipoColonia(vm.TipoColonia).then(function(data){
-                if(data.AddTipoColoniaResult > 0){
+            var objTipo_Colonias1_New = {
+                'Concepto': vm.TipoColonia
+            };
+            CatalogosFactory.AddTipo_Colonias1_New(objTipo_Colonias1_New).then(function(data){
+                if(data.AddTipo_Colonias1_NewResult > 0){
                     ngNotify.set('CORRECTO, se añadió un tipo de colonia nuevo.', 'success');
                     $state.reload('home.catalogos.tipos_colonias');
 				    cancel();
                 }else{
                     ngNotify.set('ERROR, al añadir un tipo de colonia nuevo.', 'warn');
+                    $state.reload('home.catalogos.tipos_colonias');
+				    cancel();
                 }
             });
         }

@@ -5,8 +5,8 @@ angular
     .controller('TiposColoniasCtrl', function(CatalogosFactory, $uibModal){
 
         function initData(){
-            CatalogosFactory.GetTipoColoniaList().then(function(data){
-                vm.TipoColoniaList = data.GetTipoColoniaListResult;
+            CatalogosFactory.GetTipo_Colonias1_NewList().then(function(data){
+                vm.TipoColoniaList = data.GetTipo_Colonias1_NewListResult;
                 if (vm.TipoColoniaList.length == 0) {
 					vm.SinRegistros = true;
 					vm.ConRegistros = false;
@@ -32,8 +32,8 @@ angular
             });
         }
 
-        function OpenUpdateTipoColonia(TipoColoniaObj){
-            var TipoColoniaObj = TipoColoniaObj;
+        function OpenUpdateTipoColonia(Clave){
+            var Clave = Clave;
             var modalInstance = $uibModal.open({
                 animation: true,
                 ariaLabelledBy: 'modal-title',
@@ -46,15 +46,15 @@ angular
                 class: 'modal-backdrop fade',
                 size: 'md',
                 resolve: {
-                    TipoColoniaObj: function () {
-                        return TipoColoniaObj;
+                    Clave: function () {
+                        return Clave;
                     }
                 }
             });
         }
 
-        function OpenDeleteTipoColonia(TipoColoniaObj){
-            var TipoColoniaObj = TipoColoniaObj;
+        function OpenDeleteTipoColonia(Clave){
+            var Clave = Clave;
             var modalInstance = $uibModal.open({
                 animation: true,
                 ariaLabelledBy: 'modal-title',
@@ -67,8 +67,8 @@ angular
                 class: 'modal-backdrop fade',
                 size: 'sm',
                 resolve: {
-                    TipoColoniaObj: function () {
-                        return TipoColoniaObj;
+                    Clave: function () {
+                        return Clave;
                     }
                 }
             });

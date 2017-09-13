@@ -1,6 +1,6 @@
 <div class="modal-header">
     <button class="close" type="button" aria-label="close" ng-click="ctrl.cancel()">x</button>
-    <h4 class="modal-title"><i class="fa fa-pencil-square-o"></i> Editar Referencia Personal - #{{ ctrl.ObjRefCliente.IdReferencia }}</h4>
+    <h4 class="modal-title"><i class="fa fa-pencil-square-o"></i> Editar Referencia Personal - #{{ ctrl.IdReferencia }}</h4>
 </div>
 <form name="FormUpdateRefPersonal" angular-validator-submit="ctrl.UpdateRefPersonal()" novalidate angular-validator>
     <div class="modal-body">
@@ -22,7 +22,7 @@
                     <input type="text" name="InpTelefonoRef" class="form-control input-sm" ng-model="ctrl.TelefonoRef" maxlength="10" ng-pattern="/^\d{8}$|^\d{10}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa minimo 8 dígitos.'">
                 </div>
                 <div class="col-md-4">
-                    <input type="email" name="InpEmailRef" class="form-control input-sm" ng-model="ctrl.EmailRef" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido'">
+                    <input type="email" name="InpEmailRef" class="form-control input-sm" ng-model="ctrl.EmailRef" ng-pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido'">
                 </div>
                 <div class="col-md-12">
                     <br>
@@ -31,7 +31,7 @@
                     <p>Dirección:</p>
                 </div>
                 <div class="col-md-12">
-                    <textarea name="InpDireccionRef" class="form-control" rows="4" ng-model="ctrl.DireccionRef" validate-on="dirty" required required-message="'Obligatorio'"></textarea>
+                    <textarea name="InpDireccionRef" class="form-control input-sm" rows="4" ng-model="ctrl.DireccionRef" validate-on="dirty" required required-message="'Obligatorio'"></textarea>
                 </div>
             </div>
         </div>
