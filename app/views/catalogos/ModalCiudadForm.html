@@ -16,7 +16,7 @@
                 <p><b>Nombre de la ciudad:</b></p>
             </div>
             <div class="col-md-12">
-                <input type="text" name="InpCiudad" class="form-control input-sm" ng-model="ctrl.Ciudad" validate-on="dirty" required required-message="'Obligatorio'">
+                <input type="text" name="InpCiudad" class="form-control input-sm" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" ng-model="ctrl.Ciudad" validate-on="dirty" required required-message="'Obligatorio'">
             </div>
             <div class="col-md-12">
                 <br>
@@ -25,7 +25,7 @@
                 <p><b>Estado(s):</b></p>
             </div>
             <div class="col-md-9">
-                <select name="SltEstado" class="form-control input-sm" ng-model="ctrl.Estado" ng-options="E.Nombre for E in ctrl.EstadoList track by E.IdEstado">
+                <select name="SltEstado" class="form-control input-sm" ng-model="ctrl.Estado" ng-options="E.Nombre for E in ctrl.EstadoList track by E.Clv_Estado">
                     <option value="">Selecciona</option>
                 </select>
             </div>

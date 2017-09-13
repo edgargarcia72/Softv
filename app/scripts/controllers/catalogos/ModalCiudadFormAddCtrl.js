@@ -5,17 +5,18 @@ angular
     .controller('ModalCiudadFormAddCtrl', function(CatalogosFactory, $uibModalInstance, ngNotify, $state){
 
         function initData(){
-            CatalogosFactory.GetEstadoList2_web().then(function(data){
-                vm.EstadoList = data.GetEstadoList2_webResult;
+            CatalogosFactory.GetEstados_NewList().then(function(data){
+                console.log(data);
+                vm.EstadoList = data.GetEstados_NewListResult;
             });
         }
 
         function AddRelEst(){
             if(vm.Estado != undefined && vm.Estado != 0){
                 var RelEst = {};
-                RelEst.IdEstado = vm.Estado.IdEstado;
+                RelEst.IdEstado = vm.Estado.Clv_Estado;
                 var RelEstView = {};
-                RelEstView.IdEstado = vm.Estado.IdEstado;
+                RelEstView.IdEstado = vm.Estado.Clv_Estado;
                 RelEstView.Estado = vm.Estado.Nombre;
                 if(ExistsRelEst(RelEst.IdEstado) == false){
                     vm.RelEstList.push(RelEst);
