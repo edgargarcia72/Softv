@@ -1,7 +1,7 @@
 'use strict';
 angular
     .module('softvApp')
-    .controller('ModalRolUpdateCtrl', function($uibModalInstance, ngNotify, $state){
+    .controller('ModalRolUpdateCtrl', function($uibModalInstance, ngNotify, $state, IdRol){
         
         function SaveRol(){
 
@@ -12,9 +12,11 @@ angular
         }
 
         var vm = this;
-        vm.Titulo = 'Editar Rol';
+        vm.IdRol = IdRol;
+        vm.Titulo = 'Editar Rol - ' + vm.IdRol;
         vm.Icono = 'fa fa-pencil-square-o';
         vm.Estado = 'T';
         vm.SaveRol = SaveRol;
         vm.cancel = cancel;
+        console.log(vm.IdRol);
     });

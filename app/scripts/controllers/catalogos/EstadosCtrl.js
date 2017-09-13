@@ -5,8 +5,8 @@ angular
     .controller('EstadosCtrl', function(CatalogosFactory, $uibModal){
 
         function initData(){
-            CatalogosFactory.GetEstadoList2_web().then(function(data){
-                vm.EstadoList = data.GetEstadoList2_webResult;
+            CatalogosFactory.GetEstados_NewList().then(function(data){
+                vm.EstadoList = data.GetEstados_NewListResult;
                 if (vm.EstadoList.length == 0) {
 					vm.SinRegistros = true;
 					vm.ConRegistros = false;
@@ -32,8 +32,8 @@ angular
             });
         }
 
-        function OpenUpdateEstado(EstadoObj){
-            var EstadoObj = EstadoObj;
+        function OpenUpdateEstado(Clv_Estado){
+            var Clv_Estado = Clv_Estado;
             var modalInstance = $uibModal.open({
                 animation: true,
                 ariaLabelledBy: 'modal-title',
@@ -46,15 +46,15 @@ angular
                 class: 'modal-backdrop fade',
                 size: 'md',
                 resolve: {
-                    EstadoObj: function () {
-                        return EstadoObj;
+                    Clv_Estado: function () {
+                        return Clv_Estado;
                     }
                 }
             });
         }
 
-        function OpenDeleteEstado(EstadoObj){
-            var EstadoObj = EstadoObj;
+        function OpenDeleteEstado(Clv_Estado){
+            var Clv_Estado = Clv_Estado;
             var modalInstance = $uibModal.open({
                 animation: true,
                 ariaLabelledBy: 'modal-title',
@@ -67,8 +67,8 @@ angular
                 class: 'modal-backdrop fade',
                 size: 'sm',
                 resolve: {
-                    EstadoObj: function () {
-                        return EstadoObj;
+                    Clv_Estado: function () {
+                        return Clv_Estado;
                     }
                 }
             });

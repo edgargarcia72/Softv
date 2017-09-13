@@ -47,8 +47,8 @@
 							<td class="text-center" colspan="4">SIN REGISTROS</td>
 						</tr>
                         <tr dir-paginate="X in $ctrl.PlazaList|filter:$ctrl.SearchPlaza|itemsPerPage:7" ng-show="$ctrl.ConRegistros">
-                            <td>{{ X.IdPlaza }}</td>
-                            <td>{{ X.Nombre }}</td>
+                            <td>{{ X.id_compania }}</td>
+                            <td>{{ X.razon_social }}</td>
                             <td>
                                 <button type="button" class="btn btn-warning btn-xs" ui-sref="home.catalogos.plaza_editar({ id: X.IdPlaza })" title="Editar Plaza"><i class="fa fa-pencil-square-o"></i> EDITAR</button>
                             </td>
