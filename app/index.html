@@ -23,6 +23,7 @@
   <link rel="stylesheet" href="bower_components/angucomplete-alt/angucomplete-alt.css" />
   <link rel="stylesheet" href="bower_components/angular-tree-control/css/tree-control.css" />
   <link rel="stylesheet" href="bower_components/angularMultipleSelect/build/multiple-select.min.css" />
+  <link rel="stylesheet" href="bower_components/angular-bootstrap-colorpicker/css/colorpicker.css" />
   <!-- endbower -->
   <!-- endbuild -->
   <!-- build:css(.tmp) styles/main.css -->
@@ -89,6 +90,7 @@
   <script src="bower_components/angular-tree-control/angular-tree-control.js"></script>
   <script src="bower_components/angularMultipleSelect/build/multiple-select.min.js"></script>
   <script src="bower_components/angular-base64/angular-base64.js"></script>
+  <script src="bower_components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js"></script>
   <!-- endbower -->
   <!-- endbuild -->
 
@@ -127,8 +129,9 @@
   <script src="scripts/controllers/procesos/Quejas/ModalAgendaQuejaCtrl.js"></script>
   <script src="scripts/factories/quejasFactory.js"></script>
   <!---->
-  <script src="scripts/controllers/configuracion/modules.js"></script>
+  
   <script src="scripts/factories/cajasFactory.js"></script>
+  <script src="scripts/factories/ticketsFactory.js"></script>
   <script src="scripts/controllers/facturacion/modules.js"></script>
   <script src="scripts/controllers/facturacion/cajas/FacturacionCajasCtrl.js"></script>
   <script src="scripts/controllers/facturacion/cajas/ModalAddListCtrl.js"></script>
@@ -194,13 +197,7 @@
   <script src="scripts/controllers/procesos/ordenes/CambioDomicilioOrdenesCtrl.js"></script>
   <script src="scripts/controllers/procesos/ordenes/BajaServiciosCtrl.js"></script>
   <script src="scripts/controllers/procesos/ordenes/modalReporteOrdeSerCtrl.js"></script>
-  <script src="scripts/controllers/configuracion/Permisos/PermisosCtrl.js"></script>
-  <script src="scripts/controllers/configuracion/Roles/RolCtrl.js"></script>
-  <script src="scripts/controllers/configuracion/Roles/ModalAddRolCtrl.js"></script>
-  <script src="scripts/controllers/configuracion/Usuarios/usuariosCtrl.js"></script>
-  <script src="scripts/controllers/configuracion/Usuarios/nuevoUsuarioCtrl.js"></script>
-  <script src="scripts/controllers/configuracion/Usuarios/editaUsuarioCtrl.js"></script>
-  <script src="scripts/controllers/configuracion/Usuarios/detalleUsuarioCtrl.js"></script>
+  
   
   <script src="scripts/factories/rolFactory.js"></script>
   <script src="scripts/factories/permisosFactory.js"></script>
@@ -287,11 +284,24 @@
   <script src="scripts/factories/encuestasFactory.js"></script>
   <script src="scripts/factories/DescargaMaterialFactory.js"></script>
   
+
   <script src="scripts/factories/RolesFactory.js"></script>
+
+  <script src="scripts/controllers/configuracion/modules.js"></script>
+
   <script src="scripts/controllers/configuracion/Roles/RolesWebCtrl.js"></script>
   <script src="scripts/controllers/configuracion/Roles/ModalRolAddCtrl.js"></script>
   <script src="scripts/controllers/configuracion/Roles/ModalRolUpdateCtrl.js"></script>
   <script src="scripts/controllers/configuracion/Roles/ModalRolDeleteCtrl.js"></script>
+  <script src="scripts/controllers/configuracion/Permisos/PermisosCtrl.js"></script>
+  <script src="scripts/controllers/configuracion/Roles/RolCtrl.js"></script>
+  <script src="scripts/controllers/configuracion/Roles/ModalAddRolCtrl.js"></script>
+  <script src="scripts/controllers/configuracion/Usuarios/usuariosCtrl.js"></script>
+  <script src="scripts/controllers/configuracion/Usuarios/nuevoUsuarioCtrl.js"></script>
+  <script src="scripts/controllers/configuracion/Usuarios/editaUsuarioCtrl.js"></script>
+  <script src="scripts/controllers/configuracion/Usuarios/detalleUsuarioCtrl.js"></script>
+  <script src="scripts/controllers/configuracion/Generales/generalesDistribuidorCtrl.js"></script>
+  <script src="scripts/controllers/configuracion/Generales/generalesSistemaCtrl.js"></script>
 
   <!--Comisiones -->
 
