@@ -1,6 +1,6 @@
 'use strict';
 angular.module('softvApp')
-  .factory('authFactory', function ($http, $q, $window, globalService, $localStorage, PermPermissionStore, $location, $base64) {
+  .factory('authFactory', function ($http, $q, $window, globalService, $localStorage, PermPermissionStore, $location, $base64,ngNotify) {
     var factory = {};
     var paths = {
       getAuthentication: '/DameSessionW/GetDameSessionWList',
