@@ -2,14 +2,14 @@
 
 angular
     .module('softvApp')
-    .controller('ModalCiudadFormUpdateCtrl', function(CatalogosFactory, $uibModalInstance, ngNotify, $state, IdMunicipio){
+    .controller('ModalCiudadFormUpdateCtrl', function(CatalogosFactory, $uibModalInstance, ngNotify, $state, ObjMunicipio){
 
         function initData(){
             CatalogosFactory.GetEstadoList2_web().then(function(data){
                 vm.EstadoList = data.GetEstadoList2_webResult;
             });
 
-            CatalogosFactory.GetDeepMunicipio(IdMunicipio).then(function(data){
+            CatalogosFactory.GetDeepMunicipio(vm.IdCiudad).then(function(data){
                 var Ciudad = data.GetDeepMunicipioResult;
                 vm.IdCiudad = Ciudad.IdMunicipio;
                 vm.Ciudad = Ciudad.Nombre;
@@ -96,6 +96,9 @@ angular
         var vm = this;
         vm.Titulo = 'Editar Registro - ';
         vm.Icono = 'fa fa-pencil-square-o';
+        vm.IdCiudad = Clv_Ciudad;
+        vm.Ciudad = ObjMunicipio.Nombre;
+        vm.ShowEdit = true;
         vm.RelEstList = [];
         vm.RelEstViewList = [];
         vm.AddRelEst = AddRelEst;

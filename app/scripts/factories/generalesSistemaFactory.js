@@ -317,38 +317,25 @@ angular
 
     factory.GetGeneralesPrincipal = function () {
       var deferred = $q.defer();
-      var config = {
-        headers: {
-          'Authorization': $localStorage.currentUser.token
-        }
-      };
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
       $http.get(globalService.getUrl() + paths.GetGeneralesPrincipal, config).then(function (response) {
         deferred.resolve(response.data);
       }).catch(function (response) {
         deferred.reject(response.data);
       });
-
       return deferred.promise;
     };
 
 
     factory.GetPeriodoscorte = function (clv_periodo, idcompania) {
       var deferred = $q.defer();
-      var Parametros = {
-        'clv_periodo': clv_periodo,
-        'idcompania': idcompania
-      };
-      var config = {
-        headers: {
-          'Authorization': $localStorage.currentUser.token
-        }
-      };
+      var Parametros = {'clv_periodo': clv_periodo,'idcompania': idcompania};
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
       $http.post(globalService.getUrl() + paths.GetPeriodoscorte, JSON.stringify(Parametros), config).then(function (response) {
         deferred.resolve(response.data);
       }).catch(function (response) {
         deferred.reject(response.data);
       });
-
       return deferred.promise;
     };
 

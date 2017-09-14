@@ -39,9 +39,9 @@ angular
             GetDeepEstados_New: '/Estados_New/GetDeepEstados_New',
             UpdateEstados_New: '/Estados_New/UpdateEstados_New',
             DeleteEstados_New: '/Estados_New/DeleteEstados_New',
-            GetMunicipioList: '/Municipio/GetMunicipioList',
+            GetBuscaCiudades: '/RelEstadoCiudad_New/GetBuscaCiudades',
             GetDeepMunicipio: '/Municipio/GetDeepMunicipio',
-            AddRelEstMunL: '/Municipio/AddRelEstMunL',
+            GetAddCiudades: '/Ciudades_New/GetAddCiudades',
             UpdateRelEstMunL: '/Municipio/UpdateRelEstMunL',
             DeleteMunicipio: '/Municipio/DeleteMunicipio',
             GetLocalidadList: '/Localidad/GetLocalidadList',
@@ -495,10 +495,11 @@ angular
             return deferred.promise;
         };
 
-        factory.GetMunicipioList = function(){
+        factory.GetBuscaCiudades = function(ObjCiudad){
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
-            $http.get(globalService.getUrl() + paths.GetMunicipioList, config).then(function (response) {
+            var Parametros = ObjCiudad;
+            $http.post(globalService.getUrl() + paths.GetBuscaCiudades, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);
@@ -518,14 +519,11 @@ angular
             return deferred.promise;
         };
 
-        factory.AddRelEstMunL = function (lstRelEstado, RelMunicipioEstAdd) {
+        factory.GetAddCiudades = function (ObjCiudad) {
             var deferred = $q.defer();
             var config = {headers:{'Authorization': $localStorage.currentUser.token}};
-            var Parametros = {
-                'lstRelEstado': lstRelEstado,
-                'RelMunicipioEstAdd': RelMunicipioEstAdd
-            };
-            $http.post(globalService.getUrl() + paths.AddRelEstMunL, JSON.stringify(Parametros), config).then(function (response) {
+            var Parametros = ObjCiudad;
+            $http.post(globalService.getUrl() + paths.GetAddCiudades, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);

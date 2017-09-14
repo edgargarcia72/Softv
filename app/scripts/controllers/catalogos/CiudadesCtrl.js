@@ -5,8 +5,14 @@ angular
     .controller('CiudadesCtrl', function(CatalogosFactory, $uibModal){
 
         function initData(){
-            CatalogosFactory.GetMunicipioList().then(function(data){
-                vm.CiudadLista = data.GetMunicipioListResult;
+            var ObjCiudad = {
+                'Clv_Ciudad': 0,
+                'Nombre': '',
+                'Op': 2
+            };
+            CatalogosFactory.GetBuscaCiudades(ObjCiudad).then(function(data){
+                console.log(data);
+                vm.CiudadLista = data.GetBuscaCiudadesResult;
                 if (vm.CiudadLista.length == 0) {
 					vm.SinRegistros = true;
 					vm.ConRegistros = false;

@@ -18,23 +18,23 @@
             <div class="col-md-12">
                 <input type="text" name="InpCiudad" class="form-control input-sm" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" ng-model="ctrl.Ciudad" validate-on="dirty" required required-message="'Obligatorio'">
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12" ng-show="ctrl.ShowEdit">
                 <br>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12" ng-show="ctrl.ShowEdit">
                 <p><b>Estado(s):</b></p>
             </div>
-            <div class="col-md-9">
+            <div class="col-md-9" ng-show="ctrl.ShowEdit">
                 <select name="SltEstado" class="form-control input-sm" ng-model="ctrl.Estado" ng-options="E.Nombre for E in ctrl.EstadoList track by E.Clv_Estado">
                     <option value="">Selecciona</option>
                 </select>
             </div>
-            <div class="col-md-3" style="text-align:right">
+            <div class="col-md-3" style="text-align:right" ng-show="ctrl.ShowEdit">
                 <button type="button" class="btn btn-success bt-sm" title="Agregar Relación Estado" ng-click="ctrl.AddRelEst()">Agregar</button>
             </div>
         </div>
         <br>
-        <div class="row">
+        <div class="row" ng-show="ctrl.ShowEdit">
             <div class="col-md-12">
                 <div class="col-md-12 table-scroll">
                     <table class="table">
