@@ -339,6 +339,21 @@ angular
                 controller: 'ServicioUpdateCtrl',
                 controllerAs: '$ctrl'
             },
+            {
+                name: 'home.catalogos.tipos_servicios',
+                data: {
+                    pageTitle: 'SOFTV | CATÁLOGO TIPO DE SERVICIOS',
+                    permissions: {
+                        options: {
+                            reload: false
+                        }
+                    }
+                },
+                url: '/catalogo/tipos_servicios',
+                templateUrl: 'views/catalogos/TipoServicios.html',
+                controller: 'TiposServicosCtrl',
+                controllerAs: '$ctrl'
+            },
         ];
         states.forEach(function (state) {
             $stateProvider.state(state);

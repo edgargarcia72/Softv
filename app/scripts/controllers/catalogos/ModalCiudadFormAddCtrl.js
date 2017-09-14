@@ -5,17 +5,18 @@ angular
     .controller('ModalCiudadFormAddCtrl', function(CatalogosFactory, $uibModalInstance, ngNotify, $state){
 
         function initData(){
-            CatalogosFactory.GetEstadoList2_web().then(function(data){
-                vm.EstadoList = data.GetEstadoList2_webResult;
+            CatalogosFactory.GetEstados_NewList().then(function(data){
+                console.log(data);
+                vm.EstadoList = data.GetEstados_NewListResult;
             });
         }
 
         function AddRelEst(){
             if(vm.Estado != undefined && vm.Estado != 0){
                 var RelEst = {};
-                RelEst.IdEstado = vm.Estado.IdEstado;
+                RelEst.IdEstado = vm.Estado.Clv_Estado;
                 var RelEstView = {};
-                RelEstView.IdEstado = vm.Estado.IdEstado;
+                RelEstView.IdEstado = vm.Estado.Clv_Estado;
                 RelEstView.Estado = vm.Estado.Nombre;
                 if(ExistsRelEst(RelEst.IdEstado) == false){
                     vm.RelEstList.push(RelEst);
@@ -48,24 +49,32 @@ angular
         }
 
         function SaveCiudad(){
-            if(vm.RelEstList.length > 0){
-                var lstRelEstado = {};
+            var ObjCiudad = {
+                'Nombre': vm.Ciudad,
+                'Id':0
+
+            };
+            /*if(vm.RelEstList.length > 0){*/
+                /*var lstRelEstado = {};
                 lstRelEstado.Nombre = vm.Ciudad;
-                var RelMunicipioEstAdd = vm.RelEstList;
-                CatalogosFactory.AddRelEstMunL(lstRelEstado, RelMunicipioEstAdd).then(function(data){
-                    if(data.AddRelEstMunLResult > 0){
+                var RelMunicipioEstAdd = vm.RelEstList;*/
+                CatalogosFactory.GetAddCiudades(ObjCiudad).then(function(data){
+                    console.log(data);
+                    if(data.GetAddCiudadesResult[0].mismoNombre == 0){
                         ngNotify.set('CORRECTO, se añadió una ciudad nueva.', 'success');
                         $state.reload('home.catalogos.ciudades');
                         cancel();
+                    }else if(data.GetAddCiudadesResult[0].mismoNombre == 1){
+                        ngNotify.set('ERROR, Ya existe una ciudad con el mismo nombre.', 'warn');
                     }else{
                         ngNotify.set('ERROR, al añadir una ciudad nueva.', 'warn');
                         $state.reload('home.catalogos.ciudades');
                         cancel();
                     }
                 });
-            }else{
+            /*}else{
                  ngNotify.set('ERROR, Para añadir una nueva ciudad, se tiene que ingresar mínimo una relación.', 'warn');
-            }
+            }*/
         }
 
         function cancel() {
@@ -75,6 +84,7 @@ angular
         var vm = this;
         vm.Titulo = 'Nuevo Registro';
         vm.Icono = 'fa fa-plus';
+        vm.ShowEdit = false;
         vm.RelEstList = [];
         vm.RelEstViewList = [];
         vm.AddRelEst = AddRelEst;

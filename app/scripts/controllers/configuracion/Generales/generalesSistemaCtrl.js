@@ -5,6 +5,10 @@ angular
 
     function init() {
 
+      generalesSistemaFactory.GetGeneralesPrincipal().then(function(data){
+        console.log(data);
+      });
+
       generalesSistemaFactory.GetPeriodoscorte(0,1).then(function (response) {
         console.log(response);
       });

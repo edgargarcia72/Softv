@@ -42,9 +42,9 @@ angular
             GetDeepEstados_New: '/Estados_New/GetDeepEstados_New',
             UpdateEstados_New: '/Estados_New/UpdateEstados_New',
             DeleteEstados_New: '/Estados_New/DeleteEstados_New',
-            GetMunicipioList: '/Municipio/GetMunicipioList',
+            GetBuscaCiudades: '/RelEstadoCiudad_New/GetBuscaCiudades',
             GetDeepMunicipio: '/Municipio/GetDeepMunicipio',
-            AddRelEstMunL: '/Municipio/AddRelEstMunL',
+            GetAddCiudades: '/Ciudades_New/GetAddCiudades',
             UpdateRelEstMunL: '/Municipio/UpdateRelEstMunL',
             DeleteMunicipio: '/Municipio/DeleteMunicipio',
             GetLocalidadList: '/Localidad/GetLocalidadList',
@@ -73,12 +73,19 @@ angular
             UpdatePlazaL: '/Plaza/UpdatePlazaL',
             GetColoniaList: '/Colonia/GetColoniaList',
             AddColoniaL: '/Colonia/AddColoniaL',
+            GetmuestraCP_ColoniaLocalidadList: '/muestraCP_ColoniaLocalidad/GetmuestraCP_ColoniaLocalidadList',
+            GetTipServ_NewList: '/TipServ_New/GetTipServ_NewList',
+            AddTipServ_New: '/TipServ_New/AddTipServ_New',
+            GetDeepTipServ_New: '/TipServ_New/GetDeepTipServ_New',
+            UpdateTipServ_New: '/TipServ_New/UpdateTipServ_New',
+            DeleteTipServ_New: '/TipServ_New/DeleteTipServ_New',
             GetTipServList: '/TipServ/GetTipServList',
             GetmuestraCP_ColoniaLocalidadList: '/muestraCP_ColoniaLocalidad/GetmuestraCP_ColoniaLocalidadList',
             GetSucursalList: '/Sucursales/GetSUCURSALESList',
             AddSucursal: '/SUCURSALES/AddSUCURSALES',
             GetDeepSucursal:'/SUCURSALES/GetDeepSUCURSALES',
             UpdateSucursal: '/SUCURSALES/UpdateSUCURSALES'
+
         };
 
         factory.GetPlazaList = function (IdUsuario) {
@@ -498,10 +505,12 @@ angular
             return deferred.promise;
         };
 
-        factory.GetMunicipioList = function () {
+
+       factory.GetBuscaCiudades = function(ObjCiudad){
             var deferred = $q.defer();
-            var config = { headers: { 'Authorization': $localStorage.currentUser.token } };
-            $http.get(globalService.getUrl() + paths.GetMunicipioList, config).then(function (response) {
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = ObjCiudad;
+            $http.post(globalService.getUrl() + paths.GetBuscaCiudades, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);
@@ -521,14 +530,11 @@ angular
             return deferred.promise;
         };
 
-        factory.AddRelEstMunL = function (lstRelEstado, RelMunicipioEstAdd) {
+     factory.GetAddCiudades = function (ObjCiudad) {
             var deferred = $q.defer();
-            var config = { headers: { 'Authorization': $localStorage.currentUser.token } };
-            var Parametros = {
-                'lstRelEstado': lstRelEstado,
-                'RelMunicipioEstAdd': RelMunicipioEstAdd
-            };
-            $http.post(globalService.getUrl() + paths.AddRelEstMunL, JSON.stringify(Parametros), config).then(function (response) {
+            var config = {headers:{'Authorization': $localStorage.currentUser.token}};
+            var Parametros = ObjCiudad;
+            $http.post(globalService.getUrl() + paths.GetAddCiudades, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);
@@ -864,10 +870,11 @@ angular
             return deferred.promise;
         };
 
-        factory.GetTipServList = function () {
+
+        factory.GetTipServ_NewList = function(){
             var deferred = $q.defer();
-            var config = { headers: { 'Authorization': $localStorage.currentUser.token } };
-            $http.get(globalService.getUrl() + paths.GetTipServList, config).then(function (response) {
+            var config = { headers: {'Authorization': $localStorage.currentUser.token} };
+            $http.get(globalService.getUrl() + paths.GetTipServ_NewList, config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);
@@ -875,6 +882,54 @@ angular
             return deferred.promise;
         };
 
+        factory.AddTipServ_New = function (objTipServ_New) {
+            var deferred = $q.defer();
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = {'objTipServ_New': objTipServ_New};
+            $http.post(globalService.getUrl() + paths.AddTipServ_New, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.GetDeepTipServ_New = function (Clv_TipSer) {
+            var deferred = $q.defer();
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = {'Clv_TipSer': Clv_TipSer};
+            $http.post(globalService.getUrl() + paths.GetDeepTipServ_New, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.UpdateTipServ_New = function (objTipServ_New) {
+            var deferred = $q.defer();
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = {'objTipServ_New': objTipServ_New};
+            $http.post(globalService.getUrl() + paths.UpdateTipServ_New, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+       factory.DeleteTipServ_New = function (Clv_TipSer) {
+            var deferred = $q.defer();
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = {'Clv_TipSer': Clv_TipSer};
+            $http.post(globalService.getUrl() + paths.DeleteTipServ_New, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+  
         factory.AddColoniaL = function (lstRelColonia, RelColoniaLocMunEstAdd, RelColoniaServicioAdd) {
             var deferred = $q.defer();
             var config = { headers: { 'Authorization': $localStorage.currentUser.token } };
