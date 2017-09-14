@@ -32,7 +32,7 @@ angular
             .then(function (result) {
               vm.relaciones = result.GetAgregaEliminaRelCompaniaUsuarioResult;
             });
-        });
+        });  
     }
 
     function eliminarelacion(x) {

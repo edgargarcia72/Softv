@@ -7,7 +7,7 @@ angular
             {
                 name: 'home.catalogos',
                 abstract: true,
-                template: '<div ui-view></div>'
+                template: '<div ui-view></div>'  
             },
             {
                 name: 'home.catalogos.estados',
@@ -37,6 +37,21 @@ angular
                 url: '/catalogo/ciudades',
                 templateUrl: 'views/catalogos/Ciudades.html',
                 controller: 'CiudadesCtrl',
+                controllerAs: '$ctrl'
+            },
+            {
+                name: 'home.catalogos.cajas',
+                data: {
+                    pageTitle: 'SOFTV | CATÁLOGO CAJAS',
+                    permissions: {
+                        options: {
+                            reload: false
+                        }
+                    }
+                },
+                url: '/catalogo/cajas',
+                templateUrl: 'views/catalogos/Cajas.html',
+                controller: 'CajasCtrl',
                 controllerAs: '$ctrl'
             },
             {
