@@ -2,7 +2,7 @@
 
 angular
     .module('softvApp')
-    .controller('ModalCiudadFormAddCtrl', function(CatalogosFactory, $uibModalInstance, ngNotify, $state){
+    .controller('ModalCiudadFormAddCtrl', function(CatalogosFactory, $uibModalInstance, $uibModal, ngNotify, $state){
 
         function initData(){
             CatalogosFactory.GetEstados_NewList().then(function(data){
@@ -61,9 +61,12 @@ angular
                 CatalogosFactory.GetAddCiudades(ObjCiudad).then(function(data){
                     console.log(data);
                     if(data.GetAddCiudadesResult[0].mismoNombre == 0){
+                        var IdMunicipio = data.GetAddCiudadesResult[0].Clv_Ciudad
+                        console.log(IdMunicipio);
                         ngNotify.set('CORRECTO, se añadió una ciudad nueva.', 'success');
-                        $state.reload('home.catalogos.ciudades');
                         cancel();
+                        $state.reload('home.catalogos.ciudades');
+                        OpenUpdateCiudad(IdMunicipio);
                     }else if(data.GetAddCiudadesResult[0].mismoNombre == 1){
                         ngNotify.set('ERROR, Ya existe una ciudad con el mismo nombre.', 'warn');
                     }else{
@@ -75,6 +78,27 @@ angular
             /*}else{
                  ngNotify.set('ERROR, Para añadir una nueva ciudad, se tiene que ingresar mínimo una relación.', 'warn');
             }*/
+        }
+
+        function OpenUpdateCiudad(IdMunicipio){
+            var IdMunicipio = IdMunicipio;
+            var modalInstance = $uibModal.open({
+                animation: true,
+                ariaLabelledBy: 'modal-title',
+                ariaDescribedBy: 'modal-body',
+                templateUrl: 'views/catalogos/ModalCiudadForm.html',
+                controller: 'ModalCiudadFormUpdateCtrl',
+                controllerAs: 'ctrl',
+                backdrop: 'static',
+                keyboard: false,
+                class: 'modal-backdrop fade',
+                size: 'md',
+                resolve: {
+                    IdMunicipio: function () {
+                        return IdMunicipio;
+                    }
+                }
+            });
         }
 
         function cancel() {
