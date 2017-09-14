@@ -17,8 +17,8 @@ angular
     'ngCsv',
     'googlechart',   
    // 'angucomplete-alt',
-   // 'treeControl',
-   // 'multipleSelect',
+    'treeControl',
+    'multipleSelect',
     'base64'
      ])
   .config(['$provide','$urlRouterProvider', '$httpProvider' ,'cfpLoadingBarProvider', '$qProvider', 'blockUIConfig', function ($provide, $urlRouterProvider, $httpProvider ,cfpLoadingBarProvider, $qProvider, blockUIConfig) {
