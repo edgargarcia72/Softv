@@ -30,7 +30,7 @@
                     <button type="button" class="btn btn-primary btn-sm" ui-sref="home.catalogos.plaza_nueva" title="Crear una plaza nueva">NUEVA PLAZA</button>
 			    </div>
 			</div>
-        </div>
+        </div>  
         <br>
         <div class="col-md-12">
             <div class="col-md-12">
@@ -47,8 +47,8 @@
 							<td class="text-center" colspan="4">SIN REGISTROS</td>
 						</tr>
                         <tr dir-paginate="X in $ctrl.PlazaList|filter:$ctrl.SearchPlaza|itemsPerPage:7" ng-show="$ctrl.ConRegistros">
-                            <td>{{ X.IdPlaza }}</td>
-                            <td>{{ X.Nombre }}</td>
+                            <td>{{ X.id_compania }}</td>
+                            <td>{{ X.razon_social }}</td>
                             <td>
                                 <button type="button" class="btn btn-warning btn-xs" ui-sref="home.catalogos.plaza_editar({ id: X.IdPlaza })" title="Editar Plaza"><i class="fa fa-pencil-square-o"></i> EDITAR</button>
                             </td>

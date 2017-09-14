@@ -2,19 +2,30 @@
 
 angular
     .module('softvApp')
-    .controller('ModalTiposColoniasFormUpdateCtrl', function(CatalogosFactory, $uibModalInstance, ngNotify, $state, TipoColoniaObj){
+    .controller('ModalTiposColoniasFormUpdateCtrl', function(CatalogosFactory, $uibModalInstance, ngNotify, $state, Clave){
+
+        function initData(){
+            CatalogosFactory.GetDeepTipo_Colonias1_New(Clave).then(function(data){
+                var TipoColoniaResult = data.GetDeepTipo_Colonias1_NewResult;
+                vm.IdTipoColonia = TipoColoniaResult.Clave;
+                vm.TipoColonia = TipoColoniaResult.Concepto;
+            });
+        }
 
         function SaveTipoColonia(){
-            var TipoColoniaObj = {}
-            TipoColoniaObj.IdTipoColonia = vm.IdTipoColonia;
-            TipoColoniaObj.TipoColonia = vm.TipoColonia
-            CatalogosFactory.UpdateTipoColonia(TipoColoniaObj).then(function(data){
-                if(data.UpdateTipoColoniaResult == 1){
+            var objTipo_Colonias1_New = {
+                'Clave': vm.IdTipoColonia,
+                'Concepto': vm.TipoColonia
+            }
+            CatalogosFactory.UpdateTipo_Colonias1_New(objTipo_Colonias1_New).then(function(data){
+                if(data.UpdateTipo_Colonias1_NewResult == -1){
                     ngNotify.set('CORRECTO, se guardó el tipo de colonia.', 'success');
                     $state.reload('home.catalogos.tipos_colonias');
 				    cancel();
                 }else{
                     ngNotify.set('ERROR, al guardar el tipo de colonia.', 'warn');
+                    $state.reload('home.catalogos.tipos_colonias');
+				    cancel();
                 }
             });
         }
@@ -24,11 +35,10 @@ angular
         }
 
         var vm = this;
-        vm.IdTipoColonia = TipoColoniaObj.IdTipoColonia;
-        vm.TipoColonia = TipoColoniaObj.Nombre;
-        vm.Titulo = 'Editar Registro - ' + vm.IdTipoColonia;
+        vm.Titulo = 'Editar Registro - ';
         vm.Icono = 'fa fa-pencil-square-o';
         vm.SaveTipoColonia = SaveTipoColonia;
         vm.cancel = cancel;
+        initData();
 
     });

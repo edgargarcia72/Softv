@@ -1,7 +1,20 @@
 'use strict';
 angular
     .module('softvApp')
-    .controller('RolesWebCtrl', function($uibModal){
+    .controller('RolesWebCtrl', function(RolesFactory, $uibModal){
+
+        function initData(){
+            RolesFactory.GetRolList().then(function(data){
+                vm.RolesList = data.GetRolListResult;
+                if (vm.RolesList.length == 0) {
+					vm.SinRegistros = true;
+					vm.ConRegistros = false;
+				} else {
+					vm.SinRegistros = false;
+					vm.ConRegistros = true;
+				}
+            });
+        }
 
         function OpenAddRol(){
             var modalInstance = $uibModal.open({
@@ -64,4 +77,5 @@ angular
         vm.OpenAddRol = OpenAddRol;
         vm.OpenUpdateRol = OpenUpdateRol;
         vm.OpenDeleteRol = OpenDeleteRol;
+        initData();
     });

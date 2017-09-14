@@ -50,11 +50,6 @@ angular
                         return IdLocalidad;
                     }
                 }
-                /*resolve: {
-                    LocalidadObj: function () {
-                        return LocalidadObj;
-                    }
-                }*/
             });
         }
 

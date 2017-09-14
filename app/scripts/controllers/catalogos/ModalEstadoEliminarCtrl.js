@@ -2,11 +2,24 @@
 
 angular
     .module('softvApp')
-    .controller('ModalEstadoEliminarCtrl', function(CatalogosFactory, $uibModalInstance, ngNotify, $state, EstadoObj){
+    .controller('ModalEstadoEliminarCtrl', function(CatalogosFactory, $uibModalInstance, ngNotify, $state, Clv_Estado){
+
+        function initData(){
+            CatalogosFactory.GetDeepEstados_New(Clv_Estado).then(function(data){
+                var EstadoResult = data.GetDeepEstados_NewResult;
+                vm.IdEstado = EstadoResult.Clv_Estado;
+                vm.Estado = EstadoResult.Nombre;
+            });
+        }
 
         function DeleteEstado(){
-            CatalogosFactory.DeleteEstado2_web(vm.IdEstado).then(function(data){
-                if(data.DeleteEstado2_webResult == 1){
+            var ObjEstado = {
+                'Nombre': vm.Estado,
+                'opcion': 1,
+                'clv_estadomod': vm.IdEstado
+            };
+            CatalogosFactory.DeleteEstados_New(ObjEstado).then(function(data){
+                if(data.DeleteEstados_NewResult == -1){
                     ngNotify.set('CORRECTO, se eliminó el estado.', 'success');
                     $state.reload('home.catalogos.estados');
                     cancel();
@@ -23,9 +36,7 @@ angular
         }
 
         var vm = this;
-        vm.IdEstado = EstadoObj.IdEstado;
-        vm.Estado = EstadoObj.Nombre;
         vm.DeleteEstado = DeleteEstado;
         vm.cancel = cancel;
-
+        initData();
     });

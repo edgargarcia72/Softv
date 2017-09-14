@@ -82,7 +82,7 @@
               <small><b># Reporte:</b></small>
             </div>
             <div class="col-md-3">
-              <input type="text" placeholder="# Orden" class="form-control input-sm" ng-model="$ctrl.clv_queja" disabled>
+              <input type="text" placeholder="# Orden" name="clv_queja" class="form-control input-sm" ng-model="$ctrl.clv_queja" disabled>
             </div>
             <div class="col-md-3">
               <small><b># Contrato:</b></small>
@@ -98,7 +98,9 @@
             <b><small>Servicio</small></b>
           </div>
           <div class="col-md-8">
-            <select class="form-control input-sm" ng-model="$ctrl.Servicio" ng-options="item as item.Concepto for item in $ctrl.Servicios track by item.Clv_TipSerPrincipal"
+            <select class="form-control input-sm" 
+            name="servicio"
+            ng-model="$ctrl.Servicio" ng-options="item as item.Concepto for item in $ctrl.Servicios track by item.Clv_TipSerPrincipal"
               ng-disabled="true">
                <option value="">Selecciona</option>
                              </select>
@@ -154,10 +156,10 @@
             <div class="card wrapper scrollDiv2" style="background: #DDEAE9">
               <p style="font-size: 10px;" class="text-center"><span ng-repeat="x in $ctrl.servicioscli">{{ x.Servicio }} <br></span></p>
             </div>
-            <label class="text-left radio-inline radio-styled"><input type="radio" ng-checked="$ctrl.datosCli.ESHOTEL" disabled>
+            <label class="text-left radio-inline radio-styled"><input name="eshotel" type="radio" ng-checked="$ctrl.datosCli.ESHOTEL" disabled>
 					<span>Es Hotel</span>
 				</label>
-            <label class="text-left radio-inline radio-styled"><input type="radio"  ng-checked="$ctrl.datosCli.SOLOINTERNET" disabled>
+            <label class="text-left radio-inline radio-styled"><input name="solointernet" type="radio"  ng-checked="$ctrl.datosCli.SOLOINTERNET" disabled>
 					<span>Solo Internet</span>
 				</label>
           </div>
@@ -171,11 +173,15 @@
             <tr>
               <td><label>Solicitud</label></td>
               <td>
-                <input type="text" class="form-control input-sm" ng-model="$ctrl.FechaSolicitud" ng-disabled="true" placeholder="DD/MM/YYYY"
+                <input type="text" class="form-control input-sm" 
+                name="fechasolicitud"
+                ng-model="$ctrl.FechaSolicitud" ng-disabled="true" placeholder="DD/MM/YYYY"
                   ui-mask="99/99/9999">
               </td>
               <td>
-                <input type="text" class="form-control input-sm" ng-model="$ctrl.HoraSolicitud" ng-disabled="true" placeholder="hh:mm AA"
+                <input type="text" class="form-control input-sm" 
+                name="horasolicitud"
+                ng-model="$ctrl.HoraSolicitud" ng-disabled="true" placeholder="hh:mm AA"
                   ui-mask="99:99 AA">
 
               </td>
@@ -272,11 +278,16 @@
                 <label>Ejecución real</label>
               </td>
               <td>
-                <input type="text" class="form-control input-sm" ng-model="$ctrl.FechaEjecucuionReal" placeholder="DD/MM/YYYY" ui-mask="99/99/9999"
+                <input type="text" class="form-control input-sm" 
+                ng-model="$ctrl.FechaEjecucuionReal" 
+                name="FechaEjecucuionReal"
+                placeholder="DD/MM/YYYY" ui-mask="99/99/9999"
               model-view-value="true" ng-disabled="true">
               </td>
               <td>
-                 <input type="text" class="form-control input-sm" ng-model="$ctrl.HoraEjecucuionReal" placeholder="hh:mm AA" ui-mask="99:99 AA"
+                 <input type="text" class="form-control input-sm" 
+                 name="HoraEjecucuionReal"
+                 ng-model="$ctrl.HoraEjecucuionReal" placeholder="hh:mm AA" ui-mask="99:99 AA"
               model-view-value="true" ng-disabled="true">
               </td>
             </tr>
@@ -338,12 +349,16 @@
             </div>
             <div class="col-md-12">
               <b>Reporte del cliente</b>
-              <textarea class="form-control input-sm" ng-disabled="$ctrl.IDetProblema" ng-model="$ctrl.DetalleProblema">
+              <textarea class="form-control input-sm" ng-disabled="$ctrl.IDetProblema"
+              name="reportecliente"
+               ng-model="$ctrl.DetalleProblema">
                         </textarea>
             </div>
             <div class="col-md-12">
               <b> Observaciones</b>
-              <textarea class="form-control input-sm" ng-model="$ctrl.Observaciones" ng-disabled="$ctrl.Iobser">
+              <textarea class="form-control input-sm" 
+              name="observaciones"
+              ng-model="$ctrl.Observaciones" ng-disabled="$ctrl.Iobser">
 
                     </textarea>
             </div>
@@ -351,8 +366,12 @@
           <div class="col-md-12">
             <div class="col-md-6">
               <b>Tipo solución</b>
-              <select  ng-class="(QuejaForm.solucion.$valid==false)?'input-yellow':'input-normal'"    class="form-control input-sm" name="solucion" required-message="'Este campo es obligatorio.'" ng-required="$ctrl.Estatus=='E'"
-                validate-on="dirty" ng-model="$ctrl.Trabajo" ng-options="item as item.DESCRIPCION for item in $ctrl.Trabajos track by item.CLV_TRABAJO"
+              <select  ng-class="(QuejaForm.solucion.$valid==false)?'input-yellow':'input-normal'"    
+              class="form-control input-sm" 
+              name="solucion" required-message="'Este campo es obligatorio.'" 
+              ng-required="$ctrl.Estatus=='E'"
+                validate-on="dirty" ng-model="$ctrl.Trabajo"
+                 ng-options="item as item.DESCRIPCION for item in $ctrl.Trabajos track by item.CLV_TRABAJO"
                 ng-disabled="$ctrl.BloqElemnt">
                 <option value="">Selecciona</option>
               </select>

@@ -47,10 +47,10 @@
 							<td class="text-center" colspan="4">SIN REGISTROS</td>
 						</tr>
                         <tr dir-paginate="X in $ctrl.EstadoList|filter:$ctrl.SearchEstado|itemsPerPage:7" ng-show="$ctrl.ConRegistros">
-                            <td>{{ X.IdEstado }}</td>
+                            <td>{{ X.Clv_Estado }}</td>
                             <td>{{ X.Nombre }}</td>
-                            <td><button type="button" class="btn btn-warning btn-xs" ng-click="$ctrl.OpenUpdateEstado(X)" title="Editar Estado"><i class="fa fa-pencil-square-o"></i> Editar</button></td>
-                            <td><button type="button" class="btn btn-danger btn-xs" ng-click="$ctrl.OpenDeleteEstado(X)" title="Eliminar Estado"><i class="fa fa-trash"></i> Eliminar</button></td>
+                            <td><button type="button" class="btn btn-warning btn-xs" ng-click="$ctrl.OpenUpdateEstado(X.Clv_Estado)" title="Editar Estado"><i class="fa fa-pencil-square-o"></i> Editar</button></td>
+                            <td><button type="button" class="btn btn-danger btn-xs" ng-click="$ctrl.OpenDeleteEstado(X.Clv_Estado)" title="Eliminar Estado"><i class="fa fa-trash"></i> Eliminar</button></td>
                         </tr>
                     </tbody>
                 </table>

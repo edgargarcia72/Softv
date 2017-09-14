@@ -3,12 +3,12 @@
     <h4 class="modal-title"><i class="fa fa-exclamation-triangle"></i> Confirmar</h4>
 </div>
 <div class="modal-body">
-    <p>¿Realmente desea eliminar esta referencai personal con el ID: {{ctrl.ObjRefCliente.IdReferencia}}?</p>
+    <p>¿Realmente desea eliminar esta referencia del cliente?</p>
+    <p><b>Id:</b> {{ ctrl.IdReferencia }}</p>
     <p><b>Nombre:</b> {{ ctrl.NombreRef }}</p>
     <p><b>Teléfono:</b> {{ ctrl.TelefonoRef }}</p>
     <p><b>Email</b> {{ ctrl.EmailRef }}</p>
-    <p><b>Dirección:</b></p>
-    <p>{{ ctrl.DireccionRef }}</p>
+    <p><b>Dirección:</b> {{ ctrl.DireccionRef }}</p>
 </div>
 <div class="modal-footer">
     <button class="btn btn-danger btn-sm" type="button" ng-click="ctrl.DeletRefPersonal()" title="Eliminar Referencia Personal">Eliminar</button>

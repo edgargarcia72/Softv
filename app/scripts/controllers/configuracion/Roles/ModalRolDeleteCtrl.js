@@ -1,7 +1,7 @@
 'use strict';
 angular
     .module('softvApp')
-    .controller('ModalRolDeleteCtrl', function($uibModalInstance, ngNotify, $state){
+    .controller('ModalRolDeleteCtrl', function($uibModalInstance, ngNotify, $state, RolObj){
         
         function DeleteRol(){
 
@@ -12,6 +12,8 @@ angular
         }
 
         var vm = this;
+        vm.IdRol = RolObj.IdRol;
+        vm.Rol = RolObj.Nombre;
         vm.DeleteRol = DeleteRol;
         vm.cancel = cancel;
     });
