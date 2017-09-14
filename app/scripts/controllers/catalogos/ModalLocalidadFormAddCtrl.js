@@ -11,7 +11,7 @@ angular
         }
 
         function AddEstMun(){
-            if(vm.Estado != undefined && vm.Estado != 0 &&
+            if(vm.Estado != undefined && vm.Estado != 0 && 
                vm.Ciudad != undefined && vm.Ciudad != 0){
                 var EstMun = {};
                 EstMun.IdEstado = vm.Estado.Clv_Estado;

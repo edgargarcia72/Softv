@@ -161,7 +161,7 @@ angular
 
         var vm = this;
         var IdPlaza = $stateParams.id;
-        vm.Titulo = 'Plaza Editar - ' + IdPlaza;
+        vm.Titulo = 'Plaza Editar - ' + Clv_Sucursal;
         vm.RelEstMunList = [];
         vm.RelEstMunViewList = [];
         vm.GetCiudadMunicipio = GetCiudadMunicipio;

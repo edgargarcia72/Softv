@@ -21,7 +21,7 @@ angular
               vm.fechabaja = user.FechaSalida;
               vm.activo = user.Activo;
               vm.recibemensaje = user.RecibeMensaje;
-
+ 
               vm.Roles.forEach(function (item) {
                 if (item.IdRol === user.Clv_TipoUsuario) {
                   vm.rol = item;

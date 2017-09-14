@@ -72,7 +72,8 @@ angular
       MuestraArbolServiciosAparatosPorinstalar: '/MuestraArbolServiciosAparatosPorinstalar/GetMuestraArbolServiciosAparatosPorinstalarList',
       MuestraTipoAparato: '/MuestraTipoAparato/GetMuestraTipoAparatoList',
       MuestraServiciosRelTipoAparato: '/MuestraServiciosRelTipoAparato/GetMuestraServiciosRelTipoAparatoList', 
-      MuestraAparatosDisponibles: '/MuestraAparatosDisponibles/GetMuestraAparatosDisponiblesList'
+      MuestraAparatosDisponibles: '/MuestraAparatosDisponibles/GetMuestraAparatosDisponiblesList',
+      AsignaAparatosAlServicio: '/AsignaAparatosAlServicio/GetAsignaAparatosAlServicioList'
     };
 
 
@@ -1700,6 +1701,25 @@ angular
         }
       };
       $http.post(globalService.getUrl() + paths.MuestraAparatosDisponibles, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response.data);
+      });
+
+      return deferred.promise;
+    };
+
+    factory.AsignaAparatosAlServicio=function (obj) {
+      var deferred = $q.defer();
+
+      var Parametros = obj;
+
+      var config = {
+        headers: {
+          'Authorization': $localStorage.currentUser.token
+        }
+      };
+      $http.post(globalService.getUrl() + paths.AsignaAparatosAlServicio, JSON.stringify(Parametros), config).then(function (response) {
         deferred.resolve(response.data);
       }).catch(function (response) {
         deferred.reject(response.data);
