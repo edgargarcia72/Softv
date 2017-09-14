@@ -7,7 +7,7 @@ angular
             {
                 name: 'home.catalogos',
                 abstract: true,
-                template: '<div ui-view></div>'
+                template: '<div ui-view></div>'  
             },
             {
                 name: 'home.catalogos.estados',
@@ -37,6 +37,81 @@ angular
                 url: '/catalogo/ciudades',
                 templateUrl: 'views/catalogos/Ciudades.html',
                 controller: 'CiudadesCtrl',
+                controllerAs: '$ctrl'
+            },
+            {
+                name: 'home.catalogos.cajas',
+                data: {
+                    pageTitle: 'SOFTV | CATÁLOGO CAJAS',
+                    permissions: {
+                        options: {
+                            reload: false
+                        }
+                    }
+                },
+                url: '/catalogo/cajas',
+                templateUrl: 'views/catalogos/Cajas.html',
+                controller: 'CajasCtrl',
+                controllerAs: '$ctrl'
+            },
+            {
+                name: 'home.catalogos.sucursales',
+                data: {
+                    pageTitle: 'SOFTV | CATÁLOGO SUCURSALES',
+                    permissions: {
+                        options: {
+                            reload: false
+                        }
+                    }
+                },
+                url: '/catalogo/sucursales',
+                templateUrl: 'views/catalogos/Sucursales.html',
+                controller: 'SucursalesCtrl',
+                controllerAs: '$ctrl'
+            },
+            {
+                name: 'home.catalogos.sucursal_nueva',
+                data: {
+                    pageTitle: 'SOFTV | NUEVA SUCURSAL',
+                    permissions: {
+                        options: {
+                            reload: false
+                        }
+                    }
+                },
+                url: '/catalogo/sucursales/sucursal_nueva',
+                templateUrl: 'views/catalogos/SucursalForm.html',
+                controller: 'SucursalAddCtrl',
+                controllerAs: '$ctrl'
+            },
+            {
+                name: 'home.catalogos.sucursal_editar',
+                data: {
+                    pageTitle: 'SOFTV | EDITAR SUCURSAL',
+                    permissions: {
+                        options: {
+                            reload: false
+                        }
+                    }
+                },
+                url: '/catalogo/sucursales/sucursal_editar/:id',   
+                templateUrl: 'views/catalogos/SucursalForm.html',
+                controller: 'SucursalUpdateCtrl',
+                controllerAs: '$ctrl'
+            },
+            {
+                name: 'home.catalogos.SucursalDetalle',
+                data: {
+                    pageTitle: 'SOFTV | CONSULTAR SUCURSAL',
+                    permissions: {
+                        options: {
+                            reload: false
+                        }
+                    }
+                },
+                url: '/catalogo/sucursales/detalle/:id',   
+                templateUrl: 'views/catalogos/SucursalForm.html',
+                controller: 'SucursalDetalleCtrl',
                 controllerAs: '$ctrl'
             },
             {
