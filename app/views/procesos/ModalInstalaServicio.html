@@ -5,7 +5,7 @@
   </div>
   <div class="modal-body">
       <div class="tools" align="right"> 
-        <button type="button" title="Eliminar orden de servicio" class="btn btn-danger btn-sm" ng-click="ctrl.Eliminar();"><i class="fa fa-trash"></i> Eliminar</button>
+        <button type="button" title="Eliminar orden de servicio" ng-disabled="ctrl.Detalle" class="btn btn-danger btn-sm" ng-click="ctrl.Eliminar();"><i class="fa fa-trash"></i> Eliminar</button>
       </div>
 
 
@@ -45,7 +45,7 @@
 
                 &nbsp;
                 <div class="tools" align="right">
-                  <button  title="Guardar orden de servicio" class="btn btn-primary btn-sm" ng-click="ctrl.AgregaAparato()"><i class="glyphicon glyphicon-plus" aria-hidden="true" ></i> Agregar</button>    
+                  <button  title="Guardar orden de servicio" class="btn btn-primary btn-sm" ng-click="ctrl.AgregaAparato()" ng-disabled="ctrl.Detalle"><i class="glyphicon glyphicon-plus" aria-hidden="true" ></i> Agregar</button>    
                 </div>
 
 
