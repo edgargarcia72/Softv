@@ -273,7 +273,7 @@ angular
         factory.GetRELCLIBANCOList = function (Contrato) {
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
-            var Parametros = {'Contrato': Contrato}
+            var Parametros = {'Contrato': Contrato};
             $http.post(globalService.getUrl() + paths.GetRELCLIBANCOList, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -381,7 +381,7 @@ angular
         factory.GetDeepRELCLIENTEOBS = function (Contrato) {
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
-            var Parametros = {'Contrato': Contrato}
+            var Parametros = {'Contrato': Contrato};
             $http.post(globalService.getUrl() + paths.GetDeepRELCLIENTEOBS, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -393,7 +393,7 @@ angular
         factory.GetDeepRoboDeSeñal_New = function (Contrato) {
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
-            var Parametros = {'Contrato': Contrato}
+            var Parametros = {'Contrato': Contrato};
             $http.post(globalService.getUrl() + paths.GetDeepRoboDeSeñal_New, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -534,7 +534,7 @@ angular
                 deferred.reject(response);
             });
             return deferred.promise;
-        }
+        };
 
         factory.UpdateRelEstMunL = function (lstRelEstado, RelMunicipioEstAdd) {
             var deferred = $q.defer();
