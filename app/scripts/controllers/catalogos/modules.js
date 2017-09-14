@@ -40,6 +40,66 @@ angular
                 controllerAs: '$ctrl'
             },
             {
+                name: 'home.catalogos.sucursales',
+                data: {
+                    pageTitle: 'SOFTV | CATÁLOGO SUCURSALES',
+                    permissions: {
+                        options: {
+                            reload: false
+                        }
+                    }
+                },
+                url: '/catalogo/sucursales',
+                templateUrl: 'views/catalogos/Sucursales.html',
+                controller: 'SucursalesCtrl',
+                controllerAs: '$ctrl'
+            },
+            {
+                name: 'home.catalogos.sucursal_nueva',
+                data: {
+                    pageTitle: 'SOFTV | NUEVA SUCURSAL',
+                    permissions: {
+                        options: {
+                            reload: false
+                        }
+                    }
+                },
+                url: '/catalogo/sucursales/sucursal_nueva',
+                templateUrl: 'views/catalogos/SucursalForm.html',
+                controller: 'SucursalAddCtrl',
+                controllerAs: '$ctrl'
+            },
+            {
+                name: 'home.catalogos.sucursal_editar',
+                data: {
+                    pageTitle: 'SOFTV | EDITAR SUCURSAL',
+                    permissions: {
+                        options: {
+                            reload: false
+                        }
+                    }
+                },
+                url: '/catalogo/sucursales/sucursal_editar/:id',   
+                templateUrl: 'views/catalogos/SucursalForm.html',
+                controller: 'SucursalUpdateCtrl',
+                controllerAs: '$ctrl'
+            },
+            {
+                name: 'home.catalogos.SucursalDetalle',
+                data: {
+                    pageTitle: 'SOFTV | CONSULTAR SUCURSAL',
+                    permissions: {
+                        options: {
+                            reload: false
+                        }
+                    }
+                },
+                url: '/catalogo/sucursales/detalle/:id',   
+                templateUrl: 'views/catalogos/SucursalForm.html',
+                controller: 'SucursalDetalleCtrl',
+                controllerAs: '$ctrl'
+            },
+            {
                 name: 'home.catalogos.plazas',
                 data: {
                     pageTitle: 'SOFTV | CATÁLOGO PLAZAS',
