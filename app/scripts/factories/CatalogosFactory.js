@@ -47,8 +47,8 @@ angular
             GetRelEstadoCiudad_NewList: '/RelEstadoCiudad_New/GetRelEstadoCiudad_NewList',
             DeleteRelEstadoCiudad_New: '/RelEstadoCiudad_New/DeleteRelEstadoCiudad_New',
             GetAddCiudades: '/Ciudades_New/GetAddCiudades',
-            UpdateRelEstMunL: '/Municipio/UpdateRelEstMunL',
-            DeleteMunicipio: '/Municipio/DeleteMunicipio',
+            UpdateCiudades_New: '/Ciudades_New/UpdateCiudades_New',
+            DeleteCiudades_New: '/Ciudades_New/DeleteCiudades_New',
             GetLocalidadList: '/Localidad/GetLocalidadList',
             AddRelLocalidadL: '/localidad/AddRelLocalidadL',
             GetDeepLocalidad: '/localidad/GetDeepLocalidad',
@@ -547,7 +547,6 @@ angular
             var deferred = $q.defer();
             var config = { headers: { 'Authorization': $localStorage.currentUser.token } };
             var Parametros = ObjMunicipio;
-            console.log(Parametros);
             $http.post(globalService.getUrl() + paths.GetMuestraRelEdoCd, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -560,7 +559,6 @@ angular
             var deferred = $q.defer();
             var config = { headers: { 'Authorization': $localStorage.currentUser.token } };
             var Parametros = { 'objRelEstadoCiudad_New': objRelEstadoCiudad_New };
-            console.log(JSON.stringify(Parametros));
             $http.post(globalService.getUrl() + paths.AddRelEstadoCiudad_New, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -573,7 +571,6 @@ angular
             var deferred = $q.defer();
             var config = { headers: { 'Authorization': $localStorage.currentUser.token } };
             var Parametros = ObjMunicipio;
-            console.log(Parametros);
             $http.post(globalService.getUrl() + paths.DeleteRelEstadoCiudad_New, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -594,14 +591,11 @@ angular
             return deferred.promise;
         };
 
-        factory.UpdateRelEstMunL = function (lstRelEstado, RelMunicipioEstAdd) {
+        factory.UpdateCiudades_New = function (objCiudades_New) {
             var deferred = $q.defer();
             var config = { headers: { 'Authorization': $localStorage.currentUser.token } };
-            var Parametros = {
-                'lstRelEstado': lstRelEstado,
-                'RelMunicipioEstAdd': RelMunicipioEstAdd
-            };
-            $http.post(globalService.getUrl() + paths.UpdateRelEstMunL, JSON.stringify(Parametros), config).then(function (response) {
+            var Parametros = { 'objCiudades_New': objCiudades_New };
+            $http.post(globalService.getUrl() + paths.UpdateCiudades_New, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);
@@ -609,11 +603,11 @@ angular
             return deferred.promise;
         };
 
-        factory.DeleteMunicipio = function (IdMunicipio) {
+        factory.DeleteCiudades_New = function (Clv_Ciudad) {
             var deferred = $q.defer();
             var config = { headers: { 'Authorization': $localStorage.currentUser.token } };
-            var Parametros = { 'IdMunicipio': IdMunicipio };
-            $http.post(globalService.getUrl() + paths.DeleteMunicipio, JSON.stringify(Parametros), config).then(function (response) {
+            var Parametros = { 'Clv_Ciudad': Clv_Ciudad };
+            $http.post(globalService.getUrl() + paths.DeleteCiudades_New, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);
