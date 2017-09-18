@@ -1028,9 +1028,6 @@ angular
             return deferred.promise;
         };
 
-        
-
-
         return factory;
 
     });
