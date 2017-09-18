@@ -30,7 +30,7 @@
                 </select>
             </div>
             <div class="col-md-3" style="text-align:right" ng-show="ctrl.ShowEdit">
-                <button type="button" class="btn btn-success bt-sm" title="Agregar Relación Estado" ng-click="ctrl.AddRelEst()">Agregar</button>
+                <button type="button" class="btn btn-success btn-sm" title="Agregar Relación Estado" ng-click="ctrl.AddRelEst()">Agregar</button>
             </div>
         </div>
         <br>
@@ -40,14 +40,16 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th width="80%"><b>Estado</b></th>
+                                <th width="10%"><b>Id</b></th>
+                                <th width="70%"><b>Estado</b></th>
                                 <th width="20%"><b>Acciones</b></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="X in ctrl.RelEstViewList">
-                                <td>{{ X.Estado }}</td>
-                                <td><button type="button" class="btn btn-danger btn-xs" title="Eliminar Estado" ng-click="ctrl.DeleteRelEst(X.IdEstado, X.IdMunicipio)">Eliminar</button></td>
+                            <tr ng-repeat="X in ctrl.RelEstList">
+                                <td>{{ X.Clv_Estado }}</td>
+                                <td>{{ X.Nombre }}</td>
+                                <td><button type="button" class="btn btn-danger btn-xs" title="Eliminar Estado" ng-click="ctrl.DeleteRelEst(X.Clv_Estado)">Eliminar</button></td>
                             </tr>
                         </tbody>
                     </table>

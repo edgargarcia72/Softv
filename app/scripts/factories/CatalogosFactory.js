@@ -43,10 +43,12 @@ angular
             UpdateEstados_New: '/Estados_New/UpdateEstados_New',
             DeleteEstados_New: '/Estados_New/DeleteEstados_New',
             GetBuscaCiudades: '/RelEstadoCiudad_New/GetBuscaCiudades',
-            GetDeepMunicipio: '/Municipio/GetDeepMunicipio',
+            GetMuestraCiudadById: '/Ciudades_New/GetMuestraCiudadById',
+            GetRelEstadoCiudad_NewList: '/RelEstadoCiudad_New/GetRelEstadoCiudad_NewList',
+            DeleteRelEstadoCiudad_New: '/RelEstadoCiudad_New/DeleteRelEstadoCiudad_New',
             GetAddCiudades: '/Ciudades_New/GetAddCiudades',
-            UpdateRelEstMunL: '/Municipio/UpdateRelEstMunL',
-            DeleteMunicipio: '/Municipio/DeleteMunicipio',
+            UpdateCiudades_New: '/Ciudades_New/UpdateCiudades_New',
+            DeleteCiudades_New: '/Ciudades_New/DeleteCiudades_New',
             GetLocalidadList: '/Localidad/GetLocalidadList',
             AddRelLocalidadL: '/localidad/AddRelLocalidadL',
             GetDeepLocalidad: '/localidad/GetDeepLocalidad',
@@ -79,13 +81,12 @@ angular
             GetDeepTipServ_New: '/TipServ_New/GetDeepTipServ_New',
             UpdateTipServ_New: '/TipServ_New/UpdateTipServ_New',
             DeleteTipServ_New: '/TipServ_New/DeleteTipServ_New',
-            GetTipServList: '/TipServ/GetTipServList',
-            GetmuestraCP_ColoniaLocalidadList: '/muestraCP_ColoniaLocalidad/GetmuestraCP_ColoniaLocalidadList',
             GetSucursalList: '/Sucursales/GetSUCURSALESList',
             AddSucursal: '/SUCURSALES/AddSUCURSALES',
             GetDeepSucursal:'/SUCURSALES/GetDeepSUCURSALES',
-            UpdateSucursal: '/SUCURSALES/UpdateSUCURSALES'
-
+            UpdateSucursal: '/SUCURSALES/UpdateSUCURSALES',
+            GetMuestraRelEdoCd: '/RelEstadoCiudad_New/GetMuestraRelEdoCd',
+            AddRelEstadoCiudad_New: '/RelEstadoCiudad_New/AddRelEstadoCiudad_New'
         };
 
         factory.GetPlazaList = function (IdUsuario) {
@@ -518,11 +519,11 @@ angular
             return deferred.promise;
         };
 
-        factory.GetDeepMunicipio = function (IdMunicipio) {
+        factory.GetMuestraCiudadById = function (Clv_Ciudad) {
             var deferred = $q.defer();
             var config = { headers: { 'Authorization': $localStorage.currentUser.token } };
-            var Parametros = { 'IdMunicipio': IdMunicipio };
-            $http.post(globalService.getUrl() + paths.GetDeepMunicipio, JSON.stringify(Parametros), config).then(function (response) {
+            var Parametros = { 'Clv_Ciudad': Clv_Ciudad };
+            $http.post(globalService.getUrl() + paths.GetMuestraCiudadById, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);
@@ -530,7 +531,55 @@ angular
             return deferred.promise;
         };
 
-     factory.GetAddCiudades = function (ObjCiudad) {
+        factory.GetRelEstadoCiudad_NewList = function (Clv_Ciudad) {
+            var deferred = $q.defer();
+            var config = { headers: { 'Authorization': $localStorage.currentUser.token } };
+            var Parametros = { 'Clv_Ciudad': Clv_Ciudad };
+            $http.post(globalService.getUrl() + paths.GetRelEstadoCiudad_NewList, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.GetMuestraRelEdoCd = function (ObjMunicipio) {
+            var deferred = $q.defer();
+            var config = { headers: { 'Authorization': $localStorage.currentUser.token } };
+            var Parametros = ObjMunicipio;
+            $http.post(globalService.getUrl() + paths.GetMuestraRelEdoCd, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.AddRelEstadoCiudad_New = function (objRelEstadoCiudad_New) {
+            var deferred = $q.defer();
+            var config = { headers: { 'Authorization': $localStorage.currentUser.token } };
+            var Parametros = { 'objRelEstadoCiudad_New': objRelEstadoCiudad_New };
+            $http.post(globalService.getUrl() + paths.AddRelEstadoCiudad_New, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.DeleteRelEstadoCiudad_New = function (ObjMunicipio) {
+            var deferred = $q.defer();
+            var config = { headers: { 'Authorization': $localStorage.currentUser.token } };
+            var Parametros = ObjMunicipio;
+            $http.post(globalService.getUrl() + paths.DeleteRelEstadoCiudad_New, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.GetAddCiudades = function (ObjCiudad) {
             var deferred = $q.defer();
             var config = {headers:{'Authorization': $localStorage.currentUser.token}};
             var Parametros = ObjCiudad;
@@ -542,14 +591,11 @@ angular
             return deferred.promise;
         };
 
-        factory.UpdateRelEstMunL = function (lstRelEstado, RelMunicipioEstAdd) {
+        factory.UpdateCiudades_New = function (objCiudades_New) {
             var deferred = $q.defer();
             var config = { headers: { 'Authorization': $localStorage.currentUser.token } };
-            var Parametros = {
-                'lstRelEstado': lstRelEstado,
-                'RelMunicipioEstAdd': RelMunicipioEstAdd
-            };
-            $http.post(globalService.getUrl() + paths.UpdateRelEstMunL, JSON.stringify(Parametros), config).then(function (response) {
+            var Parametros = { 'objCiudades_New': objCiudades_New };
+            $http.post(globalService.getUrl() + paths.UpdateCiudades_New, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);
@@ -557,11 +603,11 @@ angular
             return deferred.promise;
         };
 
-        factory.DeleteMunicipio = function (IdMunicipio) {
+        factory.DeleteCiudades_New = function (Clv_Ciudad) {
             var deferred = $q.defer();
             var config = { headers: { 'Authorization': $localStorage.currentUser.token } };
-            var Parametros = { 'IdMunicipio': IdMunicipio };
-            $http.post(globalService.getUrl() + paths.DeleteMunicipio, JSON.stringify(Parametros), config).then(function (response) {
+            var Parametros = { 'Clv_Ciudad': Clv_Ciudad };
+            $http.post(globalService.getUrl() + paths.DeleteCiudades_New, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);
@@ -981,9 +1027,6 @@ angular
             });
             return deferred.promise;
         };
-
-        
-
 
         return factory;
 
