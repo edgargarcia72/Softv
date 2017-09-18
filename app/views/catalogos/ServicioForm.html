@@ -31,12 +31,12 @@
                 <div class="col-md-12">
                     <div class="col-md-3">
                         <label class="checkbox-inline checkbox-styled">
-                            <input type="checkbox" name="CbxCobroMensual" ng-model="$ctrl.CobroMensual" ng-true-value="'Y'" ng-false-value="'N'" ng-change="$ctrl.SetTipoCobro()"><span>Proceso Automático</span>
+                            <input type="checkbox" name="CbxCobroMensual" ng-model="$ctrl.CobroMensual" ng-true-value="'Y'" ng-false-value="'N'" ng-change="$ctrl.SetTipoCobro()"><span>Cobro Mensual</span>
                         </label>
                     </div>
                     <div class="col-md-3">
                         <label class="checkbox-inline checkbox-styled">
-                            <input type="checkbox" name="CbxServicioMensual" ng-model="$ctrl.ServicioMensual" ng-true-value="'Y'" ng-false-value="'N'" ng-change="$ctrl.buscarStatus()"><span>Servicio Mensual</span>
+                            <input type="checkbox" name="CbxPrincipal" ng-model="$ctrl.Principal" ng-true-value="'Y'" ng-false-value="'N'" ng-change="$ctrl.buscarStatus()"><span>Principal</span>
                         </label>
                     </div>
                     <div class="col-md-3">
@@ -46,7 +46,7 @@
                     </div>
                     <div class="col-md-3">
                         <label class="checkbox-inline checkbox-styled" ng-show="$ctrl.HideCobroMensual">
-                            <input type="checkbox" name="CbxGeneraOrden" ng-model="$ctrl.GeneraOrden" ng-true-value="'Y'" ng-false-value="'N'" ng-change="$ctrl.SetOrden()"><span>Proceso Genera Orden</span>
+                            <input type="checkbox" name="CbxGeneraOrden" ng-model="$ctrl.GeneraOrden" ng-true-value="'Y'" ng-false-value="'N'" ng-change="$ctrl.SetOrden()"><span>Genera Orden</span>
                         </label>
                     </div>
                 </div>
@@ -58,7 +58,7 @@
                         <p><b>Clave:</b></p>
                     </div>
                     <div class="col-md-2">
-                        <p><b>Precio:</b></p>
+                        <p ng-if="$ctrl.HideCobroMensual == true"><b>Precio:</b></p>
                     </div>
                     <div class="col-md-5">
                         <p><b>Descripción:</b></p>
@@ -69,16 +69,16 @@
                 </div>
                 <div class="col-md-12">
                     <div class="col-md-2">
-                        <input type="text" name="InpClace" class="form-control input-sm" style="text-transform:uppercase;" ng-model="$ctrl.Clave" maxlength="5" ng-pattern="/^[A-Z]{5}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 5 caracteres.'">
+                        <input type="text" name="InpClace" class="form-control input-sm" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" ng-model="$ctrl.Clave" maxlength="5" ng-pattern="/^[A-Z]{5}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 5 caracteres.'">
                     </div>
                     <div class="col-md-2">
-                        <input type="text" name="" class="form-control input-sm" ng-model="$ctrl.Precio">
+                        <input type="text" name="InpPrecio" class="form-control input-sm" ng-model="$ctrl.Precio" ng-if="$ctrl.HideCobroMensual == true"  maxlength="10" ng-pattern="/^\d{1,10}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa un precio.'">
                     </div>
                     <div class="col-md-5">
-                        <input type="text" name="" class="form-control input-sm" ng-model="$ctrl.Descripcion">
+                        <input type="text" name="InpDescripcion" class="form-control input-sm" ng-model="$ctrl.Descripcion" validate-on="dirty" required required-message="'Obligatorio'">
                     </div>
                     <div class="col-md-3">
-                        <input type="text" name="" class="form-control input-sm" ng-model="$ctrl.Orden" ng-show="$ctrl.ShowOrden">
+                        <input type="text" name="InoOrden" class="form-control input-sm" ng-model="$ctrl.Orden" ng-if="$ctrl.ShowOrden == true" validate-on="dirty" required required-message="'Obligatorio'">
                     </div>
                 </div>
             </div>
@@ -196,16 +196,16 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="col-md-3">
-                                            <input type="number" name="ImpProntoPago" class="form-control input-sm" ng-model="$ctrl.ProntoPago" ng-pattern="/^\d{1,10}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
+                                            <input type="number" name="ImpProntoPago" class="form-control input-sm" ng-if="$ctrl.ProntoPago" ng-pattern="/^\d{1,10}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
                                         </div>
                                         <div class="col-md-3">
-                                            <input type="number" name="ImpMeses35" class="form-control input-sm" ng-model="$ctrl.Meses35" ng-pattern="/^\d{1,10}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
+                                            <input type="number" name="ImpMeses35" class="form-control input-sm" ng-if="$ctrl.Meses35" ng-pattern="/^\d{1,10}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
                                         </div>
                                         <div class="col-md-3">
-                                            <input type="number" name="ImpMeses611" class="form-control input-sm" ng-model="$ctrl.Meses611" ng-pattern="/^\d{1,10}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
+                                            <input type="number" name="ImpMeses611" class="form-control input-sm" ng-if="$ctrl.Meses611" ng-pattern="/^\d{1,10}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
                                         </div>
                                         <div class="col-md-3">
-                                            <input type="number" name="ImpMeses11" class="form-control input-sm" ng-model="$ctrl.Meses11" ng-pattern="/^\d{1,10}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
+                                            <input type="number" name="ImpMeses11" class="form-control input-sm" ng-if="$ctrl.Meses11" ng-pattern="/^\d{1,10}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
                                         </div>
                                     </div>
                                 </div>

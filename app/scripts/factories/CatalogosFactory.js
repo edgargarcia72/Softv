@@ -86,7 +86,13 @@ angular
             GetDeepSucursal:'/SUCURSALES/GetDeepSUCURSALES',
             UpdateSucursal: '/SUCURSALES/UpdateSUCURSALES',
             GetMuestraRelEdoCd: '/RelEstadoCiudad_New/GetMuestraRelEdoCd',
-            AddRelEstadoCiudad_New: '/RelEstadoCiudad_New/AddRelEstadoCiudad_New'
+            AddRelEstadoCiudad_New: '/RelEstadoCiudad_New/AddRelEstadoCiudad_New',
+            GetMuestraTipSerPrincipal_SERList: '/MuestraTipSerPrincipal_SER/GetMuestraTipSerPrincipal_SERList',
+            AddServicios_New: '/Servicios_New/AddServicios_New',
+            DeleteBORRel_Trabajos_NoCobroMensual: '/BORRel_Trabajos_NoCobroMensual/DeleteBORRel_Trabajos_NoCobroMensual',
+            AddValidaAplicaSoloInternet: '/ValidaAplicaSoloInternet/AddValidaAplicaSoloInternet',
+            AddNueAplicaSoloInternet: '/NueAplicaSoloInternet/AddNueAplicaSoloInternet',
+            DeleteBorAplicaSoloInternet: '/BorAplicaSoloInternet/DeleteBorAplicaSoloInternet'
         };
 
         factory.GetPlazaList = function (IdUsuario) {
@@ -1021,6 +1027,69 @@ angular
             var config = { headers: { 'Authorization': $localStorage.currentUser.token } };
             var Parametros = { 'objSUCURSALES': objSUCURSALES };
             $http.post(globalService.getUrl() + paths.UpdateSucursal, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.GetMuestraTipSerPrincipal_SERList = function(){
+            var deferred = $q.defer();
+            var config = { headers: { 'Authorization': $localStorage.currentUser.token } };
+            $http.get(globalService.getUrl() + paths.GetMuestraTipSerPrincipal_SERList, config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.AddServicios_New = function (objServicios_New) {
+            var deferred = $q.defer();
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = {'objServicios_New': objServicios_New};
+            console.log(Parametros);
+            $http.post(globalService.getUrl() + paths.AddServicios_New, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.DeleteBORRel_Trabajos_NoCobroMensual = function (Clv_Servicio) {
+            var deferred = $q.defer();
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = {'Clv_Servicio': Clv_Servicio};
+            console.log(Parametros);
+            $http.post(globalService.getUrl() + paths.DeleteBORRel_Trabajos_NoCobroMensual, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.AddValidaAplicaSoloInternet = function (Clv_Servicio) {
+            var deferred = $q.defer();
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = {'Clv_Servicio': Clv_Servicio};
+            console.log(Parametros);
+            $http.post(globalService.getUrl() + paths.AddValidaAplicaSoloInternet, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.DeleteBorAplicaSoloInternet = function (Clv_Servicio) {
+            var deferred = $q.defer();
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = {'Clv_Servicio': Clv_Servicio};
+            console.log(Parametros);
+            $http.post(globalService.getUrl() + paths.DeleteBorAplicaSoloInternet, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);

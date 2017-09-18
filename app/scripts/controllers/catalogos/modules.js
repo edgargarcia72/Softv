@@ -312,14 +312,9 @@ angular
             {
                 name: 'home.catalogos.servicio_nuevo',
                 data: {
-                    pageTitle: 'SOFTV | NUEVO SERVICIO',
-                    permissions: {
-                        options: {
-                            reload: false
-                        }
-                    }
+                    pageTitle: 'SOFTV | NUEVO SERVICIO'
                 },
-                url: '/catalogo/servicios/nuevo',
+                url: '/catalogo/servicios/nuevo/:id',
                 templateUrl: 'views/catalogos/ServicioForm.html',
                 controller: 'ServicioAddCtrl',
                 controllerAs: '$ctrl'

@@ -7,6 +7,11 @@
                 <a href="#"><i class="fa fa-home" aria-hidden="true"></i> Inicio</a>><a href="#" class="paginaActiva">Catálogo Servicios</a>
             </small>
         </header>
+        <div class="tools">
+			<div class="btn-group">
+                <button type="button" class="btn btn-primary btn-sm" ui-sref="home.catalogos.servicio_nuevo({ id: $ctrl.TipoServicio.Clv_TipSerPrincipal })" ng-disabled="$ctrl.TipoServicio == undefined" title="Crear una Servcio Nuevo">NUEVO SERVICIO</button>
+			</div>
+        </div>
     </div>
     <div class="card-body">
         <div class="row">
@@ -17,10 +22,12 @@
                         <span class="input-group-addon"><i class="fa fa-search"></i></span>
                     </div>
                 </div>
-                <div class="col-md-7">
+                <div class="col-md-6">
                 </div>
-                <div class="col-md-2" style="text-align:right">
-				    <button type="button" class="btn btn-primary btn-sm" ui-sref="home.catalogos.servicio_nuevo" title="Crear una Servcio Nuevo">NUEVO SERVICIO</button>
+                <div class="col-md-3" style="text-align:right">
+                    <select name="SlcTipoServicio" class="form-control input-sm" ng-model="$ctrl.TipoServicio" ng-options="T.Concepto for T in $ctrl.TipoServicioList track by T.Clv_TipSerPrincipal">
+                        <option value="">Selecciona</option>
+                    </select>
 			    </div>
 			</div>
         </div>
