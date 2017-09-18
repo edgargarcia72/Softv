@@ -26,7 +26,16 @@ angular
         factory.GetPROCESODevolucionAparatosAlmacen = function (ObjDevolucion) {
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
-            var Parametros = ObjDevolucion;
+            var Parametros = {
+                'CLV_ORDEN': ObjDevolucion.CLV_ORDEN,
+                'TIPOAPARATO': ObjDevolucion.TIPOAPARATO,
+                'CLV_CABLEMODEM': ObjDevolucion.CLV_CABLEMODEM,
+                'MACCABLEMODEM': ObjDevolucion.MACCABLEMODEM,
+                'ESTADOAPARATO': ObjDevolucion.ESTADOAPARATO,
+                'USUARIO': $localStorage.currentUser.usuario,                
+                'PROVIENE': ObjDevolucion.PROVIENE,
+                'MARCA': ObjDevolucion.MARCA
+            };;
             console.log(JSON.stringify(Parametros));
             $http.post(globalService.getUrl() + paths.GetPROCESODevolucionAparatosAlmacen, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
