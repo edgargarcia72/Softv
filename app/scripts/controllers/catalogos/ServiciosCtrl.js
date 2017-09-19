@@ -8,8 +8,37 @@ angular
                 console.log(data);
                 vm.TipoServicioList = data.GetMuestraTipSerPrincipal_SERListResult;
             });
+            vm.ServicioList = [
+                {
+                    'Clv_Servicio': 5345,
+                    'clv_txt': 'BBBBR'
+                }
+            ];
+            vm.ConRegistros = true;
+        }
+
+        function OpenDeleteServicio(ObjServicio){
+            var ObjServicio = ObjServicio;
+            var modalInstance = $uibModal.open({
+                animation: true,
+                ariaLabelledBy: 'modal-title',
+                ariaDescribedBy: 'modal-body',
+                templateUrl: 'views/catalogos/ModalServicioDelete.html',
+                controller: 'ModalServicioDeleteCtrl',
+                controllerAs: 'ctrl',
+                backdrop: 'static',
+                keyboard: false,
+                class: 'modal-backdrop fade',
+                size: 'sm',
+                resolve: {
+                    ObjServicio: function () {
+                        return ObjServicio;
+                    }
+                }
+            });
         }
 
         var vm = this;
+        vm.OpenDeleteServicio = OpenDeleteServicio;
         initData();
     });

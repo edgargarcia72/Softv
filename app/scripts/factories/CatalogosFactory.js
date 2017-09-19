@@ -92,7 +92,13 @@ angular
             DeleteBORRel_Trabajos_NoCobroMensual: '/BORRel_Trabajos_NoCobroMensual/DeleteBORRel_Trabajos_NoCobroMensual',
             AddValidaAplicaSoloInternet: '/ValidaAplicaSoloInternet/AddValidaAplicaSoloInternet',
             AddNueAplicaSoloInternet: '/NueAplicaSoloInternet/AddNueAplicaSoloInternet',
-            DeleteBorAplicaSoloInternet: '/BorAplicaSoloInternet/DeleteBorAplicaSoloInternet'
+            DeleteBorAplicaSoloInternet: '/BorAplicaSoloInternet/DeleteBorAplicaSoloInternet',
+            UpdateServicios_New: '/Servicios_New/UpdateServicios_New',
+            GetMUESTRATRABAJOS_NewList: '/MUESTRATRABAJOS_New/GetMUESTRATRABAJOS_NewList',
+            UpdateGUARDARel_Trabajos_NoCobroMensual: '/GUARDARel_Trabajos_NoCobroMensual/UpdateGUARDARel_Trabajos_NoCobroMensual',
+            GetDeepValidaCambioDClvtxtServ: '/ValidaCambioDClvtxtServ/GetDeepValidaCambioDClvtxtServ',
+            GetDeepValida_borra_servicio_New: '/Valida_borra_servicio_New/GetDeepValida_borra_servicio_New',
+            DeleteServicios_New: '/Servicios_New/DeleteServicios_New'
         };
 
         factory.GetPlazaList = function (IdUsuario) {
@@ -1071,12 +1077,25 @@ angular
             return deferred.promise;
         };
 
-        factory.AddValidaAplicaSoloInternet = function (Clv_Servicio) {
+        factory.AddValidaAplicaSoloInternet = function (objValidaAplicaSoloInternet) {
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
-            var Parametros = {'Clv_Servicio': Clv_Servicio};
+            var Parametros = {'objValidaAplicaSoloInternet': objValidaAplicaSoloInternet};
             console.log(Parametros);
             $http.post(globalService.getUrl() + paths.AddValidaAplicaSoloInternet, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.AddNueAplicaSoloInternet = function (objNueAplicaSoloInternet) {
+            var deferred = $q.defer();
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = {'objNueAplicaSoloInternet': objNueAplicaSoloInternet};
+            console.log(Parametros);
+            $http.post(globalService.getUrl() + paths.AddNueAplicaSoloInternet, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);
@@ -1097,8 +1116,84 @@ angular
             return deferred.promise;
         };
 
+        factory.UpdateServicios_New = function (objServicios_New) {
+            var deferred = $q.defer();
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = {'objServicios_New': objServicios_New};
+            console.log(Parametros);
+            $http.post(globalService.getUrl() + paths.UpdateServicios_New, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.GetMUESTRATRABAJOS_NewList = function (clv_TipSer) {
+            var deferred = $q.defer();
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = {'clv_TipSer': clv_TipSer};
+            console.log(Parametros);
+            $http.post(globalService.getUrl() + paths.GetMUESTRATRABAJOS_NewList, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.UpdateGUARDARel_Trabajos_NoCobroMensual = function (objGUARDARel_Trabajos_NoCobroMensual) {
+            var deferred = $q.defer();
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = {'objGUARDARel_Trabajos_NoCobroMensual': objGUARDARel_Trabajos_NoCobroMensual};
+            console.log(Parametros);
+            $http.post(globalService.getUrl() + paths.UpdateGUARDARel_Trabajos_NoCobroMensual, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.GetDeepValidaCambioDClvtxtServ = function (ObjValidaCambio) {
+            var deferred = $q.defer();
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = ObjValidaCambio;
+            console.log(Parametros);
+            $http.post(globalService.getUrl() + paths.GetDeepValidaCambioDClvtxtServ, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.GetDeepValida_borra_servicio_New = function (ValidaDelete) {
+            var deferred = $q.defer();
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = ValidaDelete;
+            console.log(Parametros);
+            $http.post(globalService.getUrl() + paths.GetDeepValida_borra_servicio_New, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.DeleteServicios_New = function (Clv_Servicio) {
+            var deferred = $q.defer();
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = {'Clv_Servicio': Clv_Servicio};
+            console.log(Parametros);
+            $http.post(globalService.getUrl() + paths.DeleteServicios_New, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
         return factory;
 
     });
-  
-   
