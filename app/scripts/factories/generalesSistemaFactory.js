@@ -17,8 +17,35 @@ angular
       GetspEliminaRangosCobroMaterial: '/Configuracion/GetspEliminaRangosCobroMaterial',
       GetModificaPromocionesGeneral: '/Configuracion/GetModificaPromocionesGeneral',
       GetGeneralesPrincipalGuardar: '/Configuracion/GetGeneralesPrincipalGuardar',
+      GetChangePassword: '/Configuracion/GetChangePassword',
+      
 
     };
+
+    factory.GetChangePassword = function (passwordant,passwordnue) {
+      var deferred = $q.defer();
+      var Parametros = {
+        'pswanterior':passwordant,
+        'pswnueva':passwordnue,
+        'usuario':$localStorage.currentUser.usuario,
+        'op':0
+      };
+      var config = {
+        headers: {
+          'Authorization': $localStorage.currentUser.token
+        }
+      };
+      $http.post(globalService.getUrl() + paths.GetChangePassword, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response.data);
+      });
+
+      return deferred.promise;
+    };
+
+
+
 
     factory.GetGeneralesPrincipalGuardar = function (obj) {
       var deferred = $q.defer();
@@ -317,7 +344,11 @@ angular
 
     factory.GetGeneralesPrincipal = function () {
       var deferred = $q.defer();
-      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var config = {
+        headers: {
+          'Authorization': $localStorage.currentUser.token
+        }
+      };
       $http.get(globalService.getUrl() + paths.GetGeneralesPrincipal, config).then(function (response) {
         deferred.resolve(response.data);
       }).catch(function (response) {
@@ -329,8 +360,15 @@ angular
 
     factory.GetPeriodoscorte = function (clv_periodo, idcompania) {
       var deferred = $q.defer();
-      var Parametros = {'clv_periodo': clv_periodo,'idcompania': idcompania};
-      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {
+        'clv_periodo': clv_periodo,
+        'idcompania': idcompania
+      };
+      var config = {
+        headers: {
+          'Authorization': $localStorage.currentUser.token
+        }
+      };
       $http.post(globalService.getUrl() + paths.GetPeriodoscorte, JSON.stringify(Parametros), config).then(function (response) {
         deferred.resolve(response.data);
       }).catch(function (response) {

@@ -35,7 +35,7 @@ angular
                 'USUARIO': $localStorage.currentUser.usuario,                
                 'PROVIENE': ObjDevolucion.PROVIENE,
                 'MARCA': ObjDevolucion.MARCA
-            };;
+            };
             console.log(JSON.stringify(Parametros));
             $http.post(globalService.getUrl() + paths.GetPROCESODevolucionAparatosAlmacen, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
