@@ -91,7 +91,7 @@ angular
       AddRelEstadoCiudad_New: '/RelEstadoCiudad_New/AddRelEstadoCiudad_New',
       GetCatalogoCajasList: '/CatalogoCajas/GetCatalogoCajasList',
       AddCatalogoCajas: '/CatalogoCajas/AddCatalogoCajas',
-      UpdateCatalogoCajas: 'CatalogoCajas/UpdateCatalogoCajas',
+      UpdateCatalogoCajas: '/CatalogoCajas/UpdateCatalogoCajas',
       GetDeepCatalogoCajas: '/CatalogoCajas/GetDeepCatalogoCajas'
 
     };
@@ -133,6 +133,7 @@ angular
         }
       };
       var Parametros = {
+        'objCatalogoCajas':{
         'Clave': obj.Clave,
         'Clv_sucursal': obj.Clv_sucursal,
         'IpMaquina': obj.IpMaquina,
@@ -141,6 +142,7 @@ angular
         'facnormal': obj.facnormal,
         'facticket': obj.facticket,
         'impresoratermica': obj.impresoratermica
+        }
       };
       $http.post(globalService.getUrl() + paths.UpdateCatalogoCajas, JSON.stringify(Parametros), config).then(function (response) {
         deferred.resolve(response.data);

@@ -47,7 +47,10 @@
           <b>Plaza:</b>
         </div>
         <div class="col-md-3">
-          <select name="SlcPlaza" class="form-control input-sm" ng-model="$ctrl.Plaza">
+          <select name="SlcPlaza"
+          ng-change="$ctrl.ObtenDetalle()"
+           ng-options="item as item.razon_social for item in $ctrl.plazas track by item.id_compania"
+            class="form-control input-sm" ng-model="$ctrl.Plaza">
             <option value="">Selecciona</option>
           </select>
         </div>
@@ -57,7 +60,7 @@
       <div class="col-md-12">
         <div class="col-md-12">
           <uib-tabset active="active">
-            <uib-tab index="0">
+            <!--<uib-tab index="0">
                 <uib-tab-heading>
                     Servicios de Televisión
                 </uib-tab-heading>
@@ -110,46 +113,9 @@
                 <footer>
                     <p class="text-right"></p>
                 </footer>
-            </uib-tab>
-            <uib-tab index="1">
-                <uib-tab-heading>
-                    Mensaje de Tickets
-                </uib-tab-heading>
-                <form name="FormMesajeTicket" angular-validator-submit="ctrl.SaveMesajeTicket()" novalidate angular-validator autocomplete="off">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="col-md-12">
-                        <h4 class="text-primary">Mensaje de Tickets</h4>
-                      </div>
-                    </div>
-                    <div class="col-md-12">
-                      <div class="col-md-4 col-md-offset-4">
-                        <b>Mensaje:</b>
-                      </div>
-                      <div class="col-md-4 col-md-offset-4">
-                        <textarea name="TxaMensaje" rows="5" class="form-control input-sm" ng-model="$ctrl.Mensaje" validate-on="dirty" required required-message="'Obligatorio'">
-                        </textarea>
-                        <br>
-                      </div>
-                      <div class="col-md-4 col-md-offset-4">
-                        <label class="checkbox-inline checkbox-styled">
-                            <input type="checkbox" name="CbxActivo" ng-model="$ctrl.Activo" ng-true-value="'Y'" ng-false-value="'N'"><span>Activo:</span>
-                        </label>
-                      </div>
-                    </div>
-                    <div class="col-md-12">
-                      <div class="col-md-4 col-md-offset-8">
-                        <br>
-                        <button type="submit" class="btn btn-success btn-sm">Guardar</button>
-                      </div>
-                    </div>
-                  </div>
-                </form>
-                <footer>
-                    <p class="text-right"></p>
-                </footer>
-            </uib-tab>
-            <uib-tab index="2">
+            </uib-tab>-->
+
+           <uib-tab index="0">
                 <uib-tab-heading>
                     Ordenes y Reportes
                 </uib-tab-heading>
@@ -162,7 +128,7 @@
                         <br>
                       </div>
                       <div class="col-md-9">
-                        <select name="SlcDepatamento" class="form-control input-sm" ng-model="$ctrl.Depatamento">
+                        <select name="SlcDepatamento" ng-change="$ctrl.obtentecnicos()" class="form-control input-sm" ng-options="item as item.puesto for item in $ctrl.departamentos track by item.clv_puesto"   ng-model="$ctrl.Depatamento">
                           <option value="">Selecciona</option>
                         </select>
                         <br>
@@ -178,62 +144,58 @@
                         </select>
                       </div>
                     </div>
+                    <div class="col-md-4 col-md-offset-4">
+                      <br>
+                      <div class="col-md-4">
+                        <p class="text-muted">Selecciona un rubro:</p>
+                      </div>
+                      <div class="col-md-4">
+                        <button class="btn btn-success btn-xs"> + Ordenes</button>
+                      </div>
+                      <div class="col-md-4">
+                        
+                        <button class="btn btn-success btn-xs"> + Reportes</button>
+                      </div>
+                    </div>
                   </div>
                   <div class="col-md-12">
                     <div class="dualmultiselect">
                       <div class="row">
-                        <div class="col-lg-3 col-md-3 col-sm-3 col-md-offset-1 text">
+                        <div class="col-lg-5 col-md-5 col-sm-5 col-md-offset-1">
                           <h4 class="text-primary"><b>Técnicos a mostrar en Ordenes</b></h4>
                           <div class="pool">
                             <ul>
-                              <li ng-repeat="X in $ctrl.Lista">
-                                <div class="row">
-                                  <div class="col-md-12">
-                                    <div class="col-md-6">
-                                      <a href=""><b>{{ X.Nombre }}</b></a>
-                                    </div>
-                                    <div class="col-md-6">
-                                      <button type="button" class="btn ink-reaction  btn-xs btn-danger" ng-click=""> Eliminar</button>
-                                    </div>
-                                  </div>
-                                </div>
+                              <li ng-repeat="X in $ctrl.tecnicosordenes">                            
+                                  
+                                   
+                                      <a href=""><b>{{ X.tecnico }}</b></a>
+                                   
+                                   
+                                      <button type="button" class="btn ink-reaction  btn-xs btn-danger" ng-click="$ctrl.eliminaOrdenes(x.clv_tecnico)"> Eliminar</button>
+                                 
+                                
+                               
                               </li>
                             </ul>
                           </div>
                         </div>
-                        <div class="col-lg-2 col-md-2 col-sm-2 text">
-                          <div class="col-md-12" style="text-align:left;">
-                            <br>
-                            <br>
-                            <button type="button" class="btn btn-success btn-sm">Agregar</button>
-                          </div>
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-3">
+                        
+                        <div class="col-lg-5 col-md-5 col-sm-2">
                           <h4 class="text-primary"><b>Técnicos a mostrar en Reportes</b></h4>                
                           <div class="pool">
                             <ul>
-                              <li ng-repeat="X in $ctrl.Lista">
-                                <div class="row">
-                                  <div class="col-md-12">
-                                  <div class="col-md-6">
-                                    <a href=""><b>{{ X.Nombre }}</b></a>
-                                  </div>
-                                  <div class="col-md-6">
-                                    <button type="button" class="btn ink-reaction  btn-xs btn-danger" ng-click=""> Eliminar</button>
-                                  </div>
-                                  </div>
-                                </div>
+                              <li ng-repeat="X in $ctrl.Lista">            
+                                  
+                                    <a href=""><b>{{ X.tecnico }}</b></a>   
+                                  
+                                    <button type="button" class="btn ink-reaction  btn-xs btn-danger" ng-click="$ctrl.eliminaQuejas(x.clv_tecnico)"> Eliminar</button>
+                                 
+                               
                               </li>
                             </ul>
                           </div>
                         </div>
-                        <div class="col-lg-2 col-md-2 col-sm-2 text">
-                          <div class="col-md-12" style="text-align:left;">
-                            <br>
-                            <br>
-                            <button type="button" class="btn btn-success btn-sm">Agregar</button>
-                          </div>
-                        </div>
+                        
                       </div>
                     </div>
                   </div>
@@ -242,11 +204,51 @@
                     <p class="text-right"></p>
                 </footer>
             </uib-tab>
-            <uib-tab index="3">
+
+            <uib-tab index="1">
+                <uib-tab-heading>
+                    Mensaje de Tickets
+                </uib-tab-heading>
+                <form name="FormMesajeTicket" angular-validator-submit="$ctrl.guardamensaje()" novalidate angular-validator autocomplete="off">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="col-md-12">
+                        <h4 class="text-primary">Mensaje de Tickets</h4>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="col-md-4 col-md-offset-4">
+                        <b>Mensaje:</b>
+                      </div>
+                      <div class="col-md-4 col-md-offset-4">
+                        <textarea name="TxaMensaje" rows="5" class="form-control input-sm" ng-model="$ctrl.mensajeticket" validate-on="dirty" required required-message="'Obligatorio'">
+                        </textarea>
+                        <br>
+                      </div>
+                      <div class="col-md-4 col-md-offset-4">
+                        <label class="checkbox-inline checkbox-styled">
+                            <input type="checkbox" name="CbxActivo" ng-model="$ctrl.mensajeactivo"><span>Activo:</span>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="col-md-4 col-md-offset-8">
+                        <br>
+                        <button type="submit" class="btn btn-success btn-sm">Guardar</button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+                <footer>
+                    <p class="text-right"></p>
+                </footer>
+            </uib-tab>
+            
+            <uib-tab index="2">
                 <uib-tab-heading>
                     Bonificaciones
                 </uib-tab-heading>
-                <form name="FormBonificaion" angular-validator-submit="ctrl.SaveBonificaion()" novalidate angular-validator autocomplete="off">
+                <form name="FormBonificaion" angular-validator-submit="$ctrl.guardaBonificacion()" novalidate angular-validator autocomplete="off">
                   <div class="row">
                     <div class="col-md-12">
                       <div class="col-md-12">
@@ -258,7 +260,7 @@
                         <b>Bonificacion máxima permitida:</b>
                       </div>
                       <div class="col-md-3">
-                        <input type="number" name="InpBonificacion" class="form-control input-sm" ng-model="$ctrl.Bonificacion" validate-on="dirty" required required-message="'Obligatorio'">
+                        <input type="number" name="InpBonificacion" class="form-control input-sm" ng-model="$ctrl.bonificacion" validate-on="dirty" required required-message="'Obligatorio'">
                       </div>
                     </div>
                     <div class="col-md-12">

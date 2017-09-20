@@ -45,4 +45,5 @@ angular
     var vm = this;
     init(); 
     vm.OpenDeleteCaja = OpenDeleteCaja;
+    vm.buscar=buscar;
   });
