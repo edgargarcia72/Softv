@@ -6,21 +6,29 @@
     <div class="modal-body">
         <div class="row">
             <div class="col-md-12">
-                <div class="col-md-12">
-                    <b>Concepto:</b>
-                </div>
-                <div class="col-md-12">
-                    <select class="form-control input-sm">
-                        <option value="">Selecciona</option>
-                    </select>
+                <div class="col-md-12" ng-if="ctrl.TipoConcepto.Clave == 1 && ctrl.Clv_TipoCobro == 1">
+                    <label class="checkbox-inline checkbox-styled">
+                        <input type="checkbox" name="CbxAplicatodos" ng-model="ctrl.AplicaTodos" ng-true-value="'Y'" ng-false-value="'N'"><span class="text-danger">Aplicar a todos los tipos de cobro</span>
+                    </label>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="col-md-12">
-                    <h4><b>Precios del servicio:</b></h4>
-                    <hr style="border:1px dotted;">
+                    <b>Concepto:</b>
+                </div>
+                <div class="col-md-12">
+                    <select name="SlcTipoConcepto" class="form-control input-sm" ng-model="ctrl.TipoConcepto" ng-options="TC.Concepto for TC in ctrl.TipoConceptoList track by TC.Clave" validate-on="dirty" required required-message="'Obligatorio'">
+                        <option value="" ng-disabled="true">Selecciona</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-show="false">
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <h4 class="text-primary"><b>Precios del servicio:</b></h4>
                 </div>
             </div>
             <div class="col-md-12">
@@ -39,109 +47,120 @@
                 </div>
             </div>
         </div>
-        <!-- TV Digital -->
-        <div class="row" ng-show="false">
-            <div class="col-md-12">
-                <div class="col-md-6">
-                    <h4><b>Nueva</b></h4>
-                </div>
-                <div class="col-md-6">
-                    <h4><b>Con servicio</b></h4>
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div class="col-md-6">
-                    <b>Principal:</b>
-                    <input type="text" class="form-control input-sm">
-                </div>
-                <div class="col-md-6">
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div class="col-md-6">
-                    <b>Adicional:</b>
-                    <input type="text" class="form-control input-sm">
-                </div>
-                <div class="col-md-6">
-                    <b>Adicional:</b>
-                    <input type="text" class="form-control input-sm">
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div class="col-md-6">
-                    <b>Adicional:</b>
-                    <input type="text" class="form-control input-sm">
-                </div>
-                <div class="col-md-6">
-                    <b>Adicional:</b>
-                    <input type="text" class="form-control input-sm">
-                </div>
-            </div>
-        </div>
-        <!-- TV Digital -->
         <div class="row">
             <div class="col-md-12">
                 <div class="col-md-12">
-                    <h4><b>Periodo de vigencia:</b></h4>
-                    <hr style="border:1px dotted;">
+                    <h4 class="text-primary"><b>Precios del servicio:</b></h4>
                 </div>
             </div>
             <div class="col-md-12">
+                <div class="col-md-6" style="text-align:center;">
+                    <b>Nueva</b>
+                </div>
+                <div class="col-md-6" style="text-align:center;" ng-if="ctrl.TipoConcepto.Clave == 1">
+                    <b>Con servicio</b>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-2">
+                    <b>Principal:</b>
+                </div>
+                <div class="col-md-4">
+                    <input type="number" name="InpPrincipal" class="form-control input-sm" ng-model="ctrl.Principal" validate-on="dirty" required required-message="'Obligatorio'">
+                </div>
                 <div class="col-md-6">
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-2">
+                    <b>Adicional:</b>
+                </div>
+                <div class="col-md-4">
+                    <input type="number" name="InpAdicionalN1" class="form-control input-sm" ng-model="ctrl.AdicionalN1" validate-on="dirty" required required-message="'Obligatorio'">
+                </div>
+                <div class="col-md-2" ng-if="ctrl.TipoConcepto.Clave == 1">
+                    <b>Adicional:</b>
+                </div>
+                <div class="col-md-4" ng-if="ctrl.TipoConcepto.Clave == 1">
+                    <input type="number" name="InpAdicionalS1" class="form-control input-sm" ng-model="ctrl.AdicionalS1">
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-2">
+                    <b>Adicional:</b>
+                </div>
+                <div class="col-md-4">
+                    <input type="number" name="InpAdicionalN2" class="form-control input-sm" ng-model="ctrl.AdicionalN2">
+                </div>
+                <div class="col-md-2" ng-if="ctrl.TipoConcepto.Clave == 1">
+                    <b>Adicional:</b>
+                </div>
+                <div class="col-md-4" ng-if="ctrl.TipoConcepto.Clave == 1">
+                    <input type="number" name="InpAdicionalS2" class="form-control input-sm" ng-model="ctrl.AdicionalS2">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <h4 class="text-primary"><b>Periodo de vigencia:</b></h4>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-2">
                     <b>Inicio:</b>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
+                    <input type="date" name="InpFechaInicio" class="form-control input-sm" ng-model="ctrl.FechaInicio" validate-on="dirty" required required-message="'Obligatorio'">
+                </div>
+                <div class="col-md-2">
                     <b>Final:</b>
+                </div>
+                <div class="col-md-4">
+                    <input type="date" name="InpFechaFinal" class="form-control input-sm" ng-model="ctrl.FechaFinal" validate-on="dirty" required required-message="'Obligatorio'">
                 </div>
             </div>
             <div class="col-md-12">
-                <div class="col-md-6">
-                    <input type="date" class="form-control input-sm">
-                </div>
-                <div class="col-md-6">
-                    <input type="date" class="form-control input-sm">
-                </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="col-md-12">
-                    <h4><b>Opciones:</b></h4>
-                    <hr style="border:1px dotted;">
+                    <h4 class="text-primary"><b>Opciones:</b></h4>
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="col-md-6">
-                    <label class="checkbox-inline checkbox-styled">
-                        <input type="checkbox" name="" ng-model="ctrl.Vigente" ng-true-value="'Y'" ng-false-value="'N'"><span>Vigente</span>
+                    <label class="checkbox-inline checkbox-styled" ng-if="ctrl.Clv_TipoCobro == 1 || (ctrl.Clv_TipoCobro == 2 && ctrl.TipoConcepto.Clave != 4)">
+                        <input type="checkbox" name="CbxVigente" ng-model="ctrl.Vigente" ng-true-value="'Y'" ng-false-value="'N'"><span class="text-danger">Vigente</span>
                     </label>
                 </div>
                 <div class="col-md-6">
-                    <label class="checkbox-inline checkbox-styled">
-                        <input type="checkbox" name="" ng-model="ctrl.SeCobraMensualidad" ng-true-value="'Y'" ng-false-value="'N'"><span>Se cobra mensualidad</span>
-                    </label>
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div class="col-md-6">
-                    <label class="checkbox-inline checkbox-styled">
-                        <input type="checkbox" name="" ng-model="ctrl.AplicaComision" ng-true-value="'Y'" ng-false-value="'N'"><span>Aplica comisión</span>
-                    </label>
-                </div>
-                <div class="col-md-6">
-                    <label class="checkbox-inline checkbox-styled">
-                        <input type="checkbox" name="" ng-model="ctrl.GeneraOrden" ng-true-value="'Y'" ng-false-value="'N'" ng-change="ctrl.SetOrden()"><span>Genera orden</span>
+                    <label class="checkbox-inline checkbox-styled" ng-if="ctrl.TipoConcepto.Clave == 1 || ctrl.TipoConcepto.Clave == 5">
+                        <input type="checkbox" name="CbxSeCobraMensualidad" ng-model="ctrl.SeCobraMensualidad" ng-true-value="'Y'" ng-false-value="'N'"><span class="text-danger">Se cobra mensualidad</span>
                     </label>
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="col-md-6">
-                    <label class="checkbox-inline checkbox-styled">
-                        <input type="checkbox" name="" ng-model="ctrl.AvanzaMes" ng-true-value="'Y'" ng-false-value="'N'"><span>Avanza mes</span>
+                    <label class="checkbox-inline checkbox-styled" ng-if="ctrl.TipoConcepto.Clave == 1 || ctrl.TipoConcepto.Clave == 4 || ctrl.TipoConcepto.Clave == 5">
+                        <input type="checkbox" name="CbxAplicaComision" ng-model="ctrl.AplicaComision" ng-true-value="'Y'" ng-false-value="'N'"><span class="text-danger">Aplica comisión</span>
                     </label>
                 </div>
                 <div class="col-md-6">
-                    <select class="form-control input-sm" ng-show="ctrl.ShowOrden">
+                    <label class="checkbox-inline checkbox-styled" ng-if="ctrl.TipoConcepto.Clave == 1 || ctrl.TipoConcepto.Clave == 3 || ctrl.TipoConcepto.Clave == 4 || ctrl.TipoConcepto.Clave == 5">
+                        <input type="checkbox" name="CbxGeneraOrden" ng-model="ctrl.GeneraOrden" ng-true-value="'Y'" ng-false-value="'N'" ng-change="ctrl.SetOrden()"><span class="text-danger">Genera orden</span>
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <label class="checkbox-inline checkbox-styled" ng-if="ctrl.TipoConcepto.Clave == 1 || ctrl.TipoConcepto.Clave == 3 || ctrl.TipoConcepto.Clave == 4 || ctrl.TipoConcepto.Clave == 5">
+                        <input type="checkbox" name="CbxAvanzaMes" ng-model="ctrl.AvanzaMes" ng-true-value="'Y'" ng-false-value="'N'"><span class="text-danger">Avanza mes</span>
+                    </label>
+                </div>
+                <div class="col-md-6">
+                    <select name="SlcOrden" class="form-control input-sm" ng-model="ctrl.Orden" ng-if="ctrl.ShowOrden">
                         <option value="">Selecciona orden</option>
                     </select>
                 </div>

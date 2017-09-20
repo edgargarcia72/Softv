@@ -10,8 +10,8 @@ angular
             });
             vm.ServicioList = [
                 {
-                    'Clv_Servicio': 5345,
-                    'clv_txt': 'BBBBR'
+                    'Clv_Servicio': 5344,
+                    'clv_txt': 'BBBBQ'
                 }
             ];
             vm.ConRegistros = true;

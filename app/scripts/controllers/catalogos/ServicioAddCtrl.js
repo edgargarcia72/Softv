@@ -8,9 +8,29 @@ angular
                 console.log(data);
                 vm.TrabajoList = data.GetMUESTRATRABAJOS_NewListResult;
             });
+
+            CatalogosFactory.GetTipoClienteList_WebSoftvnew().then(function(data){
+                console.log(data);
+                vm.TipoCobroList = data.GetTipoClienteList_WebSoftvnewResult;
+            });
         }
 
         function SaveServicios(){
+            if(vm.Clv_TipSer == 1){
+                SaveServicio1();
+            }else if(vm.Clv_TipSer == 2){
+                SaveServicio2();
+            }else if(vm.Clv_TipSer == 3){
+                SaveServicio3();
+            }
+        }
+        
+        function SaveServicio1(){
+            console.log('1');
+        }
+        
+        function SaveServicio2(){
+            console.log('2');
             var objServicios_New = {
                 'Clv_TipSer': vm.Clv_TipSer,
                 'Descripcion': vm.Descripcion,
@@ -51,6 +71,17 @@ angular
             });
         }
 
+        function SaveServicio3(){
+            console.log('3');
+            /*var objNUEVOClv_Equi = {
+                "Clv_txt": "98765",
+                "Clv_Equivalente": "98765"
+            };
+            CatalogosFactory.objNUEVOClv_Equi().then(function(data){
+                console.log(data);
+            });*/
+        }
+
         function AddTrabajo(Clv_Servicio){
             console.log('AddTrabajo');
             console.log(Clv_Servicio);
@@ -74,7 +105,7 @@ angular
             var objValidaAplicaSoloInternet = {
                 'Clv_Servicio': Clv_Servicio
             };
-            CatalogosFactory.AddValidaAplicaSoloInternet(objValidaAplicaSoloInternet).then(function(data){///next
+            CatalogosFactory.AddValidaAplicaSoloInternet(objValidaAplicaSoloInternet).then(function(data){
                 console.log(data);
                 var ValildaInternetResult = data.AddValidaAplicaSoloInternetResult;
                 if(ValildaInternetResult == 0){
@@ -112,6 +143,14 @@ angular
             });
         }
 
+        /*function SetTipoCobroTab(){
+            vm.TipoCobroResult = [{
+                'CLV_TIPOCLIENTE': vm.TipoCobro.CLV_TIPOCLIENTE,
+                'DESCRIPCION': vm.TipoCobro.DESCRIPCION
+            }];
+            console.log(vm.TipoCobroResult);
+        }*/
+
         function SetTipoCobro(){
             console.log(vm.CobroMensual);
             if(vm.CobroMensual == 'Y'){
@@ -140,7 +179,8 @@ angular
             }
         }
         
-        function OpenAddConcepto(){
+        function OpenAddConcepto(Clv_TipoCobro){
+            var Clv_TipoCobro = Clv_TipoCobro;
             var modalInstance = $uibModal.open({
                 animation: true,
                 ariaLabelledBy: 'modal-title',
@@ -151,7 +191,12 @@ angular
                 backdrop: 'static',
                 keyboard: false,
                 class: 'modal-backdrop fade',
-                size: 'md'
+                size: 'md',
+                resolve: {
+                    Clv_TipoCobro: function () {
+                        return Clv_TipoCobro;
+                    }
+                }
             });
         }
 
@@ -165,6 +210,7 @@ angular
         vm.SetOrden = SetOrden;
         vm.OpenAddConcepto = OpenAddConcepto;
         vm.SaveServicios = SaveServicios;
+        //vm.SetTipoCobroTab = SetTipoCobroTab;
         console.log(vm.Clv_TipSer);
         initData();
     });
