@@ -2,7 +2,7 @@
 
 angular
     .module('softvApp')
-    .controller('DevolucioAlmacenCtrl', function (CatalogosFactory, atencionFactory, $uibModal) {
+    .controller('DevolucionAlmacenCtrl', function (CatalogosFactory, atencionFactory, $uibModal) {
 
         
 
