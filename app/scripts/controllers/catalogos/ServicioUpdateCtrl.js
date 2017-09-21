@@ -3,6 +3,48 @@ angular
     .module('softvApp')
     .controller('ServicioUpdateCtrl', function(CatalogosFactory, ngNotify, $uibModal, $state, $stateParams, $rootScope){
 
+        function initData(){
+            CatalogosFactory.GetDeepServicios_New(Clv_Servicio).then(function(data){
+                console.log(data);
+                var Servicio = data.GetDeepServicios_NewResult;
+                if(Servicio != null){
+                    vm.Clv_Servicio = Servicio.Clv_Servicio;
+                    vm.Clv_TipSer = Servicio.Clv_TipSer;
+                    vm.Descripcion = Servicio.Descripcion;
+                    vm.Clave = Servicio.Clv_Txt;
+                    vm.AplicaComision = (Servicio.AplicanCom == true)? 'Y' : 'N';
+                    vm.CobroMensual = (Servicio.Sale_en_Cartera == true)? 'Y' : 'N';
+                    vm.GeneraOrden = (Servicio.Genera_Orden == true)? 'Y' : 'N';
+                    vm.Principal = (Servicio.Es_Principal == true)? 'Y' : 'N';
+                    vm.Precio = (Servicio.Precio > 0)? Servicio.Precio : 0;
+                }else{
+                    ngNotify.set('ERROR, El servicio que seleccionó no se encuentra registrado.', 'warn');
+                    $state.go('home.catalogos.servicios');
+                }
+            });
+        }
+
+        function OpenConfigurar(){
+            var Clv_Servicio = vm.Clv_Servicio;
+            var modalInstance = $uibModal.open({
+                animation: true,
+                ariaLabelledBy: 'modal-title',
+                ariaDescribedBy: 'modal-body',
+                templateUrl: 'views/catalogos/ModalConfiguracionForm.html',
+                controller: 'ModalConfiguracionAddCtrl',
+                controllerAs: 'ctrl',
+                backdrop: 'static',
+                keyboard: false,
+                class: 'modal-backdrop fade',
+                size: 'lg',
+                resolve: {
+                    Clv_Servicio: function () {
+                        return Clv_Servicio;
+                    }
+                }
+            });
+        }
+
         function SaveServicios(){
             var ObjValidaCambio = {
                 'clv_servicio': vm.Clv_Servicio,
@@ -93,14 +135,15 @@ angular
 
         var vm = this;
         vm.Titulo = 'Servicio Editar - ';
-        vm.Clv_Servicio = $stateParams.id;
+        var Clv_Servicio = $stateParams.id
         vm.ShowCobroMensual = false;
         vm.HideCobroMensual = true;
         vm.ShowOrden = false;
-        vm.Clv_TipSer = 2;
         vm.SetTipoCobro = SetTipoCobro;
         vm.SetOrden = SetOrden;
         vm.OpenAddConcepto = OpenAddConcepto;
         vm.SaveServicios = SaveServicios;
-        console.log(vm.Clv_TipSer);
+        vm.OpenConfigurar = OpenConfigurar;
+        console.log(Clv_Servicio);
+        initData();
     });
