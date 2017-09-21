@@ -11,12 +11,14 @@
     var vm = this;
     vm.cancel = cancel;
     vm.guardar = guardar;
+    vm.Detalle=items.Detalle;
     vm.seleccionaMedio=seleccionaMedio;
     vm.SeleccionaTipoAparato=SeleccionaTipoAparato;
     vm.Servicios=[];
     vm.Eliminar=Eliminar;
     vm.SelecionaNodo=SelecionaNodo;
     vm.AgregaAparato=AgregaAparato;
+
 
 
 
@@ -29,6 +31,7 @@
         ordenesFactory.MuestraArbolServiciosAparatosPorinstalar(Parametros).then(function (resp) {
           console.log(resp);
           vm.treedata = resp.GetMuestraArbolServiciosAparatosPorinstalarListResult;
+
 
           //Para tener todas las ramas abiertas
           vm.expandedNodes=[];
@@ -180,7 +183,7 @@
         var aux={
           'Nombre':vm.AparatoDisponible.Descripcion,
           'ContratoNet':0,
-          'Detalle':'nuevo',
+          'Detalle':vm.TipoAparato.Categoria,
           'Type':'file',
           'Tipo':'A',
           'Clv_Aparato':vm.AparatoDisponible.Clv_Aparato
@@ -208,9 +211,10 @@
       vm.ServiciosPosibles={};
       vm.selectedListServicios=[];
 
-      vm.AparatoDisponible=null;
       vm.TipoAparato=null;
-
+      vm.AparatoDisponible=null;
+      vm.AparatosDisponibles=null;
+      
 
 
     }
@@ -219,7 +223,35 @@
 
 
     function guardar() {
-      console.log(vm.treedata);
+      var flag=0;
+      angular.forEach(vm.treedata, function(value2, key2) {
+
+          if (value2.IdMedio===0){
+            flag=1
+          }
+                                      
+      });
+
+      if (flag===1){
+        ngNotify.set('Faltan medios del servicio por registrar.','warn');
+      }else{
+        var Parametros={};
+
+        Parametros.obj={};
+        Parametros.obj.id=0;
+
+        Parametros.Lst=[];
+        Parametros.Lst=vm.treedata;
+        console.log(Parametros);
+
+        ordenesFactory.AsignaAparatosAlServicio(Parametros).then(function (resp) {
+            console.log(resp);
+          });
+
+        $uibModalInstance.close();
+      }
+
+      
     }
 
     function cancel() {

@@ -1,22 +1,15 @@
-<style type="text/css">
-	.scrollDiv {
-		height: 500px;
-		overflow: auto;
-		overflow-x: hidden;
-	}
-</style>
 <div class="card animated fadeIn" style="margin-top:20px;">
     <div class="card-head style-default-light" style="padding-top:10px; padding-left:10px;">
         <header>
-            <strong style="font-weight:bold; border:none; margin-left:10px;">Catálogo Estados</strong>
+            <strong style="font-weight:bold; border:none; margin-left:10px;">Catálogo Tipos de servicios</strong>
 			<br>
             <small class="text-muted" style="font-size:14px; margin-left:10px;">
-                <a href="#"><i class="fa fa-home" aria-hidden="true"></i> Inicio</a>><a href="#" class="paginaActiva">Catálogo Estados</a>
+                <a href="#"><i class="fa fa-home" aria-hidden="true"></i> Inicio</a>><a href="#" class="paginaActiva">Catálogo Tipos de servicios</a>
             </small>
         </header>
         <div class="tools">
 			<div class="btn-group">
-				<button type="button" class="btn btn-primary btn-sm" ng-click="$ctrl.OpenAddEstado()" title="Crear un estado nuevo">NUEVO ESTADO</button>
+			    <button type="button" class="btn btn-primary btn-sm" ng-click="$ctrl.OpenAddTipoServicio()" title="Crear un tipo de servicio nuevo">NUEVO TIPO DE SERVICIO</button>
 			</div>
         </div>
     </div>
@@ -25,7 +18,7 @@
 			<div class="col-md-12">
                 <div class="col-md-3" style="text-align:right">
                     <div class="input-group">
-                        <input type="text" name="SearchEstado" class="form-control input-sm" ng-model="$ctrl.SearchEstado" placeholder="Buscar Estado">
+                        <input type="text" name="InpSearchTipoServicio" class="form-control input-sm" ng-model="$ctrl.SearchTipoServicio" placeholder="Buscar Tipo de servicio">
                         <span class="input-group-addon"><i class="fa fa-search"></i></span>
                     </div>
                 </div>
@@ -42,7 +35,7 @@
                     <thead>
                         <tr>
                             <th width="10%"><b>Id</b></th>
-                            <th width="70%"><b>Nombre del Estado</b></th>
+                            <th width="70%"><b>Nombre del tipo de servicio</b></th>
                             <th width="20%" colspan="2"><b>Acciones</b></th>
                         </tr>
                     </thead>
@@ -50,17 +43,17 @@
                         <tr ng-show="$ctrl.SinRegistros">
 							<td class="text-center" colspan="4">SIN REGISTROS</td>
 						</tr>
-                        <tr dir-paginate="X in $ctrl.EstadoList|filter:$ctrl.SearchEstado|itemsPerPage:7" ng-show="$ctrl.ConRegistros">
-                            <td>{{ X.Clv_Estado }}</td>
-                            <td>{{ X.Nombre }}</td>
-                            <td><button type="button" class="btn btn-warning btn-xs" ng-click="$ctrl.OpenUpdateEstado(X.Clv_Estado)" title="Editar Estado"><i class="fa fa-pencil-square-o"></i> Editar</button></td>
-                            <td><button type="button" class="btn btn-danger btn-xs" ng-click="$ctrl.OpenDeleteEstado(X.Clv_Estado)" title="Eliminar Estado"><i class="fa fa-trash"></i> Eliminar</button></td>
+                        <tr dir-paginate="X in $ctrl.TipoServicioList|filter:$ctrl.SearchTipoServicio|itemsPerPage:7" ng-show="$ctrl.ConRegistros">
+                            <td>{{ X.Clv_TipSer }}</td>
+                            <td>{{ X.Concepto }}</td>
+                            <td><button type="button" class="btn btn-warning btn-xs" ng-click="$ctrl.OpenUpdateTipoServicio(X.Clv_TipSer)" title="Editar Tipo de Servicio"><i class="fa fa-pencil-square-o"></i> EDITAR</button></td>
+                            <td><button type="button" class="btn btn-danger btn-xs" ng-click="$ctrl.OpenDeleteTipoServicio(X.Clv_TipSer)" title="Eliminar Tipo de Servicio"><i class="fa fa-trash"></i> ELIMINAR</button></td>
                         </tr>
                     </tbody>
                 </table>
                 <br>
                 <div style="margin-top:-40px;">
-					<dir-pagination-controls max-size="7" direction-links="true" boundary-links="true" ng-if="$ctrl.EstadoList.length > 0">
+					<dir-pagination-controls max-size="7" direction-links="true" boundary-links="true" ng-if="$ctrl.TipoServicioList.length > 0">
 					</dir-pagination-controls>
 				</div>
                 <br>

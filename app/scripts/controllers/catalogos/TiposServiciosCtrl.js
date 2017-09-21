@@ -1,18 +1,12 @@
-'use strict';
-
+'use stricts';
 angular
     .module('softvApp')
-    .controller('CiudadesCtrl', function(CatalogosFactory, $uibModal){
+    .controller('TiposServicosCtrl', function(CatalogosFactory, $uibModal){
 
         function initData(){
-            var ObjCiudad = {
-                'Clv_Ciudad': 0,
-                'Nombre': '',
-                'Op': 2
-            };
-            CatalogosFactory.GetBuscaCiudades(ObjCiudad).then(function(data){
-                vm.CiudadLista = data.GetBuscaCiudadesResult;
-                if (vm.CiudadLista.length == 0) {
+            CatalogosFactory.GetTipServ_NewList().then(function(data){
+                vm.TipoServicioList = data.GetTipServ_NewListResult;
+                if (vm.TipoServicioList.length == 0) {
 					vm.SinRegistros = true;
 					vm.ConRegistros = false;
 				} else {
@@ -22,13 +16,13 @@ angular
             });
         }
 
-        function OpenAddCiudad(){
+        function OpenAddTipoServicio(){
             var modalInstance = $uibModal.open({
                 animation: true,
                 ariaLabelledBy: 'modal-title',
                 ariaDescribedBy: 'modal-body',
-                templateUrl: 'views/catalogos/ModalCiudadForm.html',
-                controller: 'ModalCiudadFormAddCtrl',
+                templateUrl: 'views/catalogos/ModalTipoServicioForm.html',
+                controller: 'ModalTipoServicioFormAddCtrl',
                 controllerAs: 'ctrl',
                 backdrop: 'static',
                 keyboard: false,
@@ -37,52 +31,52 @@ angular
             });
         }
 
-        function OpenUpdateCiudad(IdMunicipio){
-            var IdMunicipio = IdMunicipio;
+        function OpenUpdateTipoServicio(Clv_TipSer){
+            var Clv_TipSer = Clv_TipSer;
             var modalInstance = $uibModal.open({
                 animation: true,
                 ariaLabelledBy: 'modal-title',
                 ariaDescribedBy: 'modal-body',
-                templateUrl: 'views/catalogos/ModalCiudadForm.html',
-                controller: 'ModalCiudadFormUpdateCtrl',
+                templateUrl: 'views/catalogos/ModalTipoServicioForm.html',
+                controller: 'ModalTipoServicioFormUpdateCtrl',
                 controllerAs: 'ctrl',
                 backdrop: 'static',
                 keyboard: false,
                 class: 'modal-backdrop fade',
                 size: 'md',
                 resolve: {
-                    IdMunicipio: function () {
-                        return IdMunicipio;
+                    Clv_TipSer: function () {
+                        return Clv_TipSer;
                     }
                 }
             });
         }
 
-        function OpenDeleteCiudad(IdMunicipio){
-            var IdMunicipio = IdMunicipio;
+        function OpenDeleteTipoServicio(Clv_TipSer){
+            var Clv_TipSer = Clv_TipSer;
             var modalInstance = $uibModal.open({
                 animation: true,
                 ariaLabelledBy: 'modal-title',
                 ariaDescribedBy: 'modal-body',
-                templateUrl: 'views/catalogos/ModalCiudadEliminar.html',
-                controller: 'ModalCiudadEliminarCtrl',
+                templateUrl: 'views/catalogos/ModalTipoServicioDelete.html',
+                controller: 'ModalTipoServicioDeleteCtrl',
                 controllerAs: 'ctrl',
                 backdrop: 'static',
                 keyboard: false,
                 class: 'modal-backdrop fade',
                 size: 'sm',
                 resolve: {
-                    IdMunicipio: function () {
-                        return IdMunicipio;
+                    Clv_TipSer: function () {
+                        return Clv_TipSer;
                     }
                 }
             });
         }
 
         var vm = this;
-        vm.OpenAddCiudad = OpenAddCiudad;
-        vm.OpenUpdateCiudad = OpenUpdateCiudad;
-        vm.OpenDeleteCiudad = OpenDeleteCiudad;
+        vm.OpenAddTipoServicio = OpenAddTipoServicio;
+        vm.OpenUpdateTipoServicio = OpenUpdateTipoServicio;
+        vm.OpenDeleteTipoServicio = OpenDeleteTipoServicio;
         initData();
-        
+
     });

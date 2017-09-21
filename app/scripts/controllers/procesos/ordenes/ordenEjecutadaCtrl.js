@@ -419,7 +419,8 @@
           ){
           var items_ = {
             'clv_orden': x.Clv_Orden,
-            'Clv_Tecnico': vm.selectedTecnico.CLV_TECNICO
+            'Clv_Tecnico': vm.selectedTecnico.CLV_TECNICO,
+            'Detalle': false
           };
 
           var modalInstance = $uibModal.open({
@@ -575,10 +576,13 @@
             'ListadeArticulos': ''
           };
           ordenesFactory.MODORDSER(obj).then(function (response) {
+            console.log(response);
+            console.log("prueba mike");
             if (response.GetDeepMODORDSERResult.Msj != null) {
+              console.log("Error");
               ngNotify.set(response.GetDeepMODORDSERResult.Msj, 'error');
             } else {
-
+              console.log("well done");
               ordenesFactory.PreejecutaOrden(vm.clv_orden).then(function (details) {
                 ordenesFactory.GetDeepSP_GuardaOrdSerAparatos(vm.clv_orden).then(function (result) {
                   var descripcion = 'Se generó la';
