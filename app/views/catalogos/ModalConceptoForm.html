@@ -25,7 +25,7 @@
                 </div>
             </div>
         </div>
-        <div class="row" ng-show="false">
+        <div class="row" ng-if="false">
             <div class="col-md-12">
                 <div class="col-md-12">
                     <h4 class="text-primary"><b>Precios del servicio:</b></h4>
@@ -160,8 +160,8 @@
                     </label>
                 </div>
                 <div class="col-md-6" ng-if="ctrl.ShowOrden">
-                    <select name="SlcOrden" class="form-control input-sm" ng-model="ctrl.Orden">
-                        <option value="">Selecciona orden</option>
+                    <select name="SlcTrabajo" class="form-control input-sm" ng-model="ctrl.Trabajo" ng-options="T.Descripcion for T in ctrl.TrabajoList track by T.Clv_Trabajo">
+                        <option value="">Selecciona</option>
                     </select>
                 </div>
             </div>
@@ -182,7 +182,7 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="sumit" class="btn btn-primary btn-sm" title="Agregar Concepto">Agregar</button>
+        <button type="sumit" class="btn btn-primary btn-sm" ng-click="ctrl.AddConcepto()" title="Agregar Concepto">Agregar</button>
         <button class="btn bnt-default btn-sm" type="button" ng-click="ctrl.cancel()" title="Salir">Cancelar</button>
     </div>
 </form>

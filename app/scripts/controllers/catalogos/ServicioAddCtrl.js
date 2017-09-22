@@ -143,14 +143,6 @@ angular
             });
         }
 
-        /*function SetTipoCobroTab(){
-            vm.TipoCobroResult = [{
-                'CLV_TIPOCLIENTE': vm.TipoCobro.CLV_TIPOCLIENTE,
-                'DESCRIPCION': vm.TipoCobro.DESCRIPCION
-            }];
-            console.log(vm.TipoCobroResult);
-        }*/
-
         function SetTipoCobro(){
             console.log(vm.CobroMensual);
             if(vm.CobroMensual == 'Y'){
@@ -210,7 +202,6 @@ angular
         vm.SetOrden = SetOrden;
         vm.OpenAddConcepto = OpenAddConcepto;
         vm.SaveServicios = SaveServicios;
-        //vm.SetTipoCobroTab = SetTipoCobroTab;
         console.log(vm.Clv_TipSer);
         initData();
     });

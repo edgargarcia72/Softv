@@ -105,7 +105,15 @@ angular
             GetMuestra_Plazas_ConfiguracionServiciosList: '/Muestra_Plazas_ConfiguracionServicios/GetMuestra_Plazas_ConfiguracionServiciosList',
             GetDameRelCompaniaEstadoCiudadList: '/DameRelCompaniaEstadoCiudad/GetDameRelCompaniaEstadoCiudadList',
             GetDameServiciosRelComEdoCd_PorServicio1_NewList: '/DameServiciosRelComEdoCd_PorServicio1_New/GetDameServiciosRelComEdoCd_PorServicio1_NewList',
-            GetDameServiciosRelComEdoCd_PorServicio2_NewList: '/DameServiciosRelComEdoCd_PorServicio1_New/GetDameServiciosRelComEdoCd_PorServicio2_NewList'
+            GetDameServiciosRelComEdoCd_PorServicio2_NewList: '/DameServiciosRelComEdoCd_PorServicio1_New/GetDameServiciosRelComEdoCd_PorServicio2_NewList',
+            AddinsertaServiciosRelCompaniaEstadoCiudad: '/insertaServiciosRelCompaniaEstadoCiudad/AddinsertaServiciosRelCompaniaEstadoCiudad',
+            DeleteinsertaServiciosRelCompaniaEstadoCiudad: '/insertaServiciosRelCompaniaEstadoCiudad/DeleteinsertaServiciosRelCompaniaEstadoCiudad',
+            AddinsertaServiciosRelCompaniaEstadoCiudadATodos: '/insertaServiciosRelCompaniaEstadoCiudadATodos/AddinsertaServiciosRelCompaniaEstadoCiudadATodos',
+            DeleteinsertaServiciosRelCompaniaEstadoCiudadATodos: '/insertaServiciosRelCompaniaEstadoCiudadATodos/DeleteinsertaServiciosRelCompaniaEstadoCiudadATodos',
+            GetREL_TARIFADOS_SERVICIOS_NewList: '/REL_TARIFADOS_SERVICIOS_New/GetREL_TARIFADOS_SERVICIOS_NewList',
+            GetMuestraTipoPromocionList: '/MuestraTipoPromocion/GetMuestraTipoPromocionList',
+            AddValidaPeriodos: '/ValidaPeriodos/AddValidaPeriodos',
+            AddREL_TARIFADOS_SERVICIOS_New: '/REL_TARIFADOS_SERVICIOS_New/AddREL_TARIFADOS_SERVICIOS_New'
         };
 
         factory.GetPlazaList = function (IdUsuario) {
@@ -1283,6 +1291,110 @@ angular
             var Parametros = ObjSerRelComEstCiu;
             console.log(Parametros);
             $http.post(globalService.getUrl() + paths.GetDameServiciosRelComEdoCd_PorServicio2_NewList, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.AddinsertaServiciosRelCompaniaEstadoCiudad = function (objinsertaServiciosRelCompaniaEstadoCiudad) {
+            var deferred = $q.defer();
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = {'objinsertaServiciosRelCompaniaEstadoCiudad': objinsertaServiciosRelCompaniaEstadoCiudad};
+            console.log(Parametros);
+            $http.post(globalService.getUrl() + paths.AddinsertaServiciosRelCompaniaEstadoCiudad, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.DeleteinsertaServiciosRelCompaniaEstadoCiudad = function (ObjDeletRelSer) {
+            var deferred = $q.defer();
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = ObjDeletRelSer;
+            console.log(Parametros);
+            $http.post(globalService.getUrl() + paths.DeleteinsertaServiciosRelCompaniaEstadoCiudad, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.AddinsertaServiciosRelCompaniaEstadoCiudadATodos = function (objinsertaServiciosRelCompaniaEstadoCiudadATodos) {
+            var deferred = $q.defer();
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = {'objinsertaServiciosRelCompaniaEstadoCiudadATodos': objinsertaServiciosRelCompaniaEstadoCiudadATodos};
+            console.log(Parametros);
+            $http.post(globalService.getUrl() + paths.AddinsertaServiciosRelCompaniaEstadoCiudadATodos, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.DeleteinsertaServiciosRelCompaniaEstadoCiudadATodos = function (ObjDeletRelSer) {
+            var deferred = $q.defer();
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = ObjDeletRelSer;
+            console.log(Parametros);
+            $http.post(globalService.getUrl() + paths.DeleteinsertaServiciosRelCompaniaEstadoCiudadATodos, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.GetREL_TARIFADOS_SERVICIOS_NewList = function (ObjTarifa) {
+            var deferred = $q.defer();
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = ObjTarifa;
+            console.log(Parametros);
+            $http.post(globalService.getUrl() + paths.GetREL_TARIFADOS_SERVICIOS_NewList, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.GetMuestraTipoPromocionList = function (clv_TipSer) {
+            var deferred = $q.defer();
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = {'clv_TipSer': clv_TipSer};
+            console.log(Parametros);
+            $http.post(globalService.getUrl() + paths.GetMuestraTipoPromocionList, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.AddValidaPeriodos = function (objValidaPeriodos) {
+            var deferred = $q.defer();
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = {'objValidaPeriodos': objValidaPeriodos};
+            console.log(Parametros);
+            $http.post(globalService.getUrl() + paths.AddValidaPeriodos, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.AddREL_TARIFADOS_SERVICIOS_New = function (objREL_TARIFADOS_SERVICIOS_New) {
+            var deferred = $q.defer();
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = {'objREL_TARIFADOS_SERVICIOS_New': objREL_TARIFADOS_SERVICIOS_New};
+            console.log(Parametros);
+            $http.post(globalService.getUrl() + paths.AddREL_TARIFADOS_SERVICIOS_New, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);

@@ -4,6 +4,11 @@ angular
     .controller('ServicioUpdateCtrl', function(CatalogosFactory, ngNotify, $uibModal, $state, $stateParams, $rootScope){
 
         function initData(){
+            CatalogosFactory.GetTipoClienteList_WebSoftvnew().then(function(data){
+                console.log(data);
+                vm.TipoCobroList = data.GetTipoClienteList_WebSoftvnewResult;
+            });
+
             CatalogosFactory.GetDeepServicios_New(Clv_Servicio).then(function(data){
                 console.log(data);
                 var Servicio = data.GetDeepServicios_NewResult;
@@ -17,9 +22,53 @@ angular
                     vm.GeneraOrden = (Servicio.Genera_Orden == true)? 'Y' : 'N';
                     vm.Principal = (Servicio.Es_Principal == true)? 'Y' : 'N';
                     vm.Precio = (Servicio.Precio > 0)? Servicio.Precio : 0;
+                    vm.HideCobroMensual = (Servicio.Sale_en_Cartera == true)? false : true;
+                    vm.ShowCobroMensual = (Servicio.Sale_en_Cartera == true)? true : false;
+                    console.log(Servicio.Sale_en_Cartera);
+                    console.log(vm.ShowCobroMensual);
                 }else{
                     ngNotify.set('ERROR, El servicio que seleccionó no se encuentra registrado.', 'warn');
                     $state.go('home.catalogos.servicios');
+                }
+            });
+        }
+
+        function GetTarifa(){
+            if(vm.TipoCobro != undefined){
+                var ObjTarifa = {
+                    'CLV_SERVICIO': vm.Clv_Servicio, 
+                    'OP': 0, 
+                    'Clv_TipoCliente': vm.TipoCobro.CLV_TIPOCLIENTE
+                };
+                CatalogosFactory.GetREL_TARIFADOS_SERVICIOS_NewList(ObjTarifa).then(function(data){
+                    console.log(data);
+                    vm.TarifaList = data.GetREL_TARIFADOS_SERVICIOS_NewListResult;
+                });
+            }else{
+
+            }  
+        }
+
+        function OpenAddConcepto(Clv_TipoCobro, Clv_Servicio){
+            var ObjServicio = {
+                'Clv_Servicio': Clv_Servicio,
+                'Clv_TipoCobro': Clv_TipoCobro
+            };
+            var modalInstance = $uibModal.open({
+                animation: true,
+                ariaLabelledBy: 'modal-title',
+                ariaDescribedBy: 'modal-body',
+                templateUrl: 'views/catalogos/ModalConceptoForm.html',
+                controller: 'ModalConceptoAddCtrl',
+                controllerAs: 'ctrl',
+                backdrop: 'static',
+                keyboard: false,
+                class: 'modal-backdrop fade',
+                size: 'md',
+                resolve: {
+                    ObjServicio: function () {
+                        return ObjServicio;
+                    }
                 }
             });
         }
@@ -117,21 +166,6 @@ angular
                 vm.ShowOrden = false;
             }
         }
-        
-        function OpenAddConcepto(){
-            var modalInstance = $uibModal.open({
-                animation: true,
-                ariaLabelledBy: 'modal-title',
-                ariaDescribedBy: 'modal-body',
-                templateUrl: 'views/catalogos/ModalConceptoForm.html',
-                controller: 'ModalConceptoAddCtrl',
-                controllerAs: 'ctrl',
-                backdrop: 'static',
-                keyboard: false,
-                class: 'modal-backdrop fade',
-                size: 'md'
-            });
-        }
 
         var vm = this;
         vm.Titulo = 'Servicio Editar - ';
@@ -144,6 +178,7 @@ angular
         vm.OpenAddConcepto = OpenAddConcepto;
         vm.SaveServicios = SaveServicios;
         vm.OpenConfigurar = OpenConfigurar;
+        vm.GetTarifa = GetTarifa;
         console.log(Clv_Servicio);
         initData();
     });

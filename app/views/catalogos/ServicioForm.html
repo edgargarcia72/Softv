@@ -15,10 +15,10 @@
     <div class="card animated fadeIn" style="margin-top:20px;">
         <div class="card-head style-default-light" style="padding-top:10px; padding-left:10px;">
             <header>
-                <strong style="font-weight:bold; border:none; margin-left:10px;">{{ $ctrl.Titulo }} {{ $ctrl.IdServicio }}</strong>
+                <strong style="font-weight:bold; border:none; margin-left:10px;">{{ $ctrl.Titulo }} {{ $ctrl.Clv_Servicio }}</strong>
                 <br>
                 <small class="text-muted" style="font-size:14px; margin-left:10px;">
-                    <a href="#"><i class="fa fa-home" aria-hidden="true"></i> Inicio</a>><a href="#" class="paginaActiva">{{ $ctrl.Titulo }} {{ $ctrl.IdServicio }}</a>
+                    <a href="#"><i class="fa fa-home" aria-hidden="true"></i> Inicio</a>><a href="#" class="paginaActiva">{{ $ctrl.Titulo }} {{ $ctrl.Clv_Servicio }}</a>
                 </small>
             </header>
             <div class="tools">
@@ -89,7 +89,7 @@
             </div>
             <br>
             <div class="row">
-                <div class="col-md-12" ng-show="$ctrl.ShowCobroMensual">
+                <div class="col-md-12" ng-show="$ctrl.ShowCobroMensual && $ctrl.Clv_Servicio > 0">
                     <div class="col-md-12">
                         <uib-tabset active="active">
                             <uib-tab index="0">
@@ -113,7 +113,7 @@
                                                 suggestions-arr="$ctrl.TipoCobroList">
                                             </multiple-autocomplete>
                                             -->
-                                            <select name="SlcTipoCobro" class="form-control input-sm" ng-model="$ctrl.TipoCobro" ng-options="C.DESCRIPCION for C in $ctrl.TipoCobroList track by C.CLV_TIPOCLIENTE" ng-change="$ctrl.SetTipoCobroTab()">
+                                            <select name="SlcTipoCobro" class="form-control input-sm" ng-model="$ctrl.TipoCobro" ng-options="C.DESCRIPCION for C in $ctrl.TipoCobroList track by C.CLV_TIPOCLIENTE" ng-change="$ctrl.GetTarifa()">
                                                 <option value="">Selecciona</option>
                                             </select>
                                         </div>
@@ -129,7 +129,7 @@
                                                         <b>Conceptos para tipo de cobro {{ $ctrl.TipoCobro.DESCRIPCION }}</b>
                                                     </div>
                                                     <div class="col-md-2">
-                                                        <button type="button" class="btn btn-primary btn-sm" title="Agregar un concepto" ng-click="$ctrl.OpenAddConcepto($ctrl.TipoCobro.CLV_TIPOCLIENTE)">Agregar Concepto</button>
+                                                        <button type="button" class="btn btn-primary btn-sm" title="Agregar un concepto" ng-click="$ctrl.OpenAddConcepto($ctrl.TipoCobro.CLV_TIPOCLIENTE, $ctrl.Clv_Servicio)">Agregar Concepto</button>
                                                     </div>
                                                     <div class="col-md-12">
                                                         <br>
@@ -150,15 +150,15 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <tr ng-repeat="X in $ctrl.RelEstMunViewList">
-                                                                    <td>{{ X.Estado }}</td>
-                                                                    <td>{{ X.Municipio }}</td>
-                                                                    <td>{{ X.Municipio }}</td>
-                                                                    <td>{{ X.Estado }}</td>
-                                                                    <td>{{ X.Municipio }}</td>
-                                                                    <td>{{ X.Municipio }}</td>
-                                                                    <td>{{ X.Estado }}</td>
-                                                                    <td>{{ X.Municipio }}</td>
+                                                                <tr ng-repeat="X in $ctrl.TarifaList">
+                                                                    <td>{{ X.CONCEPTO }}</td>
+                                                                    <td>{{ X.Precio_Inalambrico }}</td>
+                                                                    <td>{{ X.Precio_Adicional }}</td>
+                                                                    <td>{{ X.Vigente }}</td>
+                                                                    <td>{{ X.BRINCA_MES }}</td>
+                                                                    <td>{{ X.Aplica_Comision }}</td>
+                                                                    <td>{{ X.Genera_Orden }}</td>
+                                                                    <td>{{ X.TRABAJO }}</td>
                                                                     <td><button type="button" class="btn btn-danger btn-xs" title="Eliminar Ciudad" ng-click="$ctrl.DeleteRelEstMun(X)">Eliminar</button></td>
                                                                 </tr>
                                                             </tbody>
