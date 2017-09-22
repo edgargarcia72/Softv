@@ -55,6 +55,51 @@ angular
                 controllerAs: '$ctrl'
             },
             {
+                name: 'home.catalogos.nuevacaja',
+                data: {
+                    pageTitle: 'SOFTV | CATÁLOGO CAJAS',
+                    permissions: {
+                        options: {
+                            reload: false
+                        }
+                    }
+                },
+                url: '/catalogo/cajas',
+                templateUrl: 'views/catalogos/NuevaCajaForm.html',
+                controller: 'CajaNuevaCtrl',
+                controllerAs: '$ctrl'
+            },
+            {
+                name: 'home.catalogos.detalle',
+                data: {
+                    pageTitle: 'SOFTV | CATÁLOGO CAJAS',
+                    permissions: {
+                        options: {
+                            reload: false
+                        }
+                    }
+                },
+                url: '/catalogo/detalle/:id',
+                templateUrl: 'views/catalogos/NuevaCajaForm.html',
+                controller: 'CajaDetalleCtrl',
+                controllerAs: '$ctrl'
+            },
+            {
+                name: 'home.catalogos.editarcaja',
+                data: {
+                    pageTitle: 'SOFTV | CATÁLOGO CAJAS',
+                    permissions: {
+                        options: {
+                            reload: false
+                        }
+                    }
+                },
+                url: '/catalogo/editar/:id',
+                templateUrl: 'views/catalogos/NuevaCajaForm.html',
+                controller: 'CajaEditarCtrl',
+                controllerAs: '$ctrl'
+            },
+            {
                 name: 'home.catalogos.sucursales',
                 data: {
                     pageTitle: 'SOFTV | CATÁLOGO SUCURSALES',

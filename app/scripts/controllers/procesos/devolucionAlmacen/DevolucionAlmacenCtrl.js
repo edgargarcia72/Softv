@@ -2,7 +2,7 @@
 
 angular
     .module('softvApp')
-    .controller('DevolucionAlmacenCtrl', function (DevolucionAlmacenFactory, CatalogosFactory, atencionFactory, $uibModal, $localStorage) {
+    .controller('DevolucionAlmacenCtrl', function (DevolucionAlmacenFactory, CatalogosFactory,ngNotify, atencionFactory, $uibModal, $localStorage) {
         
         function initData(){
             console.log($localStorage.currentUser.idUsuario);
@@ -39,9 +39,7 @@ angular
                 'TIPOAPARATO': Obj.TIPOAPARATO,
                 'CLV_CABLEMODEM': Obj.CLV_CABLEMODEM,
                 'MACCABLEMODEM': Obj.MACCABLEMODEM,
-                'ESTADOAPARATO': Obj.ESTADOAPARATO,
-                'TIPOAPARATO': Obj.TIPOAPARATO,
-                'USUARIO': Obj.USUARIO,
+                'ESTADOAPARATO': Obj.ESTADOAPARATO,                              
                 'PROVIENE': Obj.PROVIENE,
                 'MARCA': Obj.MARCA
             };
@@ -49,10 +47,10 @@ angular
                 console.log(data);
                 var DevolucionResult = data.GetPROCESODevolucionAparatosAlmacenResult;
                 if(DevolucionResult > 0){
-                    ngNotify.set('CORRECTO, se regresoó a almacen.', 'success');
+                    ngNotify.set('El aparato  se regresó correctamente al almacén.', 'success');
                     GetDevolucionList(ObjDevolucion);
                 }else{
-                    ngNotify.set('ERROR, al regresar a almacen.', 'warn');
+                    ngNotify.set('Ocurrió un error  al regresar el apratato al almacén.', 'warn');
                     GetDevolucionList(ObjDevolucion);
                 }
             });
