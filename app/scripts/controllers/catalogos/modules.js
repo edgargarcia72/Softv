@@ -356,29 +356,15 @@ angular
             },
             {
                 name: 'home.catalogos.servicio_nuevo',
-                data: {
-                    pageTitle: 'SOFTV | NUEVO SERVICIO',
-                    permissions: {
-                        options: {
-                            reload: false
-                        }
-                    }
-                },
-                url: '/catalogo/servicios/nuevo',
+                data: { pageTitle: 'SOFTV | NUEVO SERVICIO' },
+                url: '/catalogo/servicios/nuevo/:id',
                 templateUrl: 'views/catalogos/ServicioForm.html',
                 controller: 'ServicioAddCtrl',
                 controllerAs: '$ctrl'
             },
             {
                 name: 'home.catalogos.servicio_editar',
-                data: {
-                    pageTitle: 'SOFTV | EDITAR SERVICIO',
-                    permissions: {
-                        options: {
-                            reload: false
-                        }
-                    }
-                },
+                data: { pageTitle: 'SOFTV | EDITAR SERVICIO' },
                 url: '/catalogo/servicios/editar/:id',
                 templateUrl: 'views/catalogos/ServicioForm.html',
                 controller: 'ServicioUpdateCtrl',

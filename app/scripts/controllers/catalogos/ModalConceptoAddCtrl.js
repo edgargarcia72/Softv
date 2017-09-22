@@ -2,7 +2,15 @@
 
 angular
     .module('softvApp')
-    .controller('ModalConceptoAddCtrl', function($uibModalInstance, $uibModal, CatalogosFactory, $state, $rootScope, ngNotify){
+    .controller('ModalConceptoAddCtrl', function($uibModalInstance, $uibModal, CatalogosFactory, $state, $rootScope, ngNotify, Clv_TipoCobro){
+
+        function initData(){
+            CatalogosFactory.GetMUESTRASOLOTARIFADOSList().then(function(data){
+                console.log(data);
+                vm.TipoConceptoList = data.GetMUESTRASOLOTARIFADOSListResult;
+                vm.TipoConcepto = vm.TipoConceptoList[0];
+            });
+        }
 
         function SetOrden(){
             console.log(vm.GeneraOrden);
@@ -27,4 +35,7 @@ angular
         vm.SetOrden = SetOrden;
         vm.cancel = cancel;
         vm.AddConcepto = AddConcepto;
+        vm.Clv_TipoCobro = Clv_TipoCobro;
+        console.log(Clv_TipoCobro);
+        initData();
     });
