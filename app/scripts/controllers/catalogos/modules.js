@@ -255,6 +255,17 @@ angular
                 controllerAs: '$ctrl'
             },
             {
+                name: 'home.catalogos.detalle_distribuidor',
+                data: {
+                    pageTitle: 'SOFTV | DETALLE DISTRIBUIDOR'
+                },
+                url: '/catalogo/distribuidores/detalle/:id',
+                templateUrl: 'views/catalogos/DistribuidorForm.html',
+                controller: 'DistribuidorDetalleCtrl',
+                controllerAs: '$ctrl'
+            },
+           
+            {
                 name: 'home.catalogos.colonias',
                 data: {
                     pageTitle: 'SOFTV | CATÁLOGO COLONIAS',
