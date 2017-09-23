@@ -200,6 +200,18 @@ angular
                 controllerAs: '$ctrl'
             },
             {
+                name: 'home.catalogos.plaza_detalle',
+                data: {
+                    pageTitle: 'SOFTV | DETALLE PLAZA'
+                },
+                url: '/catalogo/plazas/detalle/:id',
+                templateUrl: 'views/catalogos/PlazaForm.html',
+                controller: 'PlazaDetalleCtrl',
+                controllerAs: '$ctrl'
+            },
+
+            
+            {
                 name: 'home.catalogos.localidades',
                 data: {
                     pageTitle: 'SOFTV | CATÁLOGO LOCALIDADES',
