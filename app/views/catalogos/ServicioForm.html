@@ -86,6 +86,21 @@
                         </select>
                     </div>
                 </div>
+                <div class="col-md-12">
+                    <div class="col-md-2">
+                        <br>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-2">
+                        <p ng-if="$ctrl.Clv_TipSer == 3 && $ctrl.ShowCobroMensual == true"><b>Clave Equivalente:</b></p>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-2">
+                        <input type="text" name="InpClaveEquivalente" class="form-control input-sm" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" ng-model="$ctrl.ClaveEquivalente" ng-if="($ctrl.Clv_TipSer == 3 && $ctrl.ShowCobroMensual == true)" maxlength="5" ng-pattern="/^[A-Z0-9]{5}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 5 caracteres.'">
+                    </div>
+                </div>
             </div>
             <br>
             <div class="row">
@@ -152,14 +167,14 @@
                                                             <tbody>
                                                                 <tr ng-repeat="X in $ctrl.TarifaList">
                                                                     <td>{{ X.CONCEPTO }}</td>
-                                                                    <td>{{ X.Precio_Inalambrico }}</td>
+                                                                    <td>{{ X.PRECIO }}</td>
                                                                     <td>{{ X.Precio_Adicional }}</td>
                                                                     <td>{{ X.Vigente }}</td>
                                                                     <td>{{ X.BRINCA_MES }}</td>
                                                                     <td>{{ X.Aplica_Comision }}</td>
                                                                     <td>{{ X.Genera_Orden }}</td>
                                                                     <td>{{ X.TRABAJO }}</td>
-                                                                    <td><button type="button" class="btn btn-danger btn-xs" title="Eliminar Ciudad" ng-click="$ctrl.DeleteRelEstMun(X)">Eliminar</button></td>
+                                                                    <td><button type="button" class="btn btn-danger btn-xs" title="Eliminar Concepto" ng-click="$ctrl.OpenDeleteConcepto(X, $ctrl.TipoCobro.CLV_TIPOCLIENTE)">Eliminar</button></td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>

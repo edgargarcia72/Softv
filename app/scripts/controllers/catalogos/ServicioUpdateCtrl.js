@@ -73,6 +73,30 @@ angular
             });
         }
 
+        function OpenDeleteConcepto(ObjConcepto, CLV_TIPOCLIENTE){
+            var ObjConcepto = {
+                'ObjConcepto': ObjConcepto,
+                'CLV_TIPOCLIENTE': CLV_TIPOCLIENTE
+            };
+            var modalInstance = $uibModal.open({
+                animation: true,
+                ariaLabelledBy: 'modal-title',
+                ariaDescribedBy: 'modal-body',
+                templateUrl: 'views/catalogos/ModalConceptoDelete.html',
+                controller: 'ModalConceptoDeleteCtrl',
+                controllerAs: 'ctrl',
+                backdrop: 'static',
+                keyboard: false,
+                class: 'modal-backdrop fade',
+                size: 'md',
+                resolve: {
+                    ObjConcepto: function () {
+                        return ObjConcepto;
+                    }
+                }
+            });
+        }
+
         function OpenConfigurar(){
             var Clv_Servicio = vm.Clv_Servicio;
             var modalInstance = $uibModal.open({
@@ -138,6 +162,10 @@ angular
                 });
             });
         }
+
+        $rootScope.$on('LoadConceptos', function(e, Clv_Servicio){
+            GetTarifa(Clv_Servicio);
+        });
         
         function SetTipoCobro(){
             console.log(vm.CobroMensual);
@@ -176,6 +204,7 @@ angular
         vm.SetTipoCobro = SetTipoCobro;
         vm.SetOrden = SetOrden;
         vm.OpenAddConcepto = OpenAddConcepto;
+        vm.OpenDeleteConcepto = OpenDeleteConcepto;
         vm.SaveServicios = SaveServicios;
         vm.OpenConfigurar = OpenConfigurar;
         vm.GetTarifa = GetTarifa;

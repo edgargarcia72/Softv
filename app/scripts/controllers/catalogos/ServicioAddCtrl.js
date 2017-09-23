@@ -16,6 +16,7 @@ angular
         }
 
         function SaveServicios(){
+
             if(vm.Clv_TipSer == 1){
                 SaveServicio1();
             }else if(vm.Clv_TipSer == 2){
@@ -73,6 +74,44 @@ angular
 
         function SaveServicio3(){
             console.log('3');
+            /*var objServicios_New = {
+                'Clv_TipSer': vm.Clv_TipSer,
+                'Descripcion': vm.Descripcion,
+                'Clv_Txt': vm.Clave,
+                'AplicanCom': (vm.AplicaComision == 'Y') ? 1 : 0,
+                'Sale_en_Cartera': (vm.CobroMensual == 'Y') ? 1 : 0,
+                'Precio': (vm.Precio != undefined) ? vm.Precio : 0,
+                'Genera_Orden': (vm.GeneraOrden == 'Y') ? 1 : 0,
+                'Es_Principal': (vm.Principal == 'Y') ? 1 : 0,
+                'idcompania': 0,
+                'EsToken': 0,
+                'Gb': 0
+            };
+            CatalogosFactory.AddServicios_New(objServicios_New).then(function(data){
+                console.log(data);
+                var Clv_Servicio = data.AddServicios_NewResult;
+                if(Clv_Servicio > 0){
+                    CatalogosFactory.DeleteBORRel_Trabajos_NoCobroMensual(Clv_Servicio).then(function(data){
+                        console.log(data);
+                        var BorrarTrabajo = data.DeleteBORRel_Trabajos_NoCobroMensualResult;
+                        if(BorrarTrabajo == -1){
+                            if(vm.GeneraOrden == 'Y'){
+                                console.log('Trabajo ok');
+                                AddTrabajo(Clv_Servicio);
+                            }else{
+                                console.log('Trabajo not');
+                                ValidaSoloInternet(Clv_Servicio);
+                            }
+                        }else{
+                            ngNotify.set('ERROR, al borrar trabajos.', 'warn');
+                            $state.go('home.catalogos.servicios');
+                        }
+                    });
+                }else{
+                    ngNotify.set('ERROR, al añadir un servicio nuevo.', 'warn');
+                    $state.go('home.catalogos.servicios');
+                }
+            });*/
             /*var objNUEVOClv_Equi = {
                 "Clv_txt": "98765",
                 "Clv_Equivalente": "98765"
