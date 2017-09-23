@@ -1,6 +1,7 @@
 'use strict';
 
 angular
+
     .module('softvApp')
     .factory('CatalogosFactory', function ($http, $q, globalService, $localStorage) {
 
@@ -81,10 +82,19 @@ angular
             GetDeepTipServ_New: '/TipServ_New/GetDeepTipServ_New',
             UpdateTipServ_New: '/TipServ_New/UpdateTipServ_New',
             DeleteTipServ_New: '/TipServ_New/DeleteTipServ_New',
-            GetSucursalList: '/Sucursales/GetSUCURSALESList',
-            AddSucursal: '/SUCURSALES/AddSUCURSALES',
-            GetDeepSucursal:'/SUCURSALES/GetDeepSUCURSALES',
-            UpdateSucursal: '/SUCURSALES/UpdateSUCURSALES',
+           GetSucursalList: '/Sucursales/GetSUCURSALESList',
+      GetSUCURSALES: '/SUCURSALES/GetSUCURSALES',
+      AddSucursal: '/SUCURSALES/AddSUCURSALES',
+      GetMUESTRASUCURSALES2: '/SUCURSALES/GetMUESTRASUCURSALES2',
+      GetDeepSucursal: '/SUCURSALES/GetDeepSUCURSALES',
+      UpdateSucursal: '/SUCURSALES/UpdateSUCURSALES',
+      GetMuestraRelEdoCd: '/RelEstadoCiudad_New/GetMuestraRelEdoCd',
+      AddRelEstadoCiudad_New: '/RelEstadoCiudad_New/AddRelEstadoCiudad_New',
+      GetCatalogoCajasList: '/CatalogoCajas/GetCatalogoCajasList',
+      AddCatalogoCajas: '/CatalogoCajas/AddCatalogoCajas',
+      UpdateCatalogoCajas: '/CatalogoCajas/UpdateCatalogoCajas',
+      GetDeepCatalogoCajas: '/CatalogoCajas/GetDeepCatalogoCajas',
+
             GetMuestraRelEdoCd: '/RelEstadoCiudad_New/GetMuestraRelEdoCd',
             AddRelEstadoCiudad_New: '/RelEstadoCiudad_New/AddRelEstadoCiudad_New',
             GetMuestraTipSerPrincipal_SERList: '/MuestraTipSerPrincipal_SER/GetMuestraTipSerPrincipal_SERList',
@@ -1475,3 +1485,4 @@ angular
         return factory;
 
     });
+
