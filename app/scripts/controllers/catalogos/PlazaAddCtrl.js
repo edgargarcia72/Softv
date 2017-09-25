@@ -37,7 +37,7 @@ angular
     }
 
     function agregaRelacion() {
-      plazaFactory.GetAgregaEliminaRelCompaniaCiudad2(1, $stateParams.id, vm.estadoselect.Clv_Estado, vm.CiudadPla.Clv_Ciudad)
+      plazaFactory.GetAgregaEliminaRelCompaniaCiudad2(1, $stateParams.id, vm.estado2select.Clv_Estado, vm.CiudadPla.Clv_Ciudad)
         .then(function (res) {
           muestraRelacion();
         });
@@ -57,7 +57,9 @@ angular
       console.log(vm.detplaza);
       plazaFactory.AddPlaza(vm.detplaza)
         .then(function (result) {
+          vm.Clv_plaza=result.AddPlazaResult;
           console.log(result);
+
           vm.block = true;
           ngNotify.set('La plaza se ha guardado correctamente ,ahora puede asignar relaciones con estados y ciudades', 'success');
         });
@@ -70,4 +72,5 @@ angular
     initData();
     vm.block = false;
     vm.SavePlaza = SavePlaza;
+    vm.Clv_plaza=0;
   });

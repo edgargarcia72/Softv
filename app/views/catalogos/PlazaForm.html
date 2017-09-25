@@ -24,235 +24,220 @@
     </div>
     <div class="card-body">
       <fieldset ng-disabled="$ctrl.block">
-        <uib-tabset active="active">
-          <uib-tab index="0">
-            <uib-tab-heading>
-              Datos de la Plaza
-            </uib-tab-heading>
-            <br>
-            <div class="row">
+        <div class="col-md-12">
 
-              <div class="col-md-12">
-                <div class="col-md-3">
-                  <b><small>Distribuidor:</small></b>
-                  <select name="SltDistribuidor" class="form-control input-sm" ng-model="$ctrl.detplaza.distribuidor" ng-options="item as item.Nombre for item in $ctrl.distribuidores track by item.Clv_Plaza"
-                    validate-on="dirty" required required-message="'Obligatorio'">
-                                    <option value="">Selecciona</option>
-                                </select>
-                </div>
-                <div class="col-md-3">
-                  <b><small>Nombre de la Plaza:</small></b>
-                  <input name="InpPlaza" type="text" class="form-control input-sm" ng-model="$ctrl.detplaza.Razonsocial" validate-on="dirty"
-                    required required-message="'Obligatorio'">
-                </div>
-                <div class="col-md-3">
-                  <b><small>Calle:</small></b>
-                  <input name="InpCalle" type="text" class="form-control input-sm" ng-model="$ctrl.detplaza.Calle" validate-on="dirty" required
-                    required-message="'Obligatorio'">
-                </div>
-                <div class="col-md-3">
-                  <b><small>Entre calles:</small></b>
-                  <input name="InpCalles" type="text" class="form-control input-sm" ng-model="$ctrl.detplaza.Calles" validate-on="dirty" required
-                    required-message="'Obligatorio'">
-                </div>
+          <!--datos de plaza-->
+          <div class="col-md-6">
+            <h4 class="text-primary text-center"><b>Datos de la plaza</b></h4>
+            <div class="col-md-12">
+              <div class="col-md-6">
+                <b><small>Distribuidor:</small></b>
+                <select name="SltDistribuidor" class="form-control input-sm" ng-model="$ctrl.distribuidor" ng-options="item as item.Nombre for item in $ctrl.distribuidores track by item.Clv_Plaza"
+                  validate-on="dirty" required required-message="'Obligatorio'">
+                <option value="">Selecciona</option>
+              </select>
+              </div>
+              <div class="col-md-6">
+                <b><small>Nombre de la Plaza:</small></b>
+                <input name="InpPlaza" type="text" class="form-control input-sm" ng-model="$ctrl.detplaza.Razonsocial" validate-on="dirty"
+                  required required-message="'Obligatorio'">
+
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="col-md-6">
+                <b><small>Calle:</small></b>
+                <input name="InpCalle" type="text" class="form-control input-sm" ng-model="$ctrl.detplaza.Calle" validate-on="dirty" required
+                  required-message="'Obligatorio'">
+              </div>
+              <div class="col-md-6">
+                <b><small>Entre calles:</small></b>
+                <input name="InpCalles" type="text" class="form-control input-sm" ng-model="$ctrl.detplaza.Calles" validate-on="dirty" required
+                  required-message="'Obligatorio'">
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="col-md-6">
+                <b><small>Número Exterior:</small></b>
+                <input name="InpNumExt" type="text" class="form-control input-sm" ng-model="$ctrl.detplaza.NumExt" maxlength="6" validate-on="dirty"
+                  required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 6 dígitos.'">
+              </div>
+              <div class="col-md-6">
+                <b><small>Número Interior:</small></b>
+                <input name="InpNumInt" type="text" class="form-control input-sm" ng-model="$ctrl.detplaza.NumInt" maxlength="6" invalid-message="'Inválido, Ingresa 6 dígitos.'">
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="col-md-6">
+                <b><small>Colonia:</small></b>
+                <input name="InpColonia" type="text" class="form-control input-sm" ng-model="$ctrl.detplaza.Colonia" validate-on="dirty"
+                  required required-message="'Obligatorio'">
+
+              </div>
+              <div class="col-md-6">
+
+                <b><small>Código Postal:</small></b>
+                <input name="InpCP" type="text" class="form-control input-sm" ng-model="$ctrl.detplaza.CP" maxlength="5" ng-pattern="/^\d{5}$/"
+                  validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 5 dígitos.'">
               </div>
             </div>
 
-            <div class="row">
 
-              <div class="col-md-12">
-                <div class="col-md-2">
-                  <b><small>Número Exterior:</small></b>
-                  <input name="InpNumExt" type="text" class="form-control input-sm" ng-model="$ctrl.detplaza.NumExt" maxlength="6" validate-on="dirty"
-                    required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 6 dígitos.'">
-                </div>
-                <div class="col-md-2">
-                  <b><small>Número Interior:</small></b>
-                  <input name="InpNumInt" type="text" class="form-control input-sm" ng-model="$ctrl.detplaza.NumInt" maxlength="6" invalid-message="'Inválido, Ingresa 6 dígitos.'">
-                </div>
-                <div class="col-md-2">
-                  <b><small>Código Postal:</small></b>
-                  <input name="InpCP" type="text" class="form-control input-sm" ng-model="$ctrl.detplaza.CP" maxlength="5" ng-pattern="/^\d{5}$/"
-                    validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 5 dígitos.'">
-                </div>
-                <div class="col-md-6">
-                  <b><small>Colonia:</small></b>
-                  <input name="InpColonia" type="text" class="form-control input-sm" ng-model="$ctrl.detplaza.Colonia" validate-on="dirty"
-                    required required-message="'Obligatorio'">
-                </div>
-              </div>
-            </div>
-            <br>
-            <div class="row">
-              <div class="col-md-12">
-                <div class="col-md-3">
-                  <b><small>Localidad:</small></b>
-                  <input name="InpLocalidad" type="text" class="form-control input-sm" ng-model="$ctrl.detplaza.Localidad" validate-on="dirty"
-                    required required-message="'Obligatorio'">
-                </div>
-                <div class="col-md-3">
-                  <b><small>Municipio:</small></b>
-                  <input name="InpMunicipio" type="text" class="form-control input-sm" ng-model="$ctrl.detplaza.Municipio" validate-on="dirty"
-                    required required-message="'Obligatorio'">
-                </div>
-                <div class="col-md-3">
-                  <b><small>Estado:</small></b>
-                  <input name="InpEstado" type="text" class="form-control input-sm" ng-model="$ctrl.detplaza.Estado" validate-on="dirty" required
-                    required-message="'Obligatorio'">
-                </div>
-                <div class="col-md-3">
-                  <b><small>País:</small></b>
-                  <input name="InpPais" type="text" class="form-control input-sm" ng-model="$ctrl.detplaza.Pais" validate-on="dirty" required
-                    required-message="'Obligatorio'">
-                </div>
-              </div>
-            </div>
-            <br>
-            <div class="row">
+            <div class="col-md-12">
+              <div class="col-md-6">
+                <b><small>Localidad:</small></b>
+                <input name="InpLocalidad" type="text" class="form-control input-sm" ng-model="$ctrl.detplaza.Localidad" validate-on="dirty"
+                  required required-message="'Obligatorio'">
 
-              <div class="col-md-12">
-                <div class="col-md-4">
-                  <b><small>Teléfono 1:</small></b>
-                  <input name="InpTelefono" type="text" class="form-control input-sm" ng-model="$ctrl.detplaza.Telefono" maxlength="10" ng-pattern="/^\d{10}$/"
-                    validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 10 dígitos.'">
-                </div>
-                <div class="col-md-4">
-                  <b><small>Email:</small></b>
-                  <input name="InpEmail" type="email" class="form-control input-sm" ng-model="$ctrl.detplaza.Email" validate-on="dirty" required
-                    required-message="'Obligatorio'" invalid-message="'Inválido.'">
-                </div>
-                <div class="col-md-4">
-                  <b><small>Contacto:</small></b>
-                  <input name="InpContacto" type="text" class="form-control input-sm" ng-model="$ctrl.detplaza.Contacto" validate-on="dirty"
-                    required required-message="'Obligatorio'">
-                </div>
               </div>
-            </div>
-            <br>
+              <div class="col-md-6">
+                <b><small>Municipio:</small></b>
+                <input name="InpMunicipio" type="text" class="form-control input-sm" ng-model="$ctrl.detplaza.Municipio" validate-on="dirty"
+                  required required-message="'Obligatorio'">
 
-            <footer>
-              <p class="text-right"></p>
-            </footer>
-          </uib-tab>
-          <uib-tab index="1">
-            <uib-tab-heading>
-              Datos de Almacén
-            </uib-tab-heading>
-            <br>
-            <div class="row">
-              <div class="col-md-12">
-                <div class="col-md-6">
-                  <p><b><small>Calle:</small></b></p>
-                  <input name="InpCalleAlm" type="text" class="form-control input-sm" ng-model="$ctrl.detplaza.CalleAlmacen" validate-on="dirty"
-                    required required-message="'Obligatorio'">
-                </div>
-                <div class="col-md-3">
-                  <p><b><small>Número:</small></b></p>
-                  <input name="InpNumeroAlm" type="text" class="form-control input-sm" ng-model="$ctrl.detplaza.NumIntAlmacen" maxlength="6"
-                    validate-on="dirty" required required-message="'Obligatorio'">
-                </div>
-                <div class="col-md-3">
-                  <p><b><small>CP:</small></b></p>
-                  <input name="InpCPALm" type="text" class="form-control input-sm" ng-model="$ctrl.detplaza.CPAlmacen" maxlength="5" ng-pattern="/^\d{5}$/"
-                    validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 5 dígitos.'">
-                </div>
               </div>
             </div>
-            <br>
-            <div class="row">
 
-              <div class="col-md-12">
-                <div class="col-md-6">
-                  <p><b><small>Colonia:</small></b></p>
-                  <input name="InpColoniaAlm" type="text" class="form-control input-sm" ng-model="$ctrl.detplaza.ColoniaAlmacen" validate-on="dirty"
-                    required required-message="'Obligatorio'">
-                </div>
-                <div class="col-md-6">
-                  <p><b><small>Localidad:</small></b></p>
-                  <input name="InpLocalidadAlm" type="text" class="form-control input-sm" ng-model="$ctrl.detplaza.LocalidadAlmacen" validate-on="dirty"
-                    required required-message="'Obligatorio'">
-                </div>
-              </div>
-            </div>
-            <br>
-            <div class="row">
 
-              <div class="col-md-12">
-                <div class="col-md-6">
-                  <p><b><small>Municipio:</small></b></p>
-                  <input name="InpMunicipioAlm" type="text" class="form-control input-sm" ng-model="$ctrl.detplaza.MunicipioAlmacen" validate-on="dirty"
-                    required required-message="'Obligatorio'">
-                </div>
-                <div class="col-md-6">
-                  <p><b><small>Estado:</small></b></p>
-                  <input name="InpEstadoAlm" type="text" class="form-control input-sm" ng-model="$ctrl.detplaza.EstadoAlmacen" validate-on="dirty"
-                    required required-message="'Obligatorio'">
-                </div>
+            <div class="col-md-12">
+              <div class="col-md-6">
+                <b><small>Estado:</small></b>
+                <input name="InpEstado" type="text" class="form-control input-sm" ng-model="$ctrl.detplaza.Estado" validate-on="dirty" required
+                  required-message="'Obligatorio'">
+              </div>
+              <div class="col-md-6">
+                <b><small>País:</small></b>
+                <input name="InpPais" type="text" class="form-control input-sm" ng-model="$ctrl.detplaza.Pais" validate-on="dirty" required
+                  required-message="'Obligatorio'">
+
               </div>
             </div>
-            <footer>
-              <p class="text-right"></p>
-            </footer>
-          </uib-tab>
-          <uib-tab index="2">
-            <uib-tab-heading>
-              Ciudades asociadas a la Plaza
-            </uib-tab-heading>
-            <div class="row">
-              <div class="col-md-12">
+
+            <div class="col-md-12">
+              <div class="col-md-6">
+                <b><small>Contacto:</small></b>
+                <input name="InpContacto" type="text" class="form-control input-sm" ng-model="$ctrl.detplaza.Contacto" validate-on="dirty"
+                  required required-message="'Obligatorio'">
+              </div>
+              <div class="col-md-6">
+                <b><small>Teléfono 1:</small></b>
+                <input name="InpTelefono" type="text" class="form-control input-sm" ng-model="$ctrl.detplaza.Telefono" maxlength="10" ng-pattern="/^\d{10}$/"
+                  validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 10 dígitos.'">
+              </div>
+              <div class="col-md-6">
+                <b><small>Email:</small></b>
+                <input name="InpEmail" type="email" class="form-control input-sm" ng-model="$ctrl.detplaza.Email" validate-on="dirty" required
+                  required-message="'Obligatorio'" invalid-message="'Inválido.'">
               </div>
             </div>
-            <br>
-            <div class="row">
+
+          </div>
+          <!--datos de plaza-->
+          <!--datos de almacen-->
+          <div class="col-md-6">
+            <h4 class="text-primary text-center"><b>Datos de almacén</b></h4>
+            <div class="col-md-12">
+              <div class="col-md-6">
+                <b><small>Calle:</small></b>
+                <input name="InpCalleAlm" type="text" class="form-control input-sm" ng-model="$ctrl.detplaza.CalleAlmacen" validate-on="dirty"
+                  required required-message="'Obligatorio'">
+              </div>
+              <div class="col-md-3">
+                <b><small>Número:</small></b>
+                <input name="InpNumeroAlm" type="text" class="form-control input-sm" ng-model="$ctrl.detplaza.NumIntAlmacen" maxlength="6"
+                  validate-on="dirty" required required-message="'Obligatorio'" placeholder="Número">
+              </div>
+              <div class="col-md-3">
+                <b><small>CP:</small></b>
+                <input name="InpCPALm" type="text" class="form-control input-sm" ng-model="$ctrl.detplaza.CPAlmacen" maxlength="5" ng-pattern="/^\d{5}$/"
+                  validate-on="dirty" required required-message="'Obligatorio'" placeholder="CP" invalid-message="'Inválido, Ingresa 5 dígitos.'">
+              </div>
+            </div>
+
+
+            <div class="col-md-12">
+              <div class="col-md-6">
+                <b><small>Colonia:</small></b>
+                <input name="InpColoniaAlm" type="text" class="form-control input-sm" ng-model="$ctrl.detplaza.ColoniaAlmacen" validate-on="dirty"
+                  required required-message="'Obligatorio'">
+              </div>
+              <div class="col-md-6">
+                <b><small>Localidad:</small></b>
+                <input name="InpLocalidadAlm" type="text" class="form-control input-sm" ng-model="$ctrl.detplaza.LocalidadAlmacen" validate-on="dirty"
+                  required required-message="'Obligatorio'">
+              </div>
+            </div>
+
+
+            <div class="col-md-12">
+
+              <div class="col-md-6">
+                <b><small>Municipio:</small></b>
+                <input name="InpMunicipioAlm" type="text" class="form-control input-sm" ng-model="$ctrl.detplaza.MunicipioAlmacen" validate-on="dirty"
+                  required required-message="'Obligatorio'">
+              </div>
+              <div class="col-md-6">
+                <b><small>Estado:</small></b>
+                <select name="SltEstadoPla" type="text" class="form-control input-sm" ng-model="$ctrl.estadoselect" ng-options="item as item.Nombre for item in $ctrl.estados track by item.Clv_Estado"
+                  ng-change="$ctrl.ObtenCiudades()">
+               <option value="">Selecciona</option>
+              </select>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <br>
+              <h4 class="text-primary text-center"><b>Relación Estado-Ciudad</b></h4>
               <div class="col-md-12">
                 <div class="col-md-5">
                   <p><b><small>Estado:</small></b></p>
-                  <select name="SltEstadoPla" type="text" class="form-control input-sm" ng-model="$ctrl.estadoselect" ng-options="item as item.Nombre for item in $ctrl.estados track by item.Clv_Estado"
+                  <select name="SltEstadoPla" type="text" class="form-control input-sm" ng-model="$ctrl.estado2select" 
+                  ng-disabled="!$ctrl.Clv_plaza > 0"
+                  ng-options="item as item.Nombre for item in $ctrl.estados track by item.Clv_Estado"
                     ng-change="$ctrl.ObtenCiudades()">
                                     <option value="">Selecciona</option>
                                 </select>
                 </div>
                 <div class="col-md-5">
                   <p><b><small>Ciudades:</small></b></p>
-                  <select name="SltCiudadPla" type="text" class="form-control input-sm" ng-model="$ctrl.CiudadPla" ng-options="item as item.nombre for item in $ctrl.ciudades track by item.Clv_Ciudad">
+                  <select name="SltCiudadPla" type="text"
+                  ng-disabled="!$ctrl.Clv_plaza > 0"
+                   class="form-control input-sm" ng-model="$ctrl.CiudadPla" ng-options="item as item.nombre for item in $ctrl.ciudades track by item.Clv_Ciudad">
                                     <option value="">Selecciona</option>
                                 </select>
                 </div>
                 <div class="col-md-2">
-                  <button type="button" class="btn btn-success bt-xs" title="Agregar Ciudad" ng-click="$ctrl.agregaRelacion()">Agregar</button>
-                </div>
-              </div>
-            </div>
-            <br>
-            <div class="row">
-              <div class="col-md-12">
-                <div class="col-md-12 table-scroll">
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th width="45%"><b>Estado</b></th>
-                        <th width="45%"><b>Ciudad</b></th>
-                        <th width="10%"><b>Acciones</b></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr ng-repeat="X in $ctrl.relaciones">
-                        <td>{{ X.Estado }}</td>
-                        <td>{{ X.Nombre }}</td>
-                        <td><button type="button" class="btn btn-danger btn-xs" title="Eliminar Ciudad" ng-click="$ctrl.EliminaRelacion(X)">Eliminar</button></td>
-                      </tr>
-                    </tbody>
-                  </table>
                   <br>
+                  <button type="button" class="btn btn-success btn-xs" 
+                  ng-disabled="!$ctrl.Clv_plaza > 0"
+                  title="Agregar Ciudad" ng-click="$ctrl.agregaRelacion()">Agregar</button>
                 </div>
               </div>
+              <div class="col-md-12 " style="overflow-y: scroll; max-height: 300px;">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th width="45%"><b>Estado</b></th>
+                      <th width="45%"><b>Ciudad</b></th>
+                      <th width="10%"><b>Acciones</b></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="X in $ctrl.relaciones">
+                      <td>{{ X.Estado }}</td>
+                      <td>{{ X.Nombre }}</td>
+                      <td><button type="button" class="btn btn-danger btn-xs" title="Eliminar Ciudad" ng-click="$ctrl.EliminaRelacion(X)">Eliminar</button></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <br>
+              </div>
             </div>
-            <footer>
-              <p class="text-right"></p>
-            </footer>
-          </uib-tab>
-        </uib-tabset>
+          </div>
+          <!--datos de almacen-->
+
+        </div>
       </fieldset>
+
     </div>
   </div>
 </form>
