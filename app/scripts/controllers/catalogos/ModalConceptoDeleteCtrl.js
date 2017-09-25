@@ -10,13 +10,11 @@ angular
 
         function DeleteConcepto(){
             CatalogosFactory.GetDeepValidaEliminaClvLlave(vm.CLV_LLAVE).then(function(data){
-                console.log(data);
                 var ObjConcepto = {
                     'CLV_LLAVE':vm.CLV_LLAVE,
                     'Clv_TipoCliente': vm.CLV_TIPOCLIENTE
                 };
                 CatalogosFactory.DeleteREL_TARIFADOS_SERVICIOS_New(ObjConcepto).then(function(data){
-                    console.log(data);
                     if(data.DeleteREL_TARIFADOS_SERVICIOS_NewResult == 1){
                         ngNotify.set('CORRECTO, se eliminó el concepto.', 'success');
                         $rootScope.$emit('LoadConceptos', vm.Clv_Servicio);
@@ -33,7 +31,6 @@ angular
         var vm = this;
         vm.cancel = cancel;
         vm.DeleteConcepto = DeleteConcepto;
-        console.log(ObjConcepto);
         vm.CONCEPTO = ObjConcepto.ObjConcepto.CONCEPTO;
         vm.CLV_LLAVE = ObjConcepto.ObjConcepto.CLV_LLAVE;
         vm.CLV_TIPOCLIENTE = ObjConcepto.CLV_TIPOCLIENTE;

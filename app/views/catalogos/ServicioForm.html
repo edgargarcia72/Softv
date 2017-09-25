@@ -31,12 +31,12 @@
                 <div class="col-md-12">
                     <div class="col-md-2">
                         <label class="checkbox-inline checkbox-styled">
-                            <input type="checkbox" name="CbxCobroMensual" ng-model="$ctrl.CobroMensual" ng-true-value="'Y'" ng-false-value="'N'" ng-change="$ctrl.SetTipoCobro()"><span>Cobro Mensual</span>
+                            <input type="checkbox" name="CbxCobroMensual" ng-model="$ctrl.CobroMensual" ng-disabled="$ctrl.Disable" ng-true-value="'Y'" ng-false-value="'N'" ng-change="$ctrl.SetTipoCobro()"><span>Cobro Mensual</span>
                         </label>
                     </div>
                     <div class="col-md-2">
                         <label class="checkbox-inline checkbox-styled">
-                            <input type="checkbox" name="CbxPrincipal" ng-model="$ctrl.Principal" ng-true-value="'Y'" ng-false-value="'N'" ng-change="$ctrl.buscarStatus()"><span>Principal</span>
+                            <input type="checkbox" name="CbxPrincipal" ng-model="$ctrl.Principal" ng-disabled="$ctrl.Disable" ng-true-value="'Y'" ng-false-value="'N'" ng-change="$ctrl.buscarStatus()"><span>Principal</span>
                         </label>
                     </div>
                     <div class="col-md-2">
@@ -46,7 +46,7 @@
                     </div>
                     <div class="col-md-2">
                         <label class="checkbox-inline checkbox-styled" ng-show="$ctrl.HideCobroMensual">
-                            <input type="checkbox" name="CbxGeneraOrden" ng-model="$ctrl.GeneraOrden" ng-true-value="'Y'" ng-false-value="'N'" ng-change="$ctrl.SetOrden()"><span>Genera Orden</span>
+                            <input type="checkbox" name="CbxGeneraOrden" ng-model="$ctrl.GeneraOrden" ng-disabled="$ctrl.Disable" ng-true-value="'Y'" ng-false-value="'N'" ng-change="$ctrl.SetOrden()"><span>Genera Orden</span>
                         </label>
                     </div>
                     <div class="col-md-4">
@@ -93,12 +93,12 @@
                 </div>
                 <div class="col-md-12">
                     <div class="col-md-2">
-                        <p ng-if="$ctrl.Clv_TipSer == 3 && $ctrl.ShowCobroMensual == true"><b>Clave Equivalente:</b></p>
+                        <p ng-show="$ctrl.ShowClaveEquivalente"><b>Clave Equivalente:</b></p>
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <div class="col-md-2">
-                        <input type="text" name="InpClaveEquivalente" class="form-control input-sm" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" ng-model="$ctrl.ClaveEquivalente" ng-if="($ctrl.Clv_TipSer == 3 && $ctrl.ShowCobroMensual == true)" maxlength="5" ng-pattern="/^[A-Z0-9]{5}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 5 caracteres.'">
+                    <div class="col-md-2" ng-if="$ctrl.ShowClaveEquivalente">
+                        <input type="text" name="InpClaveEquivalente" class="form-control input-sm" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" ng-model="$ctrl.ClaveEquivalente"  maxlength="5" ng-pattern="/^[A-Z0-9]{5}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 5 caracteres.'" ng-if="$ctrl.ShowClaveEquivalente">
                     </div>
                 </div>
             </div>
@@ -120,14 +120,6 @@
                                             <b>Tipo de cobro:</b>
                                         </div>
                                         <div class="col-md-4">
-                                            <!--
-                                            <multiple-autocomplete
-                                                name="MulslcTipoCobro"
-                                                ng-model="$ctrl.TipoCobro"
-                                                object-property="DESCRIPCION"
-                                                suggestions-arr="$ctrl.TipoCobroList">
-                                            </multiple-autocomplete>
-                                            -->
                                             <select name="SlcTipoCobro" class="form-control input-sm" ng-model="$ctrl.TipoCobro" ng-options="C.DESCRIPCION for C in $ctrl.TipoCobroList track by C.CLV_TIPOCLIENTE" ng-change="$ctrl.GetTarifa()">
                                                 <option value="">Selecciona</option>
                                             </select>
@@ -161,7 +153,7 @@
                                                                     <th><b>Comisión</b></th>
                                                                     <th><b>Orden</b></th>
                                                                     <th><b>Servicio al Cliente</b></th>
-                                                                    <th><b>Acciones</b></th>
+                                                                    <th colspan="2"><b>Acciones</b></th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -169,70 +161,23 @@
                                                                     <td>{{ X.CONCEPTO }}</td>
                                                                     <td>{{ X.PRECIO }}</td>
                                                                     <td>{{ X.Precio_Adicional }}</td>
-                                                                    <td>{{ X.Vigente }}</td>
-                                                                    <td>{{ X.BRINCA_MES }}</td>
-                                                                    <td>{{ X.Aplica_Comision }}</td>
-                                                                    <td>{{ X.Genera_Orden }}</td>
+                                                                    <td ng-if="X.Vigente == true">Si</td>
+                                                                    <td ng-if="X.Vigente == false">No</td>
+                                                                    <td ng-if="X.BRINCA_MES == true">Si</td>
+                                                                    <td ng-if="X.BRINCA_MES == false">No</td>
+                                                                    <td ng-if="X.Aplica_Comision == true">Si</td>
+                                                                    <td ng-if="X.Aplica_Comision == false">No</td>
+                                                                    <td ng-if="X.Genera_Orden == true">Si</td>
+                                                                    <td ng-if="X.Genera_Orden == false">No</td>
                                                                     <td>{{ X.TRABAJO }}</td>
-                                                                    <td><button type="button" class="btn btn-danger btn-xs" title="Eliminar Concepto" ng-click="$ctrl.OpenDeleteConcepto(X, $ctrl.TipoCobro.CLV_TIPOCLIENTE)">Eliminar</button></td>
+                                                                    <td><button type="button" class="btn btn-warning btn-xs" title="Editar Concepto" ng-click="$ctrl.OpenUpdateConcepto(X.CLV_LLAVE, $ctrl.TipoCobro.CLV_TIPOCLIENTE, X.CONCEPTO)">Editar</button></td>
+                                                                    <td><button type="button" class="btn btn-danger btn-xs" title="Eliminar Concepto" ng-click="$ctrl.OpenDeleteConcepto(X, $ctrl.TipoCobro.CLV_TIPOCLIENTE, $ctrl.Clv_Servicio)">Eliminar</button></td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!--
-                                            <uib-tabset vertical="true" type="tabs">
-                                                <uib-tab index="$index + 1" ng-repeat="X in $ctrl.TipoCobro">
-                                                    <uib-tab-heading>
-                                                        {{ X.DESCRIPCION }}
-                                                    </uib-tab-heading>
-                                                    <div class="row">
-                                                        <div class="col-md-10">
-                                                            <div class="col-md-10" style="text-align:center">
-                                                                <b>Conceptos para tipo de cobro {{ X.DESCRIPCION }}</b>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <button type="button" class="btn btn-primary btn-sm" title="Agregar un concepto" ng-click="$ctrl.OpenAddConcepto(X.CLV_TIPOCLIENTE)">Agregar Concepto</button>
-                                                            </div>
-                                                            <div class="col-md-12">
-                                                                <br>
-                                                            </div>
-                                                            <div class="col-md-12 table-scroll">
-                                                                <table class="table">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th><b>Concepto</b></th>
-                                                                            <th><b>Precio</b></th>
-                                                                            <th><b>Adicional</b></th>
-                                                                            <th><b>Vigencia</b></th>
-                                                                            <th><b>Avanza mes</b></th>
-                                                                            <th><b>Comisión</b></th>
-                                                                            <th><b>Orden</b></th>
-                                                                            <th><b>Servicio al Cliente</b></th>
-                                                                            <th><b>Acciones</b></th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <tr ng-repeat="X in $ctrl.RelEstMunViewList">
-                                                                            <td>{{ X.Estado }}</td>
-                                                                            <td>{{ X.Municipio }}</td>
-                                                                            <td>{{ X.Municipio }}</td>
-                                                                            <td>{{ X.Estado }}</td>
-                                                                            <td>{{ X.Municipio }}</td>
-                                                                            <td>{{ X.Municipio }}</td>
-                                                                            <td>{{ X.Estado }}</td>
-                                                                            <td>{{ X.Municipio }}</td>
-                                                                            <td><button type="button" class="btn btn-danger btn-xs" title="Eliminar Ciudad" ng-click="$ctrl.DeleteRelEstMun(X)">Eliminar</button></td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </uib-tab>
-                                            </uib-tabset>
-                                            -->
                                         </div>
                                     </div>
                                 </div>
@@ -270,16 +215,16 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="col-md-3">
-                                            <input type="number" name="ImpProntoPago" class="form-control input-sm" ng-if="$ctrl.ProntoPago" ng-pattern="/^\d{1,10}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
+                                            <input type="number" name="ImpProntoPago" class="form-control input-sm" ng-model="$ctrl.ProntoPago" min="1" ng-pattern="/^\d{1,10}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
                                         </div>
                                         <div class="col-md-3">
-                                            <input type="number" name="ImpMeses35" class="form-control input-sm" ng-if="$ctrl.Meses35" ng-pattern="/^\d{1,10}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
+                                            <input type="number" name="ImpMeses35" class="form-control input-sm" ng-model="$ctrl.Meses35" min="1" ng-pattern="/^\d{1,10}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
                                         </div>
                                         <div class="col-md-3">
-                                            <input type="number" name="ImpMeses611" class="form-control input-sm" ng-if="$ctrl.Meses611" ng-pattern="/^\d{1,10}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
+                                            <input type="number" name="ImpMeses611" class="form-control input-sm" ng-model="$ctrl.Meses611" min="1" ng-pattern="/^\d{1,10}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
                                         </div>
                                         <div class="col-md-3">
-                                            <input type="number" name="ImpMeses11" class="form-control input-sm" ng-if="$ctrl.Meses11" ng-pattern="/^\d{1,10}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
+                                            <input type="number" name="ImpMeses11" class="form-control input-sm" ng-model="$ctrl.Meses11" min="1" ng-pattern="/^\d{1,10}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
                                         </div>
                                     </div>
                                 </div>

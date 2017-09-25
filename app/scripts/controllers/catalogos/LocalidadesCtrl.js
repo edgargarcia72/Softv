@@ -5,8 +5,9 @@ angular
     .controller('LocalidadesCtrl', function(CatalogosFactory, $uibModal){
 
         function initData(){
-            CatalogosFactory.GetLocalidadList().then(function(data){
-                vm.LocalidadList = data.GetLocalidadListResult;
+            CatalogosFactory.GetLocalidades_NewList().then(function(data){
+                console.log(data);
+                vm.LocalidadList = data.GetLocalidades_NewListResult;
                 if (vm.LocalidadList.length == 0) {
 					vm.SinRegistros = true;
 					vm.ConRegistros = false;

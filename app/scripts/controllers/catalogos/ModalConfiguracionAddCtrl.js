@@ -6,7 +6,6 @@ angular
 
         function initData(){
             CatalogosFactory.GetMuestra_Plazas_ConfiguracionServiciosList(0).then(function(data){
-                console.log(data);
                 vm.DistribuidorList = data.GetMuestra_Plazas_ConfiguracionServiciosListResult;
             });
         }
@@ -14,7 +13,6 @@ angular
         function GetRelComEstCiu(){
             if(vm.Distribuidor != undefined){
                 CatalogosFactory.GetDameRelCompaniaEstadoCiudadList(vm.Distribuidor.clv_plaza).then(function(data){
-                    console.log(data);
                     vm.RelComEstCiuList = data.GetDameRelCompaniaEstadoCiudadListResult;
                 });
             }
@@ -33,13 +31,11 @@ angular
                 'Clv_Servicio': vm.Clv_Servicio
             };
             CatalogosFactory.GetDameServiciosRelComEdoCd_PorServicio1_NewList(vm.ObjSerRelComEstCiu).then(function(data){
-                console.log(data);
                 vm.Servicio1List = data.GetDameServiciosRelComEdoCd_PorServicio1_NewListResult;
                 vm.Servicio1 = vm.Servicio1List[0];
             });
     
             CatalogosFactory.GetDameServiciosRelComEdoCd_PorServicio2_NewList(vm.ObjSerRelComEstCiu).then(function(data){
-                console.log(data);
                 vm.Servicio2List = data.GetDameServiciosRelComEdoCd_PorServicio2_NewListResult;
             });
         }
@@ -52,9 +48,7 @@ angular
                 'Clv_Ciudad': vm.ObjSerRelComEstCiu.Clv_Ciudad,
                 'clv_servicio': vm.Servicio1.Clv_Servicio
             };
-            console.log(objinsertaServiciosRelCompaniaEstadoCiudad);
             CatalogosFactory.AddinsertaServiciosRelCompaniaEstadoCiudad(objinsertaServiciosRelCompaniaEstadoCiudad).then(function(data){
-                console.log(data);
                 if(data.AddinsertaServiciosRelCompaniaEstadoCiudadResult == -1){
                     ngNotify.set('CORRECTO, se añadió el servicio.', 'success');
                     GetSerRelComEstCiu1(vm.ObjSerRelComEstCiu);
@@ -72,9 +66,7 @@ angular
                 'Clv_Ciudad': vm.ObjSerRelComEstCiu.Clv_Ciudad, 
                 'clv_servicio': vm.ObjSerRelComEstCiu.Clv_Servicio
             };
-            console.log(ObjDeletRelSer);
             CatalogosFactory.DeleteinsertaServiciosRelCompaniaEstadoCiudad(ObjDeletRelSer).then(function(data){
-                console.log(data);
                 if(data.DeleteinsertaServiciosRelCompaniaEstadoCiudadResult == -1){
                     ngNotify.set('CORRECTO, se eliminó el servicio.', 'success');
                     GetSerRelComEstCiu1(vm.ObjSerRelComEstCiu);
@@ -89,9 +81,7 @@ angular
                 'clv_plaza': vm.ObjSerRelComEstCiu.clv_plaza,
                 'clv_servicio': vm.ObjSerRelComEstCiu.Clv_Servicio
             };
-            console.log(objinsertaServiciosRelCompaniaEstadoCiudadATodos);
             CatalogosFactory.AddinsertaServiciosRelCompaniaEstadoCiudadATodos(objinsertaServiciosRelCompaniaEstadoCiudadATodos).then(function(data){
-                console.log(data);
                 if(data.AddinsertaServiciosRelCompaniaEstadoCiudadATodosResult == -1){
                     ngNotify.set('CORRECTO, se añadió el servicio a todas las plazas.', 'success');
                     GetSerRelComEstCiu1(vm.ObjSerRelComEstCiu);
@@ -106,9 +96,7 @@ angular
                 'clv_plaza': vm.ObjSerRelComEstCiu.clv_plaza,
                 'clv_servicio': vm.ObjSerRelComEstCiu.Clv_Servicio
             };
-            console.log(ObjDeletRelSer);
             CatalogosFactory.DeleteinsertaServiciosRelCompaniaEstadoCiudadATodos(ObjDeletRelSer).then(function(data){
-                console.log(data);
                 if(data.DeleteinsertaServiciosRelCompaniaEstadoCiudadATodosResult == -1){
                     ngNotify.set('CORRECTO, se añadió el servicio a todas las plazas.', 'success');
                     GetSerRelComEstCiu1(vm.ObjSerRelComEstCiu);

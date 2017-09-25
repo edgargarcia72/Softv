@@ -5,7 +5,6 @@ angular
 
         function initData(){
             CatalogosFactory.GetTipoClienteList_WebSoftvnew().then(function(data){
-                console.log(data);
                 vm.TipoCobroList = data.GetTipoClienteList_WebSoftvnewResult;
             });
 
@@ -20,12 +19,14 @@ angular
                     vm.AplicaComision = (Servicio.AplicanCom == true)? 'Y' : 'N';
                     vm.CobroMensual = (Servicio.Sale_en_Cartera == true)? 'Y' : 'N';
                     vm.GeneraOrden = (Servicio.Genera_Orden == true)? 'Y' : 'N';
+                    vm.ShowOrden = (Servicio.Genera_Orden == true)? true : false;
                     vm.Principal = (Servicio.Es_Principal == true)? 'Y' : 'N';
                     vm.Precio = (Servicio.Precio > 0)? Servicio.Precio : 0;
                     vm.HideCobroMensual = (Servicio.Sale_en_Cartera == true)? false : true;
                     vm.ShowCobroMensual = (Servicio.Sale_en_Cartera == true)? true : false;
-                    console.log(Servicio.Sale_en_Cartera);
-                    console.log(vm.ShowCobroMensual);
+                    CatalogosFactory.GetMUESTRATRABAJOS_NewList(vm.Clv_TipSer).then(function(data){
+                        vm.TrabajoList = data.GetMUESTRATRABAJOS_NewListResult;
+                    });
                 }else{
                     ngNotify.set('ERROR, El servicio que seleccionó no se encuentra registrado.', 'warn');
                     $state.go('home.catalogos.servicios');
@@ -97,6 +98,31 @@ angular
             });
         }
 
+        function OpenUpdateConcepto(CLV_LLAVE, CLV_TIPOCLIENTE, CONCEPTO){
+            var ObjConcepto = {
+                'CLV_LLAVE': CLV_LLAVE,
+                'CLV_TIPOCLIENTE': CLV_TIPOCLIENTE,
+                'CONCEPTO': CONCEPTO
+            };
+            var modalInstance = $uibModal.open({
+                animation: true,
+                ariaLabelledBy: 'modal-title',
+                ariaDescribedBy: 'modal-body',
+                templateUrl: 'views/catalogos/ModalConceptoForm.html',
+                controller: 'ModalConceptoUpdateCtrl',
+                controllerAs: 'ctrl',
+                backdrop: 'static',
+                keyboard: false,
+                class: 'modal-backdrop fade',
+                size: 'md',
+                resolve: {
+                    ObjConcepto: function () {
+                        return ObjConcepto;
+                    }
+                }
+            });
+        }
+
         function OpenConfigurar(){
             var Clv_Servicio = vm.Clv_Servicio;
             var modalInstance = $uibModal.open({
@@ -125,7 +151,7 @@ angular
             };
             CatalogosFactory.GetDeepValidaCambioDClvtxtServ(ObjValidaCambio).then(function(data){
                 console.log(data);
-                var MsjExt = data.GetDeepValidaCambioDClvtxtServResult.MSJ;
+                vm.MsjExt = data.GetDeepValidaCambioDClvtxtServResult.MSJ;
                     var objServicios_New = {
                     'Clv_Servicio': vm.Clv_Servicio,
                     'Clv_TipSer': vm.Clv_TipSer,
@@ -141,18 +167,38 @@ angular
                     'Gb': 0
                 };
                 CatalogosFactory.UpdateServicios_New(objServicios_New).then(function(data){
-                    console.log(data);
                     if(data.UpdateServicios_NewResult == -1){
-                        if(MsjExt != null){
-                            var MSJ = 'NOTA:' + MsjExt + ' CORRECTO, se guardó el servicio.';
-                        }else{
-                            var MSJ = 'CORRECTO, se guardó el servicio.';
-                        }
-                        ngNotify.set(MSJ, 'success');
-                        $state.go('home.catalogos.servicios');
+                        var objNUEPuntos_Pago_Adelantado = {
+                            'CLV_SERVICIO': vm.Clv_Servicio,
+                            'Puntos3': vm.Meses35,
+                            'Puntos6': vm.Meses611,
+                            'puntos11': vm.Meses11,
+                            'Punto_Pronto_Pago': vm.ProntoPago
+                        };
+                        CatalogosFactory.AddNUEPuntos_Pago_Adelantado(objNUEPuntos_Pago_Adelantado).then(function(data){
+                            console.log(data);
+                            if(data.AddNUEPuntos_Pago_AdelantadoResult == -1){
+                                console.log(vm.MsjExt);
+                                if(vm.MsjExt != null){
+                                    var MSJ = 'NOTA:' + vm.MsjExt + ' CORRECTO, se guardó el servicio.';
+                                }else{
+                                    var MSJ = 'CORRECTO, se guardó el servicio.';
+                                }
+                                ngNotify.set(MSJ, 'success');
+                                $state.go('home.catalogos.servicios');
+                            }else{
+                                if(vm.MsjExt != null){
+                                    var MSJ = 'NOTA:' + vm.MsjExt + ' ERROR, al guardar el servicio.';
+                                }else{
+                                    var MSJ = 'ERROR, al guardar el servicio.';
+                                }
+                                ngNotify.set(MSJ, 'warn');
+                                $state.go('home.catalogos.servicios');
+                            }
+                        });
                     }else{
-                        if(MsjExt != null){
-                            var MSJ = 'NOTA:' + MsjExt + ' ERROR, al guardar el servicio.';
+                        if(vm.MsjExt != null){
+                            var MSJ = 'NOTA:' + vm.MsjExt + ' ERROR, al guardar el servicio.';
                         }else{
                             var MSJ = 'ERROR, al guardar el servicio.';
                         }
@@ -163,12 +209,14 @@ angular
             });
         }
 
+        function SavePuntos(){
+        }
+
         $rootScope.$on('LoadConceptos', function(e, Clv_Servicio){
             GetTarifa(Clv_Servicio);
         });
         
         function SetTipoCobro(){
-            console.log(vm.CobroMensual);
             if(vm.CobroMensual == 'Y'){
                 vm.ShowCobroMensual = true;
                 vm.HideCobroMensual = false;
@@ -186,7 +234,6 @@ angular
         }
 
         function SetOrden(){
-            console.log(vm.GeneraOrden);
             if(vm.GeneraOrden == 'Y'){
                 vm.ShowOrden = true;
             }
@@ -201,13 +248,14 @@ angular
         vm.ShowCobroMensual = false;
         vm.HideCobroMensual = true;
         vm.ShowOrden = false;
+        vm.Disable = true;
         vm.SetTipoCobro = SetTipoCobro;
         vm.SetOrden = SetOrden;
         vm.OpenAddConcepto = OpenAddConcepto;
+        vm.OpenUpdateConcepto = OpenUpdateConcepto;
         vm.OpenDeleteConcepto = OpenDeleteConcepto;
         vm.SaveServicios = SaveServicios;
         vm.OpenConfigurar = OpenConfigurar;
         vm.GetTarifa = GetTarifa;
-        console.log(Clv_Servicio);
         initData();
     });

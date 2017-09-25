@@ -82,21 +82,18 @@ angular
             GetDeepTipServ_New: '/TipServ_New/GetDeepTipServ_New',
             UpdateTipServ_New: '/TipServ_New/UpdateTipServ_New',
             DeleteTipServ_New: '/TipServ_New/DeleteTipServ_New',
-           GetSucursalList: '/Sucursales/GetSUCURSALESList',
-      GetSUCURSALES: '/SUCURSALES/GetSUCURSALES',
-      AddSucursal: '/SUCURSALES/AddSUCURSALES',
-      GetMUESTRASUCURSALES2: '/SUCURSALES/GetMUESTRASUCURSALES2',
-      GetDeepSucursal: '/SUCURSALES/GetDeepSUCURSALES',
-      UpdateSucursal: '/SUCURSALES/UpdateSUCURSALES',
-      GetMuestraRelEdoCd: '/RelEstadoCiudad_New/GetMuestraRelEdoCd',
-      AddRelEstadoCiudad_New: '/RelEstadoCiudad_New/AddRelEstadoCiudad_New',
-      GetCatalogoCajasList: '/CatalogoCajas/GetCatalogoCajasList',
-      AddCatalogoCajas: '/CatalogoCajas/AddCatalogoCajas',
-      UpdateCatalogoCajas: '/CatalogoCajas/UpdateCatalogoCajas',
-      GetDeepCatalogoCajas: '/CatalogoCajas/GetDeepCatalogoCajas',
-
+            GetSucursalList: '/Sucursales/GetSUCURSALESList',
+            GetSUCURSALES: '/SUCURSALES/GetSUCURSALES',
+            AddSucursal: '/SUCURSALES/AddSUCURSALES',
+            GetMUESTRASUCURSALES2: '/SUCURSALES/GetMUESTRASUCURSALES2',
+            GetDeepSucursal: '/SUCURSALES/GetDeepSUCURSALES',
+            UpdateSucursal: '/SUCURSALES/UpdateSUCURSALES',
             GetMuestraRelEdoCd: '/RelEstadoCiudad_New/GetMuestraRelEdoCd',
             AddRelEstadoCiudad_New: '/RelEstadoCiudad_New/AddRelEstadoCiudad_New',
+            GetCatalogoCajasList: '/CatalogoCajas/GetCatalogoCajasList',
+            AddCatalogoCajas: '/CatalogoCajas/AddCatalogoCajas',
+            UpdateCatalogoCajas: '/CatalogoCajas/UpdateCatalogoCajas',
+            GetDeepCatalogoCajas: '/CatalogoCajas/GetDeepCatalogoCajas',
             GetMuestraTipSerPrincipal_SERList: '/MuestraTipSerPrincipal_SER/GetMuestraTipSerPrincipal_SERList',
             AddServicios_New: '/Servicios_New/AddServicios_New',
             DeleteBORRel_Trabajos_NoCobroMensual: '/BORRel_Trabajos_NoCobroMensual/DeleteBORRel_Trabajos_NoCobroMensual',
@@ -128,7 +125,14 @@ angular
             AddRelTarifadosServiciosCostoPorCaja_New: '/RelTarifadosServiciosCostoPorCaja_New/AddRelTarifadosServiciosCostoPorCaja_New',
             GetDeepValidaEliminaClvLlave: '/ValidaEliminaClvLlave/GetDeepValidaEliminaClvLlave',
             DeleteREL_TARIFADOS_SERVICIOS_New: '/REL_TARIFADOS_SERVICIOS_New/DeleteREL_TARIFADOS_SERVICIOS_New',
-            GetServicios_NewList: '/Servicios_New/GetServicios_NewList'
+            GetServicios_NewList: '/Servicios_New/GetServicios_NewList',
+            UpdateREL_TARIFADOS_SERVICIOS_New: '/REL_TARIFADOS_SERVICIOS_New/UpdateREL_TARIFADOS_SERVICIOS_New',
+            GetDeepREL_TARIFADOS_SERVICIOS_New: '/REL_TARIFADOS_SERVICIOS_New/GetDeepREL_TARIFADOS_SERVICIOS_New',
+            GetDeepRelTarifadosServiciosCostoPorCaja_New: '/RelTarifadosServiciosCostoPorCaja_New/GetDeepRelTarifadosServiciosCostoPorCaja_New',
+            UpdateREL_TARIFADOS_SERVICIOSAll_New: '/REL_TARIFADOS_SERVICIOS_New/UpdateREL_TARIFADOS_SERVICIOSAll_New',
+            AddNUEPuntos_Pago_Adelantado: '/NUEPuntos_Pago_Adelantado/AddNUEPuntos_Pago_Adelantado',
+            GetLocalidades_NewList: '/Localidades_New/GetLocalidades_NewList',
+            UpdateModRentaAparato: '/ModRentaAparato/UpdateModRentaAparato'
         };
 
         factory.GetPlazaList = function (IdUsuario) {
@@ -1085,7 +1089,6 @@ angular
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
             var Parametros = {'objServicios_New': objServicios_New};
-            console.log(Parametros);
             $http.post(globalService.getUrl() + paths.AddServicios_New, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -1098,7 +1101,6 @@ angular
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
             var Parametros = {'Clv_Servicio': Clv_Servicio};
-            console.log(Parametros);
             $http.post(globalService.getUrl() + paths.DeleteBORRel_Trabajos_NoCobroMensual, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -1111,7 +1113,6 @@ angular
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
             var Parametros = {'objValidaAplicaSoloInternet': objValidaAplicaSoloInternet};
-            console.log(Parametros);
             $http.post(globalService.getUrl() + paths.AddValidaAplicaSoloInternet, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -1124,7 +1125,6 @@ angular
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
             var Parametros = {'objNueAplicaSoloInternet': objNueAplicaSoloInternet};
-            console.log(Parametros);
             $http.post(globalService.getUrl() + paths.AddNueAplicaSoloInternet, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -1137,7 +1137,6 @@ angular
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
             var Parametros = {'Clv_Servicio': Clv_Servicio};
-            console.log(Parametros);
             $http.post(globalService.getUrl() + paths.DeleteBorAplicaSoloInternet, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -1150,7 +1149,6 @@ angular
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
             var Parametros = {'objServicios_New': objServicios_New};
-            console.log(Parametros);
             $http.post(globalService.getUrl() + paths.UpdateServicios_New, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -1163,7 +1161,6 @@ angular
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
             var Parametros = {'clv_TipSer': clv_TipSer};
-            console.log(Parametros);
             $http.post(globalService.getUrl() + paths.GetMUESTRATRABAJOS_NewList, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -1176,7 +1173,6 @@ angular
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
             var Parametros = {'objGUARDARel_Trabajos_NoCobroMensual': objGUARDARel_Trabajos_NoCobroMensual};
-            console.log(Parametros);
             $http.post(globalService.getUrl() + paths.UpdateGUARDARel_Trabajos_NoCobroMensual, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -1189,7 +1185,6 @@ angular
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
             var Parametros = ObjValidaCambio;
-            console.log(Parametros);
             $http.post(globalService.getUrl() + paths.GetDeepValidaCambioDClvtxtServ, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -1202,7 +1197,6 @@ angular
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
             var Parametros = ObjValidaDelete;
-            console.log(JSON.stringify(Parametros));
             $http.post(globalService.getUrl() + paths.GetDeepValida_borra_servicio_New, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -1215,7 +1209,6 @@ angular
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
             var Parametros = {'Clv_Servicio': Clv_Servicio};
-            console.log(Parametros);
             $http.post(globalService.getUrl() + paths.DeleteServicios_New, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -1228,8 +1221,7 @@ angular
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
             var Parametros = {'objNUEVOClv_Equi': objNUEVOClv_Equi};
-            console.log(Parametros);
-            $http.post(globalService.getUrl() + paths.DeleteServicios_New, JSON.stringify(Parametros), config).then(function (response) {
+            $http.post(globalService.getUrl() + paths.UpdateNUEVOClv_Equi, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);
@@ -1252,7 +1244,6 @@ angular
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
             var Parametros = {'Clv_Servicio': Clv_Servicio};
-            console.log(Parametros);
             $http.post(globalService.getUrl() + paths.GetDeepServicios_New, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -1265,7 +1256,6 @@ angular
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
             var Parametros = {'clv_plaza': clv_plaza};
-            console.log(Parametros);
             $http.post(globalService.getUrl() + paths.GetMuestra_Plazas_ConfiguracionServiciosList, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -1278,7 +1268,6 @@ angular
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
             var Parametros = {'clv_plaza': clv_plaza};
-            console.log(Parametros);
             $http.post(globalService.getUrl() + paths.GetDameRelCompaniaEstadoCiudadList, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -1291,7 +1280,6 @@ angular
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
             var Parametros = ObjSerRelComEstCiu;
-            console.log(Parametros);
             $http.post(globalService.getUrl() + paths.GetDameServiciosRelComEdoCd_PorServicio1_NewList, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -1304,7 +1292,6 @@ angular
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
             var Parametros = ObjSerRelComEstCiu;
-            console.log(Parametros);
             $http.post(globalService.getUrl() + paths.GetDameServiciosRelComEdoCd_PorServicio2_NewList, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -1317,7 +1304,6 @@ angular
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
             var Parametros = {'objinsertaServiciosRelCompaniaEstadoCiudad': objinsertaServiciosRelCompaniaEstadoCiudad};
-            console.log(Parametros);
             $http.post(globalService.getUrl() + paths.AddinsertaServiciosRelCompaniaEstadoCiudad, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -1330,7 +1316,6 @@ angular
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
             var Parametros = ObjDeletRelSer;
-            console.log(Parametros);
             $http.post(globalService.getUrl() + paths.DeleteinsertaServiciosRelCompaniaEstadoCiudad, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -1343,7 +1328,6 @@ angular
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
             var Parametros = {'objinsertaServiciosRelCompaniaEstadoCiudadATodos': objinsertaServiciosRelCompaniaEstadoCiudadATodos};
-            console.log(Parametros);
             $http.post(globalService.getUrl() + paths.AddinsertaServiciosRelCompaniaEstadoCiudadATodos, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -1356,7 +1340,6 @@ angular
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
             var Parametros = ObjDeletRelSer;
-            console.log(Parametros);
             $http.post(globalService.getUrl() + paths.DeleteinsertaServiciosRelCompaniaEstadoCiudadATodos, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -1369,7 +1352,6 @@ angular
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
             var Parametros = ObjTarifa;
-            console.log(Parametros);
             $http.post(globalService.getUrl() + paths.GetREL_TARIFADOS_SERVICIOS_NewList, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -1382,7 +1364,6 @@ angular
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
             var Parametros = {'clv_TipSer': clv_TipSer};
-            console.log(Parametros);
             $http.post(globalService.getUrl() + paths.GetMuestraTipoPromocionList, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -1395,7 +1376,6 @@ angular
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
             var Parametros = {'objValidaPeriodos': objValidaPeriodos};
-            console.log(Parametros);
             $http.post(globalService.getUrl() + paths.AddValidaPeriodos, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -1408,7 +1388,6 @@ angular
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
             var Parametros = {'objREL_TARIFADOS_SERVICIOS_New': objREL_TARIFADOS_SERVICIOS_New};
-            console.log(Parametros);
             $http.post(globalService.getUrl() + paths.AddREL_TARIFADOS_SERVICIOS_New, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -1421,7 +1400,6 @@ angular
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
             var Parametros = {'objREL_TARIFADOS_SERVICIOS_New': objREL_TARIFADOS_SERVICIOS_New};
-            console.log(Parametros);
             $http.post(globalService.getUrl() + paths.AddREL_TARIFADOS_SERVICIOSAll_New, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -1434,7 +1412,6 @@ angular
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
             var Parametros = {'objRelTarifadosServiciosCostoPorCaja_New': objRelTarifadosServiciosCostoPorCaja_New};
-            console.log(Parametros);
             $http.post(globalService.getUrl() + paths.AddRelTarifadosServiciosCostoPorCaja_New, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -1447,7 +1424,6 @@ angular
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
             var Parametros = {'Clv_Llave': Clv_Llave};
-            console.log(Parametros);
             $http.post(globalService.getUrl() + paths.GetDeepValidaEliminaClvLlave, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -1460,7 +1436,6 @@ angular
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
             var Parametros = ObjConcepto;
-            console.log(Parametros);
             $http.post(globalService.getUrl() + paths.DeleteREL_TARIFADOS_SERVICIOS_New, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -1473,8 +1448,96 @@ angular
             var deferred = $q.defer();
             var config = {headers: {'Authorization': $localStorage.currentUser.token}};
             var Parametros = ObjBusqueda;
-            console.log(Parametros);
             $http.post(globalService.getUrl() + paths.GetServicios_NewList, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.UpdateREL_TARIFADOS_SERVICIOS_New = function (objREL_TARIFADOS_SERVICIOS_New) {
+            var deferred = $q.defer();
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = {'objREL_TARIFADOS_SERVICIOS_New': objREL_TARIFADOS_SERVICIOS_New};
+            $http.post(globalService.getUrl() + paths.UpdateREL_TARIFADOS_SERVICIOS_New, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.GetDeepREL_TARIFADOS_SERVICIOS_New = function (ObjConcepto) {
+            var deferred = $q.defer();
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = ObjConcepto;
+            $http.post(globalService.getUrl() + paths.GetDeepREL_TARIFADOS_SERVICIOS_New, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.GetDeepRelTarifadosServiciosCostoPorCaja_New = function (Clv_Llave) {
+            var deferred = $q.defer();
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = {'Clv_Llave': Clv_Llave};
+            console.log(Parametros);
+            $http.post(globalService.getUrl() + paths.GetDeepRelTarifadosServiciosCostoPorCaja_New, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.UpdateREL_TARIFADOS_SERVICIOSAll_New = function (objREL_TARIFADOS_SERVICIOS_New) {
+            var deferred = $q.defer();
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = {'objREL_TARIFADOS_SERVICIOS_New': objREL_TARIFADOS_SERVICIOS_New};
+            console.log(Parametros);
+            $http.post(globalService.getUrl() + paths.UpdateREL_TARIFADOS_SERVICIOSAll_New, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.AddNUEPuntos_Pago_Adelantado = function (objNUEPuntos_Pago_Adelantado) {
+            var deferred = $q.defer();
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = {'objNUEPuntos_Pago_Adelantado': objNUEPuntos_Pago_Adelantado};
+            console.log(Parametros);
+            $http.post(globalService.getUrl() + paths.AddNUEPuntos_Pago_Adelantado, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.UpdateModRentaAparato = function (objModRentaAparato) {
+            var deferred = $q.defer();
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = {'objModRentaAparato': objModRentaAparato};
+            console.log(Parametros);
+            $http.post(globalService.getUrl() + paths.UpdateModRentaAparato, JSON.stringify(Parametros), config).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        factory.GetLocalidades_NewList = function (ObjLocalidad) {
+            var deferred = $q.defer();
+            var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+            var Parametros = ObjLocalidad;
+            console.log(Parametros);
+            $http.post(globalService.getUrl() + paths.GetLocalidades_NewList, JSON.stringify(Parametros), config).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);

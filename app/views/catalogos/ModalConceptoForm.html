@@ -1,7 +1,7 @@
 <form name="FormConcepto" angular-validator-submit="ctrl.SaveConcepto()" novalidate angular-validator autocomplete="off">
     <div class="modal-header">
         <button class="close" type="button" aria-label="close" ng-click="ctrl.cancel()">x</button>
-        <h4 class="modal-title"><i class="fa fa-plus"></i> Nuevo Concepto</h4>
+        <h4 class="modal-title"><i ng-class="ctrl.Icono"></i> {{ ctrl.Titulo }} {{ ctrl.CLV_LLAVE }}</h4>
     </div>
     <div class="modal-body">
         <div class="row">
@@ -19,7 +19,7 @@
                     <b>Concepto:</b>
                 </div>
                 <div class="col-md-10">
-                    <select name="SlcTipoConcepto" class="form-control input-sm" ng-model="ctrl.TipoConcepto" ng-options="TC.Concepto for TC in ctrl.TipoConceptoList track by TC.Clave" validate-on="dirty" required required-message="'Obligatorio'">
+                    <select name="SlcTipoConcepto" class="form-control input-sm" ng-model="ctrl.TipoConcepto" ng-options="TC.Concepto for TC in ctrl.TipoConceptoList track by TC.Clave" ng-change="ctrl.SetTipoConepto()" validate-on="dirty" required required-message="'Obligatorio'">
                         <option value="" ng-disabled="true">Selecciona</option>
                     </select>
                 </div>
@@ -182,7 +182,7 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="sumit" class="btn btn-primary btn-sm" title="Agregar Concepto">Agregar</button>
+        <button type="sumit" class="btn btn-primary btn-sm" title="Guardar Concepto">Guardar</button>
         <button class="btn bnt-default btn-sm" type="button" ng-click="ctrl.cancel()" title="Salir">Cancelar</button>
     </div>
 </form>
