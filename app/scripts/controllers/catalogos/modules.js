@@ -160,6 +160,21 @@ angular
                 controllerAs: '$ctrl'
             },
             {
+                name: 'home.catalogos.equipos_digitales',
+                data: {
+                    pageTitle: 'SOFTV | CATÁLOGO EQUIPOS DIGITALES',
+                    permissions: {
+                        options: {
+                            reload: false
+                        }
+                    }
+                },
+                url: '/catalogo/equipos_digitales',
+                templateUrl: 'views/catalogos/EquiposDigitales.html',
+                controller: 'EquiposDigitalesCtrl',
+                controllerAs: '$ctrl'
+            },
+            {
                 name: 'home.catalogos.plazas',
                 data: {
                     pageTitle: 'SOFTV | CATÁLOGO PLAZAS',
