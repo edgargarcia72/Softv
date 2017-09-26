@@ -2,53 +2,20 @@
 
 angular
     .module('softvApp')
-    .controller('DistribuidoresCtrl', function(CatalogosFactory, $uibModal){
+    .controller('DistribuidoresCtrl', function(distribuidorFactory, $uibModal){
 
         function initData(){
-            CatalogosFactory.GetDistribuidorList().then(function(data){
-                vm.DistribuidoresList = data.GetDistribuidorListResult;
+            distribuidorFactory.Getplaza(0,"").then(function(data){
+                console.log(data.GetPlaza_DistribuidoresNewResult);
+                vm.distribuidores=data.GetPlaza_DistribuidoresNewResult;
+               /* vm.DistribuidoresList = data.GetDistribuidorListResult;
                 if (vm.DistribuidoresList.length == 0) {
 					vm.SinRegistros = true;
 					vm.ConRegistros = false;
 				} else {
 					vm.SinRegistros = false;
 					vm.ConRegistros = true;
-				}
-            });
-        }
-        function OpenAddDistribuidor(){
-            var modalInstance = $uibModal.open({
-                animation: true,
-                ariaLabelledBy: 'modal-title',
-                ariaDescribedBy: 'modal-body',
-                templateUrl: 'views/catalogos/ModalDistribuidorForm.html',
-                controller: 'ModalDistribuidorFormAddCtrl',
-                controllerAs: 'ctrl',
-                backdrop: 'static',
-                keyboard: false,
-                class: 'modal-backdrop fade',
-                size: 'lg'
-            });
-        }
-
-        function OpenUpdateDistribuidor(IdDistribuidor){
-            var IdDistribuidor = IdDistribuidor;
-            var modalInstance = $uibModal.open({
-                animation: true,
-                ariaLabelledBy: 'modal-title',
-                ariaDescribedBy: 'modal-body',
-                templateUrl: 'views/catalogos/ModalDistribuidorForm.html',
-                controller: 'ModalDistribuidorFormUpdateCtrl',
-                controllerAs: 'ctrl',
-                backdrop: 'static',
-                keyboard: false,
-                class: 'modal-backdrop fade',
-                size: 'lg',
-                resolve: {
-                    IdDistribuidor: function () {
-                        return IdDistribuidor;
-                    }
-                }
+				}*/
             });
         }
 
@@ -74,8 +41,6 @@ angular
         }
 
         var vm = this;
-        vm.OpenAddDistribuidor = OpenAddDistribuidor;
-        vm.OpenUpdateDistribuidor = OpenUpdateDistribuidor;
         vm.OpenDeleteDistribuidor = OpenDeleteDistribuidor;
         initData();
         

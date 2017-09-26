@@ -138,6 +138,16 @@ angular
         templateUrl: 'views/procesos/QuejaEjecuta.html',
         controller: 'QuejaDetalleCtrl',
         controllerAs: '$ctrl'
+      },
+      {
+        name: 'home.procesos.devolucion',
+        data: {
+          pageTitle: 'SOFTV | DETALLE REPORTE'
+        },
+        url: '/devolucionAlmacen',
+        templateUrl: 'views/procesos/DevolucionAlmacen.html',
+        controller: 'DevolucionAlmacenCtrl',
+        controllerAs: '$ctrl'
       }
     ];
     states.forEach(function (state) {

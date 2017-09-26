@@ -412,6 +412,33 @@
             }
           }
         });
+      }else if(
+          x.Descripcion.toLowerCase().includes('isnet') ||
+          x.Descripcion.toLowerCase().includes('isdig') ||
+          x.Descripcion.toLowerCase().includes('isdtv')
+          ){
+          var items_ = {
+            'clv_orden': x.Clv_Orden,
+            'Clv_Tecnico': vm.selectedTecnico.CLV_TECNICO,
+            'Detalle': false
+          };
+
+          var modalInstance = $uibModal.open({
+            animation: true,
+            ariaLabelledBy: 'modal-title',
+            ariaDescribedBy: 'modal-body',
+            templateUrl: 'views/procesos/ModalInstalaServicio.html',
+            controller: 'ModalInstalaServicioCtrl',
+            controllerAs: 'ctrl',
+            backdrop: 'static',
+            keyboard: false,
+            size: 'lg',
+            resolve: {
+              items: function () {
+                return items_;
+              }
+            }
+          });
       } else {
         console.log('este trabajo no esta implementado');
       }
@@ -549,10 +576,13 @@
             'ListadeArticulos': ''
           };
           ordenesFactory.MODORDSER(obj).then(function (response) {
+            console.log(response);
+            console.log("prueba mike");
             if (response.GetDeepMODORDSERResult.Msj != null) {
+              console.log("Error");
               ngNotify.set(response.GetDeepMODORDSERResult.Msj, 'error');
             } else {
-
+              console.log("well done");
               ordenesFactory.PreejecutaOrden(vm.clv_orden).then(function (details) {
                 ordenesFactory.GetDeepSP_GuardaOrdSerAparatos(vm.clv_orden).then(function (result) {
                   var descripcion = 'Se generó la';

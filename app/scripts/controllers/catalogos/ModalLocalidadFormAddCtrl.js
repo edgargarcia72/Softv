@@ -5,22 +5,22 @@ angular
     .controller('ModalLocalidadFormAddCtrl', function(CatalogosFactory, $uibModalInstance, ngNotify, $state){
 
         function initData(){
-            CatalogosFactory.GetEstadoList2_web().then(function(data){
-                vm.EstadoList = data.GetEstadoList2_webResult;
+            CatalogosFactory.GetEstados_NewList().then(function(data){
+                vm.EstadoList = data.GetEstados_NewListResult;
             });
         }
 
         function AddEstMun(){
-            if(vm.Estado != undefined && vm.Estado != 0 &&
+            if(vm.Estado != undefined && vm.Estado != 0 && 
                vm.Ciudad != undefined && vm.Ciudad != 0){
                 var EstMun = {};
-                EstMun.IdEstado = vm.Estado.IdEstado;
-                EstMun.IdMunicipio = vm.Ciudad.Municipio.IdMunicipio;
+                EstMun.IdEstado = vm.Estado.Clv_Estado;
+                EstMun.IdMunicipio = vm.Ciudad.Clv_Ciudad;
                 var EstMunView = {};
-                EstMunView.IdEstado = vm.Estado.IdEstado;
-                EstMunView.IdMunicipio = vm.Ciudad.Municipio.IdMunicipio;
+                EstMunView.IdEstado = vm.Estado.Clv_Estado;
+                EstMunView.IdMunicipio = vm.Ciudad.Clv_Ciudad;
                 EstMunView.Estado = vm.Estado.Nombre;
-                EstMunView.Municipio = vm.Ciudad.Municipio.Nombre;
+                EstMunView.Municipio = vm.Ciudad.Nombre;
                 if(ExistsEstMun(EstMun.IdEstado, EstMun.IdMunicipio) == false){
                     vm.EstMunList.push(EstMun);
                     vm.EstMunViewList.push(EstMunView);
@@ -76,9 +76,20 @@ angular
         }
 
         function GetCiudadMunicipio(){
-            CatalogosFactory.GetEstadosRelMun(vm.Estado.IdEstado).then(function(data){
-                vm.CiudadMunicipioList = data.GetEstadosRelMunResult;
-            });
+            if(vm.Estado != undefined){
+                var RelEstMun = {
+                    'clv_estado' : vm.Estado.Clv_Estado,
+                    'idcompania' : 1//Delete
+                };
+                CatalogosFactory.GetMuestraCiudadesEstadoList(RelEstMun).then(function(data){
+                    vm.CiudadMunicipioList = data.GetMuestraCiudadesEstadoListResult;
+                });
+            }else{
+                vm.CiudadMunicipioList = null;
+            }
+            vm.LocalidadList = null;
+            vm.ColoniaList = null;
+            vm.CalleList = null;
         }
 
         function cancel() {

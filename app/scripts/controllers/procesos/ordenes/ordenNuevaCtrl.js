@@ -489,10 +489,6 @@
             });
           });
 
-
-
-
-
         } else if (
           x.Descripcion.toLowerCase().includes('iante') ||
           x.Descripcion.toLowerCase().includes('inlnb') ||
@@ -543,6 +539,7 @@
             }
           });
         }
+
       });
     }
   }

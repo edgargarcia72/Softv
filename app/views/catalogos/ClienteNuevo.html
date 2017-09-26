@@ -1,9 +1,9 @@
 <style type="text/css">
-	.scrollDiv {
-		height: 500px;
-		overflow: auto;
-		overflow-x: hidden;
-	}
+	.table-scroll {
+        height:150px;
+        overflow:auto;  
+        margin-top:20px;
+    }
     .input-sm {
         font-size: 12px;
     }
@@ -32,10 +32,10 @@
         <div class="panel-group" id="accordion3" ng-show="$ctrl.ShowAccord">
 			<div class="card panel">
                 <div class="card-head card-head-xs collapsed" data-toggle="collapse" data-parent="#accordion3" data-target="#accordion3-1" aria-expanded="false">
-					<header ng-if="$ctrl.NombreAdi != null && $ctrl.SegundoApe != null"><i class="fa fa-user"></i> {{ $ctrl.Nombre + ' ' + $ctrl.NombreAdi + ' ' + $ctrl.PrimerApe + ' ' + $ctrl.SegundoApe + ' ' + 'Contrato: ' + $ctrl.IdCliente }}</header>
-                    <header ng-if="$ctrl.NombreAdi == null && $ctrl.SegundoApe != null"><i class="fa fa-user"></i> {{ $ctrl.Nombre + ' ' + $ctrl.PrimerApe + ' ' + $ctrl.SegundoApe + ' ' + 'Contrato: ' + $ctrl.IdCliente }}</header>
-                    <header ng-if="$ctrl.NombreAdi != null && $ctrl.SegundoApe == null"><i class="fa fa-user"></i> {{ $ctrl.Nombre + ' ' + $ctrl.NombreAdi + ' ' + $ctrl.PrimerApe + ' ' + 'Contrato: ' + $ctrl.IdCliente }}</header>
-                    <header ng-if="$ctrl.NombreAdi == null && $ctrl.SegundoApe == null"><i class="fa fa-user"></i> {{ $ctrl.Nombre + ' ' + $ctrl.PrimerApe + ' ' + 'Contrato: ' + $ctrl.IdCliente }}</header>
+					<header ng-if="$ctrl.NombreAdi != null && $ctrl.SegundoApe != null"><i class="fa fa-user"></i> {{ $ctrl.Nombre + ' ' + $ctrl.NombreAdi + ' ' + $ctrl.PrimerApe + ' ' + $ctrl.SegundoApe + ', ' + 'Contrato: ' + $ctrl.IdCliente }}</header>
+                    <header ng-if="$ctrl.NombreAdi == null && $ctrl.SegundoApe != null"><i class="fa fa-user"></i> {{ $ctrl.Nombre + ' ' + $ctrl.PrimerApe + ' ' + $ctrl.SegundoApe + ', ' + 'Contrato: ' + $ctrl.IdCliente }}</header>
+                    <header ng-if="$ctrl.NombreAdi != null && $ctrl.SegundoApe == null"><i class="fa fa-user"></i> {{ $ctrl.Nombre + ' ' + $ctrl.NombreAdi + ' ' + $ctrl.PrimerApe + ', ' + 'Contrato: ' + $ctrl.IdCliente }}</header>
+                    <header ng-if="$ctrl.NombreAdi == null && $ctrl.SegundoApe == null"><i class="fa fa-user"></i> {{ $ctrl.Nombre + ' ' + $ctrl.PrimerApe + ', ' + 'Contrato: ' + $ctrl.IdCliente }}</header>
 					<div class="tools">
 						<a class="btn btn-icon-toggle"><i class="fa fa-angle-down"></i></a>
 					</div>
@@ -44,14 +44,11 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <p><b>Plaza: </b>{{ $ctrl.NombrePlaza }}</p>
                                 </div>
-                                <div class="col-md-4">
-                                    <p><b>Periodo: </b>{{ $ctrl.NombrePeriodo }}</p>
-                                </div>
-                                <div class="col-md-4">
-                                    <p><b>Tipo de suscritor: </b>{{ $ctrl.NombreTipoCobro }}</p>
+                                <div class="col-md-6">
+                                    <p><b>Tipo de suscriptor: </b>{{ $ctrl.NombreTipoCobro }}</p>
                                 </div>
                                 <div class="col-md-3">
                                     <p><i class="fa fa-phone"></i> {{ $ctrl.Telefono }}</p>
@@ -77,52 +74,33 @@
                 </div>
 			</div>
         </div>
-        <uib-tabset active="1" vertical="true" type="tabs">
+        <uib-tabset active="0" vertical="true" type="tabs">
             <uib-tab index="0">
-                <uib-tab-heading>
-                    <i class="fa fa-list-ol"></i> Servicios
-                </uib-tab-heading>
-                <div class="row">
-                    <div class="col-md-10">
-                        <div class="col-md-12">
-                        </div>
-                    </div>
-                </div>
-            </uib-tab>
-            <uib-tab index="1">
                 <uib-tab-heading>
                     <i class="fa fa-user"></i>  Datos Personales
                 </uib-tab-heading>
                 <form name="FormDatosPersonales" angular-validator-submit="$ctrl.AddDatosPersonales()" novalidate angular-validator autocomplete="off">
                     <div class="row">
                         <div class="col-md-9">
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <p><small><b>Contrato:</b></small></p>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <p><small><b>Plaza:</b></small></p>
                             </div>
-                            <div class="col-md-3">
-                                <p><small><b>Periodo:</b></small></p>
+                            <div class="col-md-4">
+                                <p><small><b>Tipo de Suscriptor:</b></small></p>
                             </div>
-                            <div class="col-md-3">
-                                <p><small><b>Tipo de Cobro:</b></small></p>
-                            </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <input type="text" name="InpIdCliente" class="form-control input-sm" ng-model="$ctrl.IdCliente" ng-disabled="true">
                             </div>
-                            <div class="col-md-3">
-                                <select name="SlcPlaza" class="form-control input-sm" ng-model="$ctrl.Plaza" ng-options="P.Nombre for P in $ctrl.PlazaList track by P.IdPlaza" ng-change="$ctrl.GetEstado()" validate-on="dirty" required required-message="'Obligatorio'" ng-disabled="$ctrl.BlockInput">
+                            <div class="col-md-4">
+                                <select name="SlcPlaza" class="form-control input-sm" ng-model="$ctrl.Plaza" ng-options="P.razon_social for P in $ctrl.PlazaList track by P.id_compania" ng-change="$ctrl.GetEstado()" validate-on="dirty" required required-message="'Obligatorio'" ng-disabled="$ctrl.BlockInput">
                                     <option value="">Selecciona</option>
                                 </select>
                             </div>
-                            <div class="col-md-3">
-                                <select name="SlcPeriodo" class="form-control input-sm" ng-model="$ctrl.Periodo" ng-options="PE.Descripcion for PE in $ctrl.PeriodoList track by PE.IdPeriodo" validate-on="dirty" required required-message="'Obligatorio'">
-                                    <option value="">Selecciona</option>
-                                </select>
-                            </div>
-                            <div class="col-md-3">
-                                <select name="SclTipoCobro" class="form-control input-sm" ng-model="$ctrl.TipoCobro" ng-options="T.Nombre for T in $ctrl.TipoCobroList track by T.IdTipoCliente" validate-on="dirty" required required-message="'Obligatorio'" ng-disabled="$ctrl.BlockInput">
+                            <div class="col-md-4">
+                                <select name="SclTipoCobro" class="form-control input-sm" ng-model="$ctrl.TipoCobro" ng-options="T.DESCRIPCION for T in $ctrl.TipoCobroList track by T.CLV_TIPOCLIENTE" validate-on="dirty" required required-message="'Obligatorio'" ng-disabled="$ctrl.BlockInput">
                                     <option value="">Selecciona</option>
                                 </select>
                             </div>
@@ -142,16 +120,16 @@
                                 <p><small><b>Segundo apellido:</b></small></p>
                             </div>
                             <div class="col-md-3">
-                                <input type="text" name="InpNombre" class="form-control input-sm" ng-model="$ctrl.Nombre" validate-on="dirty" required required-message="'Obligatorio'">
+                                <input type="text" name="InpNombre" class="form-control input-sm" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" ng-model="$ctrl.Nombre" validate-on="dirty" required required-message="'Obligatorio'">
                             </div>
                             <div class="col-md-3">
-                                <input type="text" name="InpNombreAdi" class="form-control input-sm" ng-model="$ctrl.NombreAdi">
+                                <input type="text" name="InpNombreAdi" class="form-control input-sm" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" ng-model="$ctrl.NombreAdi">
                             </div>
                             <div class="col-md-3">
-                                <input type="text" name="InpPrimerApe" class="form-control input-sm" ng-model="$ctrl.PrimerApe" validate-on="dirty" required required-message="'Obligatorio'">
+                                <input type="text" name="InpPrimerApe" class="form-control input-sm" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" ng-model="$ctrl.PrimerApe" validate-on="dirty" required required-message="'Obligatorio'">
                             </div>
                             <div class="col-md-3">
-                                <input type="text" name="InpSegundoApe" class="form-control input-sm" ng-model="$ctrl.SegundoApe">
+                                <input type="text" name="InpSegundoApe" class="form-control input-sm" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" ng-model="$ctrl.SegundoApe">
                             </div>
                             <div class="col-md-12">
                                 <br>
@@ -166,7 +144,7 @@
                                 <p><small><b>Número celular:</b></small></p>
                             </div>
                             <div class="col-md-4">
-                                <input type="text" name="InpClaveElector" class="form-control input-sm" ng-model="$ctrl.ClaveElector" validate-on="dirty" required required-message="'Obligatorio'">
+                                <input type="text" name="InpClaveElector" class="form-control input-sm" ng-model="$ctrl.ClaveElector" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="18" ng-pattern="/^[A-Z]{6}\d{8}[A-Z]{1}\d{3}$/" placeholder="AAAAAA11111111A111" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 18 caracteres.'">
                             </div>
                             <div class="col-md-4">
                                 <input type="text" name="InpTelefono" class="form-control input-sm" ng-model="$ctrl.Telefono" validate-on="dirty" ng-pattern="/^\d{10}$/" maxlength="10" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 10 dígitos.'">
@@ -177,7 +155,7 @@
                             <div class="col-md-12">
                                 <br>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-4">  
                                 <p><small><b>Email:</b></small></p>
                             </div>
                             <div class="col-md-4">
@@ -187,7 +165,7 @@
                                 <p><small><b>Fecha de nacimiento:</b></small></p>
                             </div>
                             <div class="col-md-4">
-                                <input type="email" name="InpEmail" class="form-control input-sm" ng-model="$ctrl.Email" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido'">
+                                <input type="email" name="InpEmail" class="form-control input-sm" ng-model="$ctrl.Email" ng-pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa un correo válido'">
                             </div>
                             <div class="col-md-4">
                                 <label class="radio-inline radio-styled" width="100px">
@@ -213,17 +191,17 @@
                                 <p><small><b>Localidad:</b></small></p>
                             </div>
                             <div class="col-md-4">
-                                <select name="SltEstado" class="form-control input-sm" ng-model="$ctrl.Estado" ng-options="E.Nombre for E in $ctrl.EstadoList track by E.IdEstado" ng-change="$ctrl.GetCiudadMunicipio()" validate-on="dirty" required required-message="'Obligatorio'">
+                                <select name="SltEstado" class="form-control input-sm" ng-model="$ctrl.Estado" ng-options="E.Nombre for E in $ctrl.EstadoList track by E.Clv_Estado" ng-change="$ctrl.GetCiudadMunicipio()" validate-on="dirty" required required-message="'Obligatorio'">
                                     <option value="">Selecciona</option>
                                 </select>
                             </div>
                             <div class="col-md-4">
-                                <select name="SltCiuMun" class="form-control input-sm" ng-model="$ctrl.CiuMun" ng-options="CM.Municipio.Nombre for CM in $ctrl.CiudadMunicipioList track by CM.Municipio.IdMunicipio" ng-change="$ctrl.GetLocalidad()" validate-on="dirty" required required-message="'Obligatorio'">
+                                <select name="SltCiuMun" class="form-control input-sm" ng-model="$ctrl.CiuMun" ng-options="CM.Nombre for CM in $ctrl.CiudadMunicipioList track by CM.Clv_Ciudad" ng-change="$ctrl.GetLocalidad()" validate-on="dirty" required required-message="'Obligatorio'">
                                     <option value="">Selecciona</option>
                                 </select>
                             </div>
                             <div class="col-md-4">
-                                <select name="SltLocalidad" class="form-control input-sm" ng-model="$ctrl.Localidad" ng-options="L.Localidad.Nombre for L in $ctrl.LocalidadList track by L.Localidad.IdLocalidad" ng-change="$ctrl.GetColonia()" validate-on="dirty" required required-message="'Obligatorio'">
+                                <select name="SltLocalidad" class="form-control input-sm" ng-model="$ctrl.Localidad" ng-options="L.NOMBRE for L in $ctrl.LocalidadList track by L.Clv_Localidad" ng-change="$ctrl.GetColonia()" validate-on="dirty" required required-message="'Obligatorio'">
                                     <option value="">Selecciona</option>
                                 </select>
                             </div>
@@ -240,17 +218,17 @@
                                 <p><small><b>Entre calles:</b></small></p>
                             </div>
                             <div class="col-md-4">
-                                <select name="SltColonia" class="form-control input-sm" ng-model="$ctrl.Colonia" ng-options="C.Colonia.Nombre for C in $ctrl.ColoniaList track by C.Colonia.IdColonia" ng-change="$ctrl.GetCalle()" validate-on="dirty" required required-message="'Obligatorio'">
+                                <select name="SltColonia" class="form-control input-sm" ng-model="$ctrl.Colonia" ng-options="C.Nombre for C in $ctrl.ColoniaList track by C.CLV_COLONIA" ng-change="$ctrl.GetCalle()" validate-on="dirty" required required-message="'Obligatorio'">
                                     <option value="">Selecciona</option>
                                 </select>
                             </div>
                             <div class="col-md-4">
-                                <select name="SltCalle" class="form-control input-sm" ng-model="$ctrl.Callle" ng-options="C.Calle.Nombre for C in $ctrl.CalleList track by C.Calle.IdCalle" validate-on="dirty" required required-message="'Obligatorio'">
+                                <select name="SltCalle" class="form-control input-sm" ng-model="$ctrl.Calle" ng-options="C.Nombre for C in $ctrl.CalleList track by C.Clv_Calle" validate-on="dirty" required required-message="'Obligatorio'">
                                     <option value="">Selecciona</option>
                                 </select>
                             </div>
                             <div class="col-md-4">
-                                <input name="InpEntCalles" type="text" class="form-control input-sm" ng-model="$ctrl.EntCalles" validate-on="dirty" required required-message="'Obligatorio'">
+                                <input name="InpEntCalles" type="text" class="form-control input-sm" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" ng-model="$ctrl.EntCalles" validate-on="dirty" required required-message="'Obligatorio'">
                             </div>
                             <div class="col-md-12">
                                 <br>
@@ -271,7 +249,7 @@
                                 <input type="text" name="InpNumInt" class="form-control input-sm" ng-model="$ctrl.NumInt" maxlength="10" validate-on="dirty">
                             </div>
                             <div class="col-md-4">
-                                <input type="text" name="InpCodigoPos" class="form-control input-sm" ng-model="$ctrl.CodigoPos" maxlength="5" ng-pattern="/^\d{5}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 5 dígitos.'">
+                                <input type="text" name="InpCodigoPos" class="form-control input-sm" ng-model="$ctrl.CodigoPos" ng-disabled="true" validate-on="dirty" required required-message="'Obligatorio'">
                             </div>
                             <div class="col-md-12">
                                 <br>
@@ -283,7 +261,7 @@
                     </div>
                 </form>
             </uib-tab>
-            <uib-tab index="3">
+            <uib-tab index="2">
                 <uib-tab-heading>
                     <i class="fa fa-building"></i> Datos Fiscales
                 </uib-tab-heading>
@@ -300,13 +278,13 @@
                                 <p><small><b>CURP:</b></small></p>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" name="InpRazonSoc" class="form-control input-sm" ng-model="$ctrl.RazonSoc" validate-on="dirty" required required-message="'Obligatorio'">
+                                <input type="text" name="InpRazonSoc" class="form-control input-sm" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" ng-model="$ctrl.RazonSoc" validate-on="dirty" required required-message="'Obligatorio'">
                             </div>
                             <div class="col-md-3">
-                                <input type="text" name="InpRFC" class="form-control input-sm" ng-model="$ctrl.RFC" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="13" ng-pattern="$ctrl.ValidateRFC" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Error, Ingresa RFC válido.'">
+                                <input type="text" name="InpRFC" class="form-control input-sm" ng-model="$ctrl.RFC" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="13" ng-pattern="$ctrl.ValidateRFC" placeholder="AAAA111111AAA" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Error, Ingresa RFC válido.'">
                             </div>
                             <div class="col-md-3">
-                                <input type="text" name="InpCURP" class="form-control input-sm" ng-model="$ctrl.CURP" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="18" ng-pattern="/^[A-Z]{4}\d{6}[A-Z]{6}\d{2}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Error, Ingresa CURP válido.'">
+                                <input type="text" name="InpCURP" class="form-control input-sm" ng-model="$ctrl.CURP" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="18" ng-pattern="/^[A-Z]{4}\d{6}[A-Z]{6}\d{2}$/" placeholder="AAAA111111AAAAAA11" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Error, Ingresa CURP válido.'">
                             </div>
                             <div class="col-md-12">
                                 <br>
@@ -317,23 +295,17 @@
                             <div class="col-md-3">
                                 <p><small><b>Número exterior:</b></small></p>
                             </div>
-                            <div class="col-md-3">
-                                <p><small><b>Número interior:</b></small></p>
-                            </div>
-                            <div class="col-md-3">
+                            <div class="col-md-6">
                                 <p><small><b>Entre calles:</b></small></p>
                             </div>
                             <div class="col-md-3">
-                                <input type="text" name="InpCalleDF" class="form-control input-sm" ng-model="$ctrl.CalleDF" validate-on="dirty" required required-message="'Obligatorio'">
+                                <input type="text" name="InpCalleDF" class="form-control input-sm" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" ng-model="$ctrl.CalleDF" validate-on="dirty" required required-message="'Obligatorio'">
                             </div>
                             <div class="col-md-3">
                                 <input type="text" name="InpNumExtDF" class="form-control input-sm" ng-model="$ctrl.NumExtDF" maxlength="10" validate-on="dirty" required required-message="'Obligatorio'">
                             </div>
-                            <div class="col-md-3">
-                                <input type="text" name="InpNumIntDF" class="form-control input-sm" ng-model="$ctrl.NumIntDF" maxlength="10">
-                            </div>
-                            <div class="col-md-3">
-                                <input type="text" name="InpEntCallesDF" class="form-control input-sm"  ng-model="$ctrl.EntCallesDF" validate-on="dirty" required required-message="'Obligatorio'">
+                            <div class="col-md-6">
+                                <input type="text" name="InpEntCallesDF" class="form-control input-sm" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();"  ng-model="$ctrl.EntCallesDF" validate-on="dirty" required required-message="'Obligatorio'">
                             </div>
                             <div class="col-md-12">
                                 <br>
@@ -351,16 +323,16 @@
                                 <p><small><b>Colonia:</b></small></p>
                             </div>
                             <div class="col-md-3">
-                                <input type="text" name="InpPais" class="form-control input-sm"  ng-model="$ctrl.Pais" validate-on="dirty" required required-message="'Obligatorio'">
+                                <input type="text" name="InpPais" class="form-control input-sm" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" ng-model="$ctrl.Pais" validate-on="dirty" required required-message="'Obligatorio'">
                             </div>
                             <div class="col-md-3">
-                                <input type="text" name="InpEstadoDF" class="form-control input-sm" ng-model="$ctrl.EstadoDF" validate-on="dirty" required required-message="'Obligatorio'">
+                                <input type="text" name="InpEstadoDF" class="form-control input-sm" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" ng-model="$ctrl.EstadoDF" validate-on="dirty" required required-message="'Obligatorio'">
                             </div>
                             <div class="col-md-3">
-                                <input type="text" name="InpCiuMunDF" class="form-control input-sm"  ng-model="$ctrl.CiuMunDF" validate-on="dirty" required required-message="'Obligatorio'">
+                                <input type="text" name="InpCiuMunDF" class="form-control input-sm" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();"  ng-model="$ctrl.CiuMunDF" validate-on="dirty" required required-message="'Obligatorio'">
                             </div>
                             <div class="col-md-3">
-                                <input type="text" name="InpColoniaDF" class="form-control input-sm" ng-model="$ctrl.ColoniaDF" validate-on="dirty" required required-message="'Obligatorio'">
+                                <input type="text" name="InpColoniaDF" class="form-control input-sm" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" ng-model="$ctrl.ColoniaDF" validate-on="dirty" required required-message="'Obligatorio'">
                             </div>
                             <div class="col-md-12">
                                 <br>
@@ -384,103 +356,117 @@
                                 <input type="text" name="InpTelefonoDF" class="form-control input-sm" ng-model="$ctrl.TelefonoDF" maxlength="10" ng-pattern="/^\d{10}/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 10 dígitos.'">
                             </div>
                             <div class="col-md-3">
-                                <input type="text" name="InpFax" class="form-control input-sm" ng-model="$ctrl.Fax" maxlength="10" ng-pattern="/^[A-Z]|[a-z]|\d$/" validator="$ctrl.Fax.length >= 7" validate-on="dirty" invalid-message="'Inválido, Ingresa mínimo 7 dígitos.'">
+                                <input type="text" name="InpFax" class="form-control input-sm" ng-model="$ctrl.Fax" maxlength="10" ng-pattern="/^[0-9]+$/" validator="$ctrl.Fax.length >= 7" validate-on="dirty" invalid-message="'Inválido, Ingresa mínimo 7 dígitos.'">
                             </div>
                             <div class="col-md-3">
-                                <input type="email" name="InpEmailDF" class="form-control input-sm" ng-model="$ctrl.EmailDF" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido'">
+                                <input type="email" name="InpEmailDF" class="form-control input-sm" ng-model="$ctrl.EmailDF" ng-pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa un correo válido'">
                             </div>
                             <div class="col-md-12">
                                 <br>
                             </div>
                             <div class="col-md-12" style="text-align:right">
-                                <button type="submit" class="btn btn-success btn-sm">Validar</button>
+                                <button type="submit" class="btn btn-success btn-sm" ng-disabled="$ctrl.DisableInput">Validar</button>
                             </div>
                         </div>
                     </div>
                 </form>
             </uib-tab>
-            <uib-tab index="4">
+            <uib-tab index="3">
                 <uib-tab-heading>
                     <i class="fa fa-university"></i> Datos Bancarios</small>
                 </uib-tab-heading>
                 <form name="FormDatosBancarios" angular-validator-submit="$ctrl.AddDatosBancarios()" novalidate angular-validator autocomplete="off">
                     <div class="row">
                         <div class="col-md-9">
+                        <div class="col-md-12">
                             <div class="col-md-4">
                                 <p><small><b>Institución Bancaria:</b></small></p>
                             </div>
                             <div class="col-md-8">
                                 <p><small><b>Nombre del titular de la tarjeta bancaria:</b></small></p>
                             </div>
+                        </div>
+                        <div class="col-md-12">
                             <div class="col-md-4">
                                 <select name="SltBanco" class="form-control input-sm" ng-model="$ctrl.Banco" ng-options="B.Nombre for B in $ctrl.BancoList track by B.IdBanco" validate-on="dirty" required required-message="'Obligatorio'">
                                     <option value="">Selecciona</option>
                                 </select>
                             </div>
                             <div class="col-md-8">
-                                <input name="InpTitular" type="text" class="form-control input-sm" ng-model="$ctrl.Titular" validate-on="dirty" required required-message="'Obligatorio'">
+                                <input name="InpTitular" type="text" class="form-control input-sm" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" ng-model="$ctrl.Titular" validate-on="dirty" required required-message="'Obligatorio'">
                             </div>
+                        </div>
+                        <div class="col-md-12">
                             <div class="col-md-12">
                                 <br>
                             </div>
-                            <div class="col-md-4">
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-3">
                                 <p><small><b>Dígitos en la tarjeta:</b></small></p>
                             </div>
-                            <div class="col-md-2">
+                             <div class="col-md-3">
+                                <p ng-show="(FormDatosBancarios.InpNumTarjeta.$dirty || $ctrl.NumTarjeta != undefined)"><small><b>Confirmar dígitos en la tarjeta:</b></small></p>
+                            </div>
+                            <div class="col-md-3">
                                 <p><small><b>Código seguridad:</b></small></p>
                             </div>
                             <div class="col-md-3">
-                                <p><small><b>Mes de la fecha de vencimiento:</b></small></p>
+                                <p ng-show="(FormDatosBancarios.InpCodigoSeg.$dirty || $ctrl.CodigoSeg != undefined)"><small><b>Confirmar código seguridad:</b></small></p>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-3">
+                                <input name="InpNumTarjeta" type="text" class="form-control input-sm" ng-model="$ctrl.NumTarjeta" ng-keyup="$ctrl.NumTarjetaC = ''" maxlength="16" ng-pattern="/^[A-Z]|[a-z]|\d$/" validator="$ctrl.NumTarjeta.length >= 15" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 15 o 16 dígitos.'">
                             </div>
                             <div class="col-md-3">
-                                <p><small><b>Año de la fecha de vencimiento:</b></small></p>
-                            </div>
-                            <div class="col-md-4">
-                                <input name="InpNumTarjeta" type="text" class="form-control input-sm" ng-model="$ctrl.NumTarjeta" maxlength="16" ng-pattern="/^[A-Z]|[a-z]|\d$/" validator="$ctrl.NumTarjeta.length >= 15" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 15 dígitos o 16 dígitos.'">
-                            </div>
-                            <div class="col-md-2">
-                                <input name="InpCodigoSeg" type="text" class="form-control input-sm" ng-model="$ctrl.CodigoSeg" maxlength="4" ng-pattern="/^[A-Z]|[a-z]|\d$/" validator="$ctrl.CodigoSeg.length >= 3" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa mínimo 3 dígitos.'">
+                                <input name="InpNumTarjetaC" type="text" class="form-control input-sm" ng-model="$ctrl.NumTarjetaC" maxlength="16" ng-show="(FormDatosBancarios.InpNumTarjeta.$dirty || $ctrl.NumTarjeta != undefined)" ng-pattern="/^[A-Z]|[a-z]|\d$/" validator="$ctrl.NumTarjetaC.length >= 15 && $ctrl.NumTarjeta == $ctrl.NumTarjetaC" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Debe ser igual al anterior.'">
                             </div>
                             <div class="col-md-3">
-                                <select name="InpMesVen" class="form-control input-sm" ng-model="$ctrl.MesVen" ng-options="M.Nombre for M in $ctrl.MesList track by M.IdMes" validate-on="dirty" required required-message="'Obligatorio'">
-                                    <option value="">Selecciona</option>
+                                <input name="InpCodigoSeg" type="password" class="form-control input-sm" ng-model="$ctrl.CodigoSeg" ng-keyup="$ctrl.CodigoSegC = ''" maxlength="4" ng-pattern="/^[A-Z]|[a-z]|\d$/" validator="$ctrl.CodigoSeg.length >= 3" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa mínimo 3 dígitos.'">
+                            </div>
+                            <div class="col-md-3">
+                                <input name="InpCodigoSegC" type="password" class="form-control input-sm" ng-model="$ctrl.CodigoSegC" maxlength="4" ng-show="(FormDatosBancarios.InpCodigoSeg.$dirty || $ctrl.CodigoSeg != undefined)" ng-pattern="/^[A-Z]|[a-z]|\d$/" validator="$ctrl.CodigoSegC.length >= 3 && $ctrl.CodigoSeg == $ctrl.CodigoSegC" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Debe ser igual al anterior.'">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <br>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-3">
+                                <p><small><b>Fecha de vencimiento:</b></small></p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><small><b>Tipo de cuenta:</b></small></p>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-3">
+                                <input name="InpFechaVen" type="text" class="form-control input-sm" ng-model="$ctrl.FechaVen" placeholder="MM/YY" ui-mask="99/99" validator="$ctrl.ValidateFechaVen($ctrl.FechaVen)" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa mes y año.'">
+                            </div>
+                            <div class="col-md-6">
+                                <select name="SlcTipoCuenta" class="form-control input-sm" ng-model="$ctrl.TipoCuenta" ng-options="TC.NOMBRE for TC in $ctrl.TipoCuentaList track by TC.NOMBRE" validate-on="dirty" required required-message="'Obligatorio'">
+                                    <option value="">Selleciona</option>
                                 </select>
                             </div>
-                            <div class="col-md-3">
-                                <!--<div class="input-group">
-                                    <span class="input-group-addon">20</span>
-                                    <input name="InpYearVen" type="text" class="form-control input-sm" ng-model="$ctrl.YearVen" maxlength="2" ng-pattern="/^\d{2}$/" validator="$ctrl.YearVen >= 16" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa los 2 últimos dígitos.'">
-                                </div>-->
-                                <input name="InpYearVen" type="text" class="form-control input-sm" ng-model="$ctrl.YearVen" maxlength="4" ng-pattern="/^\d{4}$/" validator="$ctrl.YearVen >= 2016 && $ctrl.YearVen < 2100" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa los 4 dígitos.'">
-                            </div>
+                        </div>
+                        <div class="col-md-12">
                             <div class="col-md-12">
                                 <br>
                             </div>
-                            <div class="col-md-12">
-                                <p><small><b>Tipo de plástico:</b></small></p>
-                            </div>
-                            <div class="col-md-12">
-                                <label class="radio-inline radio-styled">
-                                    <input type="radio" name="RdoTipoPlastico" ng-model="$ctrl.TipoPlastico" value="V" ng-disabled="false"><span><small>VISA</small></span>
-                                </label>
-                                <label class="radio-inline radio-styled">
-                                    <input type="radio" name="RdoTipoPlastico" ng-model="$ctrl.TipoPlastico" value="A" ng-disabled="false"><span><small>American Express</small></span>
-                                </label>
-                                <label class="radio-inline radio-styled">
-                                    <input type="radio" name="RdoTipoPlastico" ng-model="$ctrl.TipoPlastico" value="M" ng-disabled="false"><span><small>MasterCard</small></span>
-                                </label>
-                            </div>
-                            <div class="col-md-12">
-                                <br>
-                            </div>
+                        </div>
+                        <div class="col-md-12">
                             <div class="col-md-12" style="text-align:right">
-                                <button type="submit" class="btn btn-success btn-sm">Validar</button>
+                                <button type="submit" class="btn btn-success btn-sm" ng-disabled="$ctrl.DisableInput" >Validar</button>
                             </div>
+                        </div>
                         </div>
                     </div>
                 </form>
             </uib-tab>
-            <uib-tab index="5">
+            <uib-tab index="4">
                 <uib-tab-heading>
                     <i class="fa fa-users"></i> Referencias personales
                 </uib-tab-heading>
@@ -497,13 +483,13 @@
                                 <p><small><b>Email:</b></small></p>
                             </div>
                             <div class="col-md-4">
-                                <input type="text" name="InpNombreRef" class="form-control input-sm" ng-model="$ctrl.NombreRef" validate-on="dirty" required required-message="'Obligatorio'">
+                                <input type="text" name="InpNombreRef" class="form-control input-sm" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" ng-model="$ctrl.NombreRef" validate-on="dirty" required required-message="'Obligatorio'">
                             </div>
                             <div class="col-md-4">
                                 <input type="text" name="InpTelefonoRef" class="form-control input-sm" ng-model="$ctrl.TelefonoRef" maxlength="10" ng-pattern="/^\d{8}$|^\d{10}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa minimo 8 dígitos.'">
                             </div>
                             <div class="col-md-4">
-                                <input type="email" name="InpEmailRef" class="form-control input-sm" ng-model="$ctrl.EmailRef" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido'">
+                                <input type="email" name="InpEmailRef" class="form-control input-sm" ng-model="$ctrl.EmailRef" ng-pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa un correo válido'">
                             </div>
                             <div class="col-md-12">
                                 <br>
@@ -512,18 +498,18 @@
                                 <p><small><b>Dirección:</b></small></p>
                             </div>
                             <div class="col-md-12">
-                                <textarea name="InpDireccionRef" class="form-control input-sm" rows="3" ng-model="$ctrl.DireccionRef" validate-on="dirty" required required-message="'Obligatorio'"></textarea>
+                                <textarea name="InpDireccionRef" class="form-control input-sm" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" rows="3" ng-model="$ctrl.DireccionRef" validate-on="dirty" required required-message="'Obligatorio'"></textarea>
                             </div>
                             <div class="col-md-12">
                                 <br>
                             </div>
                             <div class="col-md-12" style="text-align:right">
-                                <button type="submit" class="btn btn-success btn-sm" title="Agregar Referencia personal">Agregar</button>
+                                <button type="submit" class="btn btn-success btn-sm" title="Agregar Referencia personal" ng-disabled="$ctrl.DisableInput">Agregar</button>
                             </div>
                             <div class="col-md-12">
                                 <br>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-12 table-scroll">
                                 <table class="table">
                                     <thead>
                                         <tr>
@@ -539,29 +525,24 @@
                                         <tr ng-show="$ctrl.SinRegistros">
                                             <td class="text-center" colspan="7">SIN REGISTROS</td>
                                         </tr>
-                                        <tr dir-paginate="X in $ctrl.RefPerList|itemsPerPage:7" ng-show="$ctrl.ConRegistros">
-                                            <td><small>{{ X.IdReferencia }}</small></td>
-                                            <td><small>{{ X.Nombre }}</small></td>
-                                            <td><small>{{ X.Direccion }}</small></td>
-                                            <td><small>{{ X.Telefono }}</small></td>
-                                            <td><small>{{ X.Email }}</small></td>
+                                        <tr ng-repeat="X in $ctrl.RefPerList">
+                                            <td><small>{{ X.id_referencia }}</small></td>
+                                            <td><small>{{ X.nombre }}</small></td>
+                                            <td><small>{{ X.direccion }}</small></td>
+                                            <td><small>{{ X.telefono }}</small></td>
+                                            <td><small>{{ X.email }}</small></td>
                                             <td><button type="button" class="btn btn-warning btn-xs" ng-click="$ctrl.OpenEditRefPersonal(X)" title="Editar Referencia Personal"><i class="fa fa-pencil-square-o"></i> EDITAR</button></td>
                                             <td><button type="button" class="btn btn-danger btn-xs" ng-click="$ctrl.OpenDeleteRefPersonal(X)" title="Eliminar Referencia Personal"><i class="fa fa-trash"></i> ELIMINAR</button></td>
                                         </tr>
                                     </tbody>
                                 </table>
-                                <br>
-                                <div style="margin-top:-40px;">
-                                    <dir-pagination-controls max-size="7" direction-links="true" boundary-links="true" ng-if="$ctrl.RefPerList.length > 0">
-                                    </dir-pagination-controls>
-                                </div>
-                                <br>
                             </div>
+                            <br>
                         </div>
                     </div>
                 </form>
             </uib-tab>
-            <uib-tab index="6">
+            <uib-tab index="5">
                 <uib-tab-heading>
                     <i class="fa fa-comment"></i> Notas
                 </uib-tab-heading>
@@ -575,21 +556,34 @@
                                 <p><small><b>Notas por robo de señal:</b></small></p>
                             </div>
                             <div class="col-md-6">
-                                <textarea name="TxaObservaciones" class="form-control input-sm" rows="5" ng-model="$ctrl.Observaciones" validate-on="dirty" required required-message="'Obligatorio'"></textarea>
+                                <textarea name="TxaObservaciones" class="form-control input-sm" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" rows="5" ng-model="$ctrl.Observaciones" validate-on="dirty" required required-message="'Obligatorio'"></textarea>
                             </div>
                             <div class="col-md-6">
-                                <textarea name="TxaDireccionRef" class="form-control input-sm" rows="5" ng-model="$ctrl.Notas" validate-on="dirty" required required-message="'Obligatorio'"></textarea>
+                                <textarea name="TxaDireccionRef" class="form-control input-sm" rows="5" ng-model="$ctrl.Notas" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" validate-on="dirty" required required-message="'Obligatorio'"></textarea>
                             </div>
                             <div class="col-md-12">
                                 <br>
                             </div>
                             <div class="col-md-12" style="text-align:right">
-                                <button type="submit" class="btn btn-success btn-sm">Validar</button>
+                                <button type="submit" class="btn btn-success btn-sm" ng-disabled="$ctrl.DisableInput">Validar</button>
                             </div>
                         </div>
                     </div>
                 </form>
             </uib-tab>
+            <!--
+            <uib-tab index="6">
+                <uib-tab-heading>
+                    <i class="fa fa-list-ol"></i> Servicios
+                </uib-tab-heading>
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="col-md-12">
+                        </div>
+                    </div>
+                </div>
+            </uib-tab>
+            -->
         </uib-tabset>
     </div>
 </div>
