@@ -105,10 +105,20 @@ angular
                     var objLocalidades_New = {
                         'Clv_Localidad': vm.IdLocalidad,
                         'Nombre': vm.Localidad,
-                        'opcion': 1
+                        'opcion': 1,
+                        'clvnuevo': vm.IdLocalidad
                     };
                     CatalogosFactory.UpdateLocalidades_New(objLocalidades_New).then(function(data){
                         console.log(data);
+                        if(data.UpdateLocalidades_NewResult == -1){
+                            ngNotify.set('CORRECTO, se guardó la localidad.', 'success');
+                            $state.reload('home.catalogos.localidades');
+                            cancel();
+                        }else{
+                            ngNotify.set('ERROR, al guardar la localidad.', 'warn');
+                            $state.reload('home.catalogos.localidades');
+                            cancel();
+                        }
                     });
                 }else if(data.AddValidaNombreLocalidadResult == 1){
                     ngNotify.set('ERROR, ya existe una Localidad con el mis nombre.', 'warn');

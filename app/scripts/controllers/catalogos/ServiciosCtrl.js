@@ -6,6 +6,8 @@ angular
         function initData(){
             CatalogosFactory.GetMuestraTipSerPrincipal_SERList().then(function(data){
                 vm.TipoServicioList = data.GetMuestraTipSerPrincipal_SERListResult;
+                vm.TipoServicio = vm.TipoServicioList[0];
+                GetServiciosList();
             });
             
         }
