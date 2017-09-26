@@ -1,0 +1,186 @@
+<style type="text/css">
+    .table-scroll {
+        height: 150px;
+        overflow: auto;
+        margin-top: 20px;
+    }
+</style>
+
+<form name="FormTap" angular-validator-submit="$ctrl.SaveTap()" novalidate angular-validator autocomplete="off">
+    <div class="card" style="margin-top:10px;">
+        <div class="card-head style-default-light" style="padding-top:10px; padding-left:10px;">
+            <header>
+                <strong style="font-weight:bold; border:none; margin-left:10px;">{{$ctrl.Titulo}}</strong>
+                <br /><small class="text-muted" style="font-size:14px; margin-left:10px;"> <a href="#"><i class="fa fa-home" aria-hidden="true"></i> Inicio</a>><a href="#" class="paginaActiva">Nuevo Taps</a></small>
+
+            </header>
+            <div class="tools">
+
+                <button title="Guardar encuesta" class="btn btn-primary btn-xs" type="submit" ng-disabled="$ctrl.block"><i class="fa fa-save" aria-hidden="true"></i> Guardar</button>
+                <button title="Cancelar cambios" class="btn btn-default btn-xs" type="button" ui-sref="home.areaTecnica.taps">Cancelar</button>
+
+            </div>
+        </div>
+
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-md-10" style="font-weight:bold;">
+                    Clave Tecnica:
+                </div>
+                <div class="col-md-15">
+                    <div class="col-md-12" style="text-align:right">
+                        <div class="col-md-2" style="text-align:Center">
+
+                        </div>
+                        <div class="col-md-2" style="text-align:right">
+                            <b><small>Clave:</small></b>
+                        </div>
+                        <div class="col-md-3" style="text-align:right">
+                            <input type="number" name="InpClave" class="form-control input-sm" ng-model="$ctrl.clave" placeholder="Clave">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+
+
+            <div class="row">
+
+                <div class="col-md-15">
+                    <div class="col-md-15" style="text-align:right">
+
+                        <div class="col-md-2" style="text-align:
+                            left">
+
+                        </div>
+                        <div class="col-md-2" style="text-align:right">
+                            <div class="col-md-1" style="text-align:
+                                left">
+                                <b><small>Cluster:</small></b>
+                            </div>
+                            <select class="form-control input-sm" name="plaza" validate-on="dirty" ng-model="$ctrl.plaza" ng-options="v.razon_social for v in $ctrl.plazas track by v.id_compania"
+                                ng-change="$ctrl.GetSucursales(0)" ng-disabled="$ctrl.block" required-message="'Este campo es obligatorio.'"
+                                required>
+                                              <option value="">selecciona</option>
+                                                 </select>
+                        </div>
+
+                        <div class="col-md-2" style="text-align:right">
+                            <div class="col-md-1" style="text-align:
+                                left">
+                                <b><small>Sector:</small></b>
+
+                            </div>
+                            <select class="form-control input-sm" name="plaza" validate-on="dirty" ng-model="$ctrl.plaza" ng-options="v.razon_social for v in $ctrl.plazas track by v.id_compania"
+                                ng-change="$ctrl.GetSucursales(0)" ng-disabled="$ctrl.block" required-message="'Este campo es obligatorio.'"
+                                required>
+                                          <option value="">selecciona</option>
+                                             </select>
+                        </div>
+
+                        <div class="col-md-2" style="text-align:right">
+                            <div class="col-md-1" style="text-align:
+                                left">
+                                <b><small>Poste:</small></b>
+                            </div>
+                            <select class="form-control input-sm" name="plaza" validate-on="dirty" ng-model="$ctrl.plaza" ng-options="v.razon_social for v in $ctrl.plazas track by v.id_compania"
+                                ng-change="$ctrl.GetSucursales(0)" ng-disabled="$ctrl.block" required-message="'Este campo es obligatorio.'"
+                                required>
+                                      <option value="">selecciona</option>
+                                         </select>
+                        </div>
+                        <div class="col-md-1" style="text-align:
+                        left">
+
+                        </div>
+                        <div class="col-md-2" style="text-align:
+                        left">
+                            <b><small>Tap/Salida:</small></b>
+
+                        </div>
+                        <div class="col-md-4" style="text-align:right">
+                            <div class="col-md-2" style="text-align:right">
+                            </div>
+                            <div class="col-md-3" style="text-align:left">
+                                <input type="text" name="InpSearchSucursal2" class="form-control input-sm" ng-model="$ctrl.descripcion" placeholder="Tap">
+                            </div>
+                            <div class="col-md-3" style="text-align:left">
+                                <input type="text" name="InpSearchSucursal2" class="form-control input-sm" ng-model="$ctrl.descripcion" placeholder="Salida">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-10" style="font-weight:bold;">
+                    Datos del Tap:
+                    <hr style="border:1px dotted;">
+                </div>
+                <br>
+                <div class="col-md-15">
+
+                    <div class="col-md-12" style="text-align:right">
+                        <div class="col-md-3" style="text-align:right">
+                        </div>
+                        <div class="col-md-1" style="text-align:
+                            left">
+                            <b><small>Colonia:</small></b>
+                        </div>
+                        <div class="col-md-2" style="text-align:right">
+                            <select class="form-control input-sm" name="plaza" validate-on="dirty" ng-model="$ctrl.plaza" ng-options="v.razon_social for v in $ctrl.plazas track by v.id_compania"
+                                ng-change="$ctrl.GetSucursales(0)" ng-disabled="$ctrl.block" required-message="'Este campo es obligatorio.'"
+                                required>
+                                              <option value="">selecciona Colonia</option>
+                                                 </select>
+                        </div>
+                        <div class="col-md-1" style="text-align:
+                                left">
+                            <b><small>Calle:</small></b>
+                        </div>
+                        <div class="col-md-2" style="text-align:right">
+                            <select class="form-control input-sm" name="plaza" validate-on="dirty" ng-model="$ctrl.plaza" ng-options="v.razon_social for v in $ctrl.plazas track by v.id_compania"
+                                ng-change="$ctrl.GetSucursales(0)" ng-disabled="$ctrl.block" required-message="'Este campo es obligatorio.'"
+                                required>
+                                                  <option value="">selecciona Calle</option>
+                                                     </select>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="row">
+                <table>
+                    <tr>
+                        <td width="10%" style="text-align:center"><b># de Casas:</b></td>
+                        <td width="7%" style="text-align:center"> <input type="number" name="InpSearchSucursal2" class="form-control input-sm" ng-model="$ctrl.descripcion"
+                                placeholder="Num "></td>
+
+                        <td width="10%" style="text-align:center"><b># de Negocios:</b></td>
+                        <td width="7%" style="text-align:center"> <input type="number" name="InpSearchSucursal2" class="form-control input-sm" ng-model="$ctrl.descripcion"
+                                placeholder="Num "></td>
+
+                        <td width="10%" style="text-align:center"><b># de Lotes:</b></td>
+                        <td width="7%" style="text-align:center"> <input type="number" name="InpSearchSucursal2" class="form-control input-sm" ng-model="$ctrl.descripcion"
+                                placeholder="Num"></td>
+
+                        <td width="10%" style="text-align:center"><b># de Servicios:</b></td>
+                        <td width="7%" style="text-align:center"> <input type="number" name="InpSearchSucursal2" class="form-control input-sm" ng-model="$ctrl.descripcion"
+                                placeholder="Num"></td>
+
+                        <td width="10%" style="text-align:center"><b>Frente al numero:</b></td>
+                        <td width="7%" style="text-align:center"> <input type="number" name="InpSearchSucursal2" class="form-control input-sm" ng-model="$ctrl.descripcion"
+                                placeholder="Num"></td>
+                    </tr>
+                </table>
+            </div>
+            <br>
+
+
+
+        </div>
+</form>

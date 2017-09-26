@@ -160,6 +160,21 @@ angular
                 controllerAs: '$ctrl'
             },
             {
+                name: 'home.catalogos.equipos_digitales',
+                data: {
+                    pageTitle: 'SOFTV | CATÁLOGO EQUIPOS DIGITALES',
+                    permissions: {
+                        options: {
+                            reload: false
+                        }
+                    }
+                },
+                url: '/catalogo/equipos_digitales',
+                templateUrl: 'views/catalogos/EquiposDigitales.html',
+                controller: 'EquiposDigitalesCtrl',
+                controllerAs: '$ctrl'
+            },
+            {
                 name: 'home.catalogos.plazas',
                 data: {
                     pageTitle: 'SOFTV | CATÁLOGO PLAZAS',
@@ -199,6 +214,18 @@ angular
                 controller: 'PlazaUpdateCtrl',
                 controllerAs: '$ctrl'
             },
+            {
+                name: 'home.catalogos.plaza_detalle',
+                data: {
+                    pageTitle: 'SOFTV | DETALLE PLAZA'
+                },
+                url: '/catalogo/plazas/detalle/:id',
+                templateUrl: 'views/catalogos/PlazaForm.html',
+                controller: 'PlazaDetalleCtrl',
+                controllerAs: '$ctrl'
+            },
+
+            
             {
                 name: 'home.catalogos.localidades',
                 data: {
@@ -254,6 +281,17 @@ angular
                 controller: 'DistribuidorUpdateCtrl',
                 controllerAs: '$ctrl'
             },
+            {
+                name: 'home.catalogos.detalle_distribuidor',
+                data: {
+                    pageTitle: 'SOFTV | DETALLE DISTRIBUIDOR'
+                },
+                url: '/catalogo/distribuidores/detalle/:id',
+                templateUrl: 'views/catalogos/DistribuidorForm.html',
+                controller: 'DistribuidorDetalleCtrl',
+                controllerAs: '$ctrl'
+            },
+           
             {
                 name: 'home.catalogos.colonias',
                 data: {

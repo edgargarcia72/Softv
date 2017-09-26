@@ -2,6 +2,7 @@
 
 angular
 
+
     .module('softvApp')
     .factory('CatalogosFactory', function ($http, $q, globalService, $localStorage) {
 
