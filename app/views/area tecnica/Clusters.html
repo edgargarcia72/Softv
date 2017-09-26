@@ -15,7 +15,7 @@
                 </small>
       </header>
       <div class="tools">
-        <td><button type="button" class="btn btn-primary btn-xs" ng-click="$ctrl.AddCluster()" title="Nuevo Cluster "><i class="fa fa-plus"></i> NUEVO</button></td>
+        <td><button type="button" class="btn btn-primary btn-sm" ng-click="$ctrl.AddCluster()" title="Nuevo Cluster "><i class="fa fa-plus"></i> NUEVO</button></td>
         
       </div>
     </div>
@@ -37,13 +37,13 @@
               <input type="text" name="InpSearchSucursal" class="form-control input-sm" ng-model="$ctrl.clave" placeholder="Clave">
             </div>
             <div class="col-md-1" style="text-align:right">
-              <button type="button" class="btn btn-warning btn-xs" ng-click="$ctrl.buscar(0);" title="Buscar por clave "><i class="glyphicon glyphicon-search"></i> BUSCAR</button>
+              <button type="button" class="btn btn-warning btn-xs" ng-click="$ctrl.buscar(2);" title="Buscar por clave "><i class="glyphicon glyphicon-search"></i> BUSCAR</button>
             </div>
             <div class="col-md-2" style="text-align:right">
               <input type="text" name="InpSearchSucursal2" class="form-control input-sm" ng-model="$ctrl.descripcion" placeholder="Descripcion">
             </div>
             <div class="col-md-1" style="text-align:right">
-              <button type="button" class="btn btn-warning btn-xs" ng-click="$ctrl.buscar(1);" title="Buscar por Descripcion "><i class="glyphicon glyphicon-search"></i> BUSCAR</button>
+              <button type="button" class="btn btn-warning btn-xs" ng-click="$ctrl.buscar(4);" title="Buscar por Descripcion "><i class="glyphicon glyphicon-search"></i> BUSCAR</button>
             </div>
   
           </div>
@@ -58,20 +58,22 @@
         <table class="table">
           <thead>
             <tr>
-              <th width="10%" style="text-align:center"><b>Clave</b></th>
-              <th width="70%" style="text-align:center"><b>Descripcion</b></th>
-              <th width="20%" colspan="4"><b>Acciones</b></th>
+              <th style="text-align:center"><b>Id</b></th>
+              <th style="text-align:center"><b>Clave</b></th>
+              <th style="text-align:center"><b>Descripcion</b></th>
+              <th ><b>Acciones</b></th>
             </tr>
           </thead>
           <tbody>
   
-            <tr dir-paginate="X in $ctrl.suscursales|itemsPerPage:7">
-              <td>{{ X.Clv_Motivo}}</td>
+            <tr dir-paginate="X in $ctrl.clusters|itemsPerPage:7">
+              <td>{{ X.Clv_cluster}}</td>
+              <td>{{ X.Clv_txt }}</td>
               <td>{{ X.Descripcion }}</td>
               <td>
-                  <td><button type="button" class="btn btn-info btn-xs" ng-click="$ctrl.DetalleCluster()" title="Consultar Cluster"><i class="fa fa-eye"></i> CONSULTA</button></td>
-                  <td><button type="button" class="btn btn-warning btn-xs" ng-click="$ctrl.UpdateCluster()" title="Editar Cluster "><i class="fa fa-pencil-square-o"></i> EDITAR</button></td>
-                  <td><button type="button" class="btn btn-danger btn-xs" ng-click="$ctrl.EliminaCluster()" title="Elimina Cluster "><i class="fa fa-trash"></i> ELIMINAR</button></td>
+                  <td><button type="button" class="btn btn-info btn-xs" ng-click="$ctrl.DetalleCluster(X)" title="Consultar Cluster"><i class="fa fa-eye"></i> CONSULTA</button>
+                  <button type="button" class="btn btn-warning btn-xs" ng-click="$ctrl.UpdateCluster(X)" title="Editar Cluster "><i class="fa fa-pencil-square-o"></i> EDITAR</button>
+                  <button type="button" class="btn btn-danger btn-xs" ng-click="$ctrl.EliminaCluster(X)" title="Elimina Cluster "><i class="fa fa-trash"></i> ELIMINAR</button></td>
   
               </td>
             </tr>
