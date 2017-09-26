@@ -1,3 +1,10 @@
+<style type="text/css">
+    .table-scroll {
+        height:500px;
+        overflow:auto;  
+        margin-top:20px;
+    }
+</style>
 <div class="modal-header">
     <button class="close" type="button" aria-label="close" ng-click="ctrl.cancel()">x</button>
     <h4 class="modal-title"><i class="fa fa-cogs"></i> Configuracón Servicio - {{ ctrl.Clv_Servicio }}</h4>
@@ -24,19 +31,23 @@
             <div class="col-md-1">
                 <b>Servicio:</b>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-3">
                 <select name="SlcServicio1" class="form-control input-sm" ng-model="ctrl.Servicio1" ng-options="S.Descripcion for S in ctrl.Servicio1List track by S.Clv_Servicio">
                     <option value="">Selecciona</option>
                 </select>
             </div>
             <!--
+            <div class="col-md-1">
+                
+            </div>
             <div class="col-md-2">
+                
             </div>
             -->
         </div>
         <div class="col-md-12">
             <div class="col-md-6">
-                <table class="table">
+                <table class="table table-scroll">
                     <thead>
                         <tr>
                             <th><b>Plaza</b></th>
@@ -57,36 +68,48 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4 table-scroll">
                 <table class="table">
                     <thead>
                         <tr>
-                            <th width="60%"><b>Servicio</b></th>
-                            <th width="20%" colspan="2"><b>Plaza</b></th>
-                            <th width="20%" colspan="2"><b>Todas</b></th>
+                            <th><b>Servicio</b></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr ng-repeat="X in ctrl.Servicio2List">
                             <td><small style="font-size:10px">{{ X.Descripcion }}</small></td>
-                            <td><button type="button" class="btn btn-success btn-xs" title="Agrega a la plaza seleccionada" ng-click="$ctrl.DeleteRelEstMun(X)"><i class="fa fa-save"></i></button></td>
-                            <td><button type="button" class="btn btn-danger btn-xs" title="Elimina de la plaza seleccionada" ng-click="$ctrl.DeleteRelEstMun(X)"><i class="fa fa-trash"></i></button></td>
-                            <td><button type="button" class="btn btn-success btn-xs" title="Agrega a todas las plazas" ng-click="$ctrl.DeleteRelEstMun(X)"><i class="fa fa-save"></i></button></td>
-                            <td><button type="button" class="btn btn-danger btn-xs" title="Elimina de todas las plazas" ng-click="$ctrl.DeleteRelEstMun(X)"><i class="fa fa-trash"></i></button></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            
+            <div class="col-md-2" style="text-align:center">
+                <div class="col-md-12">
+                <button type="button" class="btn btn-success btn-xs" title="Agrega a la plaza seleccionada" ng-click="ctrl.AddServicioPlaza()" ng-disabled="ctrl.Servicio1 == undefined || ctrl.Distribuidor == undefined">Agregar</button>
+                </div>
+                <div class="col-md-12">
+                    <br>
+                </div>
+                <div class="col-md-12">
+                <button type="button" class="btn btn-danger btn-xs" title="Elimina de la plaza seleccionada" ng-click="ctrl.DeleteServicioPlaza()" ng-disabled="(ctrl.Servicio2List == undefined || ctrl.Servicio2List == '') || ctrl.Servicio1 != undefined">Eliminar</button>
+                </div>
+                <div class="col-md-12">
+                    <br>
+                </div>
+                <div class="col-md-12">
+                <button type="button" class="btn btn-success btn-xs" title="Agrega a todas las plazas" ng-click="ctrl.AddServicioPlazaTodas()">Agregar<br/>todas las<br/>Plazas</button>
+                </div>
+                <div class="col-md-12">
+                    <br>
+                </div>
+                <div class="col-md-12">
+                <button type="button" class="btn btn-danger btn-xs" title="Elimina de todas las plazas" ng-click="ctrl.DeleteServicioPlazaTodas()">Eliminar<br/>de todas las<br/>Plazas</button>
+                </div>
+                <!--<button class="btn btn-danger btn-sm">Eliminar<br>de todas<br>las plazas</button>-->
+            </div>
         </div>
     </div>
     <!--
-    <div class="col-md-2" style="text-align:center">
-        <button class="btn btn-success btn-sm">Agregar<br>a todas<br>las plazas</button>
-        <br>
-        <br>
-        <button class="btn btn-danger btn-sm">Eliminar<br>de todas<br>las plazas</button>
-    </div>
+    
 
 
     <div class="row">

@@ -5,16 +5,30 @@ angular
 
         function initData(){
             CatalogosFactory.GetMuestraTipSerPrincipal_SERList().then(function(data){
-                console.log(data);
                 vm.TipoServicioList = data.GetMuestraTipSerPrincipal_SERListResult;
             });
-            vm.ServicioList = [
-                {
-                    'Clv_Servicio': 5344,
-                    'clv_txt': 'BBBBQ'
-                }
-            ];
-            vm.ConRegistros = true;
+            
+        }
+
+        function GetServiciosList(){
+            var ObjBusqueda = {
+                'Clv_TipSer': vm.TipoServicio.Clv_TipSerPrincipal, 
+                'Clv_Servicio': 0 , 
+                'Descripcion': '', 
+                'Clv_Txt': '', 
+                'Op': 2, 
+                'idcompania': 1
+            };
+            CatalogosFactory.GetServicios_NewList(ObjBusqueda).then(function(data){
+                vm.ServicioList = data.GetServicios_NewListResult;
+                 if (vm.ServicioList.length == 0) {
+					vm.SinRegistros = true;
+					vm.ConRegistros = false;
+				} else {
+					vm.SinRegistros = false;
+					vm.ConRegistros = true;
+				}
+            });
         }
 
         function OpenDeleteServicio(ObjServicio){
@@ -40,5 +54,8 @@ angular
 
         var vm = this;
         vm.OpenDeleteServicio = OpenDeleteServicio;
+        vm.GetServiciosList = GetServiciosList;
+        vm.SinRegistros = true;
+	    vm.ConRegistros = false;
         initData();
     });

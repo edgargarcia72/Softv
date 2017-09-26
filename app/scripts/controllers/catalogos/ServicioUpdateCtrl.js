@@ -4,8 +4,11 @@ angular
     .controller('ServicioUpdateCtrl', function(CatalogosFactory, ngNotify, $uibModal, $state, $stateParams, $rootScope){
 
         function initData(){
+            CatalogosFactory.GetTipoClienteList_WebSoftvnew().then(function(data){
+                vm.TipoCobroList = data.GetTipoClienteList_WebSoftvnewResult;
+            });
+
             CatalogosFactory.GetDeepServicios_New(Clv_Servicio).then(function(data){
-                console.log(data);
                 var Servicio = data.GetDeepServicios_NewResult;
                 if(Servicio != null){
                     vm.Clv_Servicio = Servicio.Clv_Servicio;
@@ -15,11 +18,105 @@ angular
                     vm.AplicaComision = (Servicio.AplicanCom == true)? 'Y' : 'N';
                     vm.CobroMensual = (Servicio.Sale_en_Cartera == true)? 'Y' : 'N';
                     vm.GeneraOrden = (Servicio.Genera_Orden == true)? 'Y' : 'N';
+                    vm.ShowOrden = (Servicio.Genera_Orden == true)? true : false;
                     vm.Principal = (Servicio.Es_Principal == true)? 'Y' : 'N';
                     vm.Precio = (Servicio.Precio > 0)? Servicio.Precio : 0;
+                    vm.HideCobroMensual = (Servicio.Sale_en_Cartera == true)? false : true;
+                    vm.ShowCobroMensual = (Servicio.Sale_en_Cartera == true)? true : false;
+                    CatalogosFactory.GetMUESTRATRABAJOS_NewList(vm.Clv_TipSer).then(function(data){
+                        vm.TrabajoList = data.GetMUESTRATRABAJOS_NewListResult;
+                    });
                 }else{
                     ngNotify.set('ERROR, El servicio que seleccionó no se encuentra registrado.', 'warn');
                     $state.go('home.catalogos.servicios');
+                }
+            });
+        }
+
+        function GetTarifa(){
+            if(vm.TipoCobro != undefined){
+                var ObjTarifa = {
+                    'CLV_SERVICIO': vm.Clv_Servicio, 
+                    'OP': 0, 
+                    'Clv_TipoCliente': vm.TipoCobro.CLV_TIPOCLIENTE
+                };
+                CatalogosFactory.GetREL_TARIFADOS_SERVICIOS_NewList(ObjTarifa).then(function(data){
+                    vm.TarifaList = data.GetREL_TARIFADOS_SERVICIOS_NewListResult;
+                });
+            }else{
+
+            }  
+        }
+
+        function OpenAddConcepto(Clv_TipoCobro, Clv_Servicio){
+            var ObjServicio = {
+                'Clv_Servicio': Clv_Servicio,
+                'Clv_TipoCobro': Clv_TipoCobro
+            };
+            var modalInstance = $uibModal.open({
+                animation: true,
+                ariaLabelledBy: 'modal-title',
+                ariaDescribedBy: 'modal-body',
+                templateUrl: 'views/catalogos/ModalConceptoForm.html',
+                controller: 'ModalConceptoAddCtrl',
+                controllerAs: 'ctrl',
+                backdrop: 'static',
+                keyboard: false,
+                class: 'modal-backdrop fade',
+                size: 'md',
+                resolve: {
+                    ObjServicio: function () {
+                        return ObjServicio;
+                    }
+                }
+            });
+        }
+
+        function OpenDeleteConcepto(ObjConcepto, CLV_TIPOCLIENTE){
+            var ObjConcepto = {
+                'ObjConcepto': ObjConcepto,
+                'CLV_TIPOCLIENTE': CLV_TIPOCLIENTE
+            };
+            var modalInstance = $uibModal.open({
+                animation: true,
+                ariaLabelledBy: 'modal-title',
+                ariaDescribedBy: 'modal-body',
+                templateUrl: 'views/catalogos/ModalConceptoDelete.html',
+                controller: 'ModalConceptoDeleteCtrl',
+                controllerAs: 'ctrl',
+                backdrop: 'static',
+                keyboard: false,
+                class: 'modal-backdrop fade',
+                size: 'md',
+                resolve: {
+                    ObjConcepto: function () {
+                        return ObjConcepto;
+                    }
+                }
+            });
+        }
+
+        function OpenUpdateConcepto(CLV_LLAVE, CLV_TIPOCLIENTE, CONCEPTO){
+            var ObjConcepto = {
+                'CLV_LLAVE': CLV_LLAVE,
+                'CLV_TIPOCLIENTE': CLV_TIPOCLIENTE,
+                'CONCEPTO': CONCEPTO
+            };
+            var modalInstance = $uibModal.open({
+                animation: true,
+                ariaLabelledBy: 'modal-title',
+                ariaDescribedBy: 'modal-body',
+                templateUrl: 'views/catalogos/ModalConceptoForm.html',
+                controller: 'ModalConceptoUpdateCtrl',
+                controllerAs: 'ctrl',
+                backdrop: 'static',
+                keyboard: false,
+                class: 'modal-backdrop fade',
+                size: 'md',
+                resolve: {
+                    ObjConcepto: function () {
+                        return ObjConcepto;
+                    }
                 }
             });
         }
@@ -51,8 +148,7 @@ angular
                 'Clv_Txt': vm.Clave
             };
             CatalogosFactory.GetDeepValidaCambioDClvtxtServ(ObjValidaCambio).then(function(data){
-                console.log(data);
-                var MsjExt = data.GetDeepValidaCambioDClvtxtServResult.MSJ;
+                vm.MsjExt = data.GetDeepValidaCambioDClvtxtServResult.MSJ;
                     var objServicios_New = {
                     'Clv_Servicio': vm.Clv_Servicio,
                     'Clv_TipSer': vm.Clv_TipSer,
@@ -68,18 +164,36 @@ angular
                     'Gb': 0
                 };
                 CatalogosFactory.UpdateServicios_New(objServicios_New).then(function(data){
-                    console.log(data);
                     if(data.UpdateServicios_NewResult == -1){
-                        if(MsjExt != null){
-                            var MSJ = 'NOTA:' + MsjExt + ' CORRECTO, se guardó el servicio.';
-                        }else{
-                            var MSJ = 'CORRECTO, se guardó el servicio.';
-                        }
-                        ngNotify.set(MSJ, 'success');
-                        $state.go('home.catalogos.servicios');
+                        var objNUEPuntos_Pago_Adelantado = {
+                            'CLV_SERVICIO': vm.Clv_Servicio,
+                            'Puntos3': vm.Meses35,
+                            'Puntos6': vm.Meses611,
+                            'puntos11': vm.Meses11,
+                            'Punto_Pronto_Pago': vm.ProntoPago
+                        };
+                        CatalogosFactory.AddNUEPuntos_Pago_Adelantado(objNUEPuntos_Pago_Adelantado).then(function(data){
+                            if(data.AddNUEPuntos_Pago_AdelantadoResult == -1){
+                                if(vm.MsjExt != null){
+                                    var MSJ = 'NOTA:' + vm.MsjExt + ' CORRECTO, se guardó el servicio.';
+                                }else{
+                                    var MSJ = 'CORRECTO, se guardó el servicio.';
+                                }
+                                ngNotify.set(MSJ, 'success');
+                                $state.go('home.catalogos.servicios');
+                            }else{
+                                if(vm.MsjExt != null){
+                                    var MSJ = 'NOTA:' + vm.MsjExt + ' ERROR, al guardar el servicio.';
+                                }else{
+                                    var MSJ = 'ERROR, al guardar el servicio.';
+                                }
+                                ngNotify.set(MSJ, 'warn');
+                                $state.go('home.catalogos.servicios');
+                            }
+                        });
                     }else{
-                        if(MsjExt != null){
-                            var MSJ = 'NOTA:' + MsjExt + ' ERROR, al guardar el servicio.';
+                        if(vm.MsjExt != null){
+                            var MSJ = 'NOTA:' + vm.MsjExt + ' ERROR, al guardar el servicio.';
                         }else{
                             var MSJ = 'ERROR, al guardar el servicio.';
                         }
@@ -89,9 +203,15 @@ angular
                 });
             });
         }
+
+        function SavePuntos(){
+        }
+
+        $rootScope.$on('LoadConceptos', function(e, Clv_Servicio){
+            GetTarifa(Clv_Servicio);
+        });
         
         function SetTipoCobro(){
-            console.log(vm.CobroMensual);
             if(vm.CobroMensual == 'Y'){
                 vm.ShowCobroMensual = true;
                 vm.HideCobroMensual = false;
@@ -109,28 +229,12 @@ angular
         }
 
         function SetOrden(){
-            console.log(vm.GeneraOrden);
             if(vm.GeneraOrden == 'Y'){
                 vm.ShowOrden = true;
             }
             else if(vm.GeneraOrden == 'N'){
                 vm.ShowOrden = false;
             }
-        }
-        
-        function OpenAddConcepto(){
-            var modalInstance = $uibModal.open({
-                animation: true,
-                ariaLabelledBy: 'modal-title',
-                ariaDescribedBy: 'modal-body',
-                templateUrl: 'views/catalogos/ModalConceptoForm.html',
-                controller: 'ModalConceptoAddCtrl',
-                controllerAs: 'ctrl',
-                backdrop: 'static',
-                keyboard: false,
-                class: 'modal-backdrop fade',
-                size: 'md'
-            });
         }
 
         var vm = this;
@@ -139,11 +243,14 @@ angular
         vm.ShowCobroMensual = false;
         vm.HideCobroMensual = true;
         vm.ShowOrden = false;
+        vm.Disable = true;
         vm.SetTipoCobro = SetTipoCobro;
         vm.SetOrden = SetOrden;
         vm.OpenAddConcepto = OpenAddConcepto;
+        vm.OpenUpdateConcepto = OpenUpdateConcepto;
+        vm.OpenDeleteConcepto = OpenDeleteConcepto;
         vm.SaveServicios = SaveServicios;
         vm.OpenConfigurar = OpenConfigurar;
-        console.log(Clv_Servicio);
+        vm.GetTarifa = GetTarifa;
         initData();
     });

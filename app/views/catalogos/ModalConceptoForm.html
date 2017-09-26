@@ -1,12 +1,12 @@
 <form name="FormConcepto" angular-validator-submit="ctrl.SaveConcepto()" novalidate angular-validator autocomplete="off">
     <div class="modal-header">
         <button class="close" type="button" aria-label="close" ng-click="ctrl.cancel()">x</button>
-        <h4 class="modal-title"><i class="fa fa-plus"></i> Nuevo Concepto</h4>
+        <h4 class="modal-title"><i ng-class="ctrl.Icono"></i> {{ ctrl.Titulo }} {{ ctrl.CLV_LLAVE }}</h4>
     </div>
     <div class="modal-body">
         <div class="row">
             <div class="col-md-12">
-                <div class="col-md-12" ng-if="ctrl.Clv_TipoCobro == 1 && (ctrl.TipoConcepto.Clave == 1 || ctrl.TipoConcepto.Clave == 2)"><!--1(1,2) 2(x) 3(x)-->
+                <div class="col-md-12" ng-show="ctrl.Clv_TipoCobro == 1 && (ctrl.TipoConcepto.Clave == 1 || ctrl.TipoConcepto.Clave == 2)"><!--1(1,2) 2(x) 3(x)-->
                     <label class="checkbox-inline checkbox-styled">
                         <input type="checkbox" name="CbxAplicatodos" ng-model="ctrl.AplicaTodos" ng-true-value="'Y'" ng-false-value="'N'"><span class="text-danger">Aplicar a todos los tipos de cobro</span>
                     </label>
@@ -19,13 +19,13 @@
                     <b>Concepto:</b>
                 </div>
                 <div class="col-md-10">
-                    <select name="SlcTipoConcepto" class="form-control input-sm" ng-model="ctrl.TipoConcepto" ng-options="TC.Concepto for TC in ctrl.TipoConceptoList track by TC.Clave" validate-on="dirty" required required-message="'Obligatorio'">
+                    <select name="SlcTipoConcepto" class="form-control input-sm" ng-model="ctrl.TipoConcepto" ng-options="TC.Concepto for TC in ctrl.TipoConceptoList track by TC.Clave" ng-change="ctrl.SetTipoConepto()" validate-on="dirty" required required-message="'Obligatorio'">
                         <option value="" ng-disabled="true">Selecciona</option>
                     </select>
                 </div>
             </div>
         </div>
-        <div class="row" ng-show="false">
+        <div class="row" ng-if="false">
             <div class="col-md-12">
                 <div class="col-md-12">
                     <h4 class="text-primary"><b>Precios del servicio:</b></h4>
@@ -66,7 +66,7 @@
                     <b>Principal:</b>
                 </div>
                 <div class="col-md-4">
-                    <input type="number" name="InpPrincipal" class="form-control input-sm" ng-model="ctrl.Principal" validate-on="dirty" required required-message="'Obligatorio'">
+                    <input type="number" name="InpPrincipal" class="form-control input-sm" ng-model="ctrl.Principal" min="1" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
                 </div>
                 <div class="col-md-6">
                 </div>
@@ -76,13 +76,13 @@
                     <b>Adicional:</b>
                 </div>
                 <div class="col-md-4">
-                    <input type="number" name="InpAdicionalN1" class="form-control input-sm" ng-model="ctrl.AdicionalN1" validate-on="dirty" required required-message="'Obligatorio'">
+                    <input type="number" name="InpAdicionalN1" class="form-control input-sm" ng-model="ctrl.AdicionalN1" min="1" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
                 </div>
                 <div class="col-md-2" ng-if="ctrl.TipoConcepto.Clave == 1">
                     <b>Adicional:</b>
                 </div>
                 <div class="col-md-4" ng-if="ctrl.TipoConcepto.Clave == 1">
-                    <input type="number" name="InpAdicionalS1" class="form-control input-sm" ng-model="ctrl.AdicionalS1">
+                    <input type="number" name="InpAdicionalS1" class="form-control input-sm" ng-model="ctrl.AdicionalS1" min="1" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
                 </div>
             </div>
             <div class="col-md-12">
@@ -90,13 +90,13 @@
                     <b>Adicional:</b>
                 </div>
                 <div class="col-md-4">
-                    <input type="number" name="InpAdicionalN2" class="form-control input-sm" ng-model="ctrl.AdicionalN2">
+                    <input type="number" name="InpAdicionalN2" class="form-control input-sm" ng-model="ctrl.AdicionalN2" min="1" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
                 </div>
                 <div class="col-md-2" ng-if="ctrl.TipoConcepto.Clave == 1">
                     <b>Adicional:</b>
                 </div>
                 <div class="col-md-4" ng-if="ctrl.TipoConcepto.Clave == 1">
-                    <input type="number" name="InpAdicionalS2" class="form-control input-sm" ng-model="ctrl.AdicionalS2">
+                    <input type="number" name="InpAdicionalS2" class="form-control input-sm" ng-model="ctrl.AdicionalS2" min="1" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
                 </div>
             </div>
         </div>
@@ -160,8 +160,8 @@
                     </label>
                 </div>
                 <div class="col-md-6" ng-if="ctrl.ShowOrden">
-                    <select name="SlcOrden" class="form-control input-sm" ng-model="ctrl.Orden">
-                        <option value="">Selecciona orden</option>
+                    <select name="SlcTrabajo" class="form-control input-sm" ng-model="ctrl.Trabajo" ng-options="T.Descripcion for T in ctrl.TrabajoList track by T.Clv_Trabajo" validate-on="dirty" required required-message="'Obligatorio'">
+                        <option value="">Selecciona</option>
                     </select>
                 </div>
             </div>
@@ -182,7 +182,7 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="sumit" class="btn btn-primary btn-sm" title="Agregar Concepto">Agregar</button>
+        <button type="sumit" class="btn btn-primary btn-sm" title="Guardar Concepto">Guardar</button>
         <button class="btn bnt-default btn-sm" type="button" ng-click="ctrl.cancel()" title="Salir">Cancelar</button>
     </div>
 </form>

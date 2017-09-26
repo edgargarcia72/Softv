@@ -21,7 +21,6 @@ angular
                     'Clv_Servicio': vm.Clv_Servicio
                 };
                 CatalogosFactory.AddValidaAplicaSoloInternet(objValidaAplicaSoloInternet).then(function(data){
-                    console.log(data);
                     var ValildaInternetResult = data.AddValidaAplicaSoloInternetResult;
                     if(ValildaInternetResult == 0){
                         DeleteServicioTrue();
@@ -34,7 +33,6 @@ angular
 
         function DeleteServicioTrue(){
             CatalogosFactory.DeleteServicios_New(vm.Clv_Servicio).then(function(data){
-                console.log(data);
                 if(data.DeleteServicios_NewResult == -1){
                     /*if(vm.ObjMSJ.error == 0){
                         var MSJ = 'NOTA: ' + vm.ObjMSJ.mensaje + 'CORRECTO, se eliminó el servicio.';
@@ -59,7 +57,6 @@ angular
 
         function DeleteAplicaSoloInternet(){
             CatalogosFactory.DeleteBorAplicaSoloInternet(vm.Clv_Servicio).then(function(data){
-                console.log(data);
                     if(data.DeleteBorAplicaSoloInternetResult == -1){
                         DeleteServicioTrue();
                     }else{
