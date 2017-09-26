@@ -5,13 +5,13 @@ angular
     .controller('ModalColoniaFormAddCtrl', function(CatalogosFactory, $uibModalInstance, ngNotify, $state){
 
         function initData(){
-            CatalogosFactory.GetTipServList().then(function(data){
+            /*CatalogosFactory.GetTipServList().then(function(data){
                 vm.TipoServicioList = data.GetTipServListResult;
             });
 
             CatalogosFactory.GetEstadoList2_web().then(function(data){
                 vm.EstadoList = data.GetEstadoList2_webResult;
-            });
+            });*/
         }
 
         function GetCiudadMunicipio(){

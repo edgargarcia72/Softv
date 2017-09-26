@@ -2,7 +2,6 @@
 
 angular
 
-
   .module('softvApp')
   .factory('CatalogosFactory', function ($http, $q, globalService, $localStorage) {
 
@@ -143,7 +142,8 @@ angular
       AddSPRelCiudadLocalidad: '/SPRelCiudadLocalidad/AddSPRelCiudadLocalidad',
       GetRelCiudadLocalidadList: '/SPRelCiudadLocalidad/GetRelCiudadLocalidadList',
       DeleteSPRelCiudadLocalidad: '/SPRelCiudadLocalidad/DeleteSPRelCiudadLocalidad',
-      GetDeepValidaEliminaRelLocalidadCiudad: '/ValidaEliminaRelLocalidadCiudad/GetDeepValidaEliminaRelLocalidadCiudad'
+      GetDeepValidaEliminaRelLocalidadCiudad: '/ValidaEliminaRelLocalidadCiudad/GetDeepValidaEliminaRelLocalidadCiudad',
+      GetColonias_NewList: '/Colonias_New/GetColonias_NewList'
     };
 
     factory.AddSucursal = function (SUCURSALESobj) {
@@ -2513,6 +2513,18 @@ angular
       };
       var Parametros = ObjRel;
       $http.post(globalService.getUrl() + paths.DeleteSPRelCiudadLocalidad, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetColonias_NewList = function (ObjColoniaList) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {'ObjColoniaList': ObjColoniaList};
+      $http.post(globalService.getUrl() + paths.GetColonias_NewList, JSON.stringify(Parametros), config).then(function (response) {
         deferred.resolve(response.data);
       }).catch(function (response) {
         deferred.reject(response);

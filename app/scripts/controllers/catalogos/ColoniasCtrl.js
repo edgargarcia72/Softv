@@ -5,7 +5,10 @@ angular
     .controller('ColoniasCtrl', function($uibModal, CatalogosFactory){
 
         function initData(){
-            CatalogosFactory.GetColoniaList().then(function(data){
+            CatalogosFactory.GetColonias_NewList().then(function(data){
+                console.log(data);
+            });
+            /*CatalogosFactory.GetColoniaList().then(function(data){
                 vm.ColoniaList = data.GetColoniaListResult;
                 if (vm.ColoniaList.length == 0) {
 					vm.SinRegistros = true;
@@ -14,7 +17,7 @@ angular
 					vm.SinRegistros = false;
 					vm.ConRegistros = true;
 				}
-            });
+            });*/
         }
 
         function OpenAddColonia(){
