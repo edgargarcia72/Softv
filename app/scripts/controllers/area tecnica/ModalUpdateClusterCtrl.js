@@ -5,7 +5,7 @@
         console.log(options);
 
         function init() {
-          vm.clv_cluster = options.Clv_cluster;
+         
           console.log(options);
           var params = {
             'opcion': 4,
@@ -37,7 +37,7 @@
         }
 
         var vm = this;
-        vm.clv_cluster = 0;
+        vm.clv_cluster = options.Clv_cluster;
         init();
         vm.Titulo = ' Editar  Cluster';
         vm.Icono = 'fa fa-pencil-square-o';        
