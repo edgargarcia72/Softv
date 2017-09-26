@@ -76,13 +76,7 @@ angular
         }
         
         function SaveServicio2(Clv_Servicio){
-            var objModRentaAparato = {
-                'CLV_TIPOCLIENTE':1,
-                'CLV_SERVICIO': 5321,
-                'PRECIO': 0,
-                'PRECIOADIC': 0
-            };
-            /*var objValidaAplicaSoloInternet = {
+            var objValidaAplicaSoloInternet = {
                 'Clv_Servicio': Clv_Servicio
             };
             CatalogosFactory.AddValidaAplicaSoloInternet(objValidaAplicaSoloInternet).then(function(data){
@@ -114,7 +108,7 @@ angular
                     ngNotify.set('ERROR, al validar el servicio nuevo.', 'warn');
                     $state.go('home.catalogos.servicios');
                 }
-            });*/
+            });
         }
 
         function SaveServicio3(){

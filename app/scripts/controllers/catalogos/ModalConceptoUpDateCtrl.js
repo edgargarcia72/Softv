@@ -23,7 +23,6 @@ angular
                 'Clv_TipoCliente': vm.Clv_TipoCobro 
             };
             CatalogosFactory.AddValidaPeriodos(objValidaPeriodos).then(function(data){
-                console.log(data);
                 var result = data.AddValidaPeriodosResult;
                 if(result == 0){
                     var objREL_TARIFADOS_SERVICIOS_New = {
@@ -51,7 +50,6 @@ angular
                     };
                     if(vm.AplicaTodos == 'Y'){
                         CatalogosFactory.UpdateREL_TARIFADOS_SERVICIOSAll_New(objREL_TARIFADOS_SERVICIOS_New).then(function(data){
-                            console.log(data);
                             /*if(data.UpdateREL_TARIFADOS_SERVICIOSAll_NewResult == -1){
                                 AddConceptoCajas()
                             }else{
@@ -62,7 +60,6 @@ angular
                         });
                     }else{
                         CatalogosFactory.UpdateREL_TARIFADOS_SERVICIOS_New(objREL_TARIFADOS_SERVICIOS_New).then(function(data){
-                            console.log(data);
                             if(data.UpdateREL_TARIFADOS_SERVICIOS_NewResult == -1){
                                 AddConceptoCajas()
                             }else{
@@ -80,7 +77,6 @@ angular
         }
 
         function AddConceptoCajas(){
-            console
             var objRelTarifadosServiciosCostoPorCaja_New = {
                 'Clv_Llave': vm.CLV_LLAVE,
                 'CostoPrincipal': vm.Principal,
@@ -93,9 +89,7 @@ angular
                 'Costo3ra2': 0,
                 'op': (vm.AplicaTodos == 'Y')? 1 : 0
             };
-            console.log(objRelTarifadosServiciosCostoPorCaja_New);
             CatalogosFactory.AddRelTarifadosServiciosCostoPorCaja_New(objRelTarifadosServiciosCostoPorCaja_New).then(function(data){
-                console.log(data);
                 if(data.AddRelTarifadosServiciosCostoPorCaja_NewResult == -1){
                     ngNotify.set('CORRECTO, se guardó un concepto nuevo.', 'success');
                     $rootScope.$emit('LoadConceptos', vm.Clv_Servicio);
@@ -109,14 +103,11 @@ angular
         }
 
         function GetConcepto(){
-            console.log('get');
             var ObjGetConcepto = {
                 'CLV_LLAVE': ObjConcepto.CLV_LLAVE,
                 'Clv_TipoCliente': ObjConcepto.CLV_TIPOCLIENTE
             };
-            console.log(ObjConcepto);
             CatalogosFactory.GetDeepREL_TARIFADOS_SERVICIOS_New(ObjGetConcepto).then(function(data){
-                console.log(data);
                 var Concepto = data.GetDeepREL_TARIFADOS_SERVICIOS_NewResult;
                 vm.CLV_LLAVE = Concepto.CLV_LLAVE;
                 vm.Clv_Servicio = Concepto.CLV_SERVICIO;
@@ -152,7 +143,6 @@ angular
                     });
                 });
                 CatalogosFactory.GetDeepRelTarifadosServiciosCostoPorCaja_New(vm.CLV_LLAVE).then(function(data){
-                    console.log(data);
                     var ConceptoCajas = data.GetDeepRelTarifadosServiciosCostoPorCaja_NewResult;
                     vm.Principal = ConceptoCajas.CostoPrincipal;
                     vm.AdicionalN1 = ConceptoCajas.Costo1ra;
@@ -218,6 +208,5 @@ angular
         vm.ShowOrden = false;
         vm.SetTipoConepto = SetTipoConepto;
         vm.SaveConcepto = SaveConcepto;
-        console.log(ObjConcepto);
         initData();
     });

@@ -44,7 +44,6 @@ angular
                 'Clv_TipoCliente': vm.Clv_TipoCobro 
             }
             CatalogosFactory.AddValidaPeriodos(objValidaPeriodos).then(function(data){
-                console.log(data);
                 var result = data.AddValidaPeriodosResult;
                 if(result == 0){
                     var objREL_TARIFADOS_SERVICIOS_New = {
@@ -71,7 +70,6 @@ angular
                     }
                     if(vm.AplicaTodos == 'Y'){
                         CatalogosFactory.AddREL_TARIFADOS_SERVICIOSAll_New(objREL_TARIFADOS_SERVICIOS_New).then(function(data){
-                            console.log(data);
                             if(data.AddREL_TARIFADOS_SERVICIOSAll_NewResult == -1){
                                 ngNotify.set('CORRECTO, se añadió un concepto nuevo.', 'success');
                                 $rootScope.$emit('LoadConceptos', vm.Clv_Servicio);
@@ -96,7 +94,6 @@ angular
                         });
                     }else{
                         CatalogosFactory.AddREL_TARIFADOS_SERVICIOS_New(objREL_TARIFADOS_SERVICIOS_New).then(function(data){
-                            console.log(data);
                             var Clv_Llave = data.AddREL_TARIFADOS_SERVICIOS_NewResult;
                             if(Clv_Llave > 0){
                                 AddConceptoCajas(Clv_Llave)
@@ -115,7 +112,6 @@ angular
         }
 
         function AddConceptoCajas(Clv_Llave){
-            console
             var objRelTarifadosServiciosCostoPorCaja_New = {
                 'Clv_Llave': Clv_Llave,
                 'CostoPrincipal': vm.Principal,
@@ -128,15 +124,44 @@ angular
                 'Costo3ra2': 0,
                 'op': (vm.AplicaTodos == 'Y')? 1 : 0
             };
-            console.log(objRelTarifadosServiciosCostoPorCaja_New);
             CatalogosFactory.AddRelTarifadosServiciosCostoPorCaja_New(objRelTarifadosServiciosCostoPorCaja_New).then(function(data){
-                console.log(data);
                 if(data.AddRelTarifadosServiciosCostoPorCaja_NewResult == -1){
+                    var ObjInstalacion = {
+                        'CLV_LLAVE': Clv_Llave,
+                        'Clv_TipoCliente': vm.Clv_TipoCobro,
+                        'opc': 2
+                    };
+                    CatalogosFactory.GetActualiza_InstalacionList(ObjInstalacion).then(function(data){
+                        if(vm.Clv_TipSer == 2){
+                            RentaAparato();
+                        }else{
+                            ngNotify.set('CORRECTO, se añadió un concepto nuevo.', 'success');
+                            $rootScope.$emit('LoadConceptos', vm.Clv_Servicio);
+                            cancel();
+                        }
+                    });
+                }else{
+                    ngNotify.set('ERROR, al añadir un concepto nuevo.', 'warn');
+                    $rootScope.$emit('LoadRefPersonal', vm.IdContrato);
+                    cancel();
+                }
+            });
+        }
+
+        function RentaAparato(){
+            var objModRentaAparato = {
+                'CLV_TIPOCLIENTE': vm.Clv_TipoCobro,
+                'CLV_SERVICIO': vm.Clv_Servicio,
+                'PRECIO': 0,
+                'PRECIOADIC': 0
+            };
+            CatalogosFactory.UpdateModRentaAparato(objModRentaAparato).then(function(data){
+                if(data.UpdateModRentaAparatoResult == 1){
                     ngNotify.set('CORRECTO, se añadió un concepto nuevo.', 'success');
                     $rootScope.$emit('LoadConceptos', vm.Clv_Servicio);
                     cancel();
                 }else{
-                    ngNotify.set('ERROR, al añadir un concepto nuevo.', 'warn');
+                    ngNotify.set('ERROR, al añadir renta de aparato.', 'warn');
                     $rootScope.$emit('LoadRefPersonal', vm.IdContrato);
                     cancel();
                 }

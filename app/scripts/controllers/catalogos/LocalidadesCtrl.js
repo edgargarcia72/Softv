@@ -6,7 +6,6 @@ angular
 
         function initData(){
             CatalogosFactory.GetLocalidades_NewList().then(function(data){
-                console.log(data);
                 vm.LocalidadList = data.GetLocalidades_NewListResult;
                 if (vm.LocalidadList.length == 0) {
 					vm.SinRegistros = true;
@@ -29,7 +28,7 @@ angular
                 backdrop: 'static',
                 keyboard: false,
                 class: 'modal-backdrop fade',
-                size: 'lg'
+                size: 'md'
             });
         }
 
@@ -45,7 +44,7 @@ angular
                 backdrop: 'static',
                 keyboard: false,
                 class: 'modal-backdrop fade',
-                size: 'lg',
+                size: 'md',
                 resolve: {
                     IdLocalidad: function () {
                         return IdLocalidad;

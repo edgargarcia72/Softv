@@ -20,7 +20,6 @@ angular
                 'idcompania': 1
             };
             CatalogosFactory.GetServicios_NewList(ObjBusqueda).then(function(data){
-                console.log(data);
                 vm.ServicioList = data.GetServicios_NewListResult;
                  if (vm.ServicioList.length == 0) {
 					vm.SinRegistros = true;

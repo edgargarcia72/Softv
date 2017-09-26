@@ -9,7 +9,6 @@ angular
             });
 
             CatalogosFactory.GetDeepServicios_New(Clv_Servicio).then(function(data){
-                console.log(data);
                 var Servicio = data.GetDeepServicios_NewResult;
                 if(Servicio != null){
                     vm.Clv_Servicio = Servicio.Clv_Servicio;
@@ -42,7 +41,6 @@ angular
                     'Clv_TipoCliente': vm.TipoCobro.CLV_TIPOCLIENTE
                 };
                 CatalogosFactory.GetREL_TARIFADOS_SERVICIOS_NewList(ObjTarifa).then(function(data){
-                    console.log(data);
                     vm.TarifaList = data.GetREL_TARIFADOS_SERVICIOS_NewListResult;
                 });
             }else{
@@ -150,7 +148,6 @@ angular
                 'Clv_Txt': vm.Clave
             };
             CatalogosFactory.GetDeepValidaCambioDClvtxtServ(ObjValidaCambio).then(function(data){
-                console.log(data);
                 vm.MsjExt = data.GetDeepValidaCambioDClvtxtServResult.MSJ;
                     var objServicios_New = {
                     'Clv_Servicio': vm.Clv_Servicio,
@@ -176,9 +173,7 @@ angular
                             'Punto_Pronto_Pago': vm.ProntoPago
                         };
                         CatalogosFactory.AddNUEPuntos_Pago_Adelantado(objNUEPuntos_Pago_Adelantado).then(function(data){
-                            console.log(data);
                             if(data.AddNUEPuntos_Pago_AdelantadoResult == -1){
-                                console.log(vm.MsjExt);
                                 if(vm.MsjExt != null){
                                     var MSJ = 'NOTA:' + vm.MsjExt + ' CORRECTO, se guardó el servicio.';
                                 }else{
