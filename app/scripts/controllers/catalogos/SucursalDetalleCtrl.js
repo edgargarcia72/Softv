@@ -44,20 +44,7 @@ angular
                 
             });
            
-        }
-
-        
-        
-       
-
-   
-
-       
-        
-        
-          
-     
-      
+        }     
 
         var vm = this;
         var Clv_Sucursal = $stateParams.id;

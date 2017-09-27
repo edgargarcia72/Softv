@@ -23,7 +23,7 @@ angular.module('softvApp')
           'Authorization': $localStorage.currentUser.token
         }
       };
-      $http.post(globalService.getUrl() + paths.GetInsertUpdateCluster, params, config).then(function (response) {
+      $http.post(globalService.getUrl() + paths.GetQuitarEliminarRelClusterSector, params, config).then(function (response) {
         deferred.resolve(response.data);
       }).catch(function (response) {
         deferred.reject(response);
