@@ -6,10 +6,7 @@ angular
 
         function initData(){
             CatalogosFactory.GetColonias_NewList().then(function(data){
-                console.log(data);
-            });
-            /*CatalogosFactory.GetColoniaList().then(function(data){
-                vm.ColoniaList = data.GetColoniaListResult;
+                vm.ColoniaList = data.GetColonias_NewListResult;
                 if (vm.ColoniaList.length == 0) {
 					vm.SinRegistros = true;
 					vm.ConRegistros = false;
@@ -17,7 +14,7 @@ angular
 					vm.SinRegistros = false;
 					vm.ConRegistros = true;
 				}
-            });*/
+            });
         }
 
         function OpenAddColonia(){

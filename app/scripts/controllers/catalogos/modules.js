@@ -308,6 +308,31 @@ angular
                 controllerAs: '$ctrl'
             },
             {
+                name: 'home.catalogos.colonia_nuevo',
+                data: {
+                    pageTitle: 'SOFTV | NUEVO COLONIA',
+                    permissions: {
+                        options: {
+                            reload: false
+                        }
+                    }
+                },
+                url: '/catalogo/colonias/nuevo',
+                templateUrl: 'views/catalogos/coloniaForm.html',
+                controller: 'ColoniaFormAddCtrl',
+                controllerAs: '$ctrl'
+            },
+            {
+                name: 'home.catalogos.colonia_editar',
+                data: {
+                    pageTitle: 'SOFTV | EDITAR COLONIA'
+                },
+                url: '/catalogo/colonias/editar/:id',
+                templateUrl: 'views/catalogos/ColoniaForm.html',
+                controller: 'ColoniaFormUpdateCtrl',
+                controllerAs: '$ctrl'
+            },
+            {
                 name: 'home.catalogos.tipos_colonias',
                 data: {
                     pageTitle: 'SOFTV | CATÁLOGO TIPOS DE COLONIAS',

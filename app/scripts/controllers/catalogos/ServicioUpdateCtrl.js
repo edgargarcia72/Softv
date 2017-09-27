@@ -7,7 +7,10 @@ angular
             CatalogosFactory.GetTipoClienteList_WebSoftvnew().then(function(data){
                 vm.TipoCobroList = data.GetTipoClienteList_WebSoftvnewResult;
             });
+            GetServicio();
+        }
 
+        function GetServicio(){
             CatalogosFactory.GetDeepServicios_New(Clv_Servicio).then(function(data){
                 var Servicio = data.GetDeepServicios_NewResult;
                 if(Servicio != null){
@@ -23,8 +26,19 @@ angular
                     vm.Precio = (Servicio.Precio > 0)? Servicio.Precio : 0;
                     vm.HideCobroMensual = (Servicio.Sale_en_Cartera == true)? false : true;
                     vm.ShowCobroMensual = (Servicio.Sale_en_Cartera == true)? true : false;
-                    CatalogosFactory.GetMUESTRATRABAJOS_NewList(vm.Clv_TipSer).then(function(data){
-                        vm.TrabajoList = data.GetMUESTRATRABAJOS_NewListResult;
+                    var ObjPuntos = {
+                        'clv_servicio': vm.Clv_Servicio,
+                        'op':0
+                    }
+                    CatalogosFactory.GetBUSCAPuntos_Pago_Adelantado(ObjPuntos).then(function(data){
+                        var Puntos = data.GetBUSCAPuntos_Pago_AdelantadoResult;
+                        vm.Meses35 = Puntos.Puntos3;
+                        vm.Meses611 = Puntos.Puntos6;
+                        vm.Meses11 = Puntos.puntos11;
+                        vm.ProntoPago  = Puntos.Punto_Pronto_Pago;
+                        CatalogosFactory.GetMUESTRATRABAJOS_NewList(vm.Clv_TipSer).then(function(data){
+                            vm.TrabajoList = data.GetMUESTRATRABAJOS_NewListResult;
+                        });
                     });
                 }else{
                     ngNotify.set('ERROR, El servicio que seleccionó no se encuentra registrado.', 'warn');
@@ -180,7 +194,7 @@ angular
                                     var MSJ = 'CORRECTO, se guardó el servicio.';
                                 }
                                 ngNotify.set(MSJ, 'success');
-                                $state.go('home.catalogos.servicios');
+                                GetServicio();
                             }else{
                                 if(vm.MsjExt != null){
                                     var MSJ = 'NOTA:' + vm.MsjExt + ' ERROR, al guardar el servicio.';
@@ -188,7 +202,7 @@ angular
                                     var MSJ = 'ERROR, al guardar el servicio.';
                                 }
                                 ngNotify.set(MSJ, 'warn');
-                                $state.go('home.catalogos.servicios');
+                                GetServicio();
                             }
                         });
                     }else{
@@ -202,9 +216,6 @@ angular
                     }
                 });
             });
-        }
-
-        function SavePuntos(){
         }
 
         $rootScope.$on('LoadConceptos', function(e, Clv_Servicio){
