@@ -29,7 +29,7 @@ angular
                 if(data.AddValidaNombreColoniaResult == 0){
                     console.log('ok');
                     var objColonias_New = {
-                        'CP': vm.CP,
+                        //'CP': vm.CP,
                         'Clv_Tipo': vm.TipoColonia.Clave,
                         'FechaEntrega': vm.FechaEntrega,
                         'Nombre': vm.Colonia,
@@ -53,34 +53,8 @@ angular
             });
         }
 
-        function GetCiudadMunicipio(){
-            if(vm.Estado != undefined){
-                CatalogosFactory.GetEstadosRelMun(vm.Estado.IdEstado).then(function(data){
-                    vm.CiudadMunicipioList = data.GetEstadosRelMunResult;
-                    vm.LocalidadList = null;
-                });
-            }else{
-                vm.CiudadMunicipioList = null;
-                vm.LocalidadList = null;
-            }
-        }
-
-        function GetLocalidad(){
-            if(vm.Ciudad != undefined){
-                CatalogosFactory.GetLocalidadRelMun(vm.Ciudad.Municipio.IdMunicipio).then(function(data){
-                    console.log(data);
-                    vm.LocalidadList = data.GetLocalidadRelMunResult;
-                });
-            }else{
-                vm.LocalidadList = null;
-            }
-        }
-
-
         var vm = this;
         vm.Titulo = 'Nueva Colonia';
-        vm.GetCiudadMunicipio = GetCiudadMunicipio;
-        vm.GetLocalidad = GetLocalidad;
         vm.SaveColonia = SaveColonia;
         initData();
 

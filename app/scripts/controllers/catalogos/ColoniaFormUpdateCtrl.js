@@ -45,8 +45,8 @@ angular
 
         function AddRelEstCiuLocCol(){
             var objInsertaRelColoniaLocalidad = {
-                'Clv_Colonia': Clv_Localidad,
-                'Clv_Localidad': vm.Localidad,
+                'Clv_Colonia': vm.Clv_Colonia,
+                'Clv_Localidad': vm.Localidad.Clv_Localidad,
                 'Clv_Ciudad': vm.Ciudad.Clv_Ciudad,
                 'CodigoPostal': vm.CPRel
             };
@@ -59,5 +59,7 @@ angular
         vm.Titulo = 'Editar Colonia - ';
         vm.GetCiudadList = GetCiudadList;
         vm.GetLocalidadList = GetLocalidadList;
+        vm.AddRelEstCiuLocCol = AddRelEstCiuLocCol;
+        vm.BtnRelCol = (vm.Estado != undefined || vm.Estado != '' && vm.Ciudad != undefined || vm.Ciudad != '' && vm.Localidad != undefined || vm.Localidad != '' && vm.CPRel != undefined || vm.CPRel != '')? true : false;
         initData();
     });

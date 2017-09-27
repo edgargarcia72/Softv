@@ -21,20 +21,22 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="col-md-4">
+                    <div class="col-md-offset-1 col-md-4">
                         <b><small>Nombre de la colonia</small></b>
                     </div>
                     <div class="col-md-3">
                         <b><small>Tipo de Colonia:</small></b>
                     </div>
+                    <!--
                     <div class="col-md-2">
                         <b><small>Código Postal:</small></b>
                     </div>
+                    -->
                     <div class="col-md-3">
                         <b><small>Fecha de entrga:</small></b>
                     </div>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-offset-1 col-md-12">
                     <div class="col-md-4">
                         <input name="InpColonia" type="text" class="form-control input-sm" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" ng-model="$ctrl.Colonia" validate-on="dirty" required required-message="'Obligatorio'">
                     </div>
@@ -43,9 +45,11 @@
                             <option value="">Selecciona</option>
                         </select>
                     </div>
+                    <!--
                     <div class="col-md-2">
                         <input name="InpCP" type="text" class="form-control input-sm" ng-model="$ctrl.CP" maxlength="5" ng-pattern="/^\d{5}$/" validator="$ctrl.CP > 0" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 5 dígitos.'">
                     </div>
+                    -->
                     <div class="col-md-3">
                         <input type="date" name="InpFechaEntrega" class="form-control input-sm" ng-model="$ctrl.FechaEntrega" validate-on="dirty" required required-message="'Obligatorio'">
                     </div>
@@ -96,10 +100,10 @@
                                 <b><small>Código Postal:</small></b>
                             </div>
                             <div class="col-md-4">
-                                <input name="InpCPRel" type="text" class="form-control input-sm" ng-model="$ctrl.CPRel" maxlength="5" ng-pattern="/^\d{5}$/" validate-on="dirty" invalid-message="'Inválido, Ingresa 5 dígitos.'">
+                                <input name="InpCPRel" type="text" class="form-control input-sm" ng-model="$ctrl.CPRel" maxlength="5" ng-pattern="/^\d{5}$/" validator="$ctrl.CPRel > 0" validate-on="dirty" invalid-message="'Inválido, Ingresa 5 dígitos.'">
                             </div>
                             <div class="col-md-4 text-center">
-                                <button type="button" class="btn btn-success btn-xs" title="Agregar Relación">Agregar</button>
+                                <button type="button" class="btn btn-success btn-xs" title="Agregar Relación" ng-click="$ctrl.AddRelEstCiuLocCol()">Agregar</button>
                             </div>
                         </div>
                         <div class="col-md-12">
