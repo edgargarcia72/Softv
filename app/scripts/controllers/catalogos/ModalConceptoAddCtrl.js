@@ -70,22 +70,9 @@ angular
                     }
                     if(vm.AplicaTodos == 'Y'){
                         CatalogosFactory.AddREL_TARIFADOS_SERVICIOSAll_New(objREL_TARIFADOS_SERVICIOS_New).then(function(data){
-                            if(data.AddREL_TARIFADOS_SERVICIOSAll_NewResult == -1){
-                                ngNotify.set('CORRECTO, se añadió un concepto nuevo.', 'success');
-                                $rootScope.$emit('LoadConceptos', vm.Clv_Servicio);
-                                cancel();
-                                /*CatalogosFactory.AddRelTarifadosServiciosCostoPorCaja_New(objRelTarifadosServiciosCostoPorCaja_New).then(function(data){
-                                    console.log(data);
-                                    if(data.AddRelTarifadosServiciosCostoPorCaja_NewResult == -1){
-                                        ngNotify.set('CORRECTO, se añadió un concepto nuevo.', 'success');
-                                        $rootScope.$emit('LoadConceptos', vm.Clv_Servicio);
-                                        cancel();
-                                    }else{
-                                        ngNotify.set('ERROR, al añadir un concepto nuevo.', 'warn');
-                                        $rootScope.$emit('LoadRefPersonal', vm.IdContrato);
-                                        cancel();
-                                    }
-                                });*/
+                            var Clv_Llave = data.AddREL_TARIFADOS_SERVICIOSAll_NewResult;
+                            if(Clv_Llave > 0){
+                                AddConceptoCajas(Clv_Llave);
                             }else{
                                 ngNotify.set('ERROR, al añadir un concepto nuevo.', 'warn');
                                 $rootScope.$emit('LoadRefPersonal', vm.IdContrato);

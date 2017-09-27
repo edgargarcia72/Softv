@@ -2,7 +2,6 @@
 
 angular
 
-
   .module('softvApp')
   .factory('CatalogosFactory', function ($http, $q, globalService, $localStorage) {
 
@@ -132,6 +131,7 @@ angular
       GetDeepRelTarifadosServiciosCostoPorCaja_New: '/RelTarifadosServiciosCostoPorCaja_New/GetDeepRelTarifadosServiciosCostoPorCaja_New',
       UpdateREL_TARIFADOS_SERVICIOSAll_New: '/REL_TARIFADOS_SERVICIOS_New/UpdateREL_TARIFADOS_SERVICIOSAll_New',
       AddNUEPuntos_Pago_Adelantado: '/NUEPuntos_Pago_Adelantado/AddNUEPuntos_Pago_Adelantado',
+      GetBUSCAPuntos_Pago_Adelantado: '/NUEPuntos_Pago_Adelantado/GetBUSCAPuntos_Pago_Adelantado',
       GetLocalidades_NewList: '/Localidades_New/GetLocalidades_NewList',
       UpdateModRentaAparato: '/ModRentaAparato/UpdateModRentaAparato',
       GetActualiza_InstalacionList: '/Actualiza_Instalacion/GetActualiza_InstalacionList',
@@ -143,7 +143,14 @@ angular
       AddSPRelCiudadLocalidad: '/SPRelCiudadLocalidad/AddSPRelCiudadLocalidad',
       GetRelCiudadLocalidadList: '/SPRelCiudadLocalidad/GetRelCiudadLocalidadList',
       DeleteSPRelCiudadLocalidad: '/SPRelCiudadLocalidad/DeleteSPRelCiudadLocalidad',
-      GetDeepValidaEliminaRelLocalidadCiudad: '/ValidaEliminaRelLocalidadCiudad/GetDeepValidaEliminaRelLocalidadCiudad'
+      GetDeepValidaEliminaRelLocalidadCiudad: '/ValidaEliminaRelLocalidadCiudad/GetDeepValidaEliminaRelLocalidadCiudad',
+      GetColonias_NewList: '/Colonias_New/GetColonias_NewList',
+      AddValidaNombreColonia: '/ValidaNombreColonia/AddValidaNombreColonia',
+      AddColonias_New: '/Colonias_New/AddColonias_New',
+      GetMuestraEstados_RelColList: '/MuestraEstados_RelCol/GetMuestraEstados_RelColList',
+      GetMuestraCdsEdo_RelColoniaList: '/MuestraCdsEdo_RelColonia/GetMuestraCdsEdo_RelColoniaList',
+      GetMuestraLoc_RelColoniaList: '/MuestraLoc_RelColonia/GetMuestraLoc_RelColoniaList',
+      AddInsertaRelColoniaLocalidad: '/InsertaRelColoniaLocalidad/AddInsertaRelColoniaLocalidad'
     };
 
     factory.AddSucursal = function (SUCURSALESobj) {
@@ -2315,6 +2322,22 @@ angular
       return deferred.promise;
     };
 
+    factory.GetBUSCAPuntos_Pago_Adelantado = function (ObjPuntos) {
+      var deferred = $q.defer();
+      var config = {
+        headers: {
+          'Authorization': $localStorage.currentUser.token
+        }
+      };
+      var Parametros = ObjPuntos;
+      $http.post(globalService.getUrl() + paths.GetBUSCAPuntos_Pago_Adelantado, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
     factory.UpdateModRentaAparato = function (objModRentaAparato) {
       var deferred = $q.defer();
       var config = {
@@ -2513,6 +2536,93 @@ angular
       };
       var Parametros = ObjRel;
       $http.post(globalService.getUrl() + paths.DeleteSPRelCiudadLocalidad, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetColonias_NewList = function (ObjColoniaList) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {'ObjColoniaList': ObjColoniaList};
+      $http.post(globalService.getUrl() + paths.GetColonias_NewList, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.AddValidaNombreColonia = function (objValidaNombreColonia) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {'objValidaNombreColonia': objValidaNombreColonia};
+      $http.post(globalService.getUrl() + paths.AddValidaNombreColonia, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.AddColonias_New = function (objColonias_New) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {'objColonias_New': objColonias_New};
+      console.log(Parametros);
+      $http.post(globalService.getUrl() + paths.AddColonias_New, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetMuestraEstados_RelColList = function () {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      $http.get(globalService.getUrl() + paths.GetMuestraEstados_RelColList, config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetMuestraCdsEdo_RelColoniaList = function (clv_estado) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {'clv_estado': clv_estado};
+      console.log(Parametros);
+      $http.post(globalService.getUrl() + paths.GetMuestraCdsEdo_RelColoniaList, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetMuestraLoc_RelColoniaList = function (ObjLocalidadList) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = ObjLocalidadList;
+      console.log(Parametros);
+      $http.post(globalService.getUrl() + paths.GetMuestraLoc_RelColoniaList, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.AddInsertaRelColoniaLocalidad = function (objInsertaRelColoniaLocalidad) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {'objInsertaRelColoniaLocalidad': objInsertaRelColoniaLocalidad};
+      console.log(Parametros);
+      $http.post(globalService.getUrl() + paths.AddInsertaRelColoniaLocalidad, JSON.stringify(Parametros), config).then(function (response) {
         deferred.resolve(response.data);
       }).catch(function (response) {
         deferred.reject(response);

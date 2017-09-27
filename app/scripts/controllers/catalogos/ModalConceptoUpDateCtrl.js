@@ -50,13 +50,16 @@ angular
                     };
                     if(vm.AplicaTodos == 'Y'){
                         CatalogosFactory.UpdateREL_TARIFADOS_SERVICIOSAll_New(objREL_TARIFADOS_SERVICIOS_New).then(function(data){
-                            /*if(data.UpdateREL_TARIFADOS_SERVICIOSAll_NewResult == -1){
-                                AddConceptoCajas()
+                            ngNotify.set('CORRECTO, se añadió un concepto nuevo.', 'success');
+                            $rootScope.$emit('LoadConceptos', vm.Clv_Servicio);
+                            cancel();
+                            if(data.UpdateREL_TARIFADOS_SERVICIOSAll_NewResult == -1){
+                                AddConceptoCajas();
                             }else{
                                 ngNotify.set('ERROR, al guardar un concepto nuevo.', 'warn');
                                 $rootScope.$emit('LoadRefPersonal', vm.IdContrato);
                                 cancel();
-                            }*/
+                            }
                         });
                     }else{
                         CatalogosFactory.UpdateREL_TARIFADOS_SERVICIOS_New(objREL_TARIFADOS_SERVICIOS_New).then(function(data){
