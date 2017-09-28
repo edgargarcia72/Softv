@@ -10,10 +10,8 @@ angular
       GetNueRelSectorColonia: '/AreaTecnica/GetNueRelSectorColonia',
       GetBorRelSectorColonia: '/AreaTecnica/GetBorRelSectorColonia ',
       GetModSector: '/AreaTecnica/GetModSector',
-
       GetMuestraPostes:'/ColoniaCAMDO/GetMuestraDescPoste',
-      GetNuePoste:'/ColoniaCAMDO/AddInsertaNueDescPoste '
-
+      GetNuePoste:'/ColoniaCAMDO/AddInsertaNueDescPoste',
       GetBorSector: '/AreaTecnica/GetBorSector'
 
 
@@ -206,10 +204,9 @@ angular
       };
       var Parametros = {
         'op': obj.op,
-        'clv_usuario': $localStorage.currentUser.idUsuario
-       
+        'clv_usuario': $localStorage.currentUser.idUsuario       
       };
-      console.log(Parametros);
+      
       $http.post(globalService.getUrl() + paths.GetMuestraPostes, JSON.stringify(Parametros), config).then(function (response) {
         deferred.resolve(response.data);
       }).catch(function (response) {
@@ -229,8 +226,7 @@ angular
         'clave': obj.clave,
         'descripcion': obj.descripcion
       
-      };
-      console.log(Parametros);
+      };      
       $http.post(globalService.getUrl() + paths.GetNuePoste, JSON.stringify(Parametros), config).then(function (response) {
         deferred.resolve(response.data);
       }).catch(function (response) {

@@ -17,7 +17,7 @@ angular.module('softvApp')
       factory.GetMuestraCalleSec = function (Clv_Sector,Clv_Colonia,Clv_Calle,Op) {
       var deferred = $q.defer();
       var params = {
-        'Clv_SectorId': Clv_Sector,
+        'Clv_Sector': Clv_Sector,
         'Clv_Colonia':Clv_Colonia,
         'Clv_Calle':Clv_Calle,
         'Op':Op
@@ -50,7 +50,8 @@ angular.module('softvApp')
           'NoLotes': obj.NoLotes,
           'NoServicios': obj.NoServicios,
           'FrenteANumero': obj.FrenteANumero,
-          'clv_cluster': obj.clv_cluster
+          'clv_cluster': obj.clv_cluster,
+          'clv_poste':obj.clv_poste
         }
 
 
