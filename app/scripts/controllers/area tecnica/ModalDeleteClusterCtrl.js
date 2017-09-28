@@ -12,4 +12,5 @@ var vm = this;
 vm.Titulo = 'Eliminar Cluster';
 vm.Icono = 'fa fa-less';
 vm.cancel = cancel;
+
 });
