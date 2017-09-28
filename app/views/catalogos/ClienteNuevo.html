@@ -147,10 +147,10 @@
                                 <input type="text" name="InpClaveElector" class="form-control input-sm" ng-model="$ctrl.ClaveElector" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="18" ng-pattern="/^[A-Z]{6}\d{8}[A-Z]{1}\d{3}$/" placeholder="AAAAAA11111111A111" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 18 caracteres.'">
                             </div>
                             <div class="col-md-4">
-                                <input type="text" name="InpTelefono" class="form-control input-sm" ng-model="$ctrl.Telefono" validate-on="dirty" ng-pattern="/^\d{10}$/" maxlength="10" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 10 dígitos.'">
+                                <input type="text" name="InpTelefono" class="form-control input-sm" ng-model="$ctrl.Telefono" validate-on="dirty" validator="$ctrl.Telefono > 0" ng-pattern="/^\d{10}$/" maxlength="10" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 10 dígitos.'">
                             </div>
                             <div class="col-md-4">
-                                <input type="text" name="InpCelular" class="form-control input-sm" ng-model="$ctrl.Celular" validate-on="dirty" ng-pattern="/^\d{10}$/" maxlength="10" invalid-message="'Inválido, Ingresa 10 dígitos.'">
+                                <input type="text" name="InpCelular" class="form-control input-sm" ng-model="$ctrl.Celular" validate-on="dirty" validator="$ctrl.Celular > 0" ng-pattern="/^\d{10}$/" maxlength="10" invalid-message="'Inválido, Ingresa 10 dígitos.'">
                             </div>
                             <div class="col-md-12">
                                 <br>
@@ -350,13 +350,13 @@
                                 <p><small><b>Email:</b></small></p>
                             </div>
                             <div class="col-md-3">
-                                <input type="text" name="InpCodigoPosDF" class="form-control input-sm" ng-model="$ctrl.CodigoPosDF" maxlength="5" ng-pattern="/^\d{5}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 5 dígitos.'">
+                                <input type="text" name="InpCodigoPosDF" class="form-control input-sm" ng-model="$ctrl.CodigoPosDF" maxlength="5" ng-pattern="/^\d{5}$/" validator="$ctrl.CodigoPosDF > 0" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 5 dígitos.'">
                             </div>
                             <div class="col-md-3">
-                                <input type="text" name="InpTelefonoDF" class="form-control input-sm" ng-model="$ctrl.TelefonoDF" maxlength="10" ng-pattern="/^\d{10}/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 10 dígitos.'">
+                                <input type="text" name="InpTelefonoDF" class="form-control input-sm" ng-model="$ctrl.TelefonoDF" maxlength="10" ng-pattern="/^\d{10}/" validator="$ctrl.TelefonoDF > 0" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 10 dígitos.'">
                             </div>
                             <div class="col-md-3">
-                                <input type="text" name="InpFax" class="form-control input-sm" ng-model="$ctrl.Fax" maxlength="10" ng-pattern="/^[0-9]+$/" validator="$ctrl.Fax.length >= 7" validate-on="dirty" invalid-message="'Inválido, Ingresa mínimo 7 dígitos.'">
+                                <input type="text" name="InpFax" class="form-control input-sm" ng-model="$ctrl.Fax" maxlength="10" ng-pattern="/^[0-9]+$/" validator="$ctrl.Fax.length >= 7 && $ctrl.Fax > 0" validate-on="dirty" invalid-message="'Inválido, Ingresa mínimo 7 dígitos.'">
                             </div>
                             <div class="col-md-3">
                                 <input type="email" name="InpEmailDF" class="form-control input-sm" ng-model="$ctrl.EmailDF" ng-pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa un correo válido'">
@@ -417,16 +417,16 @@
                         </div>
                         <div class="col-md-12">
                             <div class="col-md-3">
-                                <input name="InpNumTarjeta" type="text" class="form-control input-sm" ng-model="$ctrl.NumTarjeta" ng-keyup="$ctrl.NumTarjetaC = ''" maxlength="16" ng-pattern="/^[A-Z]|[a-z]|\d$/" validator="$ctrl.NumTarjeta.length >= 15" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 15 o 16 dígitos.'">
+                                <input name="InpNumTarjeta" type="text" class="form-control input-sm" ng-model="$ctrl.NumTarjeta" ng-keyup="$ctrl.NumTarjetaC = ''" maxlength="16" ng-pattern="/^[0-9]+$/" validator="$ctrl.NumTarjeta.length >= 15 && $ctrl.NumTarjeta > 0" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 15 o 16 dígitos.'">
                             </div>
                             <div class="col-md-3">
-                                <input name="InpNumTarjetaC" type="text" class="form-control input-sm" ng-model="$ctrl.NumTarjetaC" maxlength="16" ng-show="(FormDatosBancarios.InpNumTarjeta.$dirty || $ctrl.NumTarjeta != undefined)" ng-pattern="/^[A-Z]|[a-z]|\d$/" validator="$ctrl.NumTarjetaC.length >= 15 && $ctrl.NumTarjeta == $ctrl.NumTarjetaC" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Debe ser igual al anterior.'">
+                                <input name="InpNumTarjetaC" type="text" class="form-control input-sm" ng-model="$ctrl.NumTarjetaC" maxlength="16" ng-show="(FormDatosBancarios.InpNumTarjeta.$dirty || $ctrl.NumTarjeta != undefined)" ng-pattern="/^[0-9]+$/" validator="$ctrl.NumTarjetaC.length >= 15 && $ctrl.NumTarjeta == $ctrl.NumTarjetaC && $ctrl.NumTarjetaC > 0" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Debe ser igual al anterior.'">
                             </div>
                             <div class="col-md-3">
-                                <input name="InpCodigoSeg" type="password" class="form-control input-sm" ng-model="$ctrl.CodigoSeg" ng-keyup="$ctrl.CodigoSegC = ''" maxlength="4" ng-pattern="/^[A-Z]|[a-z]|\d$/" validator="$ctrl.CodigoSeg.length >= 3" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa mínimo 3 dígitos.'">
+                                <input name="InpCodigoSeg" type="password" class="form-control input-sm" ng-model="$ctrl.CodigoSeg" ng-keyup="$ctrl.CodigoSegC = ''" maxlength="4" ng-pattern="/^[0-9]+$/" validator="$ctrl.CodigoSeg.length >= 3 && $ctrl.CodigoSeg > 0" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa mínimo 3 dígitos.'">
                             </div>
                             <div class="col-md-3">
-                                <input name="InpCodigoSegC" type="password" class="form-control input-sm" ng-model="$ctrl.CodigoSegC" maxlength="4" ng-show="(FormDatosBancarios.InpCodigoSeg.$dirty || $ctrl.CodigoSeg != undefined)" ng-pattern="/^[A-Z]|[a-z]|\d$/" validator="$ctrl.CodigoSegC.length >= 3 && $ctrl.CodigoSeg == $ctrl.CodigoSegC" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Debe ser igual al anterior.'">
+                                <input name="InpCodigoSegC" type="password" class="form-control input-sm" ng-model="$ctrl.CodigoSegC" maxlength="4" ng-show="(FormDatosBancarios.InpCodigoSeg.$dirty || $ctrl.CodigoSeg != undefined)" ng-pattern="/^[0-9]+$/" validator="$ctrl.CodigoSegC.length >= 3 && $ctrl.CodigoSeg == $ctrl.CodigoSegC && $ctrl.CodigoSegC > 0" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Debe ser igual al anterior.'">
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -486,7 +486,7 @@
                                 <input type="text" name="InpNombreRef" class="form-control input-sm" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" ng-model="$ctrl.NombreRef" validate-on="dirty" required required-message="'Obligatorio'">
                             </div>
                             <div class="col-md-4">
-                                <input type="text" name="InpTelefonoRef" class="form-control input-sm" ng-model="$ctrl.TelefonoRef" maxlength="10" ng-pattern="/^\d{8}$|^\d{10}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa minimo 8 dígitos.'">
+                                <input type="text" name="InpTelefonoRef" class="form-control input-sm" ng-model="$ctrl.TelefonoRef" maxlength="10" ng-pattern="/^\d{8}$|^\d{9}$|^\d{10}$/" validator="$ctrl.TelefonoRef > 0" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa minimo 8 dígitos.'">
                             </div>
                             <div class="col-md-4">
                                 <input type="email" name="InpEmailRef" class="form-control input-sm" ng-model="$ctrl.EmailRef" ng-pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa un correo válido'">

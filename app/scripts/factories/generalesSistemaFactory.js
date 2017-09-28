@@ -28,8 +28,32 @@ angular
       GetNueRel_Tecnicos_Quejas: '/Configuracion/GetNueRel_Tecnicos_Quejas',
       GetBorRelOrdenesTecnicos: '/Configuracion/GetBorRelOrdenesTecnicos',
       GetBorRel_Tecnicos_Quejas: '/Configuracion/GetBorRel_Tecnicos_Quejas',
-      GetNUEBonificacionCajeras: '/Configuracion/GetNUEBonificacionCajeras'
+      GetNUEBonificacionCajeras: '/Configuracion/GetNUEBonificacionCajeras',
+      GetvalidaAccesoFacturacion:'/Configuracion/GetvalidaAccesoFacturacion'
     };
+
+   factory.GetvalidaAccesoFacturacion = function () {
+      var deferred = $q.defer();
+      var Parametros = {
+        'op': 0,
+        'ip': $localStorage.currentUser.maquina
+      };
+      console.log($localStorage.currentUser);
+      var config = {
+        headers: {
+          'Authorization': $localStorage.currentUser.token
+        }
+      };
+      $http.post(globalService.getUrl() + paths.GetvalidaAccesoFacturacion, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response.data);
+      });
+
+      return deferred.promise;
+    };
+
+
 
 
     factory.GetNUEBonificacionCajeras = function (IdCompania, BonificacionMax) {

@@ -39,8 +39,7 @@ angular
                 'TIPOAPARATO': Obj.TIPOAPARATO,
                 'CLV_CABLEMODEM': Obj.CLV_CABLEMODEM,
                 'MACCABLEMODEM': Obj.MACCABLEMODEM,
-                'ESTADOAPARATO': Obj.ESTADOAPARATO,
-                'TIPOAPARATO': Obj.TIPOAPARATO,                
+                'ESTADOAPARATO': Obj.ESTADOAPARATO,                              
                 'PROVIENE': Obj.PROVIENE,
                 'MARCA': Obj.MARCA
             };

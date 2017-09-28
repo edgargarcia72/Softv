@@ -1,83 +1,77 @@
 <style type="text/css">
-    .table-scroll {
-        height: 150px;
-        overflow: auto;
-        margin-top: 20px;
-    }
+  .table-scroll {
+    height: 150px;
+    overflow: auto;
+    margin-top: 20px;
+  }
+
 </style>
 
-<form name="FormCluster" novalidate angular-validator autocomplete="off">
-    <div class="modal-header">
-        <button class="close" type="button" aria-label="close" title="Salir" ng-click="ctrl.cancel()">x</button>
-        <h4 class="modal-title"><i ng-class="ctrl.Icono"></i> {{ ctrl.Titulo }}</h4>
-    </div>
-    <div class="col-md-8" style="font-weight:bold;">
-    </div>
-    <button type="button" ng-disabled="ctrl.blockdelete1" class="btn btn-danger btn-xs" ng-click="$ctrl.Cancel()" title="Eliminar Registro "><i class="glyphicon glyphicon-trash"></i> ELIMINAR</button>
-    <button type="button" ng-disabled="ctrl.blocksave" class="btn btn-info btn-xs" ng-click="$ctrl.Cancel()" title="Guardar Registro"><i class="	glyphicon glyphicon-floppy-disk"></i>GUARDAR</button>
+<form name="FormCluster" angular-validator-submit="ctrl.save()"  novalidate angular-validator autocomplete="off" >
+  <div class="modal-header">
+    <button  class="close" type="button" aria-label="close" title="Salir" ng-click="ctrl.cancel()">x</button>
+    <h4 class="modal-title"><i ng-class="ctrl.Icono"></i> {{ ctrl.Titulo }}</h4>
+  </div>
+  <fieldset ng-disabled="ctrl.blockForm">
+    <div class="modal-body">
+      <div class="col-md-12">
+        <p> <b>Datos del Cluster </b></p>
+        <div class="col-md-6">
+          <b><small>Clave:</small></b>
+          <input name="clave" type="text" class="form-control input-sm" ng-model="ctrl.clave" validate-on="dirty" required required-message="'Obligatorio'">
+        </div>
+        <div class="col-md-6">
 
-    <fieldset ng-disabled="ctrl.blockForm">
-        <div class="modal-body">
-            <div class="row">
-                <div class="col-md-5">
-                        <p> <b>Datos del Cluster </b></p>
-                    <div>
-                        <p><b><small>Clave:</small></b>
-                            <input name="InpClave" type="number" class="form-control input-sm" ng-model="$ctrl.Clave" validate-on="dirty" required required-message="'Obligatorio'">
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-8">
-                    <div>
-                        <p><b><small>Descripcion  :</small></b></p>
-                        <input name="InpSerie" type="text" class="form-control input-sm" ng-model="$ctrl.Serie" validate-on="dirty">
-                    </div>
-                </div>
-            </div>
-            <br>
-            <b>Relación de Sectores con  Cluster</b>
-            <hr style="border:1px dotted;">
+          <b><small>Descripcion  :</small></b>
+          <input name="descripcion" type="text" class="form-control input-sm" ng-model="ctrl.descripcion" validate-on="dirty">
 
-            <div class="row">
-                <div class="col-md-8">
-                    <div>
-                        <div class="col-md-3">
-                            <b><small>Nombre :</small></b>
-                        </div>
-                        <div class="col-md-8">
-                            <select name="SltNombre" class="form-control input-sm" ng-model="$ctrl.Plaza" ng-change="$ctrl.buscar(2)" aria-placeholder="Seleccione el Nombre"
-                                ng-options="item as item.razon_social for item in $ctrl.plazas track by item.id_compania">
+        </div>
+      </div>
+      <br>
+      <b>Relación de Sectores con  Cluster</b>
+      <hr>
+
+      <div class="row">
+        <div class="col-md-8">
+         
+            
+            <div class="col-md-8">
+              <select name="SltNombre" class="form-control input-sm" ng-model="ctrl.sector" 
+                ng-options="item as item.Descripcion for item in ctrl.sectores track by item.Clv_Sector">
                                     
-                                    <option value="">Selecciona un Nombre</option>
+                                    <option value="">Selecciona un sector</option>
                              </select>
-                        </div>
-                    </div>
-                </div>
             </div>
-            <br>
-            <div class="row">
-                    <div class="col-md-8">
-                <table class="table">
-                    <thead>
-                        <tr>
-                           
-                            <th width="20%" style="text-align:center"><b>Sector</b></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr dir-paginate="X in $ctrl.suscursales|itemsPerPage:7">
-                           
-                            <td>{{ X.Sector }}</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="col-md-3">
+            <button class="btn btn-success btn-xs" type="button" ng-click="ctrl.adddeleterelacion(1)" ng-disabled="!ctrl.clv_cluster > 0"> Agregar</button>
             </div>
+          
         </div>
-        </div>
-    </fieldset>
-    <div class="modal-footer">
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-8">
+          <table class="table">
+            <thead>
+              <tr>
 
-        <button type="button" ng-disabled="ctrl.blocksave" class="btn btn-info btn-xs" ng-click="$ctrl.Cancel()" title="Agregar Relacion"><i class="	glyphicon glyphicon-plus"></i> AGREGAR</button>
-        <button type="button" ng-disabled="ctrl.blockdelete" class="btn btn-danger btn-xs" ng-click="$ctrl.Cancel()" title="Eliminar Relacion "><i class="glyphicon glyphicon-trash"></i> ELIMINAR</button>
+                <th width="20%" style="text-align:center"><b>Sector</b></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr dir-paginate="X in $ctrl.suscursales|itemsPerPage:7">
+
+                <td>{{ X.Sector }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
+  </fieldset>
+  <div class="modal-footer">
+
+    <button  ng-disabled="ctrl.blocksave" class="btn btn-primary btn-sm" ><i class="fa fa-save"></i> guardar</button>
+    <button type="button"  class="btn btn-default-bright btn-sm" ng-click="ctrl.cancel()" > cancelar</button>
+  </div>
 </form>

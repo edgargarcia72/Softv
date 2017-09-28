@@ -215,6 +215,18 @@ angular
                 controllerAs: '$ctrl'
             },
             {
+                name: 'home.catalogos.plaza_detalle',
+                data: {
+                    pageTitle: 'SOFTV | DETALLE PLAZA'
+                },
+                url: '/catalogo/plazas/detalle/:id',
+                templateUrl: 'views/catalogos/PlazaForm.html',
+                controller: 'PlazaDetalleCtrl',
+                controllerAs: '$ctrl'
+            },
+
+            
+            {
                 name: 'home.catalogos.localidades',
                 data: {
                     pageTitle: 'SOFTV | CATÁLOGO LOCALIDADES',
@@ -270,6 +282,17 @@ angular
                 controllerAs: '$ctrl'
             },
             {
+                name: 'home.catalogos.detalle_distribuidor',
+                data: {
+                    pageTitle: 'SOFTV | DETALLE DISTRIBUIDOR'
+                },
+                url: '/catalogo/distribuidores/detalle/:id',
+                templateUrl: 'views/catalogos/DistribuidorForm.html',
+                controller: 'DistribuidorDetalleCtrl',
+                controllerAs: '$ctrl'
+            },
+           
+            {
                 name: 'home.catalogos.colonias',
                 data: {
                     pageTitle: 'SOFTV | CATÁLOGO COLONIAS',
@@ -282,6 +305,31 @@ angular
                 url: '/catalogo/colonias',
                 templateUrl: 'views/catalogos/Colonias.html',
                 controller: 'ColoniasCtrl',
+                controllerAs: '$ctrl'
+            },
+            {
+                name: 'home.catalogos.colonia_nuevo',
+                data: {
+                    pageTitle: 'SOFTV | NUEVO COLONIA',
+                    permissions: {
+                        options: {
+                            reload: false
+                        }
+                    }
+                },
+                url: '/catalogo/colonias/nuevo',
+                templateUrl: 'views/catalogos/coloniaForm.html',
+                controller: 'ColoniaFormAddCtrl',
+                controllerAs: '$ctrl'
+            },
+            {
+                name: 'home.catalogos.colonia_editar',
+                data: {
+                    pageTitle: 'SOFTV | EDITAR COLONIA'
+                },
+                url: '/catalogo/colonias/editar/:id',
+                templateUrl: 'views/catalogos/ColoniaForm.html',
+                controller: 'ColoniaFormUpdateCtrl',
                 controllerAs: '$ctrl'
             },
             {
@@ -371,29 +419,15 @@ angular
             },
             {
                 name: 'home.catalogos.servicio_nuevo',
-                data: {
-                    pageTitle: 'SOFTV | NUEVO SERVICIO',
-                    permissions: {
-                        options: {
-                            reload: false
-                        }
-                    }
-                },
-                url: '/catalogo/servicios/nuevo',
+                data: { pageTitle: 'SOFTV | NUEVO SERVICIO' },
+                url: '/catalogo/servicios/nuevo/:id',
                 templateUrl: 'views/catalogos/ServicioForm.html',
                 controller: 'ServicioAddCtrl',
                 controllerAs: '$ctrl'
             },
             {
                 name: 'home.catalogos.servicio_editar',
-                data: {
-                    pageTitle: 'SOFTV | EDITAR SERVICIO',
-                    permissions: {
-                        options: {
-                            reload: false
-                        }
-                    }
-                },
+                data: { pageTitle: 'SOFTV | EDITAR SERVICIO' },
                 url: '/catalogo/servicios/editar/:id',
                 templateUrl: 'views/catalogos/ServicioForm.html',
                 controller: 'ServicioUpdateCtrl',

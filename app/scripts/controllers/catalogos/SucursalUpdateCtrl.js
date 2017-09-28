@@ -4,10 +4,6 @@ angular
   .module('softvApp')
   .controller('SucursalUpdateCtrl', function (CatalogosFactory, ngNotify, $rootScope, $state, $stateParams, atencionFactory) {
 
-
-
-
-
     function initData() {
       CatalogosFactory.GetDeepSucursal(Clv_Sucursal).then(function (data) {
         var DatosSucursal = data.GetDeepSUCURSALESResult;
