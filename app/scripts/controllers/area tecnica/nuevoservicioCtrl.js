@@ -47,10 +47,10 @@ angular
         'descripcion': vm.descripcion,
         'puntos': vm.individual,
         'cobranza': 0,
-        'tipo': 'O',
+        'tipo': vm.tipo,
         'prospectos': 0,
-        'sica': 0,
-        'secobramaterial': 0
+        'sica': (vm.proceso === null) ? false : vm.proceso,
+        'secobramaterial': (vm.descarga === null) ? false : vm.descarga
       };
       trabajosFactory.GetSoftv_AddTrabajo(params).then(function (data) {
         console.log(data);
@@ -59,28 +59,33 @@ angular
           ngNotify.set('El trabajo no se pudo guardar ,por que existe una clave regitrada con el mismo valor', 'error');
         } else {
           vm.clv_trabajo = data.GetSoftv_AddTrabajoResult;
-          vm.blockdescarga = true;
           vm.blocksave = true;
           vm.blockform = true;
           ngNotify.set('El trabajo se guardo con exito ,ahora puede continuar con la configuaración o salir del catálogo');
+          if (vm.tipo === 'Q') {
+            trabajosFactory.GetGuarda_imputablePorTrabajo(vm.clv_trabajo, vm.imputable.idimputable).then(function (result) {});
+          }
+
+
         }
 
       });
     }
 
     function agregarelacion() {
-      trabajosFactory.
-      GetSoftv_AddRelMaterialTrabajo(vm.clasificacion.clvtipo,
-          vm.descripcionart.clave,
-          vm.cantidad,
-          vm.clv_trabajo, vm.servicio.Clv_TipSerPrincipal)
-        .then(function (data) {
-          if (data.GetSoftv_AddRelMaterialTrabajoResult === -1) {
-            ngNotify.set('El artículo ya esta registrado ', 'warn');
-          }
-          console.log(data);
-          consultamateriales();
-        });
+      if (vm.clv_trabajo>0) {
+        trabajosFactory.GetSoftv_AddRelMaterialTrabajo(vm.clasificacion.clvtipo, vm.descripcionart.clave, vm.cantidad, vm.clv_trabajo, vm.servicio.Clv_TipSerPrincipal)
+          .then(function (data) {
+            if (data.GetSoftv_AddRelMaterialTrabajoResult === -1) {
+              ngNotify.set('El artículo ya esta registrado ', 'warn');
+            }
+            console.log(data);
+            consultamateriales();
+          });
+      }else{
+         ngNotify.set('Guarde el trabajo para continuar la asignación ', 'warn');
+      }
+
     }
 
     function consultamateriales() {
@@ -91,9 +96,14 @@ angular
         });
     }
 
+    function bloquearmaterial() {
+      vm.blockmateriales = (vm.descarga === true) ? false : true;
+    }
+
 
     var vm = this;
     init();
+    vm.bloquearmaterial = bloquearmaterial;
     vm.obtenarticulos = obtenarticulos;
     vm.titulo = 'Nuevo trabajo';
     vm.save = save;
@@ -103,4 +113,5 @@ angular
     vm.agregarelacion = agregarelacion;
     vm.blockmateriales = true;
     vm.blockform = false;
+    vm.showimputable = false;
   });
