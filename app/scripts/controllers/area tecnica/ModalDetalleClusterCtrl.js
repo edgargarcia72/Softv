@@ -35,7 +35,6 @@ angular
     vm.Icono = 'fa fa-eye';
     vm.cancel = cancel;
     vm.blockForm = true;
-    vm.blocksave = true;
-    vm.blockdelete = true;
-    vm.blockdelete1 = true;
+    vm.blocksave = true;    
+     vm.blockaddrelacion=true;
   });

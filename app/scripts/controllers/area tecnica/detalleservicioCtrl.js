@@ -8,7 +8,7 @@ angular
       trabajosFactory.GetSoftv_GetTrabajoById($stateParams.id)
         .then(function (result) {
     
-          console.log(result);
+         
           var trabajo = result.GetSoftv_GetTrabajoByIdResult;
           vm.clv_trabajo = trabajo.clv_trabajo;
           vm.clave = trabajo.trabajo;
@@ -56,7 +56,7 @@ angular
       trabajosFactory.GetConsultaRelMaterialTrabajos(vm.clv_trabajo)
         .then(function (data) {
           vm.relaciones = data.GetConsultaRelMaterialTrabajosResult;
-          console.log(data);
+          
         });
     }
 
