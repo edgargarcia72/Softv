@@ -6,7 +6,7 @@ angular
     function init() {
       tapFactory.GetConSector2(0, '', '', 4, 0).then(function (data) {
         vm.sectores = data.GetConSector2Result;
-        console.log(data);
+       
       });
     }
 
@@ -21,7 +21,7 @@ angular
           ngNotify.set('se agrego la relación correctamente', 'success');
           clusterFactory.GetMuestraRelClusterSector(vm.clv_cluster,1)
           .then(function(rel){
-              console.log(rel);
+             
            vm.relaciones=rel.GetMuestraRelClusterSectorResult;
           });
         });

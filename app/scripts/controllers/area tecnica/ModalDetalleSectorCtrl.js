@@ -1,3 +1,5 @@
+'use strict'
+
 angular
 .module('softvApp')
 .controller('ModalDetalleSectorCtrl', function(areaTecnicaFactory, $uibModalInstance, ngNotify, $state,Clv_Sector){

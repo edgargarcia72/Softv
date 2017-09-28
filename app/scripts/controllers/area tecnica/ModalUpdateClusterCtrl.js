@@ -2,11 +2,8 @@
     angular
       .module('softvApp')
       .controller('ModalUpdateClusterCtrl', function (clusterFactory, tapFactory, $uibModalInstance, ngNotify, $state, options) {
-        console.log(options);
-
-        function init() {
-
-          console.log(options);
+       
+        function init() {         
           var params = {
             'opcion': 4,
             'clave': '',
@@ -16,17 +13,13 @@
           clusterFactory.GetMuestraCluster(params)
             .then(function (data) {
               vm.clave = data.GetMuestraClusterResult[0].Clv_txt;
-              vm.descripcion = data.GetMuestraClusterResult[0].Descripcion;
-              console.log(data);
+              vm.descripcion = data.GetMuestraClusterResult[0].Descripcion;            
 
               clusterFactory.GetMuestraRelClusterSector(options.Clv_cluster, 1)
-                .then(function (rel) {
-                  console.log(rel);
+                .then(function (rel) {                 
                   vm.relaciones = rel.GetMuestraRelClusterSectorResult;
-
                   tapFactory.GetConSector2(0, '', '', 4, 0).then(function (data) {
-                    vm.sectores = data.GetConSector2Result;
-                    console.log(data);
+                    vm.sectores = data.GetConSector2Result;                 
                   });
                 });
             });
@@ -41,15 +34,13 @@
             .then(function (data) {
               ngNotify.set('se agrego la relación correctamente', 'success');
               clusterFactory.GetMuestraRelClusterSector(vm.clv_cluster, 1)
-                .then(function (rel) {
-                  console.log(rel);
+                .then(function (rel) {                 
                   vm.relaciones = rel.GetMuestraRelClusterSectorResult;
                 });
             });
         }
 
-        function save() {
-         alert('alert');
+        function save() {        
           clusterFactory.GetInsertUpdateCluster(1, vm.clave, vm.descripcion, vm.clv_cluster)
             .then(function (result) {
               if (result.GetInsertUpdateClusterResult > 0) {

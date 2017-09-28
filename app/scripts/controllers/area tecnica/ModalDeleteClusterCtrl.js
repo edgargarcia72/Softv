@@ -1,3 +1,4 @@
+'use strict'
 angular
 .module('softvApp')
 .controller('ModalDeleteClusterCtrl', function(CatalogosFactory, $uibModalInstance, ngNotify, $state){
