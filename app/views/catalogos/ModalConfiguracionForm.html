@@ -31,7 +31,7 @@
             <div class="col-md-1">
                 <b>Servicio:</b>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3" ng-show="ctrl.ShowRel">
                 <select name="SlcServicio1" class="form-control input-sm" ng-model="ctrl.Servicio1" ng-options="S.Descripcion for S in ctrl.Servicio1List track by S.Clv_Servicio">
                     <option value="">Selecciona</option>
                 </select>
@@ -62,13 +62,13 @@
                             <td><small style="font-size:10px">{{ X.NomEstado }}</small></td>
                             <td><small style="font-size:10px">{{ X.NomCiudad }}</small></td>
                             <td>
-                                <button type="button" class="btn btn-warning btn-xs" title="Eliminar Ciudad" ng-click="ctrl.GetSerRelComEstCiu1(X)"><i class="fa fa-check"></i></button>
+                                <button type="button" class="btn btn-warning btn-xs" title="Seleccionar" ng-click="ctrl.GetSerRelComEstCiu1(X)"><i class="fa fa-check"></i></button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <div class="col-md-4 table-scroll">
+            <div class="col-md-4 table-scroll" ng-show="ctrl.ShowRel">
                 <table class="table">
                     <thead>
                         <tr>
@@ -82,7 +82,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col-md-2" style="text-align:center">
+            <div class="col-md-2" style="text-align:center" ng-show="ctrl.ShowRel">
                 <div class="col-md-12">
                 <button type="button" class="btn btn-success btn-xs" title="Agrega a la plaza seleccionada" ng-click="ctrl.AddServicioPlaza()" ng-disabled="ctrl.Servicio1 == undefined || ctrl.Distribuidor == undefined">Agregar</button>
                 </div>
