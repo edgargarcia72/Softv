@@ -21,7 +21,9 @@
           <fieldset ng-disabled="$ctrl.blockform">
             <div class="col-md-12">
               <b>Servicio</b>
-              <select class="form-control input-sm" validate-on="dirty" required required-message="'Este campo es obligatorio.'" name="servicio"
+              <select class="form-control input-sm" validate-on="dirty" 
+              ng-disabled="$ctrl.blockservicio"
+              required required-message="'Este campo es obligatorio.'" name="servicio"
                 ng-change="$ctrl.obtentrabajos()" ng-options="item as item.Concepto for item in $ctrl.servicios track by item.Clv_TipSerPrincipal"
                 ng-model="$ctrl.servicio">
                    <option value="">Seleccionar</option>
@@ -52,16 +54,16 @@
               <div class="col-md-6">
                 <b>Tipo:</b>
                 <label class="radio-inline radio-styled radio-warning">
-		<input type="radio" value="S" name="tipo"  ng-model="$ctrl.tipo"><span>Servicio</span>
+		<input type="radio" value="O" name="tipo" ng-change="$ctrl.showimputable=false"  ng-model="$ctrl.tipo"><span>Servicio</span>
 
 		</label>
                 <label class="radio-inline radio-styled radio-warning">
-		<input type="radio"  value="Q" name="tipo" ng-model="$ctrl.tipo"><span>Queja</span>
+		<input type="radio"  value="Q" name="tipo" ng-change="$ctrl.showimputable=true;" ng-model="$ctrl.tipo"><span>Queja</span>
 		</label>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-6" ng-if="$ctrl.showimputable">
                 <b>Imputable  a: </b>
-                <select name="imputable" ng-model="$ctrl.imputable" name="imputable" ng-options="item as item.descripcion for item in $ctrl.imputables track by item.idimputable"
+                <select name="imputable" ng-model="$ctrl.imputable" ng-required="$ctrl.tipo==='Q'" name="imputable" ng-options="item as item.descripcion for item in $ctrl.imputables track by item.idimputable"
                   class="form-control">
                   <option value="">selecciona</option>
               </select>
@@ -69,17 +71,14 @@
             </div>
           </fieldset>
           <div class="col-md-12">
-            <br>
-            <p ng-if="!$ctrl.clv_trabajo > 0" class="text-danger">Guarde el trabajo para continuar con la configuración </p>
-            <p ng-if="$ctrl.clv_trabajo > 0" class="text-success"> Selecciona 'se cobra descarga de material' para agregar artículos al trabajo </p>
-            <br>
+            
             <br>
             <div class="col-md-6">
               <label class="checkbox-inline checkbox-styled checkbox-success">
                                                         <input type="checkbox"
                                                         name="descarga"
-                                                        ng-disabled="$ctrl.blockdescarga"
-                                                        ng-change="$ctrl.blockmateriales=false"
+                                                        ng-disabled="$ctrl.proceso"
+                                                        ng-change="$ctrl.bloquearmaterial()"
                                                          ng-model="$ctrl.descarga" >
                                                         <span>se cobra la descarga de material</span>
 													</label>
@@ -87,9 +86,10 @@
             <div class="col-md-6">
               <label class="checkbox-inline checkbox-styled checkbox-success">
 														<input type="checkbox"
-                                                        name="proceso"
-                                                         ng-model="$ctrl.proceso">
-                                                        <span>Se relaciona con el proceso automático de cablemodems o aparatos digitales</span>
+                            ng-disabled="$ctrl.descarga"
+                            name="proceso"
+                           ng-model="$ctrl.proceso">
+                          <span>Se relaciona con el proceso automático de cablemodems o aparatos digitales</span>
 													</label>
             </div>
 
@@ -145,7 +145,7 @@
                         <td>{{x.descripcion}}</td>
                         <td>{{x.cantidad}}</td>
                         <td>
-                           <button type="button" class="btn ink-reaction btn-floating-action btn-xs btn-danger"><i class="fa fa-trash"></i></button>
+                          <button type="button" class="btn ink-reaction btn-floating-action btn-xs btn-danger"><i class="fa fa-trash"></i></button>
 
                         </td>
                       </tr>
