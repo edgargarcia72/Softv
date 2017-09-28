@@ -68,8 +68,7 @@ angular
         'sica': vm.proceso,
         'secobramaterial': vm.descarga
       };
-      trabajosFactory.GetSoftv_EditTrabajo(params).then(function (data) {
-        console.log(data);
+      trabajosFactory.GetSoftv_EditTrabajo(params).then(function (data) {       
 
         if (data.GetSoftv_AddTrabajoResult === -1) {
           ngNotify.set('El trabajo no se pudo guardar ,por que existe una clave regitrada con el mismo valor', 'error');
