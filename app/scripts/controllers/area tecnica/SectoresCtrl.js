@@ -11,7 +11,7 @@ angular
     function buscar(op) {
 
       var Parametros = {
-        'clvsector': (op === 3) ? ((vm.clave === null || vm.clave === undefined || vm.clave === '')? op = 0 : vm.clave ) : 0,
+        'clvsector': (op === 3) ? ((vm.clave === null|| vm.clave === undefined || vm.clave === '')? op = 0 : vm.clave ) : 0,
         'descripcion': (op === 2) ? ((vm.descripcion === undefined || vm.descripcion === null||vm.descripcion === '')? op = 0 : vm.descripcion) :'',
         'clv_txt': (op === 1) ? ((vm.clv_txt === undefined ||vm.clv_txt === null ||vm.clv_txt === '' )? op = 0 : vm.clv_txt) : '',
         'op': op,

@@ -9,7 +9,9 @@ angular
       GetNueSector: '/AreaTecnica/GetNueSector',
       GetNueRelSectorColonia: '/AreaTecnica/GetNueRelSectorColonia',
       GetBorRelSectorColonia: '/AreaTecnica/GetBorRelSectorColonia ',
-      GetModSector: '/AreaTecnica/GetModSector'
+      GetModSector: '/AreaTecnica/GetModSector',
+      GetMuestraPostes:'/ColoniaCAMDO/GetMuestraDescPoste',
+      GetNuePoste:'/ColoniaCAMDO/AddInsertaNueDescPoste '
 
     };
     var factory = {};
@@ -172,6 +174,47 @@ angular
       return deferred.promise;
     };
 
+    factory.GetPostes = function (obj) {
+      var deferred = $q.defer();
+      var config = {
+        headers: {
+          'Authorization': $localStorage.currentUser.token
+        }
+      };
+      var Parametros = {
+        'op': obj.op,
+        'clv_usuario': $localStorage.currentUser.idUsuario
+       
+      };
+      console.log(Parametros);
+      $http.post(globalService.getUrl() + paths.GetMuestraPostes, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetNuePoste = function (obj) {
+      var deferred = $q.defer();
+      var config = {
+        headers: {
+          'Authorization': $localStorage.currentUser.token
+        }
+      };
+      var Parametros = {
+        'clave': obj.clave,
+        'descripcion': obj.descripcion
+      
+      };
+      console.log(Parametros);
+      $http.post(globalService.getUrl() + paths.GetNuePoste, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
 
 
 

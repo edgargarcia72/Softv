@@ -15,9 +15,6 @@
                 </small>
         </header>
         <div class="tools">
-
-
-            <td><button type="button" class="btn btn-deafault btn-xs" ui-sref="home.dashboard" title="Elimina Cluster "><i class=""></i> CANCELAR</button></td>
         </div>
     </div>
     <div class="card-body">
@@ -25,56 +22,57 @@
             <div class="col-md-11" style="font-weight:bold;">
                 Datos del Poste:
             </div>
-            <div class="row">
-                <div class="col-md-2" style="text-align:right">
-                    Clave:
+            <br>
+            <br>
+            <div class="col-md-5" >
+
+                <div class="row">
+                    <div class="col-md-1" style="text-align:right">
+                    </div>
+                    <div class="col-md-2" style="text-align:right">
+                       <small> <b>Descripcion:</b> </small>
+                    </div>
+                    <div class="col-md-3" style="text-align:right">
+                        <input type="text" name="InpDescripcion" class="form-control input-sm" ng-model="$ctrl.descripcion" placeholder="Descripcion">
+                    </div>
+                    <div class="col-md-2" style="text-align:right">
+                        <button type="button" class="btn btn-primary btn-sm" ng-click="$ctrl.AddPoste()" title="Nuevo Poste "><i class="fa fa-plus"></i> AGREGAR</button>
+                    </div>
                 </div>
-                <div class="col-md-2" style="text-align:right">
-                    <input type="number" name="InpClave" class="form-control input-sm" ng-model="$ctrl.clave" placeholder="Clave">
+            </div>
+            <div class="col-md-6">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th width="10%" style="text-align:center"><b>Clave</b></th>
+                            <th width="20%" style="text-align:center"><b>Descripcion</b></th>
+                            <th width="20%" colspan="1" style="text-align:center"><b>Acciones</b></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr dir-paginate="X in $ctrl.postes|itemsPerPage:7">
+                            <td style="text-align:center">{{ X.CLAVE}}</td>
+                            <td style="text-align:center">{{ X.DESCRIPCION }}</td>
+                            <td style="text-align:center">
+                            <button type="button" class="btn btn-warning btn-xs" ng-click="$ctrl.UpdatePoste(X.CLAVE,X.DESCRIPCION )" title="Editar Poste "><i class="fa fa-pencil-square-o"></i> EDITAR</button>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+                <br>
+                <div style="margin-top:-40px;">
+                    <dir-pagination-controls max-size="7" direction-links="true" boundary-links="true">
+                    </dir-pagination-controls>
                 </div>
-                <div class="col-md-2" style="text-align:right">
-                    Descripcion:
-                </div>
-                <div class="col-md-2" style="text-align:right">
-                    <input type="text" name="InpDescripcion" class="form-control input-sm" ng-model="$ctrl.descripcion" placeholder="Descripcion">
-                </div>
-                <div class="col-md-2" style="text-align:right">
-                    <button type="button" class="btn btn-primary btn-xs" ng-click="$ctrl.AddCluster()" title="Nuevo Cluster "><i class="fa fa-floppy-o"></i> GUARDAR</button>
-                </div>
+                <br>
             </div>
 
         </div>
     </div>
     <br>
-    <div class="col-md-12">
-        <div class="col-md-10">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th width="10%" style="text-align:center"><b>Clave</b></th>
-                        <th width="70%" style="text-align:center"><b>Descripcion</b></th>
-                        <th width="20%" colspan="4"><b>Acciones</b></th>
-                    </tr>
-                </thead>
-                <tbody>
 
-                    <tr dir-paginate="X in $ctrl.suscursales|itemsPerPage:7">
-                        <td>{{ X.Clv_Motivo}}</td>
-                        <td>{{ X.Descripcion }}</td>
-                        <td>
-                            <td><button type="button" class="btn btn-warning btn-xs" ng-click="$ctrl.UpdateCluster()" title="Editar Cluster "><i class="fa fa-pencil-square-o"></i> EDITAR</button></td>
-                        </td>
-                    </tr>
-
-                </tbody>
-            </table>
-            <br>
-            <div style="margin-top:-40px;">
-                <dir-pagination-controls max-size="7" direction-links="true" boundary-links="true">
-                </dir-pagination-controls>
-            </div>
-            <br>
-        </div>
-    </div>
 </div>
 </div>

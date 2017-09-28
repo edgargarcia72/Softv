@@ -2,71 +2,74 @@
 
 angular
   .module('softvApp')
-  .controller('PostesCtrl', function (CatalogosFactory, atencionFactory,$uibModal) {
+  .controller('PostesCtrl', function (areaTecnicaFactory, atencionFactory, $uibModal) {
 
-   
+    function initData() {
+      GetPost(0);
+    }
+
+    function GetPost(op) {
+
+      var Parametros = {
+        'op': op
+      };
+      areaTecnicaFactory.GetPostes(Parametros)
+        .then(function (data) {
+          vm.postes = data.GetMuestraDescPosteResult;
+          console.log(data);
+        });
+
+    }
+
     function AddPoste() {
-        var modalInstance = $uibModal.open({
-          animation: true,
-          ariaLabelledBy: 'modal-title',
-          ariaDescribedBy: 'modal-body',
-          templateUrl: 'views/area tecnica/ModalPoste.html',
-          controller: 'ModalAddPosteCtrl',
-          controllerAs: 'ctrl',
-          backdrop: 'static',
-          keyboard: false,
-          class: 'modal-backdrop fade',
-          size: 'md'
-        });
-      }
-      function DetallePoste() {
-        var modalInstance = $uibModal.open({
-          animation: true,
-          ariaLabelledBy: 'modal-title',
-          ariaDescribedBy: 'modal-body',
-          templateUrl: 'views/area tecnica/ModalPoste.html',
-          controller: 'ModalDetallePosteCtrl',
-          controllerAs: 'ctrl',
-          backdrop: 'static',
-          keyboard: false,
-          class: 'modal-backdrop fade',
-          size: 'md'
-        });
-      }
-      
 
-      function UpdatePoste() {
-        var modalInstance = $uibModal.open({
-          animation: true,
-          ariaLabelledBy: 'modal-title',
-          ariaDescribedBy: 'modal-body',
-          templateUrl: 'views/area tecnica/ModalPoste.html',
-          controller: 'ModalUpdatePosteCtrl',
-          controllerAs: 'ctrl',
-          backdrop: 'static',
-          keyboard: false,
-          class: 'modal-backdrop fade',
-          size: 'md'
-        });
-      }
-      
-      function EliminaPoste() {
-        var modalInstance = $uibModal.open({
-          animation: true,
-          ariaLabelledBy: 'modal-title',
-          ariaDescribedBy: 'modal-body',
-          templateUrl: 'views/area tecnica/ModalEliminarPoste.html',
-          controller: 'ModalDeletePosteCtrl',
-          controllerAs: 'ctrl',
-          backdrop: 'static',
-          keyboard: false,
-          class: 'modal-backdrop fade',
-          size: 'sm'
-        });
-      }
+      var Parametros = {
 
-      function cancel() {
-        $uibModalInstance.dismiss('cancel');
+        'clave': -1,
+        'descripcion': vm.descripcion
+
+      };
+      areaTecnicaFactory.GetNuePoste(Parametros)
+        .then(function (data) {
+          var result = data.AddInsertaNueDescPosteResult;
+          console.log(data);
+          GetPost(0);
+
+
+        });
+    }
+
+
+
+    function UpdatePoste(CLAVE,DESCRIPCION) {
+      var CLAVE = CLAVE;
+      var DESCRIPCION = DESCRIPCION;
+      var modalInstance = $uibModal.open({
+        animation: true,
+        ariaLabelledBy: 'modal-title',
+        ariaDescribedBy: 'modal-body',
+        templateUrl: 'views/area tecnica/ModalPoste.html',
+        controller: 'ModalUpdatePosteCtrl',
+        controllerAs: 'ctrl',
+        backdrop: 'static',
+        keyboard: false,
+        class: 'modal-backdrop fade',
+        size: 'md',
+        resolve: {
+          
+          CLAVE: function () {
+            return CLAVE;
+          },
+          DESCRIPCION: function() {
+              return DESCRIPCION;
+          }
+          
+        }
+      });
+    }
+
+    function cancel() {
+      $uibModalInstance.dismiss('cancel');
     }
 
 
@@ -74,10 +77,9 @@ angular
 
 
     var vm = this;
+    initData();
+    vm.cancel = cancel;
     vm.AddPoste = AddPoste;
     vm.UpdatePoste = UpdatePoste;
-    vm.EliminaPoste = EliminaPoste;
-    vm.DetallePoste = DetallePoste;
-    vm.cancel = cancel;
 
   });
