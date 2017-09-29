@@ -60,11 +60,14 @@ angular
       GetDeepTipo_Colonias1_New: '/Tipo_Colonias1_New/GetDeepTipo_Colonias1_New',
       UpdateTipo_Colonias1_New: '/Tipo_Colonias1_New/UpdateTipo_Colonias1_New',
       DeleteTipo_Colonias1_New: '/Tipo_Colonias1_New/DeleteTipo_Colonias1_New',
-      GetCalleList: '/Calle/GetCalleList',
-      AddCalleL: '/Calle/AddCalleL',
-      GetDeepCalle: '/Calle/GetDeepCalle',
-      UpdateCalleL: '/Calle/UpdateCalleL',
+
+      GetCalles_NewList: '/Calles_New/GetCalles_NewList',
+      AddCalles_New: '/Calles_New/AddCalles_New',
+      GetDeepCalles_New: '/Calles_New/GetDeepCalles_New',
+      UpdateCalles_New: '/Calles_New/UpdateCalles_New',
       DeleteCalle: '/Calle/DeleteCalle',
+      AddValidaNombreCalle: '/ValidaNombreCalle/AddValidaNombreCalle',
+
       GetDistribuidorList: '/Distribuidor/GetDistribuidorList',
       AddDistribuidor: '/Distribuidor/AddDistribuidor',
       GetDeepDistribuidor: '/Distribuidor/GetDeepDistribuidor',
@@ -163,7 +166,13 @@ angular
       GetMuestraMedios_NewList: '/MuestraMedios_New/GetMuestraMedios_NewList',
       AddRelColoniaMedio: '/RelColoniaMedio/AddRelColoniaMedio',
       GetRelColoniaMedioList: '/RelColoniaMedio/GetRelColoniaMedioList',
-      DeleteRelColoniaMedio: '/RelColoniaMedio/DeleteRelColoniaMedio'
+      DeleteRelColoniaMedio: '/RelColoniaMedio/DeleteRelColoniaMedio',
+      GetMuestraLocalidades_CalleList: '/MuestraLocalidades_Calle/GetMuestraLocalidades_CalleList',
+      GetMuestraColonias_CalleList: '/MuestraColonias_Calle/GetMuestraColonias_CalleList',
+      AddRelColoniasCalles_New: '/RelColoniasCalles_New/AddRelColoniasCalles_New',
+      GetRelColoniasCalles_NewList: '/RelColoniasCalles_New/GetRelColoniasCalles_NewList',
+      DeleteRelColoniasCalles_New: '/RelColoniasCalles_New/DeleteRelColoniasCalles_New',
+      GetValidaEliminarRelColoniaCalle: '/ValidaEliminarRelColoniaCalle/GetValidaEliminarRelColoniaCalle'
     };
 
     factory.AddSucursal = function (SUCURSALESobj) {
@@ -1285,14 +1294,11 @@ angular
       return deferred.promise;
     };
 
-    factory.GetCalleList = function () {
+    factory.GetCalles_NewList = function (ObjCalle) {
       var deferred = $q.defer();
-      var config = {
-        headers: {
-          'Authorization': $localStorage.currentUser.token
-        }
-      };
-      $http.get(globalService.getUrl() + paths.GetCalleList, config).then(function (response) {
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {'ObjCalle': ObjCalle};
+      $http.post(globalService.getUrl() + paths.GetCalles_NewList, JSON.stringify(Parametros), config).then(function (response) {
         deferred.resolve(response.data);
       }).catch(function (response) {
         deferred.reject(response);
@@ -1300,18 +1306,11 @@ angular
       return deferred.promise;
     };
 
-    factory.AddCalleL = function (lstRelCalle, RelCalleAdd) {
+    factory.AddValidaNombreCalle = function (objValidaNombreCalle) {
       var deferred = $q.defer();
-      var config = {
-        headers: {
-          'Authorization': $localStorage.currentUser.token
-        }
-      };
-      var Parametros = {
-        'lstRelCalle': lstRelCalle,
-        'RelCalleAdd': RelCalleAdd
-      };
-      $http.post(globalService.getUrl() + paths.AddCalleL, JSON.stringify(Parametros), config).then(function (response) {
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {'objValidaNombreCalle': objValidaNombreCalle};
+      $http.post(globalService.getUrl() + paths.AddValidaNombreCalle, JSON.stringify(Parametros), config).then(function (response) {
         deferred.resolve(response.data);
       }).catch(function (response) {
         deferred.reject(response);
@@ -1319,17 +1318,11 @@ angular
       return deferred.promise;
     };
 
-    factory.GetDeepCalle = function (IdCalle) {
+    factory.AddCalles_New = function (objCalles_New) {
       var deferred = $q.defer();
-      var config = {
-        headers: {
-          'Authorization': $localStorage.currentUser.token
-        }
-      };
-      var Parametros = {
-        'IdCalle': IdCalle
-      };
-      $http.post(globalService.getUrl() + paths.GetDeepCalle, JSON.stringify(Parametros), config).then(function (response) {
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {'objCalles_New': objCalles_New};
+      $http.post(globalService.getUrl() + paths.AddCalles_New, JSON.stringify(Parametros), config).then(function (response) {
         deferred.resolve(response.data);
       }).catch(function (response) {
         deferred.reject(response);
@@ -1337,18 +1330,23 @@ angular
       return deferred.promise;
     };
 
-    factory.UpdateCalleL = function (lstRelCalle, RelCalleAdd) {
+    factory.GetDeepCalles_New = function (Clv_Calle) {
       var deferred = $q.defer();
-      var config = {
-        headers: {
-          'Authorization': $localStorage.currentUser.token
-        }
-      };
-      var Parametros = {
-        'lstRelCalle': lstRelCalle,
-        'RelCalleAdd': RelCalleAdd
-      };
-      $http.post(globalService.getUrl() + paths.UpdateCalleL, JSON.stringify(Parametros), config).then(function (response) {
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {'Clv_Calle': Clv_Calle};
+      $http.post(globalService.getUrl() + paths.GetDeepCalles_New, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.UpdateCalles_New = function (objCalles_New) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {'objCalles_New': objCalles_New};
+      $http.post(globalService.getUrl() + paths.UpdateCalles_New, JSON.stringify(Parametros), config).then(function (response) {
         deferred.resolve(response.data);
       }).catch(function (response) {
         deferred.reject(response);
@@ -2786,6 +2784,78 @@ angular
       var config = {headers: {'Authorization': $localStorage.currentUser.token}};
       var Parametros = ObjRelColMed;
       $http.post(globalService.getUrl() + paths.DeleteRelColoniaMedio, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetMuestraLocalidades_CalleList = function (clv_ciudad) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {'clv_ciudad': clv_ciudad};
+      $http.post(globalService.getUrl() + paths.GetMuestraLocalidades_CalleList, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetMuestraColonias_CalleList = function (clv_localidad) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {'clv_localidad': clv_localidad};
+      $http.post(globalService.getUrl() + paths.GetMuestraColonias_CalleList, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.AddRelColoniasCalles_New = function (objRelColoniasCalles_New) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {'objRelColoniasCalles_New': objRelColoniasCalles_New};
+      $http.post(globalService.getUrl() + paths.AddRelColoniasCalles_New, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetRelColoniasCalles_NewList = function (clv_calle) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {'clv_calle': clv_calle};
+      $http.post(globalService.getUrl() + paths.GetRelColoniasCalles_NewList, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.DeleteRelColoniasCalles_New = function (ObjRelCalle) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = ObjRelCalle;
+      $http.post(globalService.getUrl() + paths.DeleteRelColoniasCalles_New, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetValidaEliminarRelColoniaCalle = function (ObjRelCalle) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = ObjRelCalle;
+      $http.post(globalService.getUrl() + paths.GetValidaEliminarRelColoniaCalle, JSON.stringify(Parametros), config).then(function (response) {
         deferred.resolve(response.data);
       }).catch(function (response) {
         deferred.reject(response);
