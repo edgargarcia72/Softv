@@ -1,7 +1,7 @@
 'use strict';
 angular
   .module('softvApp')
-  .factory('areaTecnicaFactory', function ($http, $q, globalService, $localStorage) {
+  .factory('agendaFactory', function ($http, $q, globalService, $localStorage) {
     var paths = {
       GetSectores: '/AreaTecnica/GetConSector',
       GetColoniasSec: '/AreaTecnica/GetMuestraColoniaSec',
