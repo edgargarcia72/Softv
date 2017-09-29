@@ -22,7 +22,8 @@ angular
       };
 
       tapFactory.GetCONSULTATap(params).then(function (data) {
-       console.log(data.GetCONSULTATapResult);
+        console.log(data);
+       vm.lista=data.GetCONSULTATapResult;
       });
     }
 
