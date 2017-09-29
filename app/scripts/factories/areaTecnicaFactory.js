@@ -17,10 +17,7 @@ angular
 
     };
     var factory = {};
-    var usuarioAtencion = $localStorage.currentUser.idUsuario;
-
-
-
+ 
     factory.GetBorSector = function (Clv_Sector) {
       var deferred = $q.defer();
       var config = {

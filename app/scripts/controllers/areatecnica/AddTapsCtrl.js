@@ -61,7 +61,7 @@ angular
 
       tapFactory.GetINSERTATap(obj).then(function (data) {
         ngNotify.set('El tap se agregó correctamente', 'success');
-        $state.go('home.areaTecnica.taps');
+        $state.go('home.areatecnica.taps');
       });
 
     }
@@ -69,8 +69,8 @@ angular
     var vm = this;
     Init();
     vm.Titulo = 'Nuevo Tap';
-    vm.Icono = 'fa fa-plus';
-    vm.blockdelete1 = true;
+    vm.blocksave=false;
+    vm.blockForm=false;
     vm.getsectores = getsectores;
     vm.getcolonias = getcolonias;
     vm.SaveTap = SaveTap;

@@ -48,7 +48,7 @@ angular
         animation: true,
         ariaLabelledBy: 'modal-title',
         ariaDescribedBy: 'modal-body',
-        templateUrl: 'views/area tecnica/ModalPoste.html',
+        templateUrl: 'views/areatecnica/ModalPoste.html',
         controller: 'ModalUpdatePosteCtrl',
         controllerAs: 'ctrl',
         backdrop: 'static',
