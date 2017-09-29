@@ -110,11 +110,14 @@ angular
                 if(data.AddInsertaRelColoniaLocalidadResult == -1){
                     ngNotify.set('CORRECTO, se agregó la relación.', 'success');
                     GetRelLocColList();
+                    GetCiudadList();
                     vm.ObjRelCol = null;
                     vm.ShowRel = false;
+                    vm.CPRel = '';
                 }else{
                     ngNotify.set('ERROR, al agregar la relación.', 'warn');
                     GetRelLocColList();
+                    vm.CPRel = '';
                     vm.ObjRelCol = null;
                     vm.ShowRel = false;
                 }
@@ -138,17 +141,20 @@ angular
                         if(data.DeleteInsertaRelColoniaLocalidadResult == -1){
                             ngNotify.set('CORRECTO, se eliminó la relación.', 'success');
                             GetRelLocColList();
+                            GetCiudadList();
+                            vm.CPRel = '';
                             vm.ObjRelCol = null;
                             vm.ShowRel = false;
                         }else{
                             ngNotify.set('ERROR, al eliminar la relación.', 'warn');
                             GetRelLocColList();
+                            vm.CPRel = '';
                             vm.ObjRelCol = null;
                             vm.ShowRel = false;
                         }
                     });
                 }else if(data.AddValidaCVELOCCOLResult == 0){
-                    ngNotify.set('ERROR, al eliminar la relación, Posiblemente puede estar relacionada con uno o varios clientes.', 'warn');
+                    ngNotify.set('ERROR, al eliminar la relación, posiblemente puede estar relacionada con uno o varios clientes.', 'warn');
                 }
             });
         }
@@ -257,6 +263,7 @@ angular
         var vm = this;
         vm.Titulo = 'Editar Colonia - ';
         vm.ShowRel = false;
+        vm.Disable = false;
         vm.Clv_Colonia = $stateParams.id;
         vm.SaveColonia = SaveColonia;
         vm.GetCiudadList = GetCiudadList;
