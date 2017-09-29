@@ -21,6 +21,9 @@ angular
       AddDatosFiscales: '/DatosFiscales/AddDatosFiscales',
       GetDatosFiscalesList: '/DatosFiscales/GetDatosFiscalesList',
       GetBancoList: '/Banco/GetBancoList',
+      AddBanco: '/Banco/AddBanco',
+      UpdateBanco: '/Banco/UpdateBanco',
+      GetDeepBanco: '/Banco/GetDeepBanco',
       GetMUESTRATIPOSDECUENTAList: '/MUESTRATIPOSDECUENTA/GetMUESTRATIPOSDECUENTAList',
       AddRELCLIBANCO: '/RELCLIBANCO/AddRELCLIBANCO',
       UpdateRELCLIBANCO: '/RELCLIBANCO/UpdateRELCLIBANCO',
@@ -60,14 +63,12 @@ angular
       GetDeepTipo_Colonias1_New: '/Tipo_Colonias1_New/GetDeepTipo_Colonias1_New',
       UpdateTipo_Colonias1_New: '/Tipo_Colonias1_New/UpdateTipo_Colonias1_New',
       DeleteTipo_Colonias1_New: '/Tipo_Colonias1_New/DeleteTipo_Colonias1_New',
-
       GetCalles_NewList: '/Calles_New/GetCalles_NewList',
       AddCalles_New: '/Calles_New/AddCalles_New',
       GetDeepCalles_New: '/Calles_New/GetDeepCalles_New',
       UpdateCalles_New: '/Calles_New/UpdateCalles_New',
       DeleteCalle: '/Calle/DeleteCalle',
       AddValidaNombreCalle: '/ValidaNombreCalle/AddValidaNombreCalle',
-
       GetDistribuidorList: '/Distribuidor/GetDistribuidorList',
       AddDistribuidor: '/Distribuidor/AddDistribuidor',
       GetDeepDistribuidor: '/Distribuidor/GetDeepDistribuidor',
@@ -172,7 +173,7 @@ angular
       AddRelColoniasCalles_New: '/RelColoniasCalles_New/AddRelColoniasCalles_New',
       GetRelColoniasCalles_NewList: '/RelColoniasCalles_New/GetRelColoniasCalles_NewList',
       DeleteRelColoniasCalles_New: '/RelColoniasCalles_New/DeleteRelColoniasCalles_New',
-      GetValidaEliminarRelColoniaCalle: '/ValidaEliminarRelColoniaCalle/GetValidaEliminarRelColoniaCalle'
+      GetValidaEliminarRelColoniaCalle: '/ValidaEliminarRelColoniaCalle/GetValidaEliminarRelColoniaCalle',
     };
 
     factory.AddSucursal = function (SUCURSALESobj) {
@@ -569,6 +570,45 @@ angular
         }
       };
       $http.get(globalService.getUrl() + paths.GetBancoList, config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.AddBanco = function (objBanco) {
+      var deferred = $q.defer();
+      var config = {headers: { 'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {'objBanco': objBanco};
+      console.log(Parametros);
+      $http.post(globalService.getUrl() + paths.AddBanco, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.UpdateBanco = function (objBanco) {
+      var deferred = $q.defer();
+      var config = {headers: { 'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {'objBanco': objBanco};
+      console.log(Parametros);
+      $http.post(globalService.getUrl() + paths.UpdateBanco, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetDeepBanco = function (IdBanco) {
+      var deferred = $q.defer();
+      var config = {headers: { 'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {'IdBanco': IdBanco};
+      console.log(Parametros);
+      $http.post(globalService.getUrl() + paths.GetDeepBanco, JSON.stringify(Parametros), config).then(function (response) {
         deferred.resolve(response.data);
       }).catch(function (response) {
         deferred.reject(response);
