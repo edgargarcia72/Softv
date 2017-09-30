@@ -65,7 +65,7 @@ angular
                 backdrop: 'static',
                 keyboard: false,
                 class: 'modal-backdrop fade',
-                size: 'md',
+                size: 'sm',
                 resolve: {
                     ObjBanco: function () {
                         return ObjBanco;
@@ -77,6 +77,7 @@ angular
         var vm = this;
         vm.OpenAddBanco = OpenAddBanco;
         vm.OpenUpdateBanco = OpenUpdateBanco;
+        vm.OpenDeleteBanco = OpenDeleteBanco;
         initData();
 
     });

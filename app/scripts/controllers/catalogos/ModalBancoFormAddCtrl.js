@@ -11,7 +11,6 @@ angular
                 'ClaveTxt': vm.Clave
              };
              CatalogosFactory.AddBanco(objBanco).then(function(data){
-                console.log(data);
                 if(data.AddBancoResult > 0){
                     ngNotify.set('CORRECTO, se añadió un banco nuevo.', 'success');
                     $state.reload('home.catalogos.bancos');

@@ -6,7 +6,6 @@ angular
         
         function initData(){
             CatalogosFactory.GetDeepBanco(IdBanco).then(function(data){
-                console.log(data);
                 var Banco = data.GetDeepBancoResult;
                 vm.IdBanco = Banco.IdBanco;
                 vm.Banco = Banco.Nombre;
@@ -22,7 +21,6 @@ angular
                 'ClaveTxt': vm.Clave
              };
              CatalogosFactory.UpdateBanco(objBanco).then(function(data){
-                console.log(data);
                 if(data.UpdateBancoResult == -1){
                     ngNotify.set('CORRECTO, se guardó el banco.', 'success');
                     $state.reload('home.catalogos.bancos');
