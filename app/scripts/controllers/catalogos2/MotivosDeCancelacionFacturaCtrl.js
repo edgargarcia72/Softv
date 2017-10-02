@@ -63,6 +63,27 @@ angular
           }
         });
       }
+
+      function DetalleMotivoF(Clv_motivo) {
+        var Clv_motivo = Clv_motivo;
+        var modalInstance = $uibModal.open({
+          animation: true,
+          ariaLabelledBy: 'modal-title',
+          ariaDescribedBy: 'modal-body',
+          templateUrl: 'views/catalogos/ModalMotivoCancelFactura.html',
+          controller: 'ModalMotivoCancelFactDetalleCtrl',
+          controllerAs: 'ctrl',
+          backdrop: 'static',
+          keyboard: false,
+          class: 'modal-backdrop fade',
+          size: 'md',
+          resolve: {
+              Clv_motivo: function () {
+                  return Clv_motivo;
+              }
+          }
+        });
+      }
       
       function EliminaMotivoF(Clv_motivo) {
         var Clv_motivo = Clv_motivo;
@@ -88,6 +109,7 @@ angular
       var vm = this;
       vm.AddMotivoF = AddMotivoF;
       vm.UpdateMotivoF = UpdateMotivoF;
+      vm.DetalleMotivoF = DetalleMotivoF;
       vm.EliminaMotivoF = EliminaMotivoF;
       vm.GetMotivoCancelacionFList = GetMotivoCancelacionFList;
       initData();
