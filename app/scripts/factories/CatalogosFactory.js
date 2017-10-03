@@ -21,6 +21,10 @@ angular
       AddDatosFiscales: '/DatosFiscales/AddDatosFiscales',
       GetDatosFiscalesList: '/DatosFiscales/GetDatosFiscalesList',
       GetBancoList: '/Banco/GetBancoList',
+      AddBanco: '/Banco/AddBanco',
+      UpdateBanco: '/Banco/UpdateBanco',
+      GetDeepBanco: '/Banco/GetDeepBanco',
+      DeleteBanco: '/Banco/DeleteBanco',
       GetMUESTRATIPOSDECUENTAList: '/MUESTRATIPOSDECUENTA/GetMUESTRATIPOSDECUENTAList',
       AddRELCLIBANCO: '/RELCLIBANCO/AddRELCLIBANCO',
       UpdateRELCLIBANCO: '/RELCLIBANCO/UpdateRELCLIBANCO',
@@ -60,14 +64,12 @@ angular
       GetDeepTipo_Colonias1_New: '/Tipo_Colonias1_New/GetDeepTipo_Colonias1_New',
       UpdateTipo_Colonias1_New: '/Tipo_Colonias1_New/UpdateTipo_Colonias1_New',
       DeleteTipo_Colonias1_New: '/Tipo_Colonias1_New/DeleteTipo_Colonias1_New',
-
       GetCalles_NewList: '/Calles_New/GetCalles_NewList',
       AddCalles_New: '/Calles_New/AddCalles_New',
       GetDeepCalles_New: '/Calles_New/GetDeepCalles_New',
       UpdateCalles_New: '/Calles_New/UpdateCalles_New',
       DeleteCalle: '/Calle/DeleteCalle',
       AddValidaNombreCalle: '/ValidaNombreCalle/AddValidaNombreCalle',
-
       GetDistribuidorList: '/Distribuidor/GetDistribuidorList',
       AddDistribuidor: '/Distribuidor/AddDistribuidor',
       GetDeepDistribuidor: '/Distribuidor/GetDeepDistribuidor',
@@ -172,7 +174,15 @@ angular
       AddRelColoniasCalles_New: '/RelColoniasCalles_New/AddRelColoniasCalles_New',
       GetRelColoniasCalles_NewList: '/RelColoniasCalles_New/GetRelColoniasCalles_NewList',
       DeleteRelColoniasCalles_New: '/RelColoniasCalles_New/DeleteRelColoniasCalles_New',
-      GetValidaEliminarRelColoniaCalle: '/ValidaEliminarRelColoniaCalle/GetValidaEliminarRelColoniaCalle'
+      GetValidaEliminarRelColoniaCalle: '/ValidaEliminarRelColoniaCalle/GetValidaEliminarRelColoniaCalle',
+      GetBuscaMotivoCancelacion: '/CatalogoMotivos/GetBuscaMotivoCancelacion',
+      GetNUEMotivoCancelacion: '/CatalogoMotivos/GetNUEMotivoCancelacion',
+      GetMODMotivoCancelacion: '/CatalogoMotivos/GetMODMotivoCancelacion',
+      GetBORMotivoCancelacion: '/CatalogoMotivos/GetBORMotivoCancelacion',
+      GetBuscaMotivosFacturaCancelada: '/CatalogoMotivos/GetBuscaMotivosFacturaCancelada',
+      GetNUEMOTIVOSFACTURACANCELACION: '/CatalogoMotivos/GetNUEMOTIVOSFACTURACANCELACION',
+      GetMODMOTIVOSFACTURACANCELACION: '/CatalogoMotivos/GetMODMOTIVOSFACTURACANCELACION',
+      GetBORMOTIVOSFACTURACANCELACION: '/CatalogoMotivos/GetBORMOTIVOSFACTURACANCELACION'
     };
 
     factory.AddSucursal = function (SUCURSALESobj) {
@@ -569,6 +579,54 @@ angular
         }
       };
       $http.get(globalService.getUrl() + paths.GetBancoList, config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.AddBanco = function (objBanco) {
+      var deferred = $q.defer();
+      var config = {headers: { 'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {'objBanco': objBanco};
+      $http.post(globalService.getUrl() + paths.AddBanco, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.UpdateBanco = function (objBanco) {
+      var deferred = $q.defer();
+      var config = {headers: { 'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {'objBanco': objBanco};
+      $http.post(globalService.getUrl() + paths.UpdateBanco, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.DeleteBanco = function (IdBanco) {
+      var deferred = $q.defer();
+      var config = {headers: { 'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {'IdBanco': IdBanco};
+      $http.post(globalService.getUrl() + paths.DeleteBanco, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetDeepBanco = function (IdBanco) {
+      var deferred = $q.defer();
+      var config = {headers: { 'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {'IdBanco': IdBanco};
+      $http.post(globalService.getUrl() + paths.GetDeepBanco, JSON.stringify(Parametros), config).then(function (response) {
         deferred.resolve(response.data);
       }).catch(function (response) {
         deferred.reject(response);
@@ -2856,6 +2914,102 @@ angular
       var config = {headers: {'Authorization': $localStorage.currentUser.token}};
       var Parametros = ObjRelCalle;
       $http.post(globalService.getUrl() + paths.GetValidaEliminarRelColoniaCalle, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetBuscaMotivoCancelacion = function (ObjMotivo) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = ObjMotivo;
+      $http.post(globalService.getUrl() + paths.GetBuscaMotivoCancelacion, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetNUEMotivoCancelacion = function (ObjMotivo) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = ObjMotivo;
+      $http.post(globalService.getUrl() + paths.GetNUEMotivoCancelacion, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetMODMotivoCancelacion = function (ObjMotivo) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = ObjMotivo;
+      $http.post(globalService.getUrl() + paths.GetMODMotivoCancelacion, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetBORMotivoCancelacion = function (Clv_MOTCAN) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {'Clv_MOTCAN': Clv_MOTCAN};
+      $http.post(globalService.getUrl() + paths.GetBORMotivoCancelacion, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetBuscaMotivosFacturaCancelada = function (ObjMotivo) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = ObjMotivo;
+      $http.post(globalService.getUrl() + paths.GetBuscaMotivosFacturaCancelada, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetNUEMOTIVOSFACTURACANCELACION = function (ObjMotivo) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = ObjMotivo;
+      $http.post(globalService.getUrl() + paths.GetNUEMOTIVOSFACTURACANCELACION, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetMODMOTIVOSFACTURACANCELACION = function (ObjMotivo) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = ObjMotivo;
+      $http.post(globalService.getUrl() + paths.GetMODMOTIVOSFACTURACANCELACION, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetBORMOTIVOSFACTURACANCELACION = function (Clv_Motivo) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {'Clv_Motivo': Clv_Motivo};
+      $http.post(globalService.getUrl() + paths.GetBORMOTIVOSFACTURACANCELACION, JSON.stringify(Parametros), config).then(function (response) {
         deferred.resolve(response.data);
       }).catch(function (response) {
         deferred.reject(response);

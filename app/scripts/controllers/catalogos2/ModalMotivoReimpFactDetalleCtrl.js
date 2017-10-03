@@ -1,7 +1,6 @@
-
 angular
 .module('softvApp')
-.controller('ModalMotivoReimpFactUpdateCtrl', function (CatalogosFactory, $uibModalInstance, ngNotify, $state, Clv_motivo) {
+.controller('ModalMotivoReimpFactDetalleCtrl', function (CatalogosFactory, $uibModalInstance, ngNotify, $state, Clv_motivo) {
  
  function initData(){
     var ObjMotivo = {
@@ -39,12 +38,12 @@ angular
   }
 
   var vm = this;
-  vm.Titulo = ' Editar Motivo de Reimpresion de Factura';
+  vm.Titulo = 'Editar Motivo de Reimpresion de Factura';
   vm.Icono = 'fa fa-pencil-square-o';
   vm.SaveMotivo = SaveMotivo;
   vm.cancel = cancel;
-  vm.blockForm = false;
-  vm.blocksave = false;
+  vm.blockForm = true;
+  vm.blocksave = true;
   vm.blockdelete = true;
   initData();
 });

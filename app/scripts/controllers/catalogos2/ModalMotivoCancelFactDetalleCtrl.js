@@ -1,6 +1,6 @@
 angular
   .module('softvApp')
-  .controller('ModalMotivoCancelFactUpdateCtrl', function (CatalogosFactory, $uibModalInstance, ngNotify, $state, Clv_motivo) {
+  .controller('ModalMotivoCancelFactDetalleCtrl', function (CatalogosFactory, $uibModalInstance, ngNotify, $state, Clv_motivo) {
    
     function initData(){
       var ObjMotivo = {
@@ -42,8 +42,8 @@ angular
     vm.Icono = 'fa fa-pencil-square-o';
     vm.cancel = cancel;
     vm.SaveMotivo = SaveMotivo;
-    vm.blockForm = false;
-    vm.blocksave = false;
+    vm.blockForm = true;
+    vm.blocksave = true;
     vm.blockdelete = true;
     initData();
 
