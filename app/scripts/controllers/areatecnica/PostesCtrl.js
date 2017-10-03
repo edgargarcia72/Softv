@@ -9,7 +9,6 @@ angular
     }
 
     function GetPost(op) {
-
       var Parametros = {
         'op': op
       };
@@ -21,29 +20,24 @@ angular
 
     }
 
-    function AddPoste() {
+    function Add() {
 
       var Parametros = {
-
         'clave': -1,
         'descripcion': vm.descripcion
-
       };
       areaTecnicaFactory.GetNuePoste(Parametros)
         .then(function (data) {
-          var result = data.AddInsertaNueDescPosteResult;
-          console.log(data);
           GetPost(0);
-
-
         });
     }
 
 
 
-    function UpdatePoste(CLAVE,DESCRIPCION) {
-      var CLAVE = CLAVE;
-      var DESCRIPCION = DESCRIPCION;
+    function Update(id, descripcion) {
+      var CLAVE = id;
+      var DESCRIPCION = descripcion;
+      var OP = 1;
       var modalInstance = $uibModal.open({
         animation: true,
         ariaLabelledBy: 'modal-title',
@@ -56,14 +50,15 @@ angular
         class: 'modal-backdrop fade',
         size: 'md',
         resolve: {
-          
           CLAVE: function () {
             return CLAVE;
           },
-          DESCRIPCION: function() {
-              return DESCRIPCION;
+          DESCRIPCION: function () {
+            return DESCRIPCION;
+          },
+          OP: function () {
+            return OP;
           }
-          
         }
       });
     }
@@ -72,14 +67,11 @@ angular
       $uibModalInstance.dismiss('cancel');
     }
 
-
-
-
-
     var vm = this;
     initData();
     vm.cancel = cancel;
-    vm.AddPoste = AddPoste;
-    vm.UpdatePoste = UpdatePoste;
+    vm.Add = Add;
+    vm.Update = Update;
+    vm.titulo = 'Catálogo de Postes';
 
   });

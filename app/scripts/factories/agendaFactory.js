@@ -18,8 +18,7 @@ angular
 
 
     };
-    var factory = {};
-    var usuarioAtencion = $localStorage.currentUser.idUsuario;
+    var factory = {};   
 
 
 
