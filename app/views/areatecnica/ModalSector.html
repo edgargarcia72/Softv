@@ -14,8 +14,7 @@
   </div>
   <fieldset ng-disabled="ctrl.blockForm">
     <div class="modal-body">
-      <div class="row">
-        <p> <b>Datos del Sector </b></p>
+      <div class="row">       
         <div class="col-md-5">
 
           <b><small>Clave:</small></b>
@@ -32,7 +31,7 @@
       </div>
       <br>
       <fieldset ng-disabled="ctrl.blockForm2">
-        <b>Relación de Colonias con el Sector</b>
+        <b>Relación de Colonias</b>
         <hr>
 
         <div class="row">
@@ -81,7 +80,7 @@
   </fieldset>
   <div class="modal-footer">
 
-    <button type="button" ng-disabled="ctrl.blocksave" class="btn btn-info btn-sm" ng-click="ctrl.AddSector(0)" title="Guardar Registro"><i class="	glyphicon glyphicon-floppy-disk"></i>GUARDAR</button>
+    <button type="button" ng-disabled="ctrl.blocksave" class="btn btn-info btn-sm" ng-click="ctrl.AddSector()" title="Guardar Registro"><i class="	glyphicon glyphicon-floppy-disk"></i>GUARDAR</button>
     <button type="button" class="btn btn-default-bright btn-sm" ng-click="ctrl.cancel()">cancelar</button>
   </div>
 </form>

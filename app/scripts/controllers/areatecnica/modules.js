@@ -118,6 +118,46 @@ angular
         controller: 'editaservicioCtrl',
         controllerAs: '$ctrl'
       },
+      {
+        name: 'home.areatecnica.hub',
+        data: {
+          pageTitle: 'SOFTV | HUB',
+        },
+        url: '/hub',
+        templateUrl: 'views/areatecnica/hub.html',
+        controller: 'hubCtrl',
+        controllerAs: '$ctrl'
+      },
+      {
+        name: 'home.areatecnica.olt',
+        data: {
+          pageTitle: 'SOFTV | OLT',
+        },
+        url: '/olt',
+        templateUrl: 'views/areatecnica/Postes.html',
+        controller: 'oltCtrl',
+        controllerAs: '$ctrl'
+      },
+      {
+        name: 'home.areatecnica.nap',
+        data: {
+          pageTitle: 'SOFTV | NAP',
+        },
+        url: '/nap',
+        templateUrl: 'views/areatecnica/nap.html',
+        controller: 'napCtrl',
+        controllerAs: '$ctrl'
+      },
+      {
+        name: 'home.areatecnica.nuevanap',
+        data: {
+          pageTitle: 'SOFTV | NAP',
+        },
+        url: '/nuevanap',
+        templateUrl: 'views/areatecnica/nuevoNap.html',
+        controller: 'nuevoNapCtrl',
+        controllerAs: '$ctrl'
+      }
     ];
     states.forEach(function (state) {
       $stateProvider.state(state);
