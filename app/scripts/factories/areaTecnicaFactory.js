@@ -22,9 +22,35 @@ angular
       GetBorHub: '/AreaTecnica/GetBorHub',
       GetMuestraDescOlt: '/AreaTecnica/GetMuestraDescOlt',
       GetInsertaNueDescOlt: '/AreaTecnica/GetInsertaNueDescOlt',
-      
+      GetCONSULTAnap:'/AreaTecnica/GetCONSULTAnap'
     };
     var factory = {};
+    
+  factory.GetCONSULTAnap = function (obj) {
+      var deferred = $q.defer();
+      var config = {
+        headers: {
+          'Authorization': $localStorage.currentUser.token
+        }
+      };
+      var Parametros = {
+        'Op': obj.Op,
+        'IdTap': obj.IdTap,
+        'Clave':obj.Clave,
+        'Sector':obj.Sector,
+        'Poste':obj.Poste,
+        'Colonia':obj.Colonia,
+        'Calle':obj.Calle
+      };
+      $http.post(globalService.getUrl() + paths.GetCONSULTAnap, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+
 
 
     factory.GetInsertaNueDescOlt = function (Clave, Descripcion) {
