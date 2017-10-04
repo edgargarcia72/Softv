@@ -74,7 +74,7 @@
                 </div>
 			</div>
         </div>
-        <uib-tabset active="0" vertical="true" type="tabs">
+        <uib-tabset active="6" vertical="true" type="tabs">
             <uib-tab index="0">
                 <uib-tab-heading>
                     <i class="fa fa-user"></i>  Datos Personales
@@ -448,7 +448,7 @@
                             </div>
                             <div class="col-md-6">
                                 <select name="SlcTipoCuenta" class="form-control input-sm" ng-model="$ctrl.TipoCuenta" ng-options="TC.NOMBRE for TC in $ctrl.TipoCuentaList track by TC.NOMBRE" validate-on="dirty" required required-message="'Obligatorio'">
-                                    <option value="">Selleciona</option>
+                                    <option value="">Seleciona</option>
                                 </select>
                             </div>
                         </div>
@@ -468,7 +468,7 @@
             </uib-tab>
             <uib-tab index="4">
                 <uib-tab-heading>
-                    <i class="fa fa-users"></i> Referencias personales
+                    <i class="fa fa-users"></i> Referencias
                 </uib-tab-heading>
                 <form name="FormRefPersonales" angular-validator-submit="$ctrl.AddRefPersonales()" novalidate angular-validator autocomplete="off">
                     <div class="row">
@@ -571,7 +571,6 @@
                     </div>
                 </form>
             </uib-tab>
-            <!--
             <uib-tab index="6">
                 <uib-tab-heading>
                     <i class="fa fa-list-ol"></i> Servicios
@@ -579,11 +578,275 @@
                 <div class="row">
                     <div class="col-md-10">
                         <div class="col-md-12">
+                            <div class="col-md-4">
+                                <div class="col-md-12">
+                                    <h4 class="text-primary">Servicios Asignados</h4>
+                                </div>
+                                <div class="col-md-offset-6 col-md-3">
+                                    <button type="button" class="btn btn-success btn-xs">GUARDAR</button>
+                                </div>
+                                <div class="col-md-3">
+                                    <button type="button" class="btn btn-danger btn-xs">ELIMINAR</button>
+                                </div>
+                                <div class="col-md-12">
+                                    <br>
+                                </div>
+                                <div class="col-md-12">
+                                    <treecontrol class="tree-light" tree-model="$ctrl.treedata" expanded-nodes="$ctrl.expandedNodes" on-selection="$ctrl.DetalleServicio(node)"> <!--on-selection="ctrl.SelecionaNodo(node, $parentNode)">-->
+                                        <span ng-switch="" on="node.Type">
+                                            <span ng-switch-when="folder" class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
+                                            <span ng-switch-when="pic" class="glyphicon glyphicon-picture" aria-hidden="true"></span>
+                                            <span ng-switch-when="doc" class="glyphicon glyphicon-file" aria-hidden="true"></span>
+                                            <span ng-switch-when="file" class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
+                                            <span ng-switch-when="movie" class="glyphicon glyphicon-film" aria-hidden="true"></span>
+                                            <span ng-switch-when="email" class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                                            <span ng-switch-when="home" class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                                            <span ng-switch-when="trash" class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                        </span> 
+                                        <a style="font-size:10px">{{node.Nombre}} ({{node.Detalle}})</a>
+                                    </treecontrol>
+                                </div>
+                            </div>
+                            <div class="col-md-8" ng-if="$ctrl.Detalle == 0">
+                                <div class="col-md-12">
+                                    <h4 class="text-primary">Detalles Servicio</h4>
+                                </div><!-- Internet -->
+                                <div class="col-md-offset-8 col-md-2">
+                                    <button type="button" class="btn btn-success btn-xs">GUARDAR</button>
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-danger btn-xs">CANCELAR</button>
+                                </div>
+                                <div class="col-md-12">
+                                    <br>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="col-md-6">
+                                        <div class="col-md-12">
+                                            <div class="col-md-4">
+                                                <small><b>Status:</b></small>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <select name="SlcTipoCuenta" class="form-control input-sm" ng-model="$ctrl.TipoCuenta">
+                                                    <option value="">Seleciona</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="col-md-4">
+                                                <small><b>#Ticket:</b></small>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input name="SlcTipoCuenta" class="form-control input-sm" ng-model="$ctrl.TipoCuenta">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="col-md-12">
+                                                <label class="checkbox-inline checkbox-styled">
+                                                    <input type="checkbox" name="CbxPrincipal" ng-model="$ctrl.Principal" ng-disabled="$ctrl.Disable" ng-true-value="'Y'" ng-false-value="'N'" ng-change="$ctrl.buscarStatus()"><span><small>Primer Mensualidad</small></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="col-md-6">
+                                                <label class="checkbox-inline checkbox-styled">
+                                                    <input type="checkbox" name="CbxPrincipal" ng-model="$ctrl.Principal" ng-disabled="$ctrl.Disable" ng-true-value="'Y'" ng-false-value="'N'" ng-change="$ctrl.buscarStatus()"><span><small>Cortesia</small></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="col-md-6 text-center">
+                                                <button type="button" class="btn btn-success btn-xs">...</button>
+                                            </div>
+                                            <div class="col-md-6 text-center">
+                                                <button type="button" class="btn btn-success btn-xs">Descuento</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="col-md-4">
+                                                <small><b>Vendedor:</b></small>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <select class="form-control input-sm">
+                                                    <option value="">Selecciona</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="col-md-4">
+                                                <small><b>Capturo:</b></small>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <select class="form-control input-sm">
+                                                    <option value="">Selecciona</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="col-md-12">
+                                                <small><b>Observaciones:</b></small>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <textarea class="form-control input-xs" rows="2"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="col-md-12 text-center">
+                                            <small class="text-primary"><b>Ultimo Pagado</b></small>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="col-md-6">
+                                                <small><b>Mes</b></small>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <small><b>Año</b></small>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="col-md-6">
+                                                <input class="form-control input-sm">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input class="form-control input-sm">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 text-center">
+                                            <small class="text-primary"><b>Fechas de:</b></small>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="col-md-6">
+                                                <small><b>Contratación:</b></small>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="date" class="form-control input-sm" ng-model="Contratacion">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="col-md-6">
+                                                <small><b>Instalación:</b></small>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input class="form-control input-sm">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="col-md-6">
+                                                <small><b>Suspención:</b></small>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input class="form-control input-sm">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="col-md-6">
+                                                <small><b>Baja:</b></small>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input class="form-control input-sm">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="col-md-6">
+                                                <small><b>Fuera Area:</b></small>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input class="form-control input-sm">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="col-md-6">
+                                                <small><b>Ultimo Pago:</b></small>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input class="form-control input-sm">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-7" ng-if="$ctrl.Detalle == 1">
+                                <div class="col-md-12">
+                                    <h4 class="text-primary">Detalles Aparato</h4>
+                                </div>
+                                <div class="col-md-offset-8 col-md-2">
+                                    <button type="button" class="btn btn-success btn-xs">GUARDAR</button>
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-danger btn-xs">CANCELAR</button>
+                                </div>
+                                <div class="col-md-12">
+                                    <br>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="col-md-6">
+                                        <div class="col-md-6">
+                                            <small><b>Datos Antena:</b></small>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input class="form-control input-sm">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <small><b>Status:</b></small>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input class="form-control input-sm">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <small><b>Modelo:</b></small>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input class="form-control input-sm">
+                                        </div>
+                                        <div class="col-md-12">
+                                            <small><b>Observaciones:</b></small>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <textarea rows="2" class="form-control input-sm"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="col-md-12 text-center">
+                                            <small class="text-primary"><b>Fechas de:</b></small>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="col-md-6">
+                                                <small><b>Activación:</b></small>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input class="form-control input-sm">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="col-md-6">
+                                                <small><b>Suspención:</b></small>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input class="form-control input-sm">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="col-md-6">
+                                                <small><b>Baja:</b></small>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input class="form-control input-sm">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="col-md-12">
+                                            <label class="checkbox-inline checkbox-styled">
+                                                <input type="checkbox" name="CbxPrincipal" ng-model="$ctrl.Principal" ng-disabled="$ctrl.Disable" ng-true-value="'Y'" ng-false-value="'N'" ng-change="$ctrl.buscarStatus()"><span><small>Se renta</small></span>
+                                            </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </uib-tab>
-            -->
         </uib-tabset>
     </div>
 </div>

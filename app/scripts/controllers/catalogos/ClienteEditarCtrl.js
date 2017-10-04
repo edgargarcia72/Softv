@@ -2,7 +2,7 @@
 
 angular
     .module('softvApp')
-    .controller('ClienteEditarCtrl', function(CatalogosFactory, ngNotify, $uibModal, $state, $stateParams, $rootScope, $localStorage){
+    .controller('ClienteEditarCtrl', function(CatalogosFactory, ordenesFactory, ngNotify, $uibModal, $state, $stateParams, $rootScope, $localStorage){
 
         function initData(){
             CatalogosFactory.GetConsultaClientesList(vm.IdContrato).then(function(data){
@@ -20,6 +20,7 @@ angular
                                     GetDatosBancario(vm.IdContrato);
                                     GetReferenciasPersonales(vm.IdContrato);
                                     GetNotas(vm.IdContrato);
+                                    GetServicios(vm.IdContrato);
                                 });
                             });
                         });
@@ -30,6 +31,37 @@ angular
                 }
             });
         }
+        function GetServicios(IdContrato){
+            CatalogosFactory.GetMuestraArbolServicios_ClientesList(IdContrato).then(function(data){
+                console.log(data);
+                vm.treedata = data.GetMuestraArbolServicios_ClientesListResult;
+                vm.expandedNodes=[];
+                angular.forEach(vm.treedata, function(value, key) {
+                    vm.expandedNodes.push(value);
+                });
+            });
+            /*var Parametros = {
+                'clv_orden': 10647
+            };
+            ordenesFactory.MuestraArbolServiciosAparatosPorinstalar(Parametros).then(function (data) {
+                console.log(data);
+                vm.treedata = data.GetMuestraArbolServiciosAparatosPorinstalarListResult;
+                vm.expandedNodes=[];
+                angular.forEach(vm.treedata, function(value, key) {
+                    vm.expandedNodes.push(value);
+                });
+            });*/
+         }
+
+         function DetalleServicio(ObjServicio){
+            console.log('ok');
+            console.log(ObjServicio);
+            if(ObjServicio.Tipo = 'S'){
+                console.log('Servicio');
+            }else if(ObjServicio.Tipo = 'A'){
+                console.log('Aparato');
+            }
+         }
 
         function GetDatosClientes(IdContratoCliente){
             CatalogosFactory.GetConsultaClientesList(IdContratoCliente).then(function(data){
@@ -542,6 +574,8 @@ angular
         vm.OpenEditRefPersonal = OpenEditRefPersonal;
         vm.OpenDeleteRefPersonal = OpenDeleteRefPersonal;
         vm.AddNotas = AddNotas;
+        vm.DetalleServicio = DetalleServicio;
+        vm.Detalle = 0;
         initData();
 
     });

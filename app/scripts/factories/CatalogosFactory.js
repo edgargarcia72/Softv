@@ -182,7 +182,8 @@ angular
       GetBuscaMotivosFacturaCancelada: '/CatalogoMotivos/GetBuscaMotivosFacturaCancelada',
       GetNUEMOTIVOSFACTURACANCELACION: '/CatalogoMotivos/GetNUEMOTIVOSFACTURACANCELACION',
       GetMODMOTIVOSFACTURACANCELACION: '/CatalogoMotivos/GetMODMOTIVOSFACTURACANCELACION',
-      GetBORMOTIVOSFACTURACANCELACION: '/CatalogoMotivos/GetBORMOTIVOSFACTURACANCELACION'
+      GetBORMOTIVOSFACTURACANCELACION: '/CatalogoMotivos/GetBORMOTIVOSFACTURACANCELACION',
+      GetMuestraArbolServicios_ClientesList: '/MuestraArbolServicios_Clientes/GetMuestraArbolServicios_ClientesList'
     };
 
     factory.AddSucursal = function (SUCURSALESobj) {
@@ -3017,6 +3018,18 @@ angular
       return deferred.promise;
     };
 
+    factory.GetMuestraArbolServicios_ClientesList = function (Contrato) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {'Contrato': Contrato};
+      console.log(Parametros);
+      $http.post(globalService.getUrl() + paths.GetMuestraArbolServicios_ClientesList, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
     return factory;
 
   });
