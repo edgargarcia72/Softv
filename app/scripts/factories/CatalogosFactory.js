@@ -183,7 +183,12 @@ angular
       GetNUEMOTIVOSFACTURACANCELACION: '/CatalogoMotivos/GetNUEMOTIVOSFACTURACANCELACION',
       GetMODMOTIVOSFACTURACANCELACION: '/CatalogoMotivos/GetMODMOTIVOSFACTURACANCELACION',
       GetBORMOTIVOSFACTURACANCELACION: '/CatalogoMotivos/GetBORMOTIVOSFACTURACANCELACION',
-      GetMuestraArbolServicios_ClientesList: '/MuestraArbolServicios_Clientes/GetMuestraArbolServicios_ClientesList'
+      GetMuestraArbolServicios_ClientesList: '/MuestraArbolServicios_Clientes/GetMuestraArbolServicios_ClientesList',
+      GetStatusNet: '/ContratacionServicio/GetStatusNet',
+      GetStatusCableModem: '/ContratacionServicio/GetStatusCableModem',
+      GetMuestraPromotoresNet: '/ContratacionServicio/GetMuestraPromotoresNet',
+      GetMuestra_Usuarios: '/ContratacionServicio/GetMuestra_Usuarios',
+      GetCONRel_ContNet_Usuarios: '/ContratacionServicio/GetCONRel_ContNet_Usuarios'
     };
 
     factory.AddSucursal = function (SUCURSALESobj) {
@@ -3030,6 +3035,66 @@ angular
       });
       return deferred.promise;
     };
+
+    factory.GetStatusNet = function () {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      $http.get(globalService.getUrl() + paths.GetStatusNet, config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetStatusCableModem = function () {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      $http.get(globalService.getUrl() + paths.GetStatusCableModem, config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetMuestraPromotoresNet = function () {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      $http.get(globalService.getUrl() + paths.GetMuestraPromotoresNet, config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetMuestra_Usuarios = function (ObjUsuario) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = ObjUsuario;
+      console.log(Parametros);
+      $http.post(globalService.getUrl() + paths.GetMuestra_Usuarios, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetCONRel_ContNet_Usuarios = function (Clv_UnicaNet) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {Clv_UnicaNet: Clv_UnicaNet};
+      console.log(Parametros);
+      $http.post(globalService.getUrl() + paths.GetCONRel_ContNet_Usuarios, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
     return factory;
 
   });

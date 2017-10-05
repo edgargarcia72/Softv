@@ -2,9 +2,21 @@
 
 angular
     .module('softvApp')
-    .controller('ClienteEditarCtrl', function(CatalogosFactory, ordenesFactory, ngNotify, $uibModal, $state, $stateParams, $rootScope, $localStorage){
+    .controller('ClienteEditarCtrl', function(CatalogosFactory, ngNotify, $uibModal, $state, $stateParams, $rootScope, $localStorage){
 
         function initData(){
+            CatalogosFactory.GetStatusNet().then(function(data){
+                console.log(data);
+                vm.StatusServicioList = data.GetStatusNetResult;
+            });
+            CatalogosFactory.GetStatusCableModem().then(function(data){
+                console.log(data);
+                vm.StatusAparatoList = data.GetStatusCableModemResult;
+            });
+            CatalogosFactory.GetMuestraPromotoresNet().then(function(data){
+                console.log(data);
+                vm.VendedorList = data.GetMuestraPromotoresNetResult;
+            });
             CatalogosFactory.GetConsultaClientesList(vm.IdContrato).then(function(data){
                 if(data.GetConsultaClientesListResult.length > 0){
                     CatalogosFactory.GetPlazaList($localStorage.currentUser.idUsuario).then(function(data){
@@ -30,6 +42,8 @@ angular
                     $state.go('home.catalogos.clientes');
                 }
             });
+
+
         }
         function GetServicios(IdContrato){
             CatalogosFactory.GetMuestraArbolServicios_ClientesList(IdContrato).then(function(data){
@@ -40,26 +54,37 @@ angular
                     vm.expandedNodes.push(value);
                 });
             });
-            /*var Parametros = {
-                'clv_orden': 10647
-            };
-            ordenesFactory.MuestraArbolServiciosAparatosPorinstalar(Parametros).then(function (data) {
-                console.log(data);
-                vm.treedata = data.GetMuestraArbolServiciosAparatosPorinstalarListResult;
-                vm.expandedNodes=[];
-                angular.forEach(vm.treedata, function(value, key) {
-                    vm.expandedNodes.push(value);
-                });
-            });*/
          }
 
          function DetalleServicio(ObjServicio){
             console.log('ok');
             console.log(ObjServicio);
-            if(ObjServicio.Tipo = 'S'){
+            if(ObjServicio.Tipo == 'S'){
                 console.log('Servicio');
-            }else if(ObjServicio.Tipo = 'A'){
+                vm.DivServicio = true;
+                vm.DivAparato = false;
+                //Consultar Servicio
+                var ObjUsuario = {
+                    'CLV_UNICANET': 2,
+                    'tipo_serv': 2//Consultar Deep Servicio
+                };
+                CatalogosFactory.GetMuestra_Usuarios(ObjUsuario).then(function(data){
+                    console.log(data);
+                    vm.UsuarioList = data.GetMuestra_UsuariosResult;
+                    CatalogosFactory.GetCONRel_ContNet_Usuarios(2).then(function(data){
+                        console.log(data);
+                        var UsuarioResult = data.GetCONRel_ContNet_UsuariosResult;
+                        for(var i = 0; vm.UsuarioList.length > i; i ++){
+                            if(vm.UsuarioList[i].Clave == UsuarioResult.Clave){
+                                vm.Usuario = vm.UsuarioList[i];
+                            }
+                        }
+                    });
+                });
+            }else if(ObjServicio.Tipo == 'A'){
                 console.log('Aparato');
+                vm.DivServicio = false;
+                vm.DivAparato = true;
             }
          }
 
@@ -575,7 +600,8 @@ angular
         vm.OpenDeleteRefPersonal = OpenDeleteRefPersonal;
         vm.AddNotas = AddNotas;
         vm.DetalleServicio = DetalleServicio;
-        vm.Detalle = 0;
+        vm.DivServicio = false;
+        vm.DivAparato = false;
         initData();
 
     });

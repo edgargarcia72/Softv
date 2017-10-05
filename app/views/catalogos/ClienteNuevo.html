@@ -583,10 +583,10 @@
                                     <h4 class="text-primary">Servicios Asignados</h4>
                                 </div>
                                 <div class="col-md-offset-6 col-md-3">
-                                    <button type="button" class="btn btn-success btn-xs">GUARDAR</button>
+                                    <button type="button" class="btn btn-success btn-xs" title="Agregar Servicio">AGREGAR</button>
                                 </div>
                                 <div class="col-md-3">
-                                    <button type="button" class="btn btn-danger btn-xs">ELIMINAR</button>
+                                    <button type="button" class="btn btn-danger btn-xs" title="Eliminar Servicio">ELIMINAR</button>
                                 </div>
                                 <div class="col-md-12">
                                     <br>
@@ -607,7 +607,7 @@
                                     </treecontrol>
                                 </div>
                             </div>
-                            <div class="col-md-8" ng-if="$ctrl.Detalle == 0">
+                            <div class="col-md-8" ng-if="$ctrl.DivServicio">
                                 <div class="col-md-12">
                                     <h4 class="text-primary">Detalles Servicio</h4>
                                 </div><!-- Internet -->
@@ -623,34 +623,34 @@
                                 <div class="col-md-12">
                                     <div class="col-md-6">
                                         <div class="col-md-12">
-                                            <div class="col-md-4">
+                                            <div class="col-md-3">
                                                 <small><b>Status:</b></small>
                                             </div>
-                                            <div class="col-md-8">
-                                                <select name="SlcTipoCuenta" class="form-control input-sm" ng-model="$ctrl.TipoCuenta">
-                                                    <option value="">Seleciona</option>
+                                            <div class="col-md-9">
+                                                <select class="form-control input-sm" ng-model="$ctrl.StatusServicio" ng-options="SS.Concepto for SS in $ctrl.StatusServicioList track by SS.Clave">
+                                                    <option value="">Selecciona</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
-                                            <div class="col-md-4">
+                                            <div class="col-md-3">
                                                 <small><b>#Ticket:</b></small>
                                             </div>
-                                            <div class="col-md-8">
+                                            <div class="col-md-9">
                                                 <input name="SlcTipoCuenta" class="form-control input-sm" ng-model="$ctrl.TipoCuenta">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="col-md-12">
                                                 <label class="checkbox-inline checkbox-styled">
-                                                    <input type="checkbox" name="CbxPrincipal" ng-model="$ctrl.Principal" ng-disabled="$ctrl.Disable" ng-true-value="'Y'" ng-false-value="'N'" ng-change="$ctrl.buscarStatus()"><span><small>Primer Mensualidad</small></span>
+                                                    <input type="checkbox" name="CbxPrimerMen" ng-model="$ctrl.PrimerMen" ng-true-value="'Y'" ng-false-value="'N'"><span><small>Primer Mensualidad</small></span>
                                                 </label>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="col-md-6">
                                                 <label class="checkbox-inline checkbox-styled">
-                                                    <input type="checkbox" name="CbxPrincipal" ng-model="$ctrl.Principal" ng-disabled="$ctrl.Disable" ng-true-value="'Y'" ng-false-value="'N'" ng-change="$ctrl.buscarStatus()"><span><small>Cortesia</small></span>
+                                                    <input type="checkbox" name="CbxCortesia" ng-model="$ctrl.Cortesia" ng-true-value="'Y'" ng-false-value="'N'"><span><small>Cortesia</small></span>
                                                 </label>
                                             </div>
                                         </div>
@@ -663,21 +663,21 @@
                                             </div>
                                         </div>
                                         <div class="col-md-12">
-                                            <div class="col-md-4">
+                                            <div class="col-md-3">
                                                 <small><b>Vendedor:</b></small>
                                             </div>
-                                            <div class="col-md-8">
-                                                <select class="form-control input-sm">
+                                            <div class="col-md-9">
+                                                <select class="form-control input-sm" ng-model="$ctrl.Vendedor" ng-options="V.Nombre for V in $ctrl.VendedorList track by V.Clv_Vendedor">
                                                     <option value="">Selecciona</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
-                                            <div class="col-md-4">
+                                            <div class="col-md-3">
                                                 <small><b>Capturo:</b></small>
                                             </div>
-                                            <div class="col-md-8">
-                                                <select class="form-control input-sm">
+                                            <div class="col-md-9">
+                                                <select class="form-control input-sm" ng-model="$ctrl.Usuario" ng-options="U.Nombre for U in $ctrl.UsuarioList track by U.Clave">
                                                     <option value="">Selecciona</option>
                                                 </select>
                                             </div>
@@ -687,7 +687,7 @@
                                                 <small><b>Observaciones:</b></small>
                                             </div>
                                             <div class="col-md-12">
-                                                <textarea class="form-control input-xs" rows="2"></textarea>
+                                                <textarea class="form-control input-sm" rows="2"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -696,18 +696,16 @@
                                             <small class="text-primary"><b>Ultimo Pagado</b></small>
                                         </div>
                                         <div class="col-md-12">
-                                            <div class="col-md-6">
+                                            <div class="col-md-2">
                                                 <small><b>Mes</b></small>
                                             </div>
-                                            <div class="col-md-6">
-                                                <small><b>Año</b></small>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
                                                 <input class="form-control input-sm">
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-2">
+                                                <small><b>Año</b></small>
+                                            </div>
+                                            <div class="col-md-4">
                                                 <input class="form-control input-sm">
                                             </div>
                                         </div>
@@ -715,87 +713,91 @@
                                             <small class="text-primary"><b>Fechas de:</b></small>
                                         </div>
                                         <div class="col-md-12">
-                                            <div class="col-md-6">
+                                            <div class="col-md-5">
                                                 <small><b>Contratación:</b></small>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-7">
                                                 <input type="date" class="form-control input-sm" ng-model="Contratacion">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
-                                            <div class="col-md-6">
+                                            <div class="col-md-5">
                                                 <small><b>Instalación:</b></small>
                                             </div>
-                                            <div class="col-md-6">
-                                                <input class="form-control input-sm">
+                                            <div class="col-md-7">
+                                                <input type="date" class="form-control input-sm">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
-                                            <div class="col-md-6">
+                                            <div class="col-md-5">
                                                 <small><b>Suspención:</b></small>
                                             </div>
-                                            <div class="col-md-6">
-                                                <input class="form-control input-sm">
+                                            <div class="col-md-7">
+                                                <input type="date" class="form-control input-sm">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
-                                            <div class="col-md-6">
+                                            <div class="col-md-5">
                                                 <small><b>Baja:</b></small>
                                             </div>
-                                            <div class="col-md-6">
-                                                <input class="form-control input-sm">
+                                            <div class="col-md-7">
+                                                <input type="date" class="form-control input-sm">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
-                                            <div class="col-md-6">
+                                            <div class="col-md-5">
                                                 <small><b>Fuera Area:</b></small>
                                             </div>
-                                            <div class="col-md-6">
-                                                <input class="form-control input-sm">
+                                            <div class="col-md-7">
+                                                <input type="date" class="form-control input-sm">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
-                                            <div class="col-md-6">
+                                            <div class="col-md-5">
                                                 <small><b>Ultimo Pago:</b></small>
                                             </div>
-                                            <div class="col-md-6">
-                                                <input class="form-control input-sm">
+                                            <div class="col-md-7">
+                                                <input type="date" class="form-control input-sm">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-7" ng-if="$ctrl.Detalle == 1">
+                            <div class="col-md-7" ng-if="$ctrl.DivAparato">
                                 <div class="col-md-12">
                                     <h4 class="text-primary">Detalles Aparato</h4>
                                 </div>
-                                <div class="col-md-offset-8 col-md-2">
-                                    <button type="button" class="btn btn-success btn-xs">GUARDAR</button>
-                                </div>
-                                <div class="col-md-2">
-                                    <button type="button" class="btn btn-danger btn-xs">CANCELAR</button>
-                                </div>
                                 <div class="col-md-12">
-                                    <br>
+                                    <div class="col-md-offset-8 col-md-2">
+                                        <button type="button" class="btn btn-success btn-xs">GUARDAR</button>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button type="button" class="btn btn-danger btn-xs">CANCELAR</button>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <br>
+                                    </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="col-md-6">
-                                        <div class="col-md-6">
-                                            <small><b>Datos Antena:</b></small>
+                                        <div class="col-md-5">
+                                            <small><b>Tipo Aparato:</b></small>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-7">
                                             <input class="form-control input-sm">
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-5">
                                             <small><b>Status:</b></small>
                                         </div>
-                                        <div class="col-md-6">
-                                            <input class="form-control input-sm">
+                                        <div class="col-md-7">
+                                            <select class="form-control input-sm" ng-model="$ctrl.StatusAparato" ng-options="SS.Concepto for SS in $ctrl.StatusAparatoList track by SS.Clave">
+                                                <option value="">Selecciona</option>
+                                            </select>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-5">
                                             <small><b>Modelo:</b></small>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-7">
                                             <input class="form-control input-sm">
                                         </div>
                                         <div class="col-md-12">
@@ -810,27 +812,27 @@
                                             <small class="text-primary"><b>Fechas de:</b></small>
                                         </div>
                                         <div class="col-md-12">
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
                                                 <small><b>Activación:</b></small>
                                             </div>
-                                            <div class="col-md-6">
-                                                <input class="form-control input-sm">
+                                            <div class="col-md-8">
+                                                <input type="date" class="form-control input-sm">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
                                                 <small><b>Suspención:</b></small>
                                             </div>
-                                            <div class="col-md-6">
-                                                <input class="form-control input-sm">
+                                            <div class="col-md-8">
+                                                <input type="date" class="form-control input-sm">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
                                                 <small><b>Baja:</b></small>
                                             </div>
-                                            <div class="col-md-6">
-                                                <input class="form-control input-sm">
+                                            <div class="col-md-8">
+                                                <input type="date" class="form-control input-sm">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
