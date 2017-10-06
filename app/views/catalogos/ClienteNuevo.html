@@ -583,7 +583,7 @@
                                     <h4 class="text-primary">Servicios Asignados</h4>
                                 </div>
                                 <div class="col-md-offset-6 col-md-3">
-                                    <button type="button" class="btn btn-success btn-xs" title="Agregar Servicio">AGREGAR</button>
+                                    <button type="button" class="btn btn-success btn-xs" ng-click="$ctrl.OpenAddServicioCliente()" title="Agregar Servicio">AGREGAR</button>
                                 </div>
                                 <div class="col-md-3">
                                     <button type="button" class="btn btn-danger btn-xs" title="Eliminar Servicio">ELIMINAR</button>
@@ -592,7 +592,7 @@
                                     <br>
                                 </div>
                                 <div class="col-md-12">
-                                    <treecontrol class="tree-light" tree-model="$ctrl.treedata" expanded-nodes="$ctrl.expandedNodes" on-selection="$ctrl.DetalleServicio(node)"> <!--on-selection="ctrl.SelecionaNodo(node, $parentNode)">-->
+                                    <treecontrol class="tree-light" tree-model="$ctrl.treedata" expanded-nodes="$ctrl.expandedNodes" on-selection="$ctrl.DetalleConcepto(node)"> <!--on-selection="ctrl.SelecionaNodo(node, $parentNode)">-->
                                         <span ng-switch="" on="node.Type">
                                             <span ng-switch-when="folder" class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
                                             <span ng-switch-when="pic" class="glyphicon glyphicon-picture" aria-hidden="true"></span>
@@ -608,20 +608,30 @@
                                 </div>
                             </div>
                             <div class="col-md-8" ng-if="$ctrl.DivServicio">
-                                <div class="col-md-12">
-                                    <h4 class="text-primary">Detalles Servicio</h4>
+                                <div class="col-md-3">
+                                    <h4 class="text-primary">Detalle Servicio:</h4>
                                 </div><!-- Internet -->
-                                <div class="col-md-offset-8 col-md-2">
-                                    <button type="button" class="btn btn-success btn-xs">GUARDAR</button>
+                                <div class="col-md-9">
+                                    <h4 class="text-danger">{{ $ctrl.NombreServicio }} ({{ $ctrl.DetalleServicio }}) - {{ $ctrl.Clv_UnicaNet }}</h4>
                                 </div>
-                                <div class="col-md-2">
-                                    <button type="button" class="btn btn-danger btn-xs">CANCELAR</button>
+                                <div class="col-md-offset-10 col-md-2">
+                                    <button type="button" class="btn btn-success btn-xs">GUARDAR</button>
                                 </div>
                                 <div class="col-md-12">
                                     <br>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="col-md-6">
+                                        <!--
+                                        <div class="col-md-12">
+                                            <div class="col-md-6">
+                                                <small><b>Dato:</b></small>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <small>{{ $ctrl.NombreServicio }}</small>
+                                            </div>
+                                        </div>
+                                        -->
                                         <div class="col-md-12">
                                             <div class="col-md-3">
                                                 <small><b>Status:</b></small>
@@ -637,7 +647,7 @@
                                                 <small><b>#Ticket:</b></small>
                                             </div>
                                             <div class="col-md-9">
-                                                <input name="SlcTipoCuenta" class="form-control input-sm" ng-model="$ctrl.TipoCuenta">
+                                                <input name="InpFactura" class="form-control input-sm" ng-model="$ctrl.Factura">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
@@ -687,7 +697,7 @@
                                                 <small><b>Observaciones:</b></small>
                                             </div>
                                             <div class="col-md-12">
-                                                <textarea class="form-control input-sm" rows="2"></textarea>
+                                                <textarea name="TxaObservacionesServicio" class="form-control input-sm" rows="2" ng-model="$ctrl.ObservacionesServicio"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -700,13 +710,13 @@
                                                 <small><b>Mes</b></small>
                                             </div>
                                             <div class="col-md-4">
-                                                <input class="form-control input-sm">
+                                                <input name="InpUltimoMesServicio" class="form-control input-sm" ng-model="$ctrl.UltimoMesServicio">
                                             </div>
                                             <div class="col-md-2">
                                                 <small><b>Año</b></small>
                                             </div>
                                             <div class="col-md-4">
-                                                <input class="form-control input-sm">
+                                                <input name="InpUltimoAnioServicio" class="form-control input-sm" ng-model="$ctrl.UltimoAnioServicio">
                                             </div>
                                         </div>
                                         <div class="col-md-12 text-center">
@@ -717,7 +727,7 @@
                                                 <small><b>Contratación:</b></small>
                                             </div>
                                             <div class="col-md-7">
-                                                <input type="date" class="form-control input-sm" ng-model="Contratacion">
+                                                <input type="date" name="InpFechaContratacion" class="form-control input-sm" ng-model="$ctrl.FechaContratacion">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
@@ -725,7 +735,7 @@
                                                 <small><b>Instalación:</b></small>
                                             </div>
                                             <div class="col-md-7">
-                                                <input type="date" class="form-control input-sm">
+                                                <input type="date" name="InpFechaInstalacion" class="form-control input-sm" ng-model="$ctrl.FechaInstalacion">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
@@ -733,7 +743,7 @@
                                                 <small><b>Suspención:</b></small>
                                             </div>
                                             <div class="col-md-7">
-                                                <input type="date" class="form-control input-sm">
+                                                <input type="date" name="InpFechaSuspencion" class="form-control input-sm" ng-model="$ctrl.FechaSuspencion">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
@@ -741,7 +751,7 @@
                                                 <small><b>Baja:</b></small>
                                             </div>
                                             <div class="col-md-7">
-                                                <input type="date" class="form-control input-sm">
+                                                <input type="date" name="InpFechaBaja" class="form-control input-sm" ng-model="$ctrl.FechaBaja">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
@@ -749,7 +759,7 @@
                                                 <small><b>Fuera Area:</b></small>
                                             </div>
                                             <div class="col-md-7">
-                                                <input type="date" class="form-control input-sm">
+                                                <input type="date" name="InpFechaFueraArea" class="form-control input-sm" ng-model="$ctrl.FechaFueraArea">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
@@ -757,15 +767,25 @@
                                                 <small><b>Ultimo Pago:</b></small>
                                             </div>
                                             <div class="col-md-7">
-                                                <input type="date" class="form-control input-sm">
+                                                <input type="date" name="InpFechaUltimoPago" class="form-control input-sm" ng-model="$ctrl.FechaUltimoPago">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="col-md-5">
+                                                <small><b>Cancelación:</b></small>
+                                            </div>
+                                            <div class="col-md-7">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-7" ng-if="$ctrl.DivAparato">
-                                <div class="col-md-12">
-                                    <h4 class="text-primary">Detalles Aparato</h4>
+                                <div class="col-md-3">
+                                    <h4 class="text-primary">Detalle Aparato:</h4>
+                                </div>
+                                <div class="col-md-9">
+                                    <h4 class="text-danger">{{ $ctrl.NombreAparato }} ({{ $ctrl.DetalleAparato }}) - {{ $ctrl.ContratoNet }}</h4>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="col-md-offset-8 col-md-2">
@@ -780,12 +800,14 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="col-md-6">
+                                        <!--
                                         <div class="col-md-5">
-                                            <small><b>Tipo Aparato:</b></small>
+                                            <small><b>Dato:</b></small>
                                         </div>
                                         <div class="col-md-7">
                                             <input class="form-control input-sm">
                                         </div>
+                                        -->
                                         <div class="col-md-5">
                                             <small><b>Status:</b></small>
                                         </div>
@@ -804,7 +826,7 @@
                                             <small><b>Observaciones:</b></small>
                                         </div>
                                         <div class="col-md-12">
-                                            <textarea rows="2" class="form-control input-sm"></textarea>
+                                            <textarea name="TxaObservacionesAparato" rows="2" class="form-control input-sm" ng-model="$ctrl.ObservacionesAparatos"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -816,7 +838,7 @@
                                                 <small><b>Activación:</b></small>
                                             </div>
                                             <div class="col-md-8">
-                                                <input type="date" class="form-control input-sm">
+                                                <input type="date" name="Inp" class="form-control input-sm" ng-model="$ctrl.FechaActivacionAparato">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
@@ -824,7 +846,7 @@
                                                 <small><b>Suspención:</b></small>
                                             </div>
                                             <div class="col-md-8">
-                                                <input type="date" class="form-control input-sm">
+                                                <input type="date" name="Inp" class="form-control input-sm" ng-model="$ctrl.FechaSuspencionAparato">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
@@ -832,13 +854,13 @@
                                                 <small><b>Baja:</b></small>
                                             </div>
                                             <div class="col-md-8">
-                                                <input type="date" class="form-control input-sm">
+                                                <input type="date" name="Inp" class="form-control input-sm" ng-model="$ctrl.FechaBajaAparato">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="col-md-12">
                                             <label class="checkbox-inline checkbox-styled">
-                                                <input type="checkbox" name="CbxPrincipal" ng-model="$ctrl.Principal" ng-disabled="$ctrl.Disable" ng-true-value="'Y'" ng-false-value="'N'" ng-change="$ctrl.buscarStatus()"><span><small>Se renta</small></span>
+                                                <input type="checkbox" name="CbxSeRenta" ng-model="$ctrl.SeRenta" ng-true-value="'Y'" ng-false-value="'N'"><span><small>Se renta</small></span>
                                             </label>
                                             </div>
                                         </div>

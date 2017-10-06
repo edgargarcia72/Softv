@@ -1,0 +1,34 @@
+<form name="FormCalle" angular-validator-submit="ctrl.SaveCalle()" novalidate angular-validator autocomplete="off">
+    <div class="modal-header">
+        <button class="close" type="button" aria-label="close" ng-click="ctrl.cancel()">x</button>
+        <h4 class="modal-title"><i ng-class="ctrl.Icono"></i> {{ ctrl.Titulo }} {{ ctrl.IdCalle }}</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <b><smal>Tipo Servicio:</small></b>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <b><smal>Servicio:</small></b>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary btn-sm" title="Guardar Calle" ng-disabled="ctrl.DisableAdd">Guardar</button>
+        <button type="button" class="btn btn-default btn-sm" ng-click="ctrl.cancel()" title="Salir">Cancelar</button>
+    </div>
+</form>

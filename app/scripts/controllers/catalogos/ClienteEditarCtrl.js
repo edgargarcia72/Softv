@@ -45,48 +45,6 @@ angular
 
 
         }
-        function GetServicios(IdContrato){
-            CatalogosFactory.GetMuestraArbolServicios_ClientesList(IdContrato).then(function(data){
-                console.log(data);
-                vm.treedata = data.GetMuestraArbolServicios_ClientesListResult;
-                vm.expandedNodes=[];
-                angular.forEach(vm.treedata, function(value, key) {
-                    vm.expandedNodes.push(value);
-                });
-            });
-         }
-
-         function DetalleServicio(ObjServicio){
-            console.log('ok');
-            console.log(ObjServicio);
-            if(ObjServicio.Tipo == 'S'){
-                console.log('Servicio');
-                vm.DivServicio = true;
-                vm.DivAparato = false;
-                //Consultar Servicio
-                var ObjUsuario = {
-                    'CLV_UNICANET': 2,
-                    'tipo_serv': 2//Consultar Deep Servicio
-                };
-                CatalogosFactory.GetMuestra_Usuarios(ObjUsuario).then(function(data){
-                    console.log(data);
-                    vm.UsuarioList = data.GetMuestra_UsuariosResult;
-                    CatalogosFactory.GetCONRel_ContNet_Usuarios(2).then(function(data){
-                        console.log(data);
-                        var UsuarioResult = data.GetCONRel_ContNet_UsuariosResult;
-                        for(var i = 0; vm.UsuarioList.length > i; i ++){
-                            if(vm.UsuarioList[i].Clave == UsuarioResult.Clave){
-                                vm.Usuario = vm.UsuarioList[i];
-                            }
-                        }
-                    });
-                });
-            }else if(ObjServicio.Tipo == 'A'){
-                console.log('Aparato');
-                vm.DivServicio = false;
-                vm.DivAparato = true;
-            }
-         }
 
         function GetDatosClientes(IdContratoCliente){
             CatalogosFactory.GetConsultaClientesList(IdContratoCliente).then(function(data){
@@ -580,6 +538,148 @@ angular
             }
         }
 
+        function GetServicios(IdContrato){
+            CatalogosFactory.GetMuestraArbolServicios_ClientesList(IdContrato).then(function(data){
+                console.log(data);
+                vm.treedata = data.GetMuestraArbolServicios_ClientesListResult;
+                vm.expandedNodes=[];
+                angular.forEach(vm.treedata, function(value, key) {
+                    vm.expandedNodes.push(value);
+                });
+            });
+        }
+
+        function DetalleConcepto(ObjConcepto){
+            console.log('ok');
+            console.log(ObjConcepto);
+            if(ObjConcepto.Tipo == 'S'){
+                console.log('Servicio');
+                vm.DivServicio = true;
+                vm.DivAparato = false;
+                var Clv_UnicaNet = ObjConcepto.Clv_UnicaNet;
+                vm.NombreServicio = ObjConcepto.Nombre;
+                vm.DetalleServicio = ObjConcepto.Detalle;
+                console.log('Clv_Unica', Clv_UnicaNet);
+                CatalogosFactory.GetClientesServicioList(Clv_UnicaNet).then(function(data){
+                    console.log(data);
+                    var ServicioResult = data.GetClientesServicioListResult[0];
+                    vm.Clv_UnicaNet = ServicioResult.Clv_UnicaNet;
+                    vm.Factura = ServicioResult.factura;
+                    vm.ObservacionesServicio = ServicioResult.Obs;
+                    vm.UltimoMesServicio = ServicioResult.ultimo_mes;
+                    vm.UltimoAnioServicio = ServicioResult.ultimo_anio;
+                    vm.FechaContratacion = toDate(ServicioResult.fecha_solicitud);
+                    vm.FechaInstalacion = toDate(ServicioResult.fecha_instalacio);
+                    vm.FechaSuspencion = toDate(ServicioResult.fecha_suspension);
+                    vm.FechaBaja = toDate(ServicioResult.fecha_baja);
+                    vm.FechaFueraArea = toDate(ServicioResult.fecha_Fuera_Area);
+                    vm.FechaUltimoPago = toDate(ServicioResult.FECHA_ULT_PAGO);
+                    vm.PrimerMen = (ServicioResult.primerMesAnt == 1)? 'Y' : 'N';
+                    vm.Cortesia = (ServicioResult.Cortesia == 1)? 'Y' : 'N';
+                    var Status = ServicioResult.status;
+                    var Vendedor = ServicioResult.Clv_Vendedor;
+                    var Clv_Servicio = ServicioResult.Clv_Servicio;
+                    for(var i = 0; vm.VendedorList.length > i; i ++){
+                        if(vm.VendedorList[i].Clv_StatusNet == Vendedor){
+                            vm.StatusServicio = vm.VendedorList[i];
+                        }
+                    }
+                    for(var i = 0; vm.StatusServicioList.length > i; i ++){
+                        if(vm.StatusServicioList[i].Clv_StatusNet == Status){
+                            vm.StatusServicio = vm.StatusServicioList[i];
+                        }
+                    }
+                    CatalogosFactory.GetDeepServicios_New(Clv_Servicio).then(function(data){
+                        console.log(data);
+                        var Clv_TipSer = data.GetDeepServicios_NewResult.Clv_TipSer;
+                        var ObjUsuario = {
+                            'CLV_UNICANET': vm.Clv_UnicaNet,
+                            'tipo_serv': Clv_TipSer
+                        };
+                        CatalogosFactory.GetMuestra_Usuarios(ObjUsuario).then(function(data){
+                            console.log(data);
+                            vm.UsuarioList = data.GetMuestra_UsuariosResult;
+                            CatalogosFactory.GetCONRel_ContNet_Usuarios(vm.Clv_UnicaNet).then(function(data){
+                                console.log(data);
+                                var UsuarioResult = data.GetCONRel_ContNet_UsuariosResult;
+                                for(var i = 0; vm.UsuarioList.length > i; i ++){
+                                    if(vm.UsuarioList[i].Clave == UsuarioResult.Clave){
+                                        vm.Usuario = vm.UsuarioList[i];
+                                    }
+                                }
+                            });
+                        });
+                    });
+                });                
+            }else if(ObjConcepto.Tipo == 'A'){
+                console.log('Aparato');
+                vm.DivServicio = false;
+                vm.DivAparato = true;
+                var ContratoNet = ObjConcepto.ContratoNet;
+                vm.NombreAparato = ObjConcepto.Nombre;
+                vm.DetalleAparato = ObjConcepto.Detalle;
+                CatalogosFactory.GetClientesAparatoList(ContratoNet).then(function(data){
+                    console.log(data);
+                    var AparatoResult = data.GetClientesAparatoListResult[0];
+                    vm.ContratoNet = AparatoResult.ContratoNet;
+                    vm.ObservacionesAparatos = AparatoResult.Obs;
+                    vm.FechaActivacionAparato = toDate(AparatoResult.Fecha_Activacion);
+                    vm.FechaSuspencionAparato = toDate(AparatoResult.Fecha_Suspension);
+                    vm.FechaBajaAparato = toDate(AparatoResult.Fecha_Baja);
+                    vm.SeRenta = (AparatoResult.SeRenta == true)? 'Y' : 'N';
+                    var Status = AparatoResult.Status;
+                    for(var i = 0; vm.StatusAparatoList.length > i; i ++){
+                        if(vm.StatusAparatoList[i].Clv_StatusNet == Status){
+                            vm.StatusAparato = vm.StatusAparatoList[i];
+                        }
+                    }
+                });
+            }
+        }
+
+        function OpenAddServicioCliente(){
+            //var ObjRefCliente = ObjRefCliente;
+            var modalInstance = $uibModal.open({
+                animation: true,
+                ariaLabelledBy: 'modal-title',
+                ariaDescribedBy: 'modal-body', 
+                templateUrl: 'views/catalogos/ModalServicioClienteForm.html',
+                controller: 'ModalServicioClienteAddCtrl',
+                controllerAs: 'ctrl',
+                backdrop: 'static',
+                keyboard: false,
+                class: 'modal-backdrop fade',
+                size: 'md'/*,
+                resolve: {
+                    ObjRefCliente: function () {
+                        return ObjRefCliente;
+                    }
+                }*/
+            });
+        }
+
+        function OpenDeleteServicioServicioCliente(){
+            //var ObjRefCliente = ObjRefCliente;
+            var modalInstance = $uibModal.open({
+                animation: true,
+                ariaLabelledBy: 'modal-title',
+                ariaDescribedBy: 'modal-body',
+                templateUrl: 'views/catalogos/ModalServicioClienteDelete.html',
+                controller: 'ModalServicioClienteDeleteCtrl',
+                controllerAs: 'ctrl',
+                backdrop: 'static',
+                keyboard: false,
+                class: 'modal-backdrop fade',
+                size: 'sm'/*,
+                resolve: {
+                    ObjRefCliente: function () {
+                        return ObjRefCliente;
+                    }
+                }*/
+            });
+        }
+        
+
         var vm = this;
         vm.IdContrato = $stateParams.id;
         vm.Title = 'Cliente editar - ' + vm.IdContrato;
@@ -599,7 +699,9 @@ angular
         vm.OpenEditRefPersonal = OpenEditRefPersonal;
         vm.OpenDeleteRefPersonal = OpenDeleteRefPersonal;
         vm.AddNotas = AddNotas;
-        vm.DetalleServicio = DetalleServicio;
+        vm.DetalleConcepto = DetalleConcepto;
+        vm.OpenAddServicioCliente = OpenAddServicioCliente;
+        vm.OpenDeleteServicioCliente = OpenAddServicioCliente;
         vm.DivServicio = false;
         vm.DivAparato = false;
         initData();
