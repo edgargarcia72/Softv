@@ -579,20 +579,17 @@
                     <div class="col-md-10">
                         <div class="col-md-12">
                             <div class="col-md-4">
-                                <div class="col-md-12">
-                                    <h4 class="text-primary">Servicios Asignados</h4>
-                                </div>
                                 <div class="col-md-offset-6 col-md-3">
                                     <button type="button" class="btn btn-success btn-xs" ng-click="$ctrl.OpenAddServicioCliente()" title="Agregar Servicio">AGREGAR</button>
                                 </div>
                                 <div class="col-md-3">
-                                    <button type="button" class="btn btn-danger btn-xs" title="Eliminar Servicio">ELIMINAR</button>
+                                    <button type="button" class="btn btn-danger btn-xs" title="Eliminar Servicio" ng-show="$ctrl.ShowServicios">ELIMINAR</button>
+                                </div>
+                                <div class="col-md-12" ng-show="$ctrl.ShowServicios">
+                                    <h4 class="text-primary">Servicios Asignados</h4>
                                 </div>
                                 <div class="col-md-12">
-                                    <br>
-                                </div>
-                                <div class="col-md-12">
-                                    <treecontrol class="tree-light" tree-model="$ctrl.treedata" expanded-nodes="$ctrl.expandedNodes" on-selection="$ctrl.DetalleConcepto(node)"> <!--on-selection="ctrl.SelecionaNodo(node, $parentNode)">-->
+                                    <treecontrol class="tree-light" tree-model="$ctrl.ServicioList" expanded-nodes="$ctrl.expandedNodes" on-selection="$ctrl.DetalleConcepto(node)"> <!--on-selection="ctrl.SelecionaNodo(node, $parentNode)">-->
                                         <span ng-switch="" on="node.Type">
                                             <span ng-switch-when="folder" class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
                                             <span ng-switch-when="pic" class="glyphicon glyphicon-picture" aria-hidden="true"></span>
@@ -608,17 +605,14 @@
                                 </div>
                             </div>
                             <div class="col-md-8" ng-if="$ctrl.DivServicio">
+                                <div class="col-md-offset-10 col-md-2">
+                                    <button type="button" class="btn btn-success btn-xs">GUARDAR</button>
+                                </div>
                                 <div class="col-md-3">
                                     <h4 class="text-primary">Detalle Servicio:</h4>
                                 </div><!-- Internet -->
                                 <div class="col-md-9">
                                     <h4 class="text-danger">{{ $ctrl.NombreServicio }} ({{ $ctrl.DetalleServicio }}) - {{ $ctrl.Clv_UnicaNet }}</h4>
-                                </div>
-                                <div class="col-md-offset-10 col-md-2">
-                                    <button type="button" class="btn btn-success btn-xs">GUARDAR</button>
-                                </div>
-                                <div class="col-md-12">
-                                    <br>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="col-md-6">
@@ -638,7 +632,7 @@
                                             </div>
                                             <div class="col-md-9">
                                                 <select class="form-control input-sm" ng-model="$ctrl.StatusServicio" ng-options="SS.Concepto for SS in $ctrl.StatusServicioList track by SS.Clave">
-                                                    <option value="">Selecciona</option>
+                                                    <option value="" ng-disabled="">Selecciona</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -781,12 +775,6 @@
                                 </div>
                             </div>
                             <div class="col-md-7" ng-if="$ctrl.DivAparato">
-                                <div class="col-md-3">
-                                    <h4 class="text-primary">Detalle Aparato:</h4>
-                                </div>
-                                <div class="col-md-9">
-                                    <h4 class="text-danger">{{ $ctrl.NombreAparato }} ({{ $ctrl.DetalleAparato }}) - {{ $ctrl.ContratoNet }}</h4>
-                                </div>
                                 <div class="col-md-12">
                                     <div class="col-md-offset-8 col-md-2">
                                         <button type="button" class="btn btn-success btn-xs">GUARDAR</button>
@@ -794,9 +782,12 @@
                                     <div class="col-md-2">
                                         <button type="button" class="btn btn-danger btn-xs">CANCELAR</button>
                                     </div>
-                                    <div class="col-md-12">
-                                        <br>
-                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <h4 class="text-primary">Detalle Aparato:</h4>
+                                </div>
+                                <div class="col-md-9">
+                                    <h4 class="text-danger">{{ $ctrl.NombreAparato }} ({{ $ctrl.DetalleAparato }}) - {{ $ctrl.ContratoNet }}</h4>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="col-md-6">
@@ -808,19 +799,19 @@
                                             <input class="form-control input-sm">
                                         </div>
                                         -->
-                                        <div class="col-md-5">
+                                        <div class="col-md-3">
                                             <small><b>Status:</b></small>
                                         </div>
-                                        <div class="col-md-7">
+                                        <div class="col-md-9">
                                             <select class="form-control input-sm" ng-model="$ctrl.StatusAparato" ng-options="SS.Concepto for SS in $ctrl.StatusAparatoList track by SS.Clave">
                                                 <option value="">Selecciona</option>
                                             </select>
                                         </div>
-                                        <div class="col-md-5">
+                                        <div class="col-md-3">
                                             <small><b>Modelo:</b></small>
                                         </div>
-                                        <div class="col-md-7">
-                                            <input class="form-control input-sm">
+                                        <div class="col-md-9">
+                                            <input name="InpModeloAparato" class="form-control input-sm" ng-model="$ctrl.ModeloAparato">
                                         </div>
                                         <div class="col-md-12">
                                             <small><b>Observaciones:</b></small>

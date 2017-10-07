@@ -190,7 +190,11 @@ angular
       GetMuestra_Usuarios: '/ContratacionServicio/GetMuestra_Usuarios',
       GetCONRel_ContNet_Usuarios: '/ContratacionServicio/GetCONRel_ContNet_Usuarios',
       GetClientesServicioList: '/ClientesServicio/GetClientesServicioList',
-      GetClientesAparatoList: '/ClientesAparato/GetClientesAparatoList'
+      GetClientesAparatoList: '/ClientesAparato/GetClientesAparatoList',
+      GetModeloAparato: '/ModeloAparato/GetModeloAparato',
+      GetRelTipoServClienteList: '/RelTipoServCliente/GetRelTipoServClienteList',
+      AddClientesServicio: '/ClientesServicio/AddClientesServicio',
+      UpdateClientesServicio: '/ClientesServicio/UpdateClientesServicio'
     };
 
     factory.AddSucursal = function (SUCURSALESobj) {
@@ -3116,6 +3120,58 @@ angular
       var Parametros = {ContratoNet: ContratoNet};
       console.log(Parametros);
       $http.post(globalService.getUrl() + paths.GetClientesAparatoList, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetModeloAparato = function (Clv_CableModem) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {Clv_CableModem: Clv_CableModem};
+      console.log(Parametros);
+      $http.post(globalService.getUrl() + paths.GetModeloAparato, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetRelTipoServClienteList = function (Clv_TipSer) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {Clv_TipSer: Clv_TipSer};
+      console.log(Parametros);
+      $http.post(globalService.getUrl() + paths.GetRelTipoServClienteList, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.AddClientesServicio = function (objClientesServicio) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {objClientesServicio: objClientesServicio};
+      console.log(Parametros);
+      $http.post(globalService.getUrl() + paths.AddClientesServicio, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.UpdateClientesServicio = function (objClientesServicio) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {objClientesServicio: objClientesServicio};
+      console.log(Parametros);
+      $http.post(globalService.getUrl() + paths.UpdateClientesServicio, JSON.stringify(Parametros), config).then(function (response) {
         deferred.resolve(response.data);
       }).catch(function (response) {
         deferred.reject(response);
