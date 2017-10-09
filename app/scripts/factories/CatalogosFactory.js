@@ -194,7 +194,8 @@ angular
       GetModeloAparato: '/ModeloAparato/GetModeloAparato',
       GetRelTipoServClienteList: '/RelTipoServCliente/GetRelTipoServClienteList',
       AddClientesServicio: '/ClientesServicio/AddClientesServicio',
-      UpdateClientesServicio: '/ClientesServicio/UpdateClientesServicio'
+      UpdateClientesServicio: '/ClientesServicio/UpdateClientesServicio',
+      UpdateClientesAparato: '/ClientesAparato/UpdateClientesAparato'
     };
 
     factory.AddSucursal = function (SUCURSALESobj) {
@@ -3172,6 +3173,19 @@ angular
       var Parametros = {objClientesServicio: objClientesServicio};
       console.log(Parametros);
       $http.post(globalService.getUrl() + paths.UpdateClientesServicio, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.UpdateClientesAparato = function (objClientesAparato) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {objClientesAparato: objClientesAparato};
+      console.log(Parametros);
+      $http.post(globalService.getUrl() + paths.UpdateClientesAparato, JSON.stringify(Parametros), config).then(function (response) {
         deferred.resolve(response.data);
       }).catch(function (response) {
         deferred.reject(response);

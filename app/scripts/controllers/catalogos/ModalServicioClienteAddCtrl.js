@@ -2,7 +2,7 @@
 
 angular
     .module('softvApp')
-    .controller('ModalServicioClienteAddCtrl', function(CatalogosFactory, $uibModal, $uibModalInstance, ngNotify, $state, $rootScope, IdContrato){
+    .controller('ModalServicioClienteAddCtrl', function(CatalogosFactory, $uibModal, $uibModalInstance, ngNotify, $state, $rootScope, IdContrato, $localStorage){
         
         function initData(){
             CatalogosFactory.GetMuestraTipSerPrincipal_SERList().then(function(data){
@@ -40,7 +40,8 @@ angular
                 'Adic': 0,
                 'TVSINPAGO': 0,
                 'TVCONPAGO': 0,
-                'IdMedio': 0
+                'IdMedio': 0,
+                'Clv_usuarioCapturo': $localStorage.currentUser.idUsuario
             };
             CatalogosFactory.AddClientesServicio(ObjServicioCliente).then(function(data){
                 console.log(data);

@@ -5,6 +5,7 @@ angular
     .controller('ClienteEditarCtrl', function(CatalogosFactory, ngNotify, $uibModal, $state, $stateParams, $rootScope, $localStorage){
 
         function initData(){
+            console.log($localStorage);
             CatalogosFactory.GetStatusNet().then(function(data){
                 console.log(data);
                 vm.StatusServicioList = data.GetStatusNetResult;
@@ -360,21 +361,21 @@ angular
         function AddDatosFiscales(){
             if(vm.IdContrato != undefined){
                 var objDatosFiscales = {
-                    "Contrato": vm.IdContrato,
-                    "RAZON_SOCIAL" : vm.RazonSoc,
-                    "RFC" : vm.RFC,
-                    "CURP" : vm.CURP,
-                    "PAIS" : vm.Pais,
-                    "ESTADO_RS" : vm.EstadoDF,
-                    "CIUDAD_RS" : vm.CiuMunDF,
-                    "COLONIA_RS" : vm.ColoniaDF,
-                    "CP_RS" : vm.CodigoPosDF,
-                    "CALLE_RS" : vm.CalleDF,
-                    "NUMERO_RS" : vm.NumExtDF,
-                    "ENTRECALLES" : vm.EntCallesDF,
-                    "TELEFONO_RS" : vm.TelefonoDF,
-                    "FAX_RS" : vm.Fax,
-                    "Email" : vm.EmailDF
+                    'Contrato': vm.IdContrato,
+                    'RAZON_SOCIAL' : vm.RazonSoc,
+                    'RFC' : vm.RFC,
+                    'CURP' : vm.CURP,
+                    'PAIS' : vm.Pais,
+                    'ESTADO_RS' : vm.EstadoDF,
+                    'CIUDAD_RS' : vm.CiuMunDF,
+                    'COLONIA_RS' : vm.ColoniaDF,
+                    'CP_RS' : vm.CodigoPosDF,
+                    'CALLE_RS' : vm.CalleDF,
+                    'NUMERO_RS' : vm.NumExtDF,
+                    'ENTRECALLES' : vm.EntCallesDF,
+                    'TELEFONO_RS' : vm.TelefonoDF,
+                    'FAX_RS' : vm.Fax,
+                    'Email' : vm.EmailDF
                 };
                 CatalogosFactory.AddDatosFiscales(objDatosFiscales).then(function(data){
                     var DatosFiscales = data.AddDatosFiscalesResult;
@@ -586,13 +587,26 @@ angular
                     vm.FechaBaja = toDate(ServicioResult.fecha_baja);
                     vm.FechaFueraArea = toDate(ServicioResult.fecha_Fuera_Area);
                     vm.FechaUltimoPago = toDate(ServicioResult.FECHA_ULT_PAGO);
-                    vm.PrimerMen = (ServicioResult.primerMesAnt == 1)? 'Y' : 'N';
+                    vm.PrimerMen = (ServicioResult.PrimerMensualidad == true)? 'Y' : 'N';
                     vm.Cortesia = (ServicioResult.Cortesia == 1)? 'Y' : 'N';
+                    vm.Clv_usuarioCapturo = ServicioResult.Clv_usuarioCapturo;
+                    vm.AdicServicio = ServicioResult.Adic;
+                    vm.CLV_MOTCANServicio = ServicioResult.CLV_MOTCAN;
+                    vm.Clv_PromocionServicio = ServicioResult.Clv_Promocion;
+                    vm.EmailServicio = ServicioResult.Email;
+                    vm.GENERAOSINSTAServicio = ServicioResult.GENERAOSINSTA;
+                    vm.IdMedioServicio = ServicioResult.IdMedio;
+                    vm.TVCONPAGOServicio = ServicioResult.TVCONPAGO;
+                    vm.TVSINPAGOServicio = ServicioResult.TVSINPAGO;
+                    vm.facturaAntServicio = ServicioResult.facturaAnt;
+                    vm.primerMesAntServicio = ServicioResult.primerMesAnt;
+                    vm.statusAntServicio = ServicioResult.statusAnt;
                     var Status = ServicioResult.status;
                     var Vendedor = ServicioResult.Clv_Vendedor;
+                    console.log(vm.Clv_usuarioCapturo);
                     for(var i = 0; vm.VendedorList.length > i; i ++){
-                        if(vm.VendedorList[i].Clv_StatusNet == Vendedor){
-                            vm.StatusServicio = vm.VendedorList[i];
+                        if(vm.VendedorList[i].Clv_Vendedor == Vendedor){
+                            vm.Vendedor = vm.VendedorList[i];
                         }
                     }
                     for(var i = 0; vm.StatusServicioList.length > i; i ++){
@@ -610,7 +624,12 @@ angular
                         CatalogosFactory.GetMuestra_Usuarios(ObjUsuario).then(function(data){
                             console.log(data);
                             vm.UsuarioList = data.GetMuestra_UsuariosResult;
-                            CatalogosFactory.GetCONRel_ContNet_Usuarios(vm.Clv_UnicaNet).then(function(data){
+                            for(var i = 0; vm.UsuarioList.length > i; i ++){
+                                if(vm.UsuarioList[i].Clave == vm.Clv_usuarioCapturo){
+                                    vm.Usuario = vm.UsuarioList[i];
+                                }
+                            }
+                            /*CatalogosFactory.GetCONRel_ContNet_Usuarios(vm.Clv_UnicaNet).then(function(data){
                                 console.log(data);
                                 var UsuarioResult = data.GetCONRel_ContNet_UsuariosResult;
                                 for(var i = 0; vm.UsuarioList.length > i; i ++){
@@ -618,7 +637,7 @@ angular
                                         vm.Usuario = vm.UsuarioList[i];
                                     }
                                 }
-                            });
+                            });*/
                         });
                     });
                 });                
@@ -638,13 +657,21 @@ angular
                     vm.FechaActivacionAparato = toDate(AparatoResult.Fecha_Activacion);
                     vm.FechaSuspencionAparato = toDate(AparatoResult.Fecha_Suspension);
                     vm.FechaBajaAparato = toDate(AparatoResult.Fecha_Baja);
+                    vm.Fecha_Traspaso = toDate(AparatoResult.Fecha_Traspaso);
                     vm.SeRenta = (AparatoResult.SeRenta == true)? 'Y' : 'N';
+                    vm.Clv_UsuarioAparato = AparatoResult.Clv_Usuario;
+                    vm.NoCajaAparato = AparatoResult.NoCaja;
+                    vm.Tipo_CablemodemAparato = AparatoResult.Tipo_Cablemodem;
+                    vm.no_extensionesAparato = AparatoResult.no_extensiones;
+                    vm.ventacablemodem1Aparato = AparatoResult.ventacablemodem1;
+                    vm.ventacablemodem2Aparato = AparatoResult.ventacablemodem2;
                     var Status = AparatoResult.Status;
                     for(var i = 0; vm.StatusAparatoList.length > i; i ++){
                         if(vm.StatusAparatoList[i].Clv_StatusNet == Status){
                             vm.StatusAparato = vm.StatusAparatoList[i];
                         }
                     }
+                    console.log(vm.Clv_CableModem);
                     CatalogosFactory.GetModeloAparato(vm.Clv_CableModem).then(function(data){
                         console.log(data);
                         vm.ModeloAparato = data.GetModeloAparatoResult.Nombre;
@@ -665,25 +692,78 @@ angular
                 'fecha_baja': JToDate(vm.FechaBaja),
                 'fecha_Fuera_Area': JToDate(vm.FechaFueraArea),
                 'FECHA_ULT_PAGO': JToDate(vm.FechaUltimoPago),
-                'PrimerMensualidad': 1,
-                'ultimo_mes': 0,
-                'ultimo_anio': 0,
-                'primerMesAnt': 0,
-                'statusAnt': 'C',
-                'facturaAnt': '',
-                'GENERAOSINSTA': 1,
-                'factura': '',
-                'Clv_Vendedor': 0,
-                'Clv_Promocion': 0,
-                'Email': '',
-                'Obs': '',
-                'CLV_MOTCAN': 0,
-                'Cortesia': 0,
-                'Adic': 0,
-                'TVSINPAGO': 0,
-                'TVCONPAGO': 0,
-                'IdMedio': 0
+                'PrimerMensualidad': (vm.PrimerMen == 'Y')? 1:0,
+                'ultimo_mes': vm.UltimoMesServicio,
+                'ultimo_anio': vm.UltimoAnioServicio,
+                'primerMesAnt': vm.primerMesAntServicio,
+                'statusAnt': vm.statusAntServicio,
+                'facturaAnt': vm.facturaAntServicio,
+                'GENERAOSINSTA': vm.GENERAOSINSTAServicio,
+                'factura': vm.Factura,
+                'Clv_Vendedor': (vm.Vendedor != undefined)? vm.Vendedor.Clv_Vendedor:0,
+                'Clv_Promocion': vm.Clv_PromocionServicio,
+                'Email': vm.EmailServicio,
+                'Obs': vm.ObservacionesServicio,
+                'CLV_MOTCAN': vm.CLV_MOTCANServicio,
+                'Cortesia': (vm.Cortesia == 'Y')? 1:0,
+                'Adic': vm.AdicServicio,
+                'TVSINPAGO': vm.TVSINPAGOServicio,
+                'TVCONPAGO': vm.TVCONPAGOServicio,
+                'IdMedio': vm.IdMedioServicio,
+                'Clv_usuarioCapturo': vm.Usuario.Clave
             };
+            CatalogosFactory.UpdateClientesServicio(objClientesServicio).then(function(data){
+                console.log(data);
+                var ObjConcepto = {
+                    'Clv_UnicaNet': vm.Clv_UnicaNet,
+                    'Nombre': vm.NombreServicio,
+                    'Detalle': vm.DetalleServicio,
+                    'Tipo': 'S'
+                };
+                if(data.UpdateClientesServicioResult == -1){
+                    ngNotify.set('CORRECTO, se guardó detalle del servicio.', 'success');
+                    DetalleConcepto(ObjConcepto);
+                }else{
+                    ngNotify.set('ERROR, al guardar detalle del servicio.', 'warn');
+                    DetalleConcepto(ObjConcepto);
+                }
+            });
+        }
+
+        function UpdateAparatoCliente(){
+            var objClientesAparato = {
+                'ContratoNet': vm.ContratoNet,
+                'Status': vm.StatusAparato.Clv_StatusNet,
+                'Clv_CableModem': vm.Clv_CableModem,
+                'Clv_Usuario': vm.Clv_UsuarioAparato,
+                'Fecha_Activacion': JToDate(vm.FechaActivacionAparato),
+                'Fecha_Suspension': (vm.FechaSuspencionAparato != undefined)? JToDate(vm.FechaSuspencionAparato):'01/01/1900',
+                'Fecha_Baja': (vm.FechaBajaAparato != undefined)? JToDate(vm.FechaBajaAparato):'01/01/1900',
+                'Fecha_Traspaso': (vm.Fecha_Traspaso != undefined)? JToDate(vm.Fecha_Traspaso):'01/01/1900',
+                'Obs': vm.ObservacionesAparatos,
+                'SeRenta': (vm.SeRenta == 'Y')? 1:0,
+                'no_extensiones': vm.no_extensionesAparato,
+                'NoCaja': vm.NoCajaAparato,
+                'ventacablemodem1': vm.ventacablemodem1Aparato,
+                'ventacablemodem2': vm.ventacablemodem2Aparato,
+                'Tipo_Cablemodem': vm.Tipo_CablemodemAparato
+            };
+            CatalogosFactory.UpdateClientesAparato(objClientesAparato).then(function(data){
+                console.log(data);
+                var ObjConcepto = {
+                    'ContratoNet': vm.ContratoNet,
+                    'Nombre': vm.NombreAparato,
+                    'Detalle': vm.DetalleAparato,
+                    'Tipo': 'A'
+                };
+                if(data.UpdateClientesAparatoResult == -1){
+                    ngNotify.set('CORRECTO, se guardó detalle del aparato.', 'success');
+                    DetalleConcepto(ObjConcepto);
+                }else{
+                    ngNotify.set('ERROR, al guardar detalle del aparato.', 'warn');
+                    DetalleConcepto(ObjConcepto);
+                }
+            });
         }
 
         $rootScope.$on('LoadServicioCliente', function(e, IdContrato){
@@ -708,27 +788,6 @@ angular
                         return IdContrato;
                     }
                 }
-            });
-        }
-
-        function OpenDeleteServicioServicioCliente(){
-            //var ObjRefCliente = ObjRefCliente;
-            var modalInstance = $uibModal.open({
-                animation: true,
-                ariaLabelledBy: 'modal-title',
-                ariaDescribedBy: 'modal-body',
-                templateUrl: 'views/catalogos/ModalServicioClienteDelete.html',
-                controller: 'ModalServicioClienteDeleteCtrl',
-                controllerAs: 'ctrl',
-                backdrop: 'static',
-                keyboard: false,
-                class: 'modal-backdrop fade',
-                size: 'sm'/*,
-                resolve: {
-                    ObjRefCliente: function () {
-                        return ObjRefCliente;
-                    }
-                }*/
             });
         }
         
@@ -756,7 +815,8 @@ angular
         vm.AddNotas = AddNotas;
         vm.DetalleConcepto = DetalleConcepto;
         vm.OpenAddServicioCliente = OpenAddServicioCliente;
-        vm.OpenDeleteServicioCliente = OpenAddServicioCliente;
+        vm.UpdateServicioCliente = UpdateServicioCliente;
+        vm.UpdateAparatoCliente = UpdateAparatoCliente;
         initData();
 
     });
