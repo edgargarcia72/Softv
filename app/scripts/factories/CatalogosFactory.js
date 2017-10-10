@@ -195,7 +195,8 @@ angular
       GetRelTipoServClienteList: '/RelTipoServCliente/GetRelTipoServClienteList',
       AddClientesServicio: '/ClientesServicio/AddClientesServicio',
       UpdateClientesServicio: '/ClientesServicio/UpdateClientesServicio',
-      UpdateClientesAparato: '/ClientesAparato/UpdateClientesAparato'
+      UpdateClientesAparato: '/ClientesAparato/UpdateClientesAparato',
+      GetDeepMuestraMedios_New: '/MuestraMedios_New/GetDeepMuestraMedios_New'
     };
 
     factory.AddSucursal = function (SUCURSALESobj) {
@@ -3034,7 +3035,6 @@ angular
       var deferred = $q.defer();
       var config = {headers: {'Authorization': $localStorage.currentUser.token}};
       var Parametros = {'Contrato': Contrato};
-      console.log(Parametros);
       $http.post(globalService.getUrl() + paths.GetMuestraArbolServicios_ClientesList, JSON.stringify(Parametros), config).then(function (response) {
         deferred.resolve(response.data);
       }).catch(function (response) {
@@ -3080,7 +3080,6 @@ angular
       var deferred = $q.defer();
       var config = {headers: {'Authorization': $localStorage.currentUser.token}};
       var Parametros = ObjUsuario;
-      console.log(Parametros);
       $http.post(globalService.getUrl() + paths.GetMuestra_Usuarios, JSON.stringify(Parametros), config).then(function (response) {
         deferred.resolve(response.data);
       }).catch(function (response) {
@@ -3093,7 +3092,6 @@ angular
       var deferred = $q.defer();
       var config = {headers: {'Authorization': $localStorage.currentUser.token}};
       var Parametros = {Clv_UnicaNet: Clv_UnicaNet};
-      console.log(Parametros);
       $http.post(globalService.getUrl() + paths.GetCONRel_ContNet_Usuarios, JSON.stringify(Parametros), config).then(function (response) {
         deferred.resolve(response.data);
       }).catch(function (response) {
@@ -3106,7 +3104,6 @@ angular
       var deferred = $q.defer();
       var config = {headers: {'Authorization': $localStorage.currentUser.token}};
       var Parametros = {Clv_UnicaNet: Clv_UnicaNet};
-      console.log(Parametros);
       $http.post(globalService.getUrl() + paths.GetClientesServicioList, JSON.stringify(Parametros), config).then(function (response) {
         deferred.resolve(response.data);
       }).catch(function (response) {
@@ -3119,7 +3116,6 @@ angular
       var deferred = $q.defer();
       var config = {headers: {'Authorization': $localStorage.currentUser.token}};
       var Parametros = {ContratoNet: ContratoNet};
-      console.log(Parametros);
       $http.post(globalService.getUrl() + paths.GetClientesAparatoList, JSON.stringify(Parametros), config).then(function (response) {
         deferred.resolve(response.data);
       }).catch(function (response) {
@@ -3132,7 +3128,6 @@ angular
       var deferred = $q.defer();
       var config = {headers: {'Authorization': $localStorage.currentUser.token}};
       var Parametros = {Clv_CableModem: Clv_CableModem};
-      console.log(Parametros);
       $http.post(globalService.getUrl() + paths.GetModeloAparato, JSON.stringify(Parametros), config).then(function (response) {
         deferred.resolve(response.data);
       }).catch(function (response) {
@@ -3145,7 +3140,6 @@ angular
       var deferred = $q.defer();
       var config = {headers: {'Authorization': $localStorage.currentUser.token}};
       var Parametros = {Clv_TipSer: Clv_TipSer};
-      console.log(Parametros);
       $http.post(globalService.getUrl() + paths.GetRelTipoServClienteList, JSON.stringify(Parametros), config).then(function (response) {
         deferred.resolve(response.data);
       }).catch(function (response) {
@@ -3158,7 +3152,6 @@ angular
       var deferred = $q.defer();
       var config = {headers: {'Authorization': $localStorage.currentUser.token}};
       var Parametros = {objClientesServicio: objClientesServicio};
-      console.log(Parametros);
       $http.post(globalService.getUrl() + paths.AddClientesServicio, JSON.stringify(Parametros), config).then(function (response) {
         deferred.resolve(response.data);
       }).catch(function (response) {
@@ -3171,7 +3164,6 @@ angular
       var deferred = $q.defer();
       var config = {headers: {'Authorization': $localStorage.currentUser.token}};
       var Parametros = {objClientesServicio: objClientesServicio};
-      console.log(Parametros);
       $http.post(globalService.getUrl() + paths.UpdateClientesServicio, JSON.stringify(Parametros), config).then(function (response) {
         deferred.resolve(response.data);
       }).catch(function (response) {
@@ -3184,8 +3176,19 @@ angular
       var deferred = $q.defer();
       var config = {headers: {'Authorization': $localStorage.currentUser.token}};
       var Parametros = {objClientesAparato: objClientesAparato};
-      console.log(Parametros);
       $http.post(globalService.getUrl() + paths.UpdateClientesAparato, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetDeepMuestraMedios_New = function (IdMedio) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {IdMedio: IdMedio};
+      $http.post(globalService.getUrl() + paths.GetDeepMuestraMedios_New, JSON.stringify(Parametros), config).then(function (response) {
         deferred.resolve(response.data);
       }).catch(function (response) {
         deferred.reject(response);

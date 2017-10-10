@@ -5,17 +5,13 @@ angular
     .controller('ClienteEditarCtrl', function(CatalogosFactory, ngNotify, $uibModal, $state, $stateParams, $rootScope, $localStorage){
 
         function initData(){
-            console.log($localStorage);
             CatalogosFactory.GetStatusNet().then(function(data){
-                console.log(data);
                 vm.StatusServicioList = data.GetStatusNetResult;
             });
             CatalogosFactory.GetStatusCableModem().then(function(data){
-                console.log(data);
                 vm.StatusAparatoList = data.GetStatusCableModemResult;
             });
             CatalogosFactory.GetMuestraPromotoresNet().then(function(data){
-                console.log(data);
                 vm.VendedorList = data.GetMuestraPromotoresNetResult;
             });
             CatalogosFactory.GetConsultaClientesList(vm.IdContrato).then(function(data){
@@ -43,8 +39,6 @@ angular
                     $state.go('home.catalogos.clientes');
                 }
             });
-
-
         }
 
         function GetDatosClientes(IdContratoCliente){
@@ -551,7 +545,6 @@ angular
 
         function GetServicios(IdContrato){
             CatalogosFactory.GetMuestraArbolServicios_ClientesList(IdContrato).then(function(data){
-                console.log(data);
                 vm.ServicioList = data.GetMuestraArbolServicios_ClientesListResult;
                 vm.expandedNodes=[];
                 angular.forEach(vm.ServicioList, function(value, key) {
@@ -562,18 +555,14 @@ angular
         }
 
         function DetalleConcepto(ObjConcepto){
-            console.log('ok');
-            console.log(ObjConcepto);
             if(ObjConcepto.Tipo == 'S'){
-                console.log('Servicio');
                 vm.DivServicio = true;
                 vm.DivAparato = false;
                 var Clv_UnicaNet = ObjConcepto.Clv_UnicaNet;
+                var IdMedio = ObjConcepto.idMedio;
                 vm.NombreServicio = ObjConcepto.Nombre;
                 vm.DetalleServicio = ObjConcepto.Detalle;
-                console.log('Clv_Unica', Clv_UnicaNet);
                 CatalogosFactory.GetClientesServicioList(Clv_UnicaNet).then(function(data){
-                    console.log(data);
                     var ServicioResult = data.GetClientesServicioListResult[0];
                     vm.Clv_UnicaNet = ServicioResult.Clv_UnicaNet;
                     vm.Clv_Servicio = ServicioResult.Clv_Servicio;
@@ -603,11 +592,14 @@ angular
                     vm.statusAntServicio = ServicioResult.statusAnt;
                     var Status = ServicioResult.status;
                     var Vendedor = ServicioResult.Clv_Vendedor;
-                    console.log(vm.Clv_usuarioCapturo);
-                    for(var i = 0; vm.VendedorList.length > i; i ++){
-                        if(vm.VendedorList[i].Clv_Vendedor == Vendedor){
-                            vm.Vendedor = vm.VendedorList[i];
+                    if(Vendedor > 0){
+                        for(var i = 0; vm.VendedorList.length > i; i ++){
+                            if(vm.VendedorList[i].Clv_Vendedor == Vendedor){
+                                vm.Vendedor = vm.VendedorList[i];
+                            }
                         }
+                    }else{
+                        vm.Vendedor = undefined;
                     }
                     for(var i = 0; vm.StatusServicioList.length > i; i ++){
                         if(vm.StatusServicioList[i].Clv_StatusNet == Status){
@@ -615,41 +607,36 @@ angular
                         }
                     }
                     CatalogosFactory.GetDeepServicios_New(vm.Clv_Servicio).then(function(data){
-                        console.log(data);
                         var Clv_TipSer = data.GetDeepServicios_NewResult.Clv_TipSer;
                         var ObjUsuario = {
                             'CLV_UNICANET': vm.Clv_UnicaNet,
                             'tipo_serv': Clv_TipSer
                         };
                         CatalogosFactory.GetMuestra_Usuarios(ObjUsuario).then(function(data){
-                            console.log(data);
                             vm.UsuarioList = data.GetMuestra_UsuariosResult;
                             for(var i = 0; vm.UsuarioList.length > i; i ++){
                                 if(vm.UsuarioList[i].Clave == vm.Clv_usuarioCapturo){
                                     vm.Usuario = vm.UsuarioList[i];
+                                    CatalogosFactory.GetDeepMuestraMedios_New(IdMedio).then(function(data){
+                                        var MedioResult = data.GetDeepMuestraMedios_NewResult
+                                        if(MedioResult != null){
+                                            vm.Medio = MedioResult.Descripcion;
+                                        }else{
+                                            vm.Medio = '';
+                                        }
+                                    });
                                 }
                             }
-                            /*CatalogosFactory.GetCONRel_ContNet_Usuarios(vm.Clv_UnicaNet).then(function(data){
-                                console.log(data);
-                                var UsuarioResult = data.GetCONRel_ContNet_UsuariosResult;
-                                for(var i = 0; vm.UsuarioList.length > i; i ++){
-                                    if(vm.UsuarioList[i].Clave == UsuarioResult.Clave){
-                                        vm.Usuario = vm.UsuarioList[i];
-                                    }
-                                }
-                            });*/
                         });
                     });
                 });                
             }else if(ObjConcepto.Tipo == 'A'){
-                console.log('Aparato');
                 vm.DivServicio = false;
                 vm.DivAparato = true;
                 var ContratoNet = ObjConcepto.ContratoNet;
                 vm.NombreAparato = ObjConcepto.Nombre;
                 vm.DetalleAparato = ObjConcepto.Detalle;
                 CatalogosFactory.GetClientesAparatoList(ContratoNet).then(function(data){
-                    console.log(data);
                     var AparatoResult = data.GetClientesAparatoListResult[0];
                     vm.ContratoNet = AparatoResult.ContratoNet;
                     vm.Clv_CableModem = AparatoResult.Clv_CableModem;
@@ -671,9 +658,7 @@ angular
                             vm.StatusAparato = vm.StatusAparatoList[i];
                         }
                     }
-                    console.log(vm.Clv_CableModem);
                     CatalogosFactory.GetModeloAparato(vm.Clv_CableModem).then(function(data){
-                        console.log(data);
                         vm.ModeloAparato = data.GetModeloAparatoResult.Nombre;
                     });
                 });
@@ -713,7 +698,6 @@ angular
                 'Clv_usuarioCapturo': vm.Usuario.Clave
             };
             CatalogosFactory.UpdateClientesServicio(objClientesServicio).then(function(data){
-                console.log(data);
                 var ObjConcepto = {
                     'Clv_UnicaNet': vm.Clv_UnicaNet,
                     'Nombre': vm.NombreServicio,
@@ -749,7 +733,6 @@ angular
                 'Tipo_Cablemodem': vm.Tipo_CablemodemAparato
             };
             CatalogosFactory.UpdateClientesAparato(objClientesAparato).then(function(data){
-                console.log(data);
                 var ObjConcepto = {
                     'ContratoNet': vm.ContratoNet,
                     'Nombre': vm.NombreAparato,
@@ -782,7 +765,7 @@ angular
                 backdrop: 'static',
                 keyboard: false,
                 class: 'modal-backdrop fade',
-                size: 'md',
+                size: 'sm',
                 resolve: {
                     IdContrato: function () {
                         return IdContrato;
@@ -800,7 +783,7 @@ angular
         vm.DivServicio = false;
         vm.DivAparato = false;
         vm.ShowServicios = false;
-        vm.ValidateRFC = /^[A-Z]{4}\d{6}[A-Z]{3}$|^[A-Z]{4}\d{6}\d{3}$|^[A-Z]{4}\d{6}[A-Z]{2}\d{1}$|^[A-Z]{4}\d{6}[A-Z]{1}\d{2}$|^[A-Z]{4}\d{6}\d{2}[A-Z]{1}$|^[A-Z]{4}\d{6}\d{1}[A-Z]{2}$|^[A-Z]{4}\d{6}\d{1}[A-Z]{1}\d{1}$|^[A-Z]{4}\d{6}[A-Z]{1}\d{1}[A-Z]{1}$/;
+        vm.ValidateRFC = /^[A-Z]{4}\d{6}[a-zA-Z]{3}$|^[A-Z]{4}\d{6}\d{3}$|^[A-Z]{4}\d{6}[A-Z]{2}\d{1}$|^[A-Z]{4}\d{6}[A-Z]{1}\d{2}$|^[A-Z]{4}\d{6}\d{2}[a-zA-Z]{1}$|^[A-Z]{4}\d{6}\d{1}[a-zA-Z]{2}$|^[A-Z]{4}\d{6}\d{1}[A-Z]{1}\d{1}$|^[A-Z]{4}\d{6}[A-Z]{1}\d{1}[a-zA-Z]{1}$/;
         vm.AddDatosPersonales = AddDatosPersonales;
         vm.GetCiudadMunicipio = GetCiudadMunicipio;
         vm.GetLocalidad = GetLocalidad;

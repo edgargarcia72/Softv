@@ -12,7 +12,6 @@ angular
 
         function AddServicioCliente(){
             var Hoy = ToDate(new Date());
-            console.log(Hoy);
             var ObjServicioCliente = {
                 'Contrato': vm.IdContrato,
                 'Clv_Servicio': vm.Servicio.Clv_Servicio,
@@ -44,7 +43,6 @@ angular
                 'Clv_usuarioCapturo': $localStorage.currentUser.idUsuario
             };
             CatalogosFactory.AddClientesServicio(ObjServicioCliente).then(function(data){
-                console.log(data);
                 if(data.AddClientesServicioResult > 0){
                     ngNotify.set('CORRECTO, se agregó un servico al cliente.', 'success');
                     $rootScope.$emit('LoadServicioCliente', vm.IdContrato);
@@ -61,7 +59,6 @@ angular
         function GetServiciosList(){
             if(vm.TipoServicio != undefined){
                 CatalogosFactory.GetRelTipoServClienteList(vm.TipoServicio.Clv_TipSerPrincipal).then(function(data){
-                    console.log(data);
                     vm.ServicioList = data.GetRelTipoServClienteListResult;
                 });
             }else{
@@ -80,7 +77,6 @@ angular
         }
 
         function cancel() {
-            console.log('ok');
             $uibModalInstance.dismiss('cancel');
         }
 
@@ -91,7 +87,6 @@ angular
         vm.GetServiciosList = GetServiciosList;
         vm.AddServicioCliente = AddServicioCliente;
         vm.cancel = cancel;
-        console.log(vm.IdContrato);
         initData();
 
     });

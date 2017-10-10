@@ -74,7 +74,7 @@
                 </div>
 			</div>
         </div>
-        <uib-tabset active="6" vertical="true" type="tabs">
+        <uib-tabset active="" vertical="true" type="tabs">
             <uib-tab index="0">
                 <uib-tab-heading>
                     <i class="fa fa-user"></i>  Datos Personales
@@ -578,11 +578,11 @@
                 <div class="row">
                     <div class="col-md-10">
                         <div class="col-md-12">
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <div class="col-md-offset-9 col-md-3">
                                     <button type="button" class="btn btn-success btn-xs" ng-click="$ctrl.OpenAddServicioCliente()" title="Agregar Servicio">AGREGAR</button>
                                 </div>
-                                <div class="col-md-12" ng-show="$ctrl.ShowServicios">
+                                <div class="col-md-12">
                                     <h4 class="text-primary">Servicios Asignados</h4>
                                 </div>
                                 <div class="col-md-12">
@@ -596,186 +596,156 @@
                                             <span ng-switch-when="email" class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
                                             <span ng-switch-when="home" class="glyphicon glyphicon-home" aria-hidden="true"></span>
                                             <span ng-switch-when="trash" class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                                        </span> 
-                                        <a style="font-size:10px">{{node.Nombre}} ({{node.Detalle}})</a>
+                                        </span>
+                                        <a style="font-size:10px">{{node.Nombre}}</a>
+                                        <a style="font-size:10px" ng-if="node.status == 'C'">(Contratado)</a>
+                                        <a style="font-size:10px" ng-if="node.status == 'I'">(Instalado)</a>
+                                        <a style="font-size:10px" ng-if="node.status == 'D'">(Desconectado)</a>
+                                        <a style="font-size:10px" ng-if="node.status == 'S'">(Suspendido)</a>
+                                        <a style="font-size:10px" ng-if="node.status == 'T'">(Suspención Temporal)</a>
+                                        <a style="font-size:10px" ng-if="node.status == 'F'">(Fuera de Area)</a>
+                                        <a style="font-size:10px" ng-if="node.status == 'B'">(Baja)</a>
                                     </treecontrol>
                                 </div>
                             </div>
-                            <div class="col-md-8" ng-if="$ctrl.DivServicio">
+                            <div class="col-md-7" ng-if="$ctrl.DivServicio">
                                 <form name="FormDetallServicio" angular-validator-submit="" novalidate angular-validator autocomplete="off">
                                 <div class="col-md-offset-10 col-md-2">
                                     <button type="button" class="btn btn-success btn-xs" ng-click="$ctrl.UpdateServicioCliente()" title="Guardar Detalle del Servicio" ng-disabled="FormDetallServicio.InpUltimoMesServicio.$invalid || FormDetallServicio.InpUltimoAnioServicio.$invalid || FormDetallServicio.InpFechaContratacion.$invalid  || FormDetallServicio.InpFechaInstalacion.$invalid || FormDetallServicio.InpFechaSuspencion.$invalid || FormDetallServicio.InpFechaBaja.$invalid || FormDetallServicio.InpFechaFueraArea.$invalid || FormDetallServicio.InpFechaUltimoPago.$invalid">GUARDAR</button>
                                 </div>
                                 <div class="col-md-3">
                                     <h4 class="text-primary">Detalle Servicio:</h4>
-                                </div><!-- Internet -->
-                                <div class="col-md-9">
-                                    <h4 class="text-danger">{{ $ctrl.NombreServicio }} ({{ $ctrl.DetalleServicio }}) - {{ $ctrl.Clv_UnicaNet }}</h4>
                                 </div>
-                                <div class="col-md-12">
-                                    <div class="col-md-6">
-                                        <!--
-                                        <div class="col-md-12">
-                                            <div class="col-md-6">
-                                                <small><b>Dato:</b></small>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <small>{{ $ctrl.NombreServicio }}</small>
-                                            </div>
-                                        </div>
-                                        -->
-                                        <div class="col-md-12">
-                                            <div class="col-md-3">
-                                                <small><b>Status:</b></small>
-                                            </div>
-                                            <div class="col-md-9">
-                                                <select class="form-control input-sm" ng-model="$ctrl.StatusServicio" ng-options="SS.Concepto for SS in $ctrl.StatusServicioList track by SS.Clave">
-                                                    <option value="" ng-disabled="true">Selecciona</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="col-md-3">
-                                                <small><b>Factura:</b></small>
-                                            </div>
-                                            <div class="col-md-9">
-                                                <input name="InpFactura" class="form-control input-sm" ng-model="$ctrl.Factura" ng-disabled="true">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="col-md-12">
-                                                <label class="checkbox-inline checkbox-styled">
-                                                    <input type="checkbox" name="CbxPrimerMen" ng-model="$ctrl.PrimerMen" ng-true-value="'Y'" ng-false-value="'N'"><span><small>Primer Mensualidad</small></span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="col-md-6">
-                                                <label class="checkbox-inline checkbox-styled">
-                                                    <input type="checkbox" name="CbxCortesia" ng-model="$ctrl.Cortesia" ng-true-value="'Y'" ng-false-value="'N'"><span><small>Cortesia</small></span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="col-md-6 text-center">
-                                                <button type="button" class="btn btn-success btn-xs">...</button>
-                                            </div>
-                                            <div class="col-md-6 text-center">
-                                                <button type="button" class="btn btn-success btn-xs">Descuento</button>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="col-md-3">
-                                                <small><b>Vendedor:</b></small>
-                                            </div>
-                                            <div class="col-md-9">
-                                                <select class="form-control input-sm" ng-model="$ctrl.Vendedor" ng-options="V.Nombre for V in $ctrl.VendedorList track by V.Clv_Vendedor">
-                                                    <option value="">Selecciona</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="col-md-3">
-                                                <small><b>Capturo:</b></small>
-                                            </div>
-                                            <div class="col-md-9">
-                                                <select class="form-control input-sm" ng-model="$ctrl.Usuario" ng-options="U.Nombre for U in $ctrl.UsuarioList track by U.Clave">
-                                                    <option value="">Selecciona</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="col-md-12">
-                                                <small><b>Observaciones:</b></small>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <textarea name="TxaObservacionesServicio" class="form-control input-sm" rows="2" ng-model="$ctrl.ObservacionesServicio"></textarea>
-                                            </div>
-                                        </div>
+                                <div class="col-md-9">
+                                    <h4 class="text-danger">{{ $ctrl.NombreServicio }} - {{ $ctrl.Clv_UnicaNet }}</h4>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="col-md-3">
+                                        <small><b>Status:</b></small>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="col-md-12 text-center">
-                                            <small class="text-primary"><b>Ultimo Pagado</b></small>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="col-md-2">
-                                                <small><b>Mes</b></small>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <input type="number" name="InpUltimoMesServicio" class="form-control input-sm" min="0" ng-model="$ctrl.UltimoMesServicio" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
-                                            </div>
-                                            <div class="col-md-2">
-                                                <small><b>Año</b></small>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <input type="number" name="InpUltimoAnioServicio" class="form-control input-sm" min="0" ng-model="$ctrl.UltimoAnioServicio" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12 text-center">
-                                            <small class="text-primary"><b>Fechas de:</b></small>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="col-md-5">
-                                                <small><b>Contratación:</b></small>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <input type="date" name="InpFechaContratacion" class="form-control input-sm" ng-model="$ctrl.FechaContratacion" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="col-md-5">
-                                                <small><b>Instalación:</b></small>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <input type="date" name="InpFechaInstalacion" class="form-control input-sm" ng-model="$ctrl.FechaInstalacion" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="col-md-5">
-                                                <small><b>Suspención:</b></small>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <input type="date" name="InpFechaSuspencion" class="form-control input-sm" ng-model="$ctrl.FechaSuspencion" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="col-md-5">
-                                                <small><b>Baja:</b></small>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <input type="date" name="InpFechaBaja" class="form-control input-sm" ng-model="$ctrl.FechaBaja" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="col-md-5">
-                                                <small><b>Fuera Area:</b></small>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <input type="date" name="InpFechaFueraArea" class="form-control input-sm" ng-model="$ctrl.FechaFueraArea" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="col-md-5">
-                                                <small><b>Ultimo Pago:</b></small>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <input type="date" name="InpFechaUltimoPago" class="form-control input-sm" ng-model="$ctrl.FechaUltimoPago" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="col-md-5">
-                                                <small><b>Cancelación:</b></small>
-                                            </div>
-                                            <div class="col-md-7">
-                                            </div>
-                                        </div>
+                                    <div class="col-md-9">
+                                        <select name="SlcStatusServicio" class="form-control input-sm" ng-model="$ctrl.StatusServicio" ng-options="SS.Concepto for SS in $ctrl.StatusServicioList track by SS.Clave">
+                                            <option value="" ng-disabled="true">Selecciona</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <small><b>Factura:</b></small>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input name="InpFactura" class="form-control input-sm" ng-model="$ctrl.Factura" ng-disabled="true">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label class="checkbox-inline checkbox-styled">
+                                            <input type="checkbox" name="CbxPrimerMen" ng-model="$ctrl.PrimerMen" ng-true-value="'Y'" ng-false-value="'N'"><span><small>Primer Mensualidad</small></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label class="checkbox-inline checkbox-styled">
+                                            <input type="checkbox" name="CbxCortesia" ng-model="$ctrl.Cortesia" ng-true-value="'Y'" ng-false-value="'N'"><span><small>Cortesia</small></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6 text-center">
+                                        <button type="button" class="btn btn-success btn-xs">...</button>
+                                    </div>
+                                    <div class="col-md-6 text-center">
+                                        <button type="button" class="btn btn-success btn-xs">Descuento</button>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <small><b>Vendedor:</b></small>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <select name="SlcVendedor" class="form-control input-sm" ng-model="$ctrl.Vendedor" ng-options="V.Nombre for V in $ctrl.VendedorList track by V.Clv_Vendedor">
+                                            <option value="">Selecciona</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <small><b>Capturo:</b></small>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <select name="SlcUsuario" class="form-control input-sm" ng-model="$ctrl.Usuario" ng-options="U.Nombre for U in $ctrl.UsuarioList track by U.Clave">
+                                            <option value="">Selecciona</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <small><b>Observaciones:</b></small>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <textarea name="TxaObservacionesServicio" class="form-control input-sm" rows="2" ng-model="$ctrl.ObservacionesServicio"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="col-md-4">
+                                        <small><b>Medio:</b></small>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input name="InpMedio" class="form-control input-sm" ng-model="$ctrl.Medio" ng-disabled="true">
+                                    </div>
+                                    <div class="col-md-12 text-center">
+                                        <small class="text-primary"><b>Ultimo Pagado</b></small>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <small><b>Mes</b></small>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="number" name="InpUltimoMesServicio" class="form-control input-sm" min="0" ng-model="$ctrl.UltimoMesServicio" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <small><b>Año</b></small>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="number" name="InpUltimoAnioServicio" class="form-control input-sm" min="0" ng-model="$ctrl.UltimoAnioServicio" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
+                                    </div>
+                                    <div class="col-md-12 text-center">
+                                        <small class="text-primary"><b>Fechas de:</b></small>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <small><b>Contratación:</b></small>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <input type="date" name="InpFechaContratacion" class="form-control input-sm" ng-model="$ctrl.FechaContratacion" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
+                                    </div>
+                                    <div class="col-md-5">
+                                        <small><b>Instalación:</b></small>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <input type="date" name="InpFechaInstalacion" class="form-control input-sm" ng-model="$ctrl.FechaInstalacion" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
+                                    </div>
+                                    <div class="col-md-5">
+                                        <small><b>Suspención:</b></small>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <input type="date" name="InpFechaSuspencion" class="form-control input-sm" ng-model="$ctrl.FechaSuspencion" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
+                                    </div>
+                                    <div class="col-md-5">
+                                        <small><b>Baja:</b></small>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <input type="date" name="InpFechaBaja" class="form-control input-sm" ng-model="$ctrl.FechaBaja" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
+                                    </div>
+                                    <div class="col-md-5">
+                                        <small><b>Fuera Area:</b></small>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <input type="date" name="InpFechaFueraArea" class="form-control input-sm" ng-model="$ctrl.FechaFueraArea" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
+                                    </div>
+                                    <div class="col-md-5">
+                                        <small><b>Ultimo Pago:</b></small>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <input type="date" name="InpFechaUltimoPago" class="form-control input-sm" ng-model="$ctrl.FechaUltimoPago" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
+                                    </div>
+                                    <div class="col-md-5">
+                                        <small><b>Cancelación:</b></small>
+                                    </div>
+                                    <div class="col-md-7">
                                     </div>
                                 </div>
                                 </form>
                             </div>
-                            <div class="col-md-8" ng-if="$ctrl.DivAparato">
+                            <div class="col-md-7" ng-if="$ctrl.DivAparato">
+                                <form name="FormDetallAparato" angular-validator-submit="" novalidate angular-validator autocomplete="off">
                                 <div class="col-md-offset-10 col-md-2">
-                                    <button type="button" class="btn btn-success btn-xs" ng-click="$ctrl.UpdateAparatoCliente()" title="Guardar Detalle Aparato">GUARDAR</button>
+                                    <button type="button" class="btn btn-success btn-xs" ng-click="$ctrl.UpdateAparatoCliente()" title="Guardar Detalle Aparato" ng-disabled="FormDetallAparato.InpFechaActivacionAparato.$invalid || FormDetallAparato.InpSuspencionAparato.$invalid || FormDetallAparato.InpFechaBajaAparato.$invalid">GUARDAR</button>
                                 </div>
                                 <div class="col-md-3">
                                     <h4 class="text-primary">Detalle Aparato:</h4>
@@ -783,74 +753,57 @@
                                 <div class="col-md-9">
                                     <h4 class="text-danger">{{ $ctrl.NombreAparato }} ({{ $ctrl.DetalleAparato }}) - {{ $ctrl.ContratoNet }}</h4>
                                 </div>
-                                <div class="col-md-12">
-                                    <div class="col-md-6">
-                                        <!--
-                                        <div class="col-md-5">
-                                            <small><b>Dato:</b></small>
-                                        </div>
-                                        <div class="col-md-7">
-                                            <input class="form-control input-sm">
-                                        </div>
-                                        -->
-                                        <div class="col-md-3">
-                                            <small><b>Status:</b></small>
-                                        </div>
-                                        <div class="col-md-9">
-                                            <select class="form-control input-sm" ng-model="$ctrl.StatusAparato" ng-options="SS.Concepto for SS in $ctrl.StatusAparatoList track by SS.Clave">
-                                                <option value="" ng-disabled="true">Selecciona</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <small><b>Modelo:</b></small>
-                                        </div>
-                                        <div class="col-md-9">
-                                            <input name="InpModeloAparato" class="form-control input-sm" ng-model="$ctrl.ModeloAparato" ng-disabled="true">
-                                        </div>
-                                        <div class="col-md-12">
-                                            <small><b>Observaciones:</b></small>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <textarea name="TxaObservacionesAparato" rows="2" class="form-control input-sm" ng-model="$ctrl.ObservacionesAparatos"></textarea>
-                                        </div>
+                                <div class="col-md-6">
+                                    <div class="col-md-3">
+                                        <small><b>Status:</b></small>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="col-md-12 text-center">
-                                            <small class="text-primary"><b>Fechas de:</b></small>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="col-md-4">
-                                                <small><b>Activación:</b></small>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <input type="date" name="Inp" class="form-control input-sm" ng-model="$ctrl.FechaActivacionAparato">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="col-md-4">
-                                                <small><b>Suspención:</b></small>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <input type="date" name="Inp" class="form-control input-sm" ng-model="$ctrl.FechaSuspencionAparato">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="col-md-4">
-                                                <small><b>Baja:</b></small>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <input type="date" name="Inp" class="form-control input-sm" ng-model="$ctrl.FechaBajaAparato">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="col-md-12">
-                                            <label class="checkbox-inline checkbox-styled">
-                                                <input type="checkbox" name="CbxSeRenta" ng-model="$ctrl.SeRenta" ng-true-value="'Y'" ng-false-value="'N'"><span><small>Se renta</small></span>
-                                            </label>
-                                            </div>
-                                        </div>
+                                    <div class="col-md-9">
+                                        <select class="form-control input-sm" ng-model="$ctrl.StatusAparato" ng-options="SS.Concepto for SS in $ctrl.StatusAparatoList track by SS.Clave">
+                                            <option value="" ng-disabled="true">Selecciona</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <small><b>Modelo:</b></small>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <input name="InpModeloAparato" class="form-control input-sm" ng-model="$ctrl.ModeloAparato" ng-disabled="true">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <small><b>Observaciones:</b></small>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <textarea name="TxaObservacionesAparato" rows="2" class="form-control input-sm" ng-model="$ctrl.ObservacionesAparatos"></textarea>
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="col-md-12 text-center">
+                                        <small class="text-primary"><b>Fechas de:</b></small>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <small><b>Activación:</b></small>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="date" name="InpFechaActivacionAparato" class="form-control input-sm" ng-model="$ctrl.FechaActivacionAparato" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <small><b>Suspención:</b></small>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="date" name="InpSuspencionAparato" class="form-control input-sm" ng-model="$ctrl.FechaSuspencionAparato" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <small><b>Baja:</b></small>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="date" name="InpFechaBajaAparato" class="form-control input-sm" ng-model="$ctrl.FechaBajaAparato" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
+                                    </div>
+                                    <div class="col-md-12">
+                                    <label class="checkbox-inline checkbox-styled">
+                                        <input type="checkbox" name="CbxSeRenta" ng-model="$ctrl.SeRenta" ng-true-value="'Y'" ng-false-value="'N'"><span><small>Se renta</small></span>
+                                    </label>
+                                    </div>
+                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>

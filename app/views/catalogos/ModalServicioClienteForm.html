@@ -6,10 +6,10 @@
     <div class="modal-body">
         <div class="row">
             <div class="col-md-12">
-                <div class="col-md-4">
+                <div class="col-md-12">
                     <b><small>Tipo Servicio:</small></b>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-12">
                     <select name="SlcTipoServicio" class="form-control input-sm" ng-model="ctrl.TipoServicio" ng-options="T.Concepto for T in ctrl.TipoServicioList track by T.Clv_TipSerPrincipal" ng-change="ctrl.GetServiciosList()" validate-on="dirty" required required-message="'Obligatorio'">
                         <option value="">Selecciona</option>
                     </select>
@@ -21,10 +21,10 @@
                 </div>
             </div>
             <div class="col-md-12">
-                <div class="col-md-4">
+                <div class="col-md-12">
                     <b><small>Servicio:</small></b>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-12">
                     <select name="Servicio" class="form-control input-sm" ng-model="ctrl.Servicio" ng-options="S.Descripcion for S in ctrl.ServicioList track by S.Clv_Servicio" validate-on="dirty" required required-message="'Obligatorio'">
                         <option value="">Selecciona</option>
                     </select>
