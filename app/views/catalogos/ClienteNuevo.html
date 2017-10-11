@@ -15,6 +15,203 @@
         float:left;
     }
 </style>
+<style type="text/css">
+    #wrapper {
+    padding-left: 0;
+    -webkit-transition: all 0.6s ease;
+    -moz-transition: all 0.6s ease;
+    -o-transition: all 0.6s ease;
+    transition: all 0.6s ease;
+    }
+
+#wrapper.toggled {
+    padding-left: 200px;
+}
+
+#sidebar-wrapper {
+    z-index: 1000;
+    position: absolute;
+    left: 250px;
+    
+    width: 0;
+    height: 350PX;
+    margin-left: -250px;
+    overflow-y: auto;
+    background-color:#F7F7F7 !Important;
+   
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    width: 0;
+}
+
+#page-content-wrapper {
+    width: 100%;
+    position: absolute;
+    padding: 10px;
+}
+
+#wrapper.toggled #page-content-wrapper {
+    position: absolute;
+    margin-left:-250px;
+}
+
+/* Sidebar Styles */
+
+.sidebar-nav {
+    position: absolute;
+    top: 0;
+    right:15px;
+    width: 200px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar-nav li {
+    text-indent: 20px;
+    line-height: 40px;
+}
+
+.sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #999999;
+}
+
+.sidebar-nav li a:hover {
+    text-decoration: none;
+    color: black;
+    /*background: #312A25;*/
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+    text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand {
+    height: 65px;
+    font-size: 0px;
+    line-height: 0px;
+}
+
+.sidebar-nav > .sidebar-brand a {
+    color: #999999;
+}
+
+.sidebar-nav > .sidebar-brand a:hover {
+    color: black;
+    background: none;
+}
+
+@media(min-width:768px) {
+    #wrapper {
+        padding-left: 220px;
+    }
+
+    #wrapper.toggled {
+        padding-left: 0;
+    }
+    
+    #sidebar-wrapper {
+        width: 200px;
+    }
+
+   #wrapper.toggled #sidebar-wrapper {
+        width: 40px;
+        
+    
+    }
+
+#wrapper.toggled span {
+        visibility:hidden;
+        
+    }
+  #wrapper.toggled   i {
+ float:right;
+ } 
+
+    #page-content-wrapper {
+        padding: 20px;
+        position: relative;
+    }
+
+    #wrapper.toggled #page-content-wrapper {
+        position: relative;
+        margin-right: 0;
+    }
+}
+
+
+@media(max-width:414px) {
+
+#wrapper.toggled #page-content-wrapper {
+    position: absolute;
+    margin-right:60px;
+}
+
+#wrapper.toggled {
+    padding-right: 60px;
+}
+
+ #wrapper {
+        padding-left: 20px;
+    }
+
+    #wrapper.toggled {
+        padding-left: 0;
+    }
+
+    #sidebar-wrapper {
+        width: 50px;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        width: 140px;
+        
+        
+    }
+    
+    #wrapper.toggled span {
+        visibility:visible;
+        position:relative;
+        left:70px;
+        bottom:13px;
+        
+    }
+
+#wrapper span {
+        visibility:hidden;
+        
+    }
+  #wrapper.toggled   i {
+ float:right;
+ } 
+ 
+  #wrapper   i {
+ float:right;
+ } 
+
+    #page-content-wrapper {
+        padding: 5px;
+        position: relative;
+    }
+
+    #wrapper.toggled #page-content-wrapper {
+        position: relative;
+        margin-right: 0;
+    }
+
+
+
+
+}
+</style>
 <div class="card animated fadeIn" style="margin-top:20px;">
     <div class="card-head style-default-light" style="padding-top:10px; padding-left:10px;">
         <header>
@@ -74,6 +271,234 @@
                 </div>
 			</div>
         </div>
+
+        <!--
+        <div id="wrapper">
+
+            
+            <div id="sidebar-wrapper">
+                <ul class="sidebar-nav" style="margin-left:0;">
+                    <li class="sidebar-brand">
+                        
+                            <a   id="menu-toggle" style="margin-top:20px;float:right;" > <i class="fa fa-bars " style="font-size:20px !Important;" aria-hidden="true" aria-hidden="true"></i> 
+                        
+                    </li>
+                    <li>
+                        <a ><i class="fa fa-sort-alpha-asc " aria-hidden="true"> </i> <span style="margin-left:10px;">Section</span>  </a>
+                    </li>
+                    <li>
+                        <a href="#"> <i class="fa fa-play-circle-o " aria-hidden="true"> </i> <span style="margin-left:10px;"> Section</span> </a>
+                    </li>
+                    <li>
+                        <a href="#"> <i class="fa fa-puzzle-piece" aria-hidden="true"> </i> <span style="margin-left:10px;"> Section</span> </a>
+                    </li>
+                    <li>
+                        <a href="#"> <i class="fa fa-font" aria-hidden="true"> </i> <span style="margin-left:10px;"> Section</span> </a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-info-circle " aria-hidden="true"> </i> <span style="margin-left:10px;">Section </span> </a>
+                    </li>
+                    <li>
+                        <a href="#"> <i class="fa fa-comment-o" aria-hidden="true"> </i> <span style="margin-left:10px;"> Section</span> </a>
+                    </li>
+                </ul>
+            </div>
+            <script>
+                $("#wrapper").toggleClass("toggled");
+                $("#menu-toggle").click(function(e) {
+                    console.log(e);
+                    e.preventDefault();
+                    $("#wrapper").toggleClass("toggled");
+                });
+            </script>
+        </div>
+        <div class="row">
+            <div class="col-md-offset-1 col-md-11">
+                <form name="FormDatosPersonales" angular-validator-submit="$ctrl.AddDatosPersonales()" novalidate angular-validator autocomplete="off">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-4">
+                                <p><small><b>Contrato:</b></small></p>
+                            </div>
+                            <div class="col-md-4">
+                                <p><small><b>Plaza:</b></small></p>
+                            </div>
+                            <div class="col-md-4">
+                                <p><small><b>Tipo de Suscriptor:</b></small></p>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" name="InpIdCliente" class="form-control input-sm" ng-model="$ctrl.IdCliente" ng-disabled="true">
+                            </div>
+                            <div class="col-md-4">
+                                <select name="SlcPlaza" class="form-control input-sm" ng-model="$ctrl.Plaza" ng-options="P.razon_social for P in $ctrl.PlazaList track by P.id_compania" ng-change="$ctrl.GetEstado()" validate-on="dirty" required required-message="'Obligatorio'" ng-disabled="$ctrl.BlockInput">
+                                    <option value="">Selecciona</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <select name="SclTipoCobro" class="form-control input-sm" ng-model="$ctrl.TipoCobro" ng-options="T.DESCRIPCION for T in $ctrl.TipoCobroList track by T.CLV_TIPOCLIENTE" validate-on="dirty" required required-message="'Obligatorio'" ng-disabled="$ctrl.BlockInput">
+                                    <option value="">Selecciona</option>
+                                </select>
+                            </div>
+                            <div class="col-md-12">
+                                <br>
+                            </div>
+                            <div class="col-md-3">
+                                <p><small><b>Nombre:</b></small></p>
+                            </div>
+                            <div class="col-md-3">
+                                <p><small><b>Nombres adicionales:</b></small></p>
+                            </div>
+                            <div class="col-md-3">
+                                <p><small><b>Primer apellido:</b></small></p>
+                            </div>
+                            <div class="col-md-3">
+                                <p><small><b>Segundo apellido:</b></small></p>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" name="InpNombre" class="form-control input-sm" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" ng-model="$ctrl.Nombre" validate-on="dirty" required required-message="'Obligatorio'">
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" name="InpNombreAdi" class="form-control input-sm" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" ng-model="$ctrl.NombreAdi">
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" name="InpPrimerApe" class="form-control input-sm" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" ng-model="$ctrl.PrimerApe" validate-on="dirty" required required-message="'Obligatorio'">
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" name="InpSegundoApe" class="form-control input-sm" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" ng-model="$ctrl.SegundoApe">
+                            </div>
+                            <div class="col-md-12">
+                                <br>
+                            </div>
+                            <div class="col-md-4">
+                                <p><small><b>Clave de elector:</b></small></p>
+                            </div>
+                            <div class="col-md-4">
+                                <p><small><b>Número telefónico:</b></small></p>
+                            </div>
+                            <div class="col-md-4">
+                                <p><small><b>Número celular:</b></small></p>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" name="InpClaveElector" class="form-control input-sm" ng-model="$ctrl.ClaveElector" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="18" ng-pattern="/^[A-Z]{6}\d{8}[A-Z]{1}\d{3}$/" placeholder="AAAAAA11111111A111" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 18 caracteres.'">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" name="InpTelefono" class="form-control input-sm" ng-model="$ctrl.Telefono" validate-on="dirty" validator="$ctrl.Telefono > 0" ng-pattern="/^\d{10}$/" maxlength="10" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa 10 dígitos.'">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" name="InpCelular" class="form-control input-sm" ng-model="$ctrl.Celular" validate-on="dirty" validator="$ctrl.Celular > 0" ng-pattern="/^\d{10}$/" maxlength="10" invalid-message="'Inválido, Ingresa 10 dígitos.'">
+                            </div>
+                            <div class="col-md-12">
+                                <br>
+                            </div>
+                            <div class="col-md-4">  
+                                <p><small><b>Email:</b></small></p>
+                            </div>
+                            <div class="col-md-4">
+                                <p><small><b>Tipo de persona:</b></small></p>
+                            </div>
+                            <div class="col-md-4">
+                                <p><small><b>Fecha de nacimiento:</b></small></p>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="email" name="InpEmail" class="form-control input-sm" ng-model="$ctrl.Email" ng-pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa un correo válido'">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="radio-inline radio-styled" width="100px">
+                                    <input type="radio" name="RdoTipoPersona" ng-model="$ctrl.TipoPersona" value="F" style="width:40px; height:40px;"><span><small>Persona fisica</small></span>
+                                </label>
+                                <label class="radio-inline radio-styled">
+                                    <input type="radio" name="RdoTipoPersona" ng-model="$ctrl.TipoPersona" value="M"><span><small>Persona  moral</small></span>
+                                </label>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="date" name="InpFechaNac" class="form-control input-sm" ng-model="$ctrl.FechaNac" invalid-message="'Inválido'">
+                            </div>
+                            <div class="col-md-12">
+                                <br>
+                            </div>
+                            <div class="col-md-4">
+                                <p><small><b>Estado:</b></small></p>
+                            </div>
+                            <div class="col-md-4">
+                                <p><small><b>Ciudad / Municipio:</b></small></p>
+                            </div>
+                            <div class="col-md-4">
+                                <p><small><b>Localidad:</b></small></p>
+                            </div>
+                            <div class="col-md-4">
+                                <select name="SltEstado" class="form-control input-sm" ng-model="$ctrl.Estado" ng-options="E.Nombre for E in $ctrl.EstadoList track by E.Clv_Estado" ng-change="$ctrl.GetCiudadMunicipio()" validate-on="dirty" required required-message="'Obligatorio'">
+                                    <option value="">Selecciona</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <select name="SltCiuMun" class="form-control input-sm" ng-model="$ctrl.CiuMun" ng-options="CM.Nombre for CM in $ctrl.CiudadMunicipioList track by CM.Clv_Ciudad" ng-change="$ctrl.GetLocalidad()" validate-on="dirty" required required-message="'Obligatorio'">
+                                    <option value="">Selecciona</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <select name="SltLocalidad" class="form-control input-sm" ng-model="$ctrl.Localidad" ng-options="L.NOMBRE for L in $ctrl.LocalidadList track by L.Clv_Localidad" ng-change="$ctrl.GetColonia()" validate-on="dirty" required required-message="'Obligatorio'">
+                                    <option value="">Selecciona</option>
+                                </select>
+                            </div>
+                            <div class="col-md-12">
+                                <br>
+                            </div>
+                            <div class="col-md-4">
+                                <p><small><b>Colonia:</b></small></p>
+                            </div>
+                            <div class="col-md-4">
+                                <p><small><b>Calle:</b></small></p>
+                            </div>
+                            <div class="col-md-4">
+                                <p><small><b>Entre calles:</b></small></p>
+                            </div>
+                            <div class="col-md-4">
+                                <select name="SltColonia" class="form-control input-sm" ng-model="$ctrl.Colonia" ng-options="C.Nombre for C in $ctrl.ColoniaList track by C.CLV_COLONIA" ng-change="$ctrl.GetCalle()" validate-on="dirty" required required-message="'Obligatorio'">
+                                    <option value="">Selecciona</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <select name="SltCalle" class="form-control input-sm" ng-model="$ctrl.Calle" ng-options="C.Nombre for C in $ctrl.CalleList track by C.Clv_Calle" validate-on="dirty" required required-message="'Obligatorio'">
+                                    <option value="">Selecciona</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <input name="InpEntCalles" type="text" class="form-control input-sm" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" ng-model="$ctrl.EntCalles" validate-on="dirty" required required-message="'Obligatorio'">
+                            </div>
+                            <div class="col-md-12">
+                                <br>
+                            </div>
+                            <div class="col-md-4">
+                                <p><small><b>Número exterior:</b></small></p>
+                            </div>
+                            <div class="col-md-4">
+                                <p><small><b>Número interior:</b></small></p>
+                            </div>
+                            <div class="col-md-4">
+                                <p><small><b>Código postal:</b></small></p>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" name="InpNumExt" class="form-control input-sm" ng-model="$ctrl.NumExt" maxlength="10" validate-on="dirty" required required-message="'Obligatorio'">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" name="InpNumInt" class="form-control input-sm" ng-model="$ctrl.NumInt" maxlength="10" validate-on="dirty">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" name="InpCodigoPos" class="form-control input-sm" ng-model="$ctrl.CodigoPos" ng-disabled="true" validate-on="dirty" required required-message="'Obligatorio'">
+                            </div>
+                            <div class="col-md-12">
+                                <br>
+                            </div>
+                            <div class="col-md-12" style="text-align:right">
+                                <button type="submit" class="btn btn-success btn-sm">Validar</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        -->
         <uib-tabset active="" vertical="true" type="tabs">
             <uib-tab index="0">
                 <uib-tab-heading>
@@ -373,7 +798,7 @@
             </uib-tab>
             <uib-tab index="3">
                 <uib-tab-heading>
-                    <i class="fa fa-university"></i> Datos Bancarios</small>
+                    <i class="fa fa-university"></i> Datos Bancarios
                 </uib-tab-heading>
                 <form name="FormDatosBancarios" angular-validator-submit="$ctrl.AddDatosBancarios()" novalidate angular-validator autocomplete="off">
                     <div class="row">
@@ -586,7 +1011,7 @@
                                     <h4 class="text-primary">Servicios Asignados</h4>
                                 </div>
                                 <div class="col-md-12">
-                                    <treecontrol class="tree-light" tree-model="$ctrl.ServicioList" expanded-nodes="$ctrl.expandedNodes" on-selection="$ctrl.DetalleConcepto(node)"> <!--on-selection="ctrl.SelecionaNodo(node, $parentNode)">-->
+                                    <treecontrol class="tree-light" tree-model="$ctrl.ServicioList" expanded-nodes="$ctrl.expandedNodes" on-selection="$ctrl.DetalleConcepto(node)"> 
                                         <span ng-switch="" on="node.Type">
                                             <span ng-switch-when="folder" class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
                                             <span ng-switch-when="pic" class="glyphicon glyphicon-picture" aria-hidden="true"></span>
@@ -641,14 +1066,17 @@
                                     </div>
                                     <div class="col-md-12">
                                         <label class="checkbox-inline checkbox-styled">
-                                            <input type="checkbox" name="CbxCortesia" ng-model="$ctrl.Cortesia" ng-true-value="'Y'" ng-false-value="'N'"><span><small>Cortesia</small></span>
+                                            <input type="checkbox" name="CbxCortesia" ng-model="$ctrl.Cortesia" ng-true-value="'Y'" ng-false-value="'N'" ng-disabled="$ctrl.ConDescuento"><span><small>Cortesia</small></span>
                                         </label>
                                     </div>
-                                    <div class="col-md-6 text-center">
-                                        <button type="button" class="btn btn-success btn-xs">...</button>
+                                    <div class="col-md-12" ng-show="$ctrl.SinDescuento">
+                                        <button type="button" class="btn btn-success btn-xs" ng-click="$ctrl.AddDescuentoServicio()" title="Agregar Descuento" ng-disabled="$ctrl.Cortesia == 'Y'">Descuento</button>
                                     </div>
-                                    <div class="col-md-6 text-center">
-                                        <button type="button" class="btn btn-success btn-xs">Descuento</button>
+                                    <div class="col-md-5" ng-show="$ctrl.ConDescuento">
+                                        <button type="button" class="btn btn-success btn-xs" ng-click="$ctrl.AddDescuentoServicio()" title="Agregar Descuento" ng-disabled="$ctrl.Cortesia == 'Y'">Descuento</button>
+                                    </div>
+                                    <div class="col-md-7" ng-show="$ctrl.ConDescuento">
+                                        <small>{{ $ctrl.DescuentoServicio | currency }}</small>
                                     </div>
                                     <div class="col-md-3">
                                         <small><b>Vendedor:</b></small>
@@ -810,5 +1238,19 @@
                 </div>
             </uib-tab>
         </uib-tabset>
+        <br>
+        
+        
+        <!--<div class="row">
+            <div class="col-md-12">
+                <div class="col-md-2">
+                    <button title="Datos Personales" class="btn ink-reaction btn-floating-action btn-sm btn-default"><i class="fa fa-user"></i></button>
+                </div>
+                <div class="col-md-10">
+                </div>
+            </div>
+        </div>
+-->
+    
     </div>
 </div>

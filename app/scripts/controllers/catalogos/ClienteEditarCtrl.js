@@ -619,11 +619,8 @@ angular
                                     vm.Usuario = vm.UsuarioList[i];
                                     CatalogosFactory.GetDeepMuestraMedios_New(IdMedio).then(function(data){
                                         var MedioResult = data.GetDeepMuestraMedios_NewResult
-                                        if(MedioResult != null){
-                                            vm.Medio = MedioResult.Descripcion;
-                                        }else{
-                                            vm.Medio = '';
-                                        }
+                                        vm.Medio = (MedioResult != null)? MedioResult.Descripcion : '';
+                                        GetDescuentoServicio(Clv_TipSer);
                                     });
                                 }
                             }
@@ -773,6 +770,49 @@ angular
                 }
             });
         }
+
+        $rootScope.$on('LoadDescuentoServicio', function(e, Clv_TipSer){
+            GetDescuentoServicio(Clv_TipSer);
+        });
+
+        function GetDescuentoServicio(Clv_TipSer){
+            var ObjRelDescuento = {
+                "Clv_UnicaNet": vm.Clv_UnicaNet,
+                "Clv_TipSer": Clv_TipSer
+            };
+            CatalogosFactory.GetConRelCteDescuento(ObjRelDescuento).then(function(data){
+                var DescuentoServicio = data.GetConRelCteDescuentoResult;
+                if(DescuentoServicio.Clv_TipServ != null && DescuentoServicio.Clv_UnicaNet != null){
+                    vm.DescuentoServicio = DescuentoServicio.Descuento;
+                    vm.ConDescuento = true;
+                    vm.SinDescuento = false;
+                }else{
+                    vm.SinDescuento = true;
+                    vm.ConDescuento = false;
+                }
+            });
+        }
+
+        function AddDescuentoServicio(){
+            var Clv_UnicaNet = vm.Clv_UnicaNet;
+            var modalInstance = $uibModal.open({
+                animation: true,
+                ariaLabelledBy: 'modal-title',
+                ariaDescribedBy: 'modal-body', 
+                templateUrl: 'views/catalogos/ModalDescuentoServicioForm.html',
+                controller: 'ModalDescuentoServicioCtrl',
+                controllerAs: 'ctrl',
+                backdrop: 'static',
+                keyboard: false,
+                class: 'modal-backdrop fade',
+                size: 'sm',
+                resolve: {
+                    Clv_UnicaNet: function () {
+                        return Clv_UnicaNet;
+                    }
+                }
+            });
+        }
         
         var vm = this;
         vm.IdContrato = $stateParams.id;
@@ -783,6 +823,8 @@ angular
         vm.DivServicio = false;
         vm.DivAparato = false;
         vm.ShowServicios = false;
+        vm.SinDescuento = true;
+        vm.ConDescuento = false;
         vm.ValidateRFC = /^[A-Z]{4}\d{6}[a-zA-Z]{3}$|^[A-Z]{4}\d{6}\d{3}$|^[A-Z]{4}\d{6}[A-Z]{2}\d{1}$|^[A-Z]{4}\d{6}[A-Z]{1}\d{2}$|^[A-Z]{4}\d{6}\d{2}[a-zA-Z]{1}$|^[A-Z]{4}\d{6}\d{1}[a-zA-Z]{2}$|^[A-Z]{4}\d{6}\d{1}[A-Z]{1}\d{1}$|^[A-Z]{4}\d{6}[A-Z]{1}\d{1}[a-zA-Z]{1}$/;
         vm.AddDatosPersonales = AddDatosPersonales;
         vm.GetCiudadMunicipio = GetCiudadMunicipio;
@@ -800,6 +842,7 @@ angular
         vm.OpenAddServicioCliente = OpenAddServicioCliente;
         vm.UpdateServicioCliente = UpdateServicioCliente;
         vm.UpdateAparatoCliente = UpdateAparatoCliente;
+        vm.AddDescuentoServicio = AddDescuentoServicio;
         initData();
 
     });

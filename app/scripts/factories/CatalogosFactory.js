@@ -196,7 +196,10 @@ angular
       AddClientesServicio: '/ClientesServicio/AddClientesServicio',
       UpdateClientesServicio: '/ClientesServicio/UpdateClientesServicio',
       UpdateClientesAparato: '/ClientesAparato/UpdateClientesAparato',
-      GetDeepMuestraMedios_New: '/MuestraMedios_New/GetDeepMuestraMedios_New'
+      GetDeepMuestraMedios_New: '/MuestraMedios_New/GetDeepMuestraMedios_New',
+      GetConRelCteDescuento: '/ContratacionServicio/GetConRelCteDescuento',
+      GetNueRelCteDescuento: '/ContratacionServicio/GetNueRelCteDescuento',
+      GetBorRelCteDescuento: '/ContratacionServicio/GetBorRelCteDescuento'
     };
 
     factory.AddSucursal = function (SUCURSALESobj) {
@@ -3189,6 +3192,42 @@ angular
       var config = {headers: {'Authorization': $localStorage.currentUser.token}};
       var Parametros = {IdMedio: IdMedio};
       $http.post(globalService.getUrl() + paths.GetDeepMuestraMedios_New, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetConRelCteDescuento = function (ObjRelDescuento) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = ObjRelDescuento;
+      $http.post(globalService.getUrl() + paths.GetConRelCteDescuento, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetNueRelCteDescuento = function (ObjRelDescuento) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = ObjRelDescuento;
+      $http.post(globalService.getUrl() + paths.GetNueRelCteDescuento, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetBorRelCteDescuento = function (ObjRelDescuento) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = ObjRelDescuento;
+      $http.post(globalService.getUrl() + paths.GetBorRelCteDescuento, JSON.stringify(Parametros), config).then(function (response) {
         deferred.resolve(response.data);
       }).catch(function (response) {
         deferred.reject(response);
