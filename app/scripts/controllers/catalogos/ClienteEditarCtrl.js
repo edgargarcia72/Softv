@@ -447,6 +447,27 @@ angular
             }
         }
 
+        function OpenAddRefPersonal(){
+            var IdContrato = vm.IdContrato;
+            var modalInstance = $uibModal.open({
+                animation: true,
+                ariaLabelledBy: 'modal-title',
+                ariaDescribedBy: 'modal-body',
+                templateUrl: 'views/catalogos/ModalEditarRefCliente.html',
+                controller: 'ModalAddRefClienteCtrl',
+                controllerAs: 'ctrl',
+                backdrop: 'static',
+                keyboard: false,
+                class: 'modal-backdrop fade',
+                size: 'lg',
+                resolve: {
+                    IdContrato: function () {
+                        return IdContrato;
+                    }
+                }
+            });
+        }
+
         function OpenEditRefPersonal(ObjRefCliente){
             var ObjRefCliente = ObjRefCliente;
             var modalInstance = $uibModal.open({
@@ -468,10 +489,6 @@ angular
             });
         }
 
-        $rootScope.$on('LoadRefPersonal', function(e, IdContrato){
-            GetReferenciasPersonales(IdContrato);
-        });
-
         function OpenDeleteRefPersonal(ObjRefCliente){
             var ObjRefCliente = ObjRefCliente;
             var modalInstance = $uibModal.open({
@@ -492,6 +509,10 @@ angular
                 }
             });
         }
+
+        $rootScope.$on('LoadRefPersonal', function(e, IdContrato){
+            GetReferenciasPersonales(IdContrato);
+        });
 
         function AddNotas(){
              if(vm.IdContrato != undefined){
@@ -555,6 +576,7 @@ angular
         }
 
         function DetalleConcepto(ObjConcepto){
+            console.log(ObjConcepto);
             if(ObjConcepto.Tipo == 'S'){
                 vm.DivServicio = true;
                 vm.DivAparato = false;
@@ -817,6 +839,7 @@ angular
         var vm = this;
         vm.IdContrato = $stateParams.id;
         vm.Title = 'Cliente editar - ' + vm.IdContrato;
+        vm.SetForm = 1;
         vm.ShowAccord = true;
         vm.BlockInput = true;
         vm.DisableInput = false;
@@ -834,7 +857,8 @@ angular
         vm.ValidateFechaVen = ValidateFechaVen;
         vm.AddDatosFiscales = AddDatosFiscales;
         vm.AddDatosBancarios = AddDatosBancarios;
-        vm.AddRefPersonales = AddRefPersonales;
+        //vm.AddRefPersonales = AddRefPersonales;
+        vm.OpenAddRefPersonal = OpenAddRefPersonal;
         vm.OpenEditRefPersonal = OpenEditRefPersonal;
         vm.OpenDeleteRefPersonal = OpenDeleteRefPersonal;
         vm.AddNotas = AddNotas;
