@@ -572,6 +572,7 @@ angular
                     vm.expandedNodes.push(value);
                 });
                 vm.ShowServicios = (vm.ServicioList.length > 0)? true : false;
+                vm.ShowServiciosE = (vm.ServicioList.length == 7)? false : true;
             });
         }
 
@@ -580,6 +581,7 @@ angular
             if(ObjConcepto.Tipo == 'S'){
                 vm.DivServicio = true;
                 vm.DivAparato = false;
+                vm.ShowServiciosE = false;
                 var Clv_UnicaNet = ObjConcepto.Clv_UnicaNet;
                 var IdMedio = ObjConcepto.idMedio;
                 vm.NombreServicio = ObjConcepto.Nombre;
@@ -652,6 +654,7 @@ angular
             }else if(ObjConcepto.Tipo == 'A'){
                 vm.DivServicio = false;
                 vm.DivAparato = true;
+                vm.ShowServiciosE = (vm.ServicioList.length == 7)? false : true;
                 var ContratoNet = ObjConcepto.ContratoNet;
                 vm.NombreAparato = ObjConcepto.Nombre;
                 vm.DetalleAparato = ObjConcepto.Detalle;

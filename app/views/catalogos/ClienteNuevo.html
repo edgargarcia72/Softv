@@ -35,7 +35,7 @@
         height: 255PX;
         margin-left: -250px;
         overflow-y: auto;
-        background-color:#f2f3f3 !Important;
+        background-color:#8adcd4 !Important;/*Fondo*/
         -webkit-transition: all 0.5s ease;
         -moz-transition: all 0.5s ease;
         -o-transition: all 0.5s ease;
@@ -70,11 +70,11 @@
     .sidebar-nav li a {
         display: block;
         text-decoration: none;
-        color: #999999;
+        color: #515856;/*icono-satic*/
     }
     .sidebar-nav li a:hover {
         text-decoration: none;
-        color: black;
+        color: #858D8B;/*hover*/
         /*background: #312A25;*/
     }
     .sidebar-nav li a:active,
@@ -189,7 +189,7 @@
     <div class="card-body">
         <div class="panel-group" id="accordion3" ng-show="$ctrl.ShowAccord">
 			<div class="card panel">
-                <div class="card-head card-head-xs collapsed" style="background-color:#f2f3f3" data-toggle="collapse" data-parent="#accordion3" data-target="#accordion3-1" aria-expanded="false">
+                <div class="card-head card-head-xs collapsed" style="background-color:#8adcd4; color:#515856;" data-toggle="collapse" data-parent="#accordion3" data-target="#accordion3-1" aria-expanded="false">
 					<header ng-if="$ctrl.NombreAdi != null && $ctrl.SegundoApe != null"><i class="fa fa-user"></i> {{ $ctrl.Nombre + ' ' + $ctrl.NombreAdi + ' ' + $ctrl.PrimerApe + ' ' + $ctrl.SegundoApe + ', ' + 'Contrato: ' + $ctrl.IdCliente }}</header>
                     <header ng-if="$ctrl.NombreAdi == null && $ctrl.SegundoApe != null"><i class="fa fa-user"></i> {{ $ctrl.Nombre + ' ' + $ctrl.PrimerApe + ' ' + $ctrl.SegundoApe + ', ' + 'Contrato: ' + $ctrl.IdCliente }}</header>
                     <header ng-if="$ctrl.NombreAdi != null && $ctrl.SegundoApe == null"><i class="fa fa-user"></i> {{ $ctrl.Nombre + ' ' + $ctrl.NombreAdi + ' ' + $ctrl.PrimerApe + ', ' + 'Contrato: ' + $ctrl.IdCliente }}</header>
@@ -236,22 +236,22 @@
             <div id="sidebar-wrapper">
                 <ul class="sidebar-nav" style="margin-left:0; margin-top:15px;">      
                     <li>
-                        <a ng-click="$ctrl.SetForm = 1"> <i class="fa fa-user" aria-hidden="true"> </i> <span style="margin-left:10px; cursor:pointer;"> DATOS PERSONALES</span> </a>
+                        <a ng-click="$ctrl.SetForm = 1"> <i class="fa fa-user" aria-hidden="true" style="cursor:pointer;"> </i> <span style="margin-left:10px; cursor:pointer;"> DATOS PERSONALES</span> </a>
                     </li>
                     <li>
-                        <a ng-click="$ctrl.SetForm = 2"> <i class="fa fa-building" aria-hidden="true"> </i> <span style="margin-left:10px; cursor:pointer;"> DATOS FISCALES</span> </a>
+                        <a ng-click="$ctrl.SetForm = 2"> <i class="fa fa-building" aria-hidden="true" style="cursor:pointer;"> </i> <span style="margin-left:10px; cursor:pointer;"> DATOS FISCALES</span> </a>
                     </li>
                     <li>
-                        <a ng-click="$ctrl.SetForm = 3"> <i class="fa fa-university" aria-hidden="true"> </i> <span style="margin-left:10px; cursor:pointer;"> DATOS BANCARIOS</span> </a>
+                        <a ng-click="$ctrl.SetForm = 3"> <i class="fa fa-university" aria-hidden="true" style="cursor:pointer;"> </i> <span style="margin-left:10px; cursor:pointer;"> DATOS BANCARIOS</span> </a>
                     </li>
                     <li>
-                        <a ng-click="$ctrl.SetForm = 4"> <i class="fa fa-users" aria-hidden="true"> </i> <span style="margin-left:10px; cursor:pointer;"> REFERENCIAS</span> </a>
+                        <a ng-click="$ctrl.SetForm = 4"> <i class="fa fa-users" aria-hidden="true" style="cursor:pointer;"> </i> <span style="margin-left:10px; cursor:pointer;"> REFERENCIAS</span> </a>
                     </li>
                     <li>
-                        <a ng-click="$ctrl.SetForm = 5"><i class="fa fa-comment" aria-hidden="true"> </i> <span style="margin-left:10px; cursor:pointer;"> NOTAS</span> </a>
+                        <a ng-click="$ctrl.SetForm = 5"><i class="fa fa-comment" aria-hidden="true" style="cursor:pointer;"> </i> <span style="margin-left:10px; cursor:pointer;"> NOTAS</span> </a>
                     </li>
                     <li>
-                        <a ng-click="$ctrl.SetForm = 6"> <i class="fa fa-list-ol" aria-hidden="true"> </i> <span style="margin-left:10px; cursor:pointer;"> SERVICIOS</span> </a>
+                        <a ng-click="$ctrl.SetForm = 6"> <i class="fa fa-list-ol" aria-hidden="true" style="cursor:pointer;"> </i> <span style="margin-left:10px; cursor:pointer;"> SERVICIOS</span> </a>
                     </li>
                 </ul>
             </div>
@@ -879,7 +879,7 @@
                                     <button type="button" class="btn btn-success btn-xs" ng-click="$ctrl.OpenAddServicioCliente()" title="Agregar Servicio">AGREGAR</button>
                                 </div>
                                 <div class="col-md-12">
-                                    <h4 class="text-info">Servicios Asignados</h4>
+                                    <h4 class="text-primary">Servicios Asignados</h4>
                                 </div>
                                 <div class="col-md-12">
                                     <treecontrol class="tree-light" tree-model="$ctrl.ServicioList" expanded-nodes="$ctrl.expandedNodes" on-selection="$ctrl.DetalleConcepto(node)"> 
@@ -910,7 +910,7 @@
                                     <button type="button" class="btn btn-success btn-xs" ng-click="$ctrl.UpdateServicioCliente()" title="Guardar Detalle del Servicio" ng-disabled="FormDetallServicio.InpUltimoMesServicio.$invalid || FormDetallServicio.InpUltimoAnioServicio.$invalid || FormDetallServicio.InpFechaContratacion.$invalid  || FormDetallServicio.InpFechaInstalacion.$invalid || FormDetallServicio.InpFechaSuspencion.$invalid || FormDetallServicio.InpFechaBaja.$invalid || FormDetallServicio.InpFechaFueraArea.$invalid || FormDetallServicio.InpFechaUltimoPago.$invalid">GUARDAR</button>
                                 </div>
                                 <div class="col-md-3">
-                                    <h4 class="text-info">Detalle Servicio:</h4>
+                                    <h4 class="text-primary">Detalle Servicio:</h4>
                                 </div>
                                 <div class="col-md-9">
                                     <h4 class="text-danger">{{ $ctrl.NombreServicio }} - {{ $ctrl.Clv_UnicaNet }}</h4>
@@ -980,7 +980,7 @@
                                         <input name="InpMedio" class="form-control input-sm" ng-model="$ctrl.Medio" ng-disabled="true">
                                     </div>
                                     <div class="col-md-12 text-center">
-                                        <small class="text-info"><b>Ultimo Pagado</b></small>
+                                        <small class="text-primary"><b>Ultimo Pagado</b></small>
                                     </div>
                                     <div class="col-md-2">
                                         <small><b>Mes</b></small>
@@ -995,7 +995,7 @@
                                         <input type="number" name="InpUltimoAnioServicio" class="form-control input-sm" min="0" ng-model="$ctrl.UltimoAnioServicio" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
                                     </div>
                                     <div class="col-md-12 text-center">
-                                        <small class="text-info"><b>Fechas de:</b></small>
+                                        <small class="text-primary"><b>Fechas de:</b></small>
                                     </div>
                                     <div class="col-md-5">
                                         <small><b>Contratación:</b></small>
@@ -1047,7 +1047,7 @@
                                     <button type="button" class="btn btn-success btn-xs" ng-click="$ctrl.UpdateAparatoCliente()" title="Guardar Detalle Aparato" ng-disabled="FormDetallAparato.InpFechaActivacionAparato.$invalid || FormDetallAparato.InpSuspencionAparato.$invalid || FormDetallAparato.InpFechaBajaAparato.$invalid">GUARDAR</button>
                                 </div>
                                 <div class="col-md-3">
-                                    <h4 class="text-info">Detalle Aparato:</h4>
+                                    <h4 class="text-primary">Detalle Aparato:</h4>
                                 </div>
                                 <div class="col-md-9">
                                     <h4 class="text-danger">{{ $ctrl.NombreAparato }} ({{ $ctrl.DetalleAparato }}) - {{ $ctrl.ContratoNet }}</h4>
@@ -1076,7 +1076,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="col-md-12 text-center">
-                                        <small class="text-info"><b>Fechas de:</b></small>
+                                        <small class="text-primary"><b>Fechas de:</b></small>
                                     </div>
                                     <div class="col-md-4">
                                         <small><b>Activación:</b></small>
@@ -1104,6 +1104,13 @@
                                 </div>
                                 </form>
                             </div>
+                        </div>
+                        <div class="col-md-12" ng-show="$ctrl.ShowServiciosE">
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
                         </div>
                     </div>
                 </div>
