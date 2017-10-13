@@ -35,7 +35,7 @@
         height: 255PX;
         margin-left: -250px;
         overflow-y: auto;
-        background-color:#8adcd4 !Important;/*Fondo*/
+        background-color:#f3f1e4 !Important;/*Fondo*/
         -webkit-transition: all 0.5s ease;
         -moz-transition: all 0.5s ease;
         -o-transition: all 0.5s ease;
@@ -70,11 +70,11 @@
     .sidebar-nav li a {
         display: block;
         text-decoration: none;
-        color: #515856;/*icono-satic*/
+        color: #918E8E;/*icono-satic*/
     }
     .sidebar-nav li a:hover {
         text-decoration: none;
-        color: #858D8B;/*hover*/
+        color: black;/*hover*/
         /*background: #312A25;*/
     }
     .sidebar-nav li a:active,
@@ -189,7 +189,7 @@
     <div class="card-body">
         <div class="panel-group" id="accordion3" ng-show="$ctrl.ShowAccord">
 			<div class="card panel">
-                <div class="card-head card-head-xs collapsed" style="background-color:#8adcd4; color:#515856;" data-toggle="collapse" data-parent="#accordion3" data-target="#accordion3-1" aria-expanded="false">
+                <div class="card-head card-head-xs collapsed" style="background-color:#f3f1e4; color:#515856;" data-toggle="collapse" data-parent="#accordion3" data-target="#accordion3-1" aria-expanded="false">
 					<header ng-if="$ctrl.NombreAdi != null && $ctrl.SegundoApe != null"><i class="fa fa-user"></i> {{ $ctrl.Nombre + ' ' + $ctrl.NombreAdi + ' ' + $ctrl.PrimerApe + ' ' + $ctrl.SegundoApe + ', ' + 'Contrato: ' + $ctrl.IdCliente }}</header>
                     <header ng-if="$ctrl.NombreAdi == null && $ctrl.SegundoApe != null"><i class="fa fa-user"></i> {{ $ctrl.Nombre + ' ' + $ctrl.PrimerApe + ' ' + $ctrl.SegundoApe + ', ' + 'Contrato: ' + $ctrl.IdCliente }}</header>
                     <header ng-if="$ctrl.NombreAdi != null && $ctrl.SegundoApe == null"><i class="fa fa-user"></i> {{ $ctrl.Nombre + ' ' + $ctrl.NombreAdi + ' ' + $ctrl.PrimerApe + ', ' + 'Contrato: ' + $ctrl.IdCliente }}</header>
@@ -263,7 +263,7 @@
                         <div class="col-md-12">
                             <div class="col-md-12">
                                 <div class="col-md-12">
-                                    <h3 class="text-primary"><i class="fa fa-user"></i> Datos Personales</h3>
+                                    <b class="text-primary" style="font-size:18px;"><i class="fa fa-user"></i> Datos Personales</b>
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -484,7 +484,7 @@
                         <div class="col-md-12">
                             <div class="col-md-12">
                                 <div class="col-md-12">
-                                    <h3 class="text-primary"><i class="fa fa-building"></i> Datos Fiscales</h3>
+                                    <b class="text-primary" style="font-size:18px;"><i class="fa fa-building"></i> Datos Fiscales</b>
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -627,7 +627,7 @@
                         <div class="col-md-12">
                             <div class="col-md-12">
                                 <div class="col-md-12">
-                                    <h3 class="text-primary"><i class="fa fa-university"></i> Datos Bancarios</h3>
+                                    <b class="text-primary" style="font-size:18px;"><i class="fa fa-university"></i> Datos Bancarios</b>
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -730,53 +730,9 @@
                         <div class="col-md-12">
                             <div class="col-md-12">
                                 <div class="col-md-12">
-                                    <h3 class="text-primary"><i class="fa fa-users"></i> Referencias</h3>
+                                    <b class="text-primary" style="font-size:18px;"><i class="fa fa-users"></i> Referencias</b>
                                 </div>
                             </div>
-                            <!--
-                            <div class="col-md-12">
-                                <div class="col-md-4">
-                                    <p><small><b>Nombre:</b></small></p>
-                                </div>
-                                <div class="col-md-4">
-                                    <p><small><b>Teléfono:</b></small></p>
-                                </div>
-                                <div class="col-md-4">
-                                    <p><small><b>Email:</b></small></p>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="col-md-4">
-                                    <input type="text" name="InpNombreRef" class="form-control input-sm" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" ng-model="$ctrl.NombreRef" validate-on="dirty" required required-message="'Obligatorio'">
-                                </div>
-                                <div class="col-md-4">
-                                    <input type="text" name="InpTelefonoRef" class="form-control input-sm" ng-model="$ctrl.TelefonoRef" maxlength="10" ng-pattern="/^\d{8}$|^\d{9}$|^\d{10}$/" validator="$ctrl.TelefonoRef > 0" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa minimo 8 dígitos.'">
-                                </div>
-                                <div class="col-md-4">
-                                    <input type="email" name="InpEmailRef" class="form-control input-sm" ng-model="$ctrl.EmailRef" ng-pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido, Ingresa un correo válido'">
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="col-md-12">
-                                    <br>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="col-md-12">
-                                    <p><small><b>Dirección:</b></small></p>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="col-md-12">
-                                    <textarea name="InpDireccionRef" class="form-control input-sm" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" rows="3" ng-model="$ctrl.DireccionRef" validate-on="dirty" required required-message="'Obligatorio'"></textarea>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="col-md-12">
-                                    <br>
-                                </div>
-                            </div>
-                            -->
                             <div class="col-md-12">
                                 <div class="col-md-12 table-scroll">
                                     <table class="table">
@@ -827,7 +783,7 @@
                         <div class="col-md-12">
                             <div class="col-md-12">
                                 <div class="col-md-12">
-                                    <h3 class="text-primary"><i class="fa fa-comment"></i> Notas</h3>
+                                    <b class="text-primary" style="font-size:18px;"><i class="fa fa-comment"></i> Notas</b>
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -861,6 +817,11 @@
                                     <button type="submit" class="btn btn-success btn-sm" ng-disabled="$ctrl.DisableInput">Validar</button>
                                 </div>
                             </div>
+                            <div class="col-md-12">
+                                <div class="col-md-12">
+                                    <br>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </form>
@@ -870,51 +831,54 @@
                     <div class="col-md-12">
                         <div class="col-md-12">
                             <div class="col-md-12">
-                                <h3 class="text-primary"><i class="fa fa-list-ol"></i> Servicios</h3>
+                                <b class="text-primary" style="font-size:18px;"><i class="fa fa-list-ol"></i> Servicios</b>
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="col-md-5">
-                                <div class="col-md-offset-9 col-md-3">
-                                    <button type="button" class="btn btn-success btn-xs" ng-click="$ctrl.OpenAddServicioCliente()" title="Agregar Servicio">AGREGAR</button>
-                                </div>
-                                <div class="col-md-12">
+                                <div class="col-md-9">
                                     <h4 class="text-primary">Servicios Asignados</h4>
+                                </div>
+                                <div class="col-md-3">
+                                    <button type="button" class="btn btn-success btn-xs" ng-click="$ctrl.OpenAddServicioCliente()" title="Agregar Servicio">AGREGAR</button>
                                 </div>
                                 <div class="col-md-12">
                                     <treecontrol class="tree-light" tree-model="$ctrl.ServicioList" expanded-nodes="$ctrl.expandedNodes" on-selection="$ctrl.DetalleConcepto(node)"> 
                                         <span ng-switch="" on="node.Type">
-                                            <span ng-switch-when="folder" class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
-                                            <span ng-switch-when="pic" class="glyphicon glyphicon-picture" aria-hidden="true"></span>
-                                            <span ng-switch-when="doc" class="glyphicon glyphicon-file" aria-hidden="true"></span>
-                                            <span ng-switch-when="file" class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
-                                            <span ng-switch-when="movie" class="glyphicon glyphicon-film" aria-hidden="true"></span>
-                                            <span ng-switch-when="email" class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
-                                            <span ng-switch-when="home" class="glyphicon glyphicon-home" aria-hidden="true"></span>
-                                            <span ng-switch-when="trash" class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                            <span style="color:#2196f3" ng-switch-when="folder" class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
+                                            <span style="color:#2196f3" ng-switch-when="pic" class="glyphicon glyphicon-picture" aria-hidden="true"></span>
+                                            <span style="color:#2196f3" ng-switch-when="doc" class="glyphicon glyphicon-file" aria-hidden="true"></span>
+                                            <span style="color:#2196f3" ng-switch-when="file" class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
+                                            <span style="color:#2196f3" ng-switch-when="movie" class="glyphicon glyphicon-film" aria-hidden="true"></span>
+                                            <span style="color:#2196f3" ng-switch-when="email" class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                                            <span style="color:#2196f3" ng-switch-when="home" class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                                            <span style="color:#2196f3" ng-switch-when="trash" class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                         </span>
-                                        <a style="font-size:12px" ng-if="node.Tipo == 'A'">{{node.Nombre}} ({{node.Detalle}})</a>
-                                        <a style="font-size:12px" ng-if="node.status == 'C'">{{node.Nombre}} (Contratado)</a>
-                                        <a style="font-size:12px" ng-if="node.status == 'I'">{{node.Nombre}} (Instalado)</a>
-                                        <a style="font-size:12px" ng-if="node.status == 'D'">{{node.Nombre}} (Desconectado)</a>
-                                        <a style="font-size:12px" ng-if="node.status == 'S'">{{node.Nombre}} (Suspendido)</a>
-                                        <a style="font-size:12px" ng-if="node.status == 'T'">{{node.Nombre}} (Suspención Temporal)</a>
-                                        <a style="font-size:12px" ng-if="node.status == 'F'">{{node.Nombre}} (Fuera de Area)</a>
-                                        <a style="font-size:12px" ng-if="node.status == 'B'">{{node.Nombre}} (Baja)</a>
+                                        <a class="text-info" style="font-size:12px" ng-if="node.Tipo == 'A'">{{node.Nombre}} ({{node.Detalle}})</a>
+                                        <a class="text-info" style="font-size:12px" ng-if="node.status == 'C'">{{node.Nombre}} (Contratado)</a>
+                                        <a class="text-info" style="font-size:12px" ng-if="node.status == 'I'">{{node.Nombre}} (Instalado)</a>
+                                        <a class="text-info" style="font-size:12px" ng-if="node.status == 'D'">{{node.Nombre}} (Desconectado)</a>
+                                        <a class="text-info" style="font-size:12px" ng-if="node.status == 'S'">{{node.Nombre}} (Suspendido)</a>
+                                        <a class="text-info" style="font-size:12px" ng-if="node.status == 'T'">{{node.Nombre}} (Suspención Temporal)</a>
+                                        <a class="text-info" style="font-size:12px" ng-if="node.status == 'F'">{{node.Nombre}} (Fuera de Area)</a>
+                                        <a class="text-info" style="font-size:12px" ng-if="node.status == 'B'">{{node.Nombre}} (Baja)</a>
                                     </treecontrol>
                                 </div>
                             </div>
                             <div class="col-md-7" ng-if="$ctrl.DivServicio">
                                 <form name="FormDetallServicio" angular-validator-submit="" novalidate angular-validator autocomplete="off">
-                                <div class="col-md-offset-10 col-md-2">
-                                    <button type="button" class="btn btn-success btn-xs" ng-click="$ctrl.UpdateServicioCliente()" title="Guardar Detalle del Servicio" ng-disabled="FormDetallServicio.InpUltimoMesServicio.$invalid || FormDetallServicio.InpUltimoAnioServicio.$invalid || FormDetallServicio.InpFechaContratacion.$invalid  || FormDetallServicio.InpFechaInstalacion.$invalid || FormDetallServicio.InpFechaSuspencion.$invalid || FormDetallServicio.InpFechaBaja.$invalid || FormDetallServicio.InpFechaFueraArea.$invalid || FormDetallServicio.InpFechaUltimoPago.$invalid">GUARDAR</button>
-                                </div>
+                                <div class="col-md-12">
                                 <div class="col-md-3">
                                     <h4 class="text-primary">Detalle Servicio:</h4>
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-7">
                                     <h4 class="text-danger">{{ $ctrl.NombreServicio }} - {{ $ctrl.Clv_UnicaNet }}</h4>
                                 </div>
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-success btn-xs" ng-click="$ctrl.UpdateServicioCliente()" title="Guardar Detalle del Servicio" ng-disabled="FormDetallServicio.InpUltimoMesServicio.$invalid || FormDetallServicio.InpUltimoAnioServicio.$invalid || FormDetallServicio.InpFechaContratacion.$invalid  || FormDetallServicio.InpFechaInstalacion.$invalid || FormDetallServicio.InpFechaSuspencion.$invalid || FormDetallServicio.InpFechaBaja.$invalid || FormDetallServicio.InpFechaFueraArea.$invalid || FormDetallServicio.InpFechaUltimoPago.$invalid">GUARDAR</button>
+                                </div>
+                                </div>
+                                <div class="col-md-12">
                                 <div class="col-md-6">
                                     <div class="col-md-3">
                                         <small><b>Status:</b></small>
@@ -1039,6 +1003,7 @@
                                     <div class="col-md-7">
                                     </div>
                                 </div>
+                                </div>
                                 </form>
                             </div>
                             <div class="col-md-7" ng-if="$ctrl.DivAparato">
@@ -1106,11 +1071,7 @@
                             </div>
                         </div>
                         <div class="col-md-12" ng-show="$ctrl.ShowServiciosE">
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
+                            <br ng-repeat="S in $ctrl.GetNumber($ctrl.ShowServiciosE)">
                         </div>
                     </div>
                 </div>

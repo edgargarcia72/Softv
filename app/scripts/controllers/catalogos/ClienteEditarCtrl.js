@@ -566,13 +566,23 @@ angular
 
         function GetServicios(IdContrato){
             CatalogosFactory.GetMuestraArbolServicios_ClientesList(IdContrato).then(function(data){
+                console.log(data);
                 vm.ServicioList = data.GetMuestraArbolServicios_ClientesListResult;
                 vm.expandedNodes=[];
                 angular.forEach(vm.ServicioList, function(value, key) {
                     vm.expandedNodes.push(value);
                 });
                 vm.ShowServicios = (vm.ServicioList.length > 0)? true : false;
-                vm.ShowServiciosE = (vm.ServicioList.length == 7)? false : true;
+                var CS = vm.ServicioList.length;
+                console.log('Total S:',CS);
+                var CA = 0;
+                for(var i = 0; vm.ServicioList.length > i; i++){
+                    CA = CA + vm.ServicioList[i].children.length;
+                }
+                vm.CT = CS + CA;
+                console.log('Total:',vm.CT);
+                vm.ShowServiciosE = (vm.CT >= 8)? 0 : 8 - vm.CT;
+                console.log(vm.ShowServiciosE);
             });
         }
 
@@ -654,7 +664,7 @@ angular
             }else if(ObjConcepto.Tipo == 'A'){
                 vm.DivServicio = false;
                 vm.DivAparato = true;
-                vm.ShowServiciosE = (vm.ServicioList.length == 7)? false : true;
+                vm.ShowServiciosE = (vm.CT >= 8)? 0 : 8 - vm.CT;
                 var ContratoNet = ObjConcepto.ContratoNet;
                 vm.NombreAparato = ObjConcepto.Nombre;
                 vm.DetalleAparato = ObjConcepto.Detalle;
@@ -838,6 +848,14 @@ angular
                 }
             });
         }
+
+        function GetNumber(num){
+            var res = [];
+            for (var i = 0; i < num; i++) {
+                res.push(i);
+            }
+            return res;
+        }
         
         var vm = this;
         vm.IdContrato = $stateParams.id;
@@ -870,6 +888,7 @@ angular
         vm.UpdateServicioCliente = UpdateServicioCliente;
         vm.UpdateAparatoCliente = UpdateAparatoCliente;
         vm.AddDescuentoServicio = AddDescuentoServicio;
+        vm.GetNumber = GetNumber;
         initData();
 
     });
