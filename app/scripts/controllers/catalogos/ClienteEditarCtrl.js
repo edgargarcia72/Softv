@@ -566,7 +566,6 @@ angular
 
         function GetServicios(IdContrato){
             CatalogosFactory.GetMuestraArbolServicios_ClientesList(IdContrato).then(function(data){
-                console.log(data);
                 vm.ServicioList = data.GetMuestraArbolServicios_ClientesListResult;
                 vm.expandedNodes=[];
                 angular.forEach(vm.ServicioList, function(value, key) {
@@ -574,20 +573,16 @@ angular
                 });
                 vm.ShowServicios = (vm.ServicioList.length > 0)? true : false;
                 var CS = vm.ServicioList.length;
-                console.log('Total S:',CS);
                 var CA = 0;
                 for(var i = 0; vm.ServicioList.length > i; i++){
                     CA = CA + vm.ServicioList[i].children.length;
                 }
                 vm.CT = CS + CA;
-                console.log('Total:',vm.CT);
                 vm.ShowServiciosE = (vm.CT >= 8)? 0 : 8 - vm.CT;
-                console.log(vm.ShowServiciosE);
             });
         }
 
         function DetalleConcepto(ObjConcepto){
-            console.log(ObjConcepto);
             if(ObjConcepto.Tipo == 'S'){
                 vm.DivServicio = true;
                 vm.DivAparato = false;

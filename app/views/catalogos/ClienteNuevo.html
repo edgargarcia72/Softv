@@ -35,7 +35,7 @@
         height: 255PX;
         margin-left: -250px;
         overflow-y: auto;
-        background-color:#f3f1e4 !Important;/*Fondo*/
+        background-color:#d0d3d6 !Important;/*Fondo*/
         -webkit-transition: all 0.5s ease;
         -moz-transition: all 0.5s ease;
         -o-transition: all 0.5s ease;
@@ -67,14 +67,18 @@
         text-indent: 20px;
         line-height: 40px;
     }
+    /*.sidebar-nav li:hover {
+        background-color: black;
+        border-radius: 0px 10px 10px 0px;
+    }*/
     .sidebar-nav li a {
         display: block;
         text-decoration: none;
-        color: #918E8E;/*icono-satic*/
+        color: black;/*icono-satic*/
     }
     .sidebar-nav li a:hover {
         text-decoration: none;
-        color: black;/*hover*/
+        color: #9a9a9a;/*hover*/
         /*background: #312A25;*/
     }
     .sidebar-nav li a:active,
@@ -189,7 +193,7 @@
     <div class="card-body">
         <div class="panel-group" id="accordion3" ng-show="$ctrl.ShowAccord">
 			<div class="card panel">
-                <div class="card-head card-head-xs collapsed" style="background-color:#f3f1e4; color:#515856;" data-toggle="collapse" data-parent="#accordion3" data-target="#accordion3-1" aria-expanded="false">
+                <div class="card-head card-head-xs collapsed" style="background-color:#83e4ca; color:#515856;" data-toggle="collapse" data-parent="#accordion3" data-target="#accordion3-1" aria-expanded="false">
 					<header ng-if="$ctrl.NombreAdi != null && $ctrl.SegundoApe != null"><i class="fa fa-user"></i> {{ $ctrl.Nombre + ' ' + $ctrl.NombreAdi + ' ' + $ctrl.PrimerApe + ' ' + $ctrl.SegundoApe + ', ' + 'Contrato: ' + $ctrl.IdCliente }}</header>
                     <header ng-if="$ctrl.NombreAdi == null && $ctrl.SegundoApe != null"><i class="fa fa-user"></i> {{ $ctrl.Nombre + ' ' + $ctrl.PrimerApe + ' ' + $ctrl.SegundoApe + ', ' + 'Contrato: ' + $ctrl.IdCliente }}</header>
                     <header ng-if="$ctrl.NombreAdi != null && $ctrl.SegundoApe == null"><i class="fa fa-user"></i> {{ $ctrl.Nombre + ' ' + $ctrl.NombreAdi + ' ' + $ctrl.PrimerApe + ', ' + 'Contrato: ' + $ctrl.IdCliente }}</header>
@@ -198,7 +202,7 @@
 						<a class="btn btn-icon-toggle"><i class="fa fa-angle-down"></i></a>
 					</div>
 				</div>
-                <div id="accordion3-1" class="collapse buscarContrato" aria-expanded="false" style="height: 0px;">
+                <div id="accordion3-1" class="collapse buscarContrato" aria-expanded="false" style="height: 0px; background-color: rgba(231, 235, 239, 1);">
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-12">
@@ -801,10 +805,10 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="col-md-6">
-                                    <textarea name="TxaObservaciones" class="form-control input-sm" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" rows="5" ng-model="$ctrl.Observaciones" validate-on="dirty" required required-message="'Obligatorio'"></textarea>
+                                    <textarea name="TxaObservaciones" class="form-control input-sm" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" rows="5" ng-model="$ctrl.Observaciones" validate-on="dirty"></textarea>
                                 </div>
                                 <div class="col-md-6">
-                                    <textarea name="TxaDireccionRef" class="form-control input-sm" rows="5" ng-model="$ctrl.Notas" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" validate-on="dirty" required required-message="'Obligatorio'"></textarea>
+                                    <textarea name="TxaDireccionRef" class="form-control input-sm" rows="5" ng-model="$ctrl.Notas" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" validate-on="dirty"></textarea>
                                 </div>
                             </div>
                             <div class="col-md-12">

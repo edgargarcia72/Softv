@@ -10,17 +10,16 @@ angular
       GetNueRelSectorColonia: '/AreaTecnica/GetNueRelSectorColonia',
       GetBorRelSectorColonia: '/AreaTecnica/GetBorRelSectorColonia ',
       GetModSector: '/AreaTecnica/GetModSector',
-
       GetMuestraPostes:'/ColoniaCAMDO/GetMuestraDescPoste',
       GetNuePoste:'/ColoniaCAMDO/AddInsertaNueDescPoste',
-
-      GetBorSector: '/AreaTecnica/GetBorSector'
-
-
+      GetBorSector: '/AreaTecnica/GetBorSector',
+      GetDesplegarAgenda: '/CatalogoAgenda/GetDesplegarAgenda',
+      GetSoftv_MuestraSectores: '/CatalogoAgenda/GetSoftv_MuestraSectores',
+      GetMuestra_Tecnicos_Agenda: '/CatalogoAgenda/GetMuestra_Tecnicos_Agenda',
+      GetspConsultaTurnosList: '/spConsultaTurnos/GetspConsultaTurnosList'
     };
+
     var factory = {};   
-
-
 
     factory.GetBorSector = function (Clv_Sector) {
       var deferred = $q.defer();
@@ -164,8 +163,6 @@ angular
         'Clv_Sector': obj.Clv_Sector,
         'Descripcion': obj.Descripcion,
         'Clv_Txt': obj.Clv_Txt
-
-
       };
       
       $http.post(globalService.getUrl() + paths.GetModSector, JSON.stringify(Parametros), config).then(function (response) {
@@ -238,8 +235,53 @@ angular
       return deferred.promise;
     };
 
+    factory.GetDesplegarAgenda = function (ObjAgenda) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {'ObjAgenda':ObjAgenda};
+      console.log(Parametros);
+      $http.post(globalService.getUrl() + paths.GetDesplegarAgenda, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
 
+    factory.GetSoftv_MuestraSectores = function (ObjAgenda) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {'ObjAgenda':ObjAgenda};
+      $http.post(globalService.getUrl() + paths.GetSoftv_MuestraSectores, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
 
+    factory.GetMuestra_Tecnicos_Agenda = function (clv_usuario) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {'clv_usuario':clv_usuario};
+      $http.post(globalService.getUrl() + paths.GetMuestra_Tecnicos_Agenda, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetspConsultaTurnosList = function () {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      $http.get(globalService.getUrl() + paths.GetspConsultaTurnosList, config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
 
     return factory;
   });
