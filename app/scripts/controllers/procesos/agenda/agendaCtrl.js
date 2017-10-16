@@ -31,7 +31,14 @@ angular
       var ObjAgenda = {
         'idcompania': vm.Plaza.id_compania,
         'ClvUsuario': $localStorage.currentUser.idUsuario,
-
+        'opSetupBoxTarjeta': (Opc == 3 && vm.SetUpBox != undefined)? 2 : 1,
+        'CLV_TECNICO': (Opc == 1 && vm.Tecnico != undefined)? vm.Tecnico.clv_tecnico : 0,
+        'CONTRATO': (Opc == 1 && vm.Contrato != undefined)? vm.Contrato : 0,
+        'Sector': (Opc > 0 && vm.Sector != undefined)? vm.Sector.Clv_Sector : 0,
+        'NOMBRE': (Opc == 2 && vm.Nombre != undefined)? vm.Nombre : '',
+        'ApellidoPaterno': (Opc == 2 && vm.Paterno != undefined)? vm.Paterno : '',
+        'ApellidoMaterno': (Opc == 2 && vm.Materno != undefined)? vm.Materno : '',
+        'SetUpBox': (Opc == 3 && vm.SetUpBox != undefined)? vm.SetUpBox : ''
       }
       agendaFactory.GetDesplegarAgenda(ObjAgenda).then(function(data){
         console.log(data);

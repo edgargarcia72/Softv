@@ -40,6 +40,7 @@ angular
                 'TVSINPAGO': 0,
                 'TVCONPAGO': 0,
                 'IdMedio': 0,
+                'TipServ': vm.TipoServicio.Clv_TipSerPrincipal,
                 'Clv_usuarioCapturo': $localStorage.currentUser.idUsuario
             };
             CatalogosFactory.AddClientesServicio(ObjServicioCliente).then(function(data){

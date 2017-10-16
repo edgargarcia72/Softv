@@ -734,9 +734,11 @@ angular
                 if(data.UpdateClientesServicioResult == -1){
                     ngNotify.set('CORRECTO, se guardó detalle del servicio.', 'success');
                     DetalleConcepto(ObjConcepto);
+                    GetServicios(vm.IdContrato);
                 }else{
                     ngNotify.set('ERROR, al guardar detalle del servicio.', 'warn');
                     DetalleConcepto(ObjConcepto);
+                    GetServicios(vm.IdContrato);
                 }
             });
         }
@@ -769,9 +771,11 @@ angular
                 if(data.UpdateClientesAparatoResult == -1){
                     ngNotify.set('CORRECTO, se guardó detalle del aparato.', 'success');
                     DetalleConcepto(ObjConcepto);
+                    GetServicios(vm.IdContrato);
                 }else{
                     ngNotify.set('ERROR, al guardar detalle del aparato.', 'warn');
                     DetalleConcepto(ObjConcepto);
+                    GetServicios(vm.IdContrato);
                 }
             });
         }

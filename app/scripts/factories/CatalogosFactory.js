@@ -3155,6 +3155,7 @@ angular
       var deferred = $q.defer();
       var config = {headers: {'Authorization': $localStorage.currentUser.token}};
       var Parametros = {objClientesServicio: objClientesServicio};
+      console.log(JSON.stringify(Parametros));
       $http.post(globalService.getUrl() + paths.AddClientesServicio, JSON.stringify(Parametros), config).then(function (response) {
         deferred.resolve(response.data);
       }).catch(function (response) {
