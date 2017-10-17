@@ -49,7 +49,7 @@
                 </div>
                 <div class="col-md-1" style="text-align:right">
                     <input type="text" name="InpSearchSetUpBox" class="form-control input-sm" ng-model="$ctrl.SetUpBox" placeholder="Set Up Box">
-                </div>
+                </div> 
                 <div class="col-md-1" style="text-align:right">
                     <button type="button" class="btn btn-warning btn-xs" ng-click="$ctrl.GetAgendaList(3);" title="Buscar por Contrato "><i class="glyphicon glyphicon-search"></i> BUSCAR</button>
                 </div>
@@ -82,14 +82,8 @@
                     <button type="button" class="btn btn-warning btn-xs" ng-click="$ctrl.BUSCAR();" title="Buscar por Turno "><i class="glyphicon glyphicon-search"></i> BUSCAR</button>
                 </div>
             </div>
-            <div class="col-md-12">
-                <div class="col-md-12">
-                    <br>
-                </div>
-            </div>
         </div>
     </div>
-    <br>
     <div class="col-md-12">
         <div class="col-md-12">
             <table class="table">
@@ -107,7 +101,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr dir-paginate="X in $ctrl.AgendaList|itemsPerPage:7">
+                    <tr dir-paginate="X in $ctrl.AgendaList|itemsPerPage:7" ng-show="$ctrl.ConResultado">
                         <td>{{ X.Tipo}}</td>
                         <td>{{ X.Estado }}</td>
                         <td>{{ X.Clv_OrdRep}}</td>
@@ -119,7 +113,9 @@
                         <td><button type="button" class="btn btn-warning btn-xs" ng-click="$ctrl.BUSCAR();" title="EDITAR"><i class="fa fa-pencil-square-o"></i> Editar</button></td>
                         <td><button type="button" class="btn btn-danger btn-xs" ng-click="$ctrl.BUSCAR();" title="ELIMINAR"><i class="fa fa-trash"></i> Eliminar</button></td>
                     </tr>
-
+                    <tr ng-show="$ctrl.SinResultado">
+                        <td class="text-center" colspan="10">Sin resultados</td>
+                    </tr>
                 </tbody>
             </table>
             <br>

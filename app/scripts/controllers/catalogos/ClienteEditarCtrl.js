@@ -14,6 +14,10 @@ angular
             CatalogosFactory.GetMuestraPromotoresNet().then(function(data){
                 vm.VendedorList = data.GetMuestraPromotoresNetResult;
             });
+            CatalogosFactory.GetInfoTvs().then(function(data){
+                vm.TvConPago = data.GetInfoTvsResult.TvConPago;
+                vm.TvSinPago = data.GetInfoTvsResult.TvSinPago;
+            });
             CatalogosFactory.GetConsultaClientesList(vm.IdContrato).then(function(data){
                 if(data.GetConsultaClientesListResult.length > 0){
                     CatalogosFactory.GetPlazaList($localStorage.currentUser.idUsuario).then(function(data){
@@ -599,12 +603,12 @@ angular
                     vm.ObservacionesServicio = ServicioResult.Obs;
                     vm.UltimoMesServicio = ServicioResult.ultimo_mes;
                     vm.UltimoAnioServicio = ServicioResult.ultimo_anio;
-                    vm.FechaContratacion = toDate(ServicioResult.fecha_solicitud);
-                    vm.FechaInstalacion = toDate(ServicioResult.fecha_instalacio);
-                    vm.FechaSuspencion = toDate(ServicioResult.fecha_suspension);
-                    vm.FechaBaja = toDate(ServicioResult.fecha_baja);
-                    vm.FechaFueraArea = toDate(ServicioResult.fecha_Fuera_Area);
-                    vm.FechaUltimoPago = toDate(ServicioResult.FECHA_ULT_PAGO);
+                    vm.FechaContratacion = (ServicioResult.fecha_solicitud != null)? toDate(ServicioResult.fecha_solicitud) : null;
+                    vm.FechaInstalacion = (ServicioResult.fecha_instalacio != null)? toDate(ServicioResult.fecha_instalacio) : null;
+                    vm.FechaSuspencion = (ServicioResult.fecha_suspension != null)? toDate(ServicioResult.fecha_suspension) : null;
+                    vm.FechaBaja = (ServicioResult.fecha_baja != null)? toDate(ServicioResult.fecha_baja) : null;
+                    vm.FechaFueraArea = (ServicioResult.fecha_Fuera_Area != null)? toDate(ServicioResult.fecha_Fuera_Area) : null;
+                    vm.FechaUltimoPago = (ServicioResult.FECHA_ULT_PAGO != null)? toDate(ServicioResult.FECHA_ULT_PAGO) : null;
                     vm.PrimerMen = (ServicioResult.PrimerMensualidad == true)? 'Y' : 'N';
                     vm.Cortesia = (ServicioResult.Cortesia == 1)? 'Y' : 'N';
                     vm.Clv_usuarioCapturo = ServicioResult.Clv_usuarioCapturo;
@@ -619,7 +623,7 @@ angular
                     vm.facturaAntServicio = ServicioResult.facturaAnt;
                     vm.primerMesAntServicio = ServicioResult.primerMesAnt;
                     vm.statusAntServicio = ServicioResult.statusAnt;
-                    var Status = ServicioResult.status;
+                    vm.ClvStatus = ServicioResult.status;
                     var Vendedor = ServicioResult.Clv_Vendedor;
                     if(Vendedor > 0){
                         for(var i = 0; vm.VendedorList.length > i; i ++){
@@ -631,12 +635,13 @@ angular
                         vm.Vendedor = undefined;
                     }
                     for(var i = 0; vm.StatusServicioList.length > i; i ++){
-                        if(vm.StatusServicioList[i].Clv_StatusNet == Status){
+                        if(vm.StatusServicioList[i].Clv_StatusNet == vm.ClvStatus){
                             vm.StatusServicio = vm.StatusServicioList[i];
                         }
                     }
                     CatalogosFactory.GetDeepServicios_New(vm.Clv_Servicio).then(function(data){
                         var Clv_TipSer = data.GetDeepServicios_NewResult.Clv_TipSer;
+                        vm.ShowTipServ1 = (data.GetDeepServicios_NewResult.Clv_TipSer == 1)? true : false;
                         var ObjUsuario = {
                             'CLV_UNICANET': vm.Clv_UnicaNet,
                             'tipo_serv': Clv_TipSer
@@ -668,10 +673,10 @@ angular
                     vm.ContratoNet = AparatoResult.ContratoNet;
                     vm.Clv_CableModem = AparatoResult.Clv_CableModem;
                     vm.ObservacionesAparatos = AparatoResult.Obs;
-                    vm.FechaActivacionAparato = toDate(AparatoResult.Fecha_Activacion);
-                    vm.FechaSuspencionAparato = toDate(AparatoResult.Fecha_Suspension);
-                    vm.FechaBajaAparato = toDate(AparatoResult.Fecha_Baja);
-                    vm.Fecha_Traspaso = toDate(AparatoResult.Fecha_Traspaso);
+                    vm.FechaActivacionAparato = (AparatoResult.Fecha_Activacion != null)? toDate(AparatoResult.Fecha_Activacion) : null;
+                    vm.FechaSuspencionAparato = (AparatoResult.Fecha_Suspension != null)? toDate(AparatoResult.Fecha_Suspension) : null;
+                    vm.FechaBajaAparato = (AparatoResult.Fecha_Baja != null)? toDate(AparatoResult.Fecha_Baja) : null;
+                    vm.Fecha_Traspaso = (AparatoResult.Fecha_Traspaso != null)? toDate(AparatoResult.Fecha_Traspaso) : null;
                     vm.SeRenta = (AparatoResult.SeRenta == true)? 'Y' : 'N';
                     vm.Clv_UsuarioAparato = AparatoResult.Clv_Usuario;
                     vm.NoCajaAparato = AparatoResult.NoCaja;
@@ -679,9 +684,9 @@ angular
                     vm.no_extensionesAparato = AparatoResult.no_extensiones;
                     vm.ventacablemodem1Aparato = AparatoResult.ventacablemodem1;
                     vm.ventacablemodem2Aparato = AparatoResult.ventacablemodem2;
-                    var Status = AparatoResult.Status;
+                    vm.StatusA = AparatoResult.Status;
                     for(var i = 0; vm.StatusAparatoList.length > i; i ++){
-                        if(vm.StatusAparatoList[i].Clv_StatusNet == Status){
+                        if(vm.StatusAparatoList[i].Clv_StatusNet == vm.StatusA){
                             vm.StatusAparato = vm.StatusAparatoList[i];
                         }
                     }
@@ -698,12 +703,12 @@ angular
                 'Contrato': vm.IdContrato,
                 'Clv_Servicio': vm.Clv_Servicio,
                 'status': vm.StatusServicio.Clv_StatusNet,
-                'fecha_solicitud': JToDate(vm.FechaContratacion),
-                'fecha_instalacio': JToDate(vm.FechaInstalacion),
-                'fecha_suspension': JToDate(vm.FechaSuspencion),
-                'fecha_baja': JToDate(vm.FechaBaja),
-                'fecha_Fuera_Area': JToDate(vm.FechaFueraArea),
-                'FECHA_ULT_PAGO': JToDate(vm.FechaUltimoPago),
+                'fecha_solicitud': (vm.FechaContratacion != null)? JToDate(vm.FechaContratacion) :'01/01/1900',
+                'fecha_instalacio': (vm.FechaInstalacion != null)? JToDate(vm.FechaInstalacion) : '01/01/1900',
+                'fecha_suspension': (vm.FechaSuspencion != null)? JToDate(vm.FechaSuspencion) : '01/01/1900',
+                'fecha_baja': (vm.FechaBaja != null)? JToDate(vm.FechaBaja) : '01/01/1900',
+                'fecha_Fuera_Area': (vm.FechaFueraArea != null)? JToDate(vm.FechaFueraArea) : '01/01/1900',
+                'FECHA_ULT_PAGO': (vm.FechaUltimoPago != null)? JToDate(vm.FechaUltimoPago) : '01/01/1900',
                 'PrimerMensualidad': (vm.PrimerMen == 'Y')? 1:0,
                 'ultimo_mes': vm.UltimoMesServicio,
                 'ultimo_anio': vm.UltimoAnioServicio,
@@ -720,9 +725,9 @@ angular
                 'Cortesia': (vm.Cortesia == 'Y')? 1:0,
                 'Adic': vm.AdicServicio,
                 'TVSINPAGO': vm.TVSINPAGOServicio,
-                'TVCONPAGO': vm.TVCONPAGOServicio,
+                'TVCONPAGO':  vm.TVCONPAGOServicio,
                 'IdMedio': vm.IdMedioServicio,
-                'Clv_usuarioCapturo': vm.Usuario.Clave
+                'Clv_usuarioCapturo': (vm.Usuario != undefined)? vm.Usuario.Clave : vm.Clv_usuarioCapturo
             };
             CatalogosFactory.UpdateClientesServicio(objClientesServicio).then(function(data){
                 var ObjConcepto = {
@@ -749,10 +754,10 @@ angular
                 'Status': vm.StatusAparato.Clv_StatusNet,
                 'Clv_CableModem': vm.Clv_CableModem,
                 'Clv_Usuario': vm.Clv_UsuarioAparato,
-                'Fecha_Activacion': JToDate(vm.FechaActivacionAparato),
-                'Fecha_Suspension': (vm.FechaSuspencionAparato != undefined)? JToDate(vm.FechaSuspencionAparato):'01/01/1900',
-                'Fecha_Baja': (vm.FechaBajaAparato != undefined)? JToDate(vm.FechaBajaAparato):'01/01/1900',
-                'Fecha_Traspaso': (vm.Fecha_Traspaso != undefined)? JToDate(vm.Fecha_Traspaso):'01/01/1900',
+                'Fecha_Activacion': (vm.FechaActivacionAparato != null)? JToDate(vm.FechaActivacionAparato) : '01/01/1900',
+                'Fecha_Suspension': (vm.FechaSuspencionAparato != null)? JToDate(vm.FechaSuspencionAparato):'01/01/1900',
+                'Fecha_Baja': (vm.FechaBajaAparato != null)? JToDate(vm.FechaBajaAparato):'01/01/1900',
+                'Fecha_Traspaso': (vm.Fecha_Traspaso != null)? JToDate(vm.Fecha_Traspaso):'01/01/1900',
                 'Obs': vm.ObservacionesAparatos,
                 'SeRenta': (vm.SeRenta == 'Y')? 1:0,
                 'no_extensiones': vm.no_extensionesAparato,
@@ -855,6 +860,31 @@ angular
             }
             return res;
         }
+
+        function ValidateStauts(){
+            if(vm.StatusServicio.Clv_StatusNet != vm.ClvStatus){
+                vm.DisFI = (vm.StatusServicio.Clv_StatusNet == 'I')? false : true;
+                vm.DisFS = (vm.StatusServicio.Clv_StatusNet == 'S')? false : true;
+                vm.DisFB = (vm.StatusServicio.Clv_StatusNet == 'B')? false : true;
+                vm.DisFFA = (vm.StatusServicio.Clv_StatusNet == 'F')? false : true;
+                
+            }else{
+                vm.DisFI = true;
+                vm.DisFS = true;
+                vm.DisFB = true;
+                vm.DisFFA = true;
+            }
+        }
+
+        function ValidateStautsAparato(){
+            if(vm.StatusAparato.Clv_StatusNet != vm.StatusA){
+                vm.DisFA_A = (vm.StatusAparato.Clv_StatusNet == 'I')? false : true;
+                vm.DisFB_A = (vm.StatusAparato.Clv_StatusNet == 'B')? false : true;
+            }else{
+                vm.DisFA_A = true;
+                vm.DisFB_A = true;
+            }
+        }
         
         var vm = this;
         vm.IdContrato = $stateParams.id;
@@ -868,6 +898,17 @@ angular
         vm.ShowServicios = false;
         vm.SinDescuento = true;
         vm.ConDescuento = false;
+        vm.DisFC = true;
+        vm.DisFI = true;
+        vm.DisFS = true;
+        vm.DisFB = true;
+        vm.DisFFA = true;
+        vm.DisFUP = true;
+        vm.DisFA_A = true;
+        vm.DisFB_A = true;
+        vm.ShowTipServ1 = false;
+        vm.DisFormDetallServicio = false;
+        vm.DisFormDetallAparato = false;
         vm.ValidateRFC = /^[A-Z]{4}\d{6}[a-zA-Z]{3}$|^[A-Z]{4}\d{6}\d{3}$|^[A-Z]{4}\d{6}[A-Z]{2}\d{1}$|^[A-Z]{4}\d{6}[A-Z]{1}\d{2}$|^[A-Z]{4}\d{6}\d{2}[a-zA-Z]{1}$|^[A-Z]{4}\d{6}\d{1}[a-zA-Z]{2}$|^[A-Z]{4}\d{6}\d{1}[A-Z]{1}\d{1}$|^[A-Z]{4}\d{6}[A-Z]{1}\d{1}[a-zA-Z]{1}$/;
         vm.AddDatosPersonales = AddDatosPersonales;
         vm.GetCiudadMunicipio = GetCiudadMunicipio;
@@ -888,6 +929,8 @@ angular
         vm.UpdateAparatoCliente = UpdateAparatoCliente;
         vm.AddDescuentoServicio = AddDescuentoServicio;
         vm.GetNumber = GetNumber;
+        vm.ValidateStauts = ValidateStauts;
+        vm.ValidateStautsAparato = ValidateStautsAparato;
         initData();
 
     });

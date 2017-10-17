@@ -128,10 +128,19 @@ angular
             }
         }
 
+        function GetNumber(num){
+            var res = [];
+            for (var i = 0; i < num; i++) {
+                res.push(i);
+            }
+            return res;
+        }
+
         var vm = this;
         vm.ShowAccord = false;
         vm.BlockInput = false;
         vm.DisableInput = true;
+        vm.ShowServiciosE = 8;
         vm.SetForm = 1;
         vm.TipoPersona = "F";
         vm.Title = 'Cliente nuevo';
@@ -142,6 +151,7 @@ angular
         vm.GetLocalidad = GetLocalidad;
         vm.GetColonia = GetColonia;
         vm.GetCalle = GetCalle;
+        vm.GetNumber = GetNumber;
         initData();
         
     });

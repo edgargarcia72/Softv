@@ -31,7 +31,7 @@ angular
       var ObjAgenda = {
         'idcompania': vm.Plaza.id_compania,
         'ClvUsuario': $localStorage.currentUser.idUsuario,
-        'opSetupBoxTarjeta': (Opc == 3 && vm.SetUpBox != undefined)? 2 : 1,
+        'opSetupBoxTarjeta': 1,
         'CLV_TECNICO': (Opc == 1 && vm.Tecnico != undefined)? vm.Tecnico.clv_tecnico : 0,
         'CONTRATO': (Opc == 1 && vm.Contrato != undefined)? vm.Contrato : 0,
         'Sector': (Opc > 0 && vm.Sector != undefined)? vm.Sector.Clv_Sector : 0,
@@ -43,6 +43,13 @@ angular
       agendaFactory.GetDesplegarAgenda(ObjAgenda).then(function(data){
         console.log(data);
         vm.AgendaList = data.GetDesplegarAgendaResult;
+        if(vm.AgendaList.length > 0){
+          vm.ConResultado = true;
+          vm.SinResultado = false;
+        }else{
+          vm.ConResultado = false;
+          vm.SinResultado = true;
+        }
       });
     }
 

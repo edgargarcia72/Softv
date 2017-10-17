@@ -199,7 +199,8 @@ angular
       GetDeepMuestraMedios_New: '/MuestraMedios_New/GetDeepMuestraMedios_New',
       GetConRelCteDescuento: '/ContratacionServicio/GetConRelCteDescuento',
       GetNueRelCteDescuento: '/ContratacionServicio/GetNueRelCteDescuento',
-      GetBorRelCteDescuento: '/ContratacionServicio/GetBorRelCteDescuento'
+      GetBorRelCteDescuento: '/ContratacionServicio/GetBorRelCteDescuento',
+      GetInfoTvs: '/InfoTvs/GetInfoTvs'
     };
 
     factory.AddSucursal = function (SUCURSALESobj) {
@@ -3155,7 +3156,6 @@ angular
       var deferred = $q.defer();
       var config = {headers: {'Authorization': $localStorage.currentUser.token}};
       var Parametros = {objClientesServicio: objClientesServicio};
-      console.log(JSON.stringify(Parametros));
       $http.post(globalService.getUrl() + paths.AddClientesServicio, JSON.stringify(Parametros), config).then(function (response) {
         deferred.resolve(response.data);
       }).catch(function (response) {
@@ -3229,6 +3229,18 @@ angular
       var config = {headers: {'Authorization': $localStorage.currentUser.token}};
       var Parametros = ObjRelDescuento;
       $http.post(globalService.getUrl() + paths.GetBorRelCteDescuento, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetInfoTvs = function () {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {};
+      $http.post(globalService.getUrl() + paths.GetInfoTvs, JSON.stringify(Parametros), config).then(function (response) {
         deferred.resolve(response.data);
       }).catch(function (response) {
         deferred.reject(response);

@@ -27,6 +27,7 @@
         padding-left: 200px;
     }
     #sidebar-wrapper {
+        box-shadow: 0px 2px 5px 0px #999;
         border-radius: 0px 10px 10px 0px;
         z-index: 1000;
         position: absolute;
@@ -844,7 +845,7 @@
                                     <h4 class="text-primary">Servicios Asignados</h4>
                                 </div>
                                 <div class="col-md-3">
-                                    <button type="button" class="btn btn-success btn-xs" ng-click="$ctrl.OpenAddServicioCliente()" title="Agregar Servicio">AGREGAR</button>
+                                    <button type="button" class="btn btn-success btn-xs" ng-click="$ctrl.OpenAddServicioCliente()" ng-disabled="$ctrl.DisableInput" title="Agregar Servicio">AGREGAR</button>
                                 </div>
                                 <div class="col-md-12">
                                     <treecontrol class="tree-light" tree-model="$ctrl.ServicioList" expanded-nodes="$ctrl.expandedNodes" on-selection="$ctrl.DetalleConcepto(node)"> 
@@ -870,7 +871,8 @@
                                 </div>
                             </div>
                             <div class="col-md-7" ng-if="$ctrl.DivServicio">
-                                <form name="FormDetallServicio" angular-validator-submit="" novalidate angular-validator autocomplete="off">
+                                <form name="FormDetallServicio" angular-validator-submit="$ctrl.UpdateServicioCliente()" novalidate angular-validator autocomplete="off">
+                                <fieldset ng-disabled="$ctrl.DisFormDetallServicio">
                                 <div class="col-md-12">
                                 <div class="col-md-3">
                                     <h4 class="text-primary">Detalle Servicio:</h4>
@@ -879,7 +881,8 @@
                                     <h4 class="text-danger">{{ $ctrl.NombreServicio }} - {{ $ctrl.Clv_UnicaNet }}</h4>
                                 </div>
                                 <div class="col-md-2">
-                                    <button type="button" class="btn btn-success btn-xs" ng-click="$ctrl.UpdateServicioCliente()" title="Guardar Detalle del Servicio" ng-disabled="FormDetallServicio.InpUltimoMesServicio.$invalid || FormDetallServicio.InpUltimoAnioServicio.$invalid || FormDetallServicio.InpFechaContratacion.$invalid  || FormDetallServicio.InpFechaInstalacion.$invalid || FormDetallServicio.InpFechaSuspencion.$invalid || FormDetallServicio.InpFechaBaja.$invalid || FormDetallServicio.InpFechaFueraArea.$invalid || FormDetallServicio.InpFechaUltimoPago.$invalid">GUARDAR</button>
+                                    <!--<button type="button" class="btn btn-success btn-xs" ng-click="$ctrl.UpdateServicioCliente()" title="Guardar Detalle del Servicio" ng-disabled="FormDetallServicio.InpUltimoMesServicio.$invalid || FormDetallServicio.InpUltimoAnioServicio.$invalid || FormDetallServicio.InpFechaContratacion.$invalid  || FormDetallServicio.InpFechaInstalacion.$invalid || FormDetallServicio.InpFechaSuspencion.$invalid || FormDetallServicio.InpFechaBaja.$invalid || FormDetallServicio.InpFechaFueraArea.$invalid || FormDetallServicio.InpFechaUltimoPago.$invalid">GUARDAR</button>-->
+                                    <button type="submit" class="btn btn-success btn-xs" title="Guardar Detalle del Servicio" ng-disabled="FormDetallServicio.InpUltimoMesServicio.$invalid || FormDetallServicio.InpUltimoAnioServicio.$invalid">GUARDAR</button>
                                 </div>
                                 </div>
                                 <div class="col-md-12">
@@ -888,7 +891,7 @@
                                         <small><b>Status:</b></small>
                                     </div>
                                     <div class="col-md-9">
-                                        <select name="SlcStatusServicio" class="form-control input-sm" ng-model="$ctrl.StatusServicio" ng-options="SS.Concepto for SS in $ctrl.StatusServicioList track by SS.Clave">
+                                        <select name="SlcStatusServicio" class="form-control input-sm" ng-model="$ctrl.StatusServicio" ng-options="SS.Concepto for SS in $ctrl.StatusServicioList track by SS.Clv_StatusNet" ng-change="$ctrl.ValidateStauts()">
                                             <option value="" ng-disabled="true">Selecciona</option>
                                         </select>
                                     </div>
@@ -902,6 +905,18 @@
                                         <label class="checkbox-inline checkbox-styled">
                                             <input type="checkbox" name="CbxPrimerMen" ng-model="$ctrl.PrimerMen" ng-true-value="'Y'" ng-false-value="'N'"><span><small>Primer Mensualidad</small></span>
                                         </label>
+                                    </div>
+                                    <div class="col-md-8" ng-if="$ctrl.ShowTipServ1">
+                                        <small><b>Tv. Adicionales Sin Pago:</b></small>
+                                    </div>
+                                    <div class="col-md-4" ng-if="$ctrl.ShowTipServ1">
+                                        <input type="number" name="InpSinPago" class="form-control input-sm" ng-model="$ctrl.TVSINPAGOServicio" min="0" max="{{$ctrl.TvSinPago}}" validate-on="dirty" required invalid-message="'Inválido.'" required-message="'Obligatorio'">
+                                    </div>
+                                    <div class="col-md-8" ng-if="$ctrl.ShowTipServ1">
+                                        <small><b>Tv. Adicionales Con Pago:</b></small>
+                                    </div>
+                                    <div class="col-md-4" ng-if="$ctrl.ShowTipServ1">
+                                        <input type="number" name="InpConPago" class="form-control input-sm" ng-model="$ctrl.TVCONPAGOServicio" min="0" max="{{$ctrl.TvConPago}}" validate-on="dirty" required invalid-message="'Inválido.'" required-message="'Obligatorio'">
                                     </div>
                                     <div class="col-md-12">
                                         <label class="checkbox-inline checkbox-styled">
@@ -929,7 +944,7 @@
                                         <small><b>Capturo:</b></small>
                                     </div>
                                     <div class="col-md-9">
-                                        <select name="SlcUsuario" class="form-control input-sm" ng-model="$ctrl.Usuario" ng-options="U.Nombre for U in $ctrl.UsuarioList track by U.Clave">
+                                        <select name="SlcUsuario" class="form-control input-sm" ng-model="$ctrl.Usuario" ng-options="U.Nombre for U in $ctrl.UsuarioList track by U.Clave" validate-on="dirty" required required-message="'Obligatorio'">
                                             <option value="">Selecciona</option>
                                         </select>
                                     </div>
@@ -969,37 +984,37 @@
                                         <small><b>Contratación:</b></small>
                                     </div>
                                     <div class="col-md-7">
-                                        <input type="date" name="InpFechaContratacion" class="form-control input-sm" ng-model="$ctrl.FechaContratacion" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
+                                        <input type="date" name="InpFechaContratacion" class="form-control input-sm" ng-model="$ctrl.FechaContratacion" validate-on="dirty" ng-required="!$ctrl.DisFC" required required-message="'Obligatorio'" invalid-message="'Inválido.'" ng-disabled="$ctrl.DisFC">
                                     </div>
                                     <div class="col-md-5">
                                         <small><b>Instalación:</b></small>
                                     </div>
                                     <div class="col-md-7">
-                                        <input type="date" name="InpFechaInstalacion" class="form-control input-sm" ng-model="$ctrl.FechaInstalacion" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
+                                        <input type="date" name="InpFechaInstalacion" class="form-control input-sm" ng-model="$ctrl.FechaInstalacion" validate-on="dirty" ng-required="!$ctrl.DisFI" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
                                     </div>
                                     <div class="col-md-5">
                                         <small><b>Suspención:</b></small>
                                     </div>
                                     <div class="col-md-7">
-                                        <input type="date" name="InpFechaSuspencion" class="form-control input-sm" ng-model="$ctrl.FechaSuspencion" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
+                                        <input type="date" name="InpFechaSuspencion" class="form-control input-sm" ng-model="$ctrl.FechaSuspencion" validate-on="dirty" ng-required="!$ctrl.DisFS" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
                                     </div>
                                     <div class="col-md-5">
                                         <small><b>Baja:</b></small>
                                     </div>
                                     <div class="col-md-7">
-                                        <input type="date" name="InpFechaBaja" class="form-control input-sm" ng-model="$ctrl.FechaBaja" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
+                                        <input type="date" name="InpFechaBaja" class="form-control input-sm" ng-model="$ctrl.FechaBaja" validate-on="dirty" ng-required="!$ctrl.DisFB" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
                                     </div>
                                     <div class="col-md-5">
                                         <small><b>Fuera Area:</b></small>
                                     </div>
                                     <div class="col-md-7">
-                                        <input type="date" name="InpFechaFueraArea" class="form-control input-sm" ng-model="$ctrl.FechaFueraArea" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
+                                        <input type="date" name="InpFechaFueraArea" class="form-control input-sm" ng-model="$ctrl.FechaFueraArea" validate-on="dirty" ng-required="!$ctrl.DisFFA" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
                                     </div>
                                     <div class="col-md-5">
                                         <small><b>Ultimo Pago:</b></small>
                                     </div>
                                     <div class="col-md-7">
-                                        <input type="date" name="InpFechaUltimoPago" class="form-control input-sm" ng-model="$ctrl.FechaUltimoPago" validate-on="dirty" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
+                                        <input type="date" name="InpFechaUltimoPago" class="form-control input-sm" ng-model="$ctrl.FechaUltimoPago" validate-on="dirty" invalid-message="'Inválido.'">
                                     </div>
                                     <div class="col-md-5">
                                         <small><b>Cancelación:</b></small>
@@ -1008,12 +1023,15 @@
                                     </div>
                                 </div>
                                 </div>
+                                </fieldset>
                                 </form>
                             </div>
                             <div class="col-md-7" ng-if="$ctrl.DivAparato">
-                                <form name="FormDetallAparato" angular-validator-submit="" novalidate angular-validator autocomplete="off">
+                                <form name="FormDetallAparato" angular-validator-submit="$ctrl.UpdateAparatoCliente()" novalidate angular-validator autocomplete="off">
+                                <fieldset ng-disabled="$ctrl.DisFormDetallAparato">
                                 <div class="col-md-offset-10 col-md-2">
-                                    <button type="button" class="btn btn-success btn-xs" ng-click="$ctrl.UpdateAparatoCliente()" title="Guardar Detalle Aparato" ng-disabled="FormDetallAparato.InpFechaActivacionAparato.$invalid || FormDetallAparato.InpSuspencionAparato.$invalid || FormDetallAparato.InpFechaBajaAparato.$invalid">GUARDAR</button>
+                                    <!--<button type="button" class="btn btn-success btn-xs" ng-click="$ctrl.UpdateAparatoCliente()" title="Guardar Detalle Aparato" ng-disabled="FormDetallAparato.InpFechaActivacionAparato.$invalid || FormDetallAparato.InpSuspencionAparato.$invalid || FormDetallAparato.InpFechaBajaAparato.$invalid">GUARDAR</button>-->
+                                    <button type="submit" class="btn btn-success btn-xs" title="Guardar Detalle Aparato">GUARDAR</button>
                                 </div>
                                 <div class="col-md-3">
                                     <h4 class="text-primary">Detalle Aparato:</h4>
@@ -1026,7 +1044,7 @@
                                         <small><b>Status:</b></small>
                                     </div>
                                     <div class="col-md-9">
-                                        <select class="form-control input-sm" ng-model="$ctrl.StatusAparato" ng-options="SS.Concepto for SS in $ctrl.StatusAparatoList track by SS.Clave">
+                                        <select name="SlcStatusAparato" class="form-control input-sm" ng-model="$ctrl.StatusAparato" ng-options="SS.Concepto for SS in $ctrl.StatusAparatoList track by SS.Clave" ng-change="$ctrl.ValidateStautsAparato()">
                                             <option value="" ng-disabled="true">Selecciona</option>
                                         </select>
                                     </div>
@@ -1051,19 +1069,19 @@
                                         <small><b>Activación:</b></small>
                                     </div>
                                     <div class="col-md-8">
-                                        <input type="date" name="InpFechaActivacionAparato" class="form-control input-sm" ng-model="$ctrl.FechaActivacionAparato" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
+                                        <input type="date" name="InpFechaActivacionAparato" class="form-control input-sm" ng-model="$ctrl.FechaActivacionAparato" validate-on="dirty" ng-required="!$ctrl.DisFA_A" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
                                     </div>
                                     <div class="col-md-4">
                                         <small><b>Suspención:</b></small>
                                     </div>
                                     <div class="col-md-8">
-                                        <input type="date" name="InpSuspencionAparato" class="form-control input-sm" ng-model="$ctrl.FechaSuspencionAparato" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
+                                        <input type="date" name="InpSuspencionAparato" class="form-control input-sm" ng-model="$ctrl.FechaSuspencionAparato" invalid-message="'Inválido.'">
                                     </div>
                                     <div class="col-md-4">
                                         <small><b>Baja:</b></small>
                                     </div>
                                     <div class="col-md-8">
-                                        <input type="date" name="InpFechaBajaAparato" class="form-control input-sm" ng-model="$ctrl.FechaBajaAparato" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
+                                        <input type="date" name="InpFechaBajaAparato" class="form-control input-sm" ng-model="$ctrl.FechaBajaAparato" validate-on="dirty" ng-required="!$ctrl.DisFB_A" required required-message="'Obligatorio'" invalid-message="'Inválido.'">
                                     </div>
                                     <div class="col-md-12">
                                     <label class="checkbox-inline checkbox-styled">
@@ -1071,12 +1089,25 @@
                                     </label>
                                     </div>
                                 </div>
+                                </fieldset>
                                 </form>
                             </div>
                         </div>
                         <div class="col-md-12" ng-show="$ctrl.ShowServiciosE">
                             <br ng-repeat="S in $ctrl.GetNumber($ctrl.ShowServiciosE)">
                         </div>
+                        <!--
+                        <div class="col-md-12">
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                        </div>
+                        -->
                     </div>
                 </div>
             </div>
