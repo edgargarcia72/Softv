@@ -41,17 +41,17 @@
                 <div class="col-md-1" style="text-align:right">
                     <button type="button" class="btn btn-warning btn-xs" ng-click="$ctrl.GetAgendaList(2);" title="Buscar por SetUpBox "><i class="glyphicon glyphicon-search"></i> BUSCAR</button>
                 </div>
-                <div class="col-md-2" style="text-align:right">
+                <div class="col-md-1" style="text-align:right">
                     <input type="number" name="InpContrato" class="form-control input-sm" ng-model="$ctrl.Contrato" placeholder="Contrato">
                 </div>
                 <div class="col-md-1" style="text-align:right">
                     <button type="button" class="btn btn-warning btn-xs" ng-click="$ctrl.GetAgendaList(1);" title="Buscar por Contrato "><i class="glyphicon glyphicon-search"></i> BUSCAR</button>
                 </div>
+                <div class="col-md-2" style="text-align:right">
+                    <input type="date" name="InpDia" class="form-control input-sm" ng-model="$ctrl.Dia" placeholder="Dia">
+                </div>
                 <div class="col-md-1" style="text-align:right">
-                    <input type="text" name="InpSearchSetUpBox" class="form-control input-sm" ng-model="$ctrl.SetUpBox" placeholder="Set Up Box">
-                </div> 
-                <div class="col-md-1" style="text-align:right">
-                    <button type="button" class="btn btn-warning btn-xs" ng-click="$ctrl.GetAgendaList(3);" title="Buscar por Contrato "><i class="glyphicon glyphicon-search"></i> BUSCAR</button>
+                    <button type="button" class="btn btn-warning btn-xs" ng-click="$ctrl.GetAgendaList(4);" title="Buscar por Dia "><i class="glyphicon glyphicon-search"></i> BUSCAR</button>
                 </div>
             </div>
             <div class="col-md-12">
@@ -69,17 +69,18 @@
                 <div class="col-md-2" style="text-align:right">
                     <input type="text" name="InpSearchApellidoM" class="form-control input-sm" ng-model="$ctrl.Materno" placeholder="A. Materno">
                 </div>
-                <div class="col-md-offset-1 col-md-2" style="text-align:right">
-                    <input type="date" name="InpSearchDia" class="form-control input-sm" ng-model="$ctrl.Dia" placeholder="Dia">
+                <div class="col-md-offset-1 col-md-1" style="text-align:right">
+                    <input type="text" name="InpSearchSetUpBox" class="form-control input-sm" ng-model="$ctrl.SetUpBox" placeholder="Set Up Box">
+                </div> 
+                <div class="col-md-1" style="text-align:right">
+                    <button type="button" class="btn btn-warning btn-xs" ng-click="$ctrl.GetAgendaList(3);" title="Buscar por Contrato "><i class="glyphicon glyphicon-search"></i> BUSCAR</button>
+                </div>
+                <div class="col-md-2" style="text-align:right">
+                    <select name="SlcTurno" class="form-control input-sm" ng-model="$ctrl.Turno" ng-options="T as T.TURNO for T in $ctrl.TurnoList track by T.ID">
+                    </select>
                 </div>
                 <div class="col-md-1" style="text-align:right">
-                    <button type="button" class="btn btn-warning btn-xs" ng-click="$ctrl.GetAgendaList(3);" title="Buscar por Dia "><i class="glyphicon glyphicon-search"></i> BUSCAR</button>
-                </div>
-                <div class="col-md-1" style="text-align:right">
-                    <input type="text" name="InpTurno" class="form-control input-sm" ng-model="$ctrl.Turno" placeholder="Turno">
-                </div>
-                <div class="col-md-1" style="text-align:right">
-                    <button type="button" class="btn btn-warning btn-xs" ng-click="$ctrl.BUSCAR();" title="Buscar por Turno "><i class="glyphicon glyphicon-search"></i> BUSCAR</button>
+                    <button type="button" class="btn btn-warning btn-xs" ng-click="$ctrl.GetAgendaList(5);" title="Buscar por Turno "><i class="glyphicon glyphicon-search"></i> BUSCAR</button>
                 </div>
             </div>
         </div>
@@ -110,8 +111,8 @@
                         <td>{{ X.FechaOrdRep }}</td>
                         <td>{{ X.Turno}}</td>
                         <td>{{ X.Status }}</td>
-                        <td><button type="button" class="btn btn-warning btn-xs" ng-click="$ctrl.BUSCAR();" title="EDITAR"><i class="fa fa-pencil-square-o"></i> Editar</button></td>
-                        <td><button type="button" class="btn btn-danger btn-xs" ng-click="$ctrl.BUSCAR();" title="ELIMINAR"><i class="fa fa-trash"></i> Eliminar</button></td>
+                        <td><button type="button" class="btn btn-warning btn-xs" ui-sref="home.procesos.agendaEditar({ id:X.Contrato, cita:X.No_Cita })" title="EDITAR"><i class="fa fa-pencil-square-o"></i> Editar</button></td>
+                        <td><button type="button" class="btn btn-danger btn-xs" ui-sref="home.procesos.agendaDetalle" title="ELIMINAR"><i class="fa fa-trash"></i> Eliminar</button></td>
                     </tr>
                     <tr ng-show="$ctrl.SinResultado">
                         <td class="text-center" colspan="10">Sin resultados</td>

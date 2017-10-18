@@ -2,7 +2,7 @@
 
 angular
   .module('softvApp')
-  .controller('agendaCtrl', function (CatalogosFactory, agendaFactory, $localStorage) {
+  .controller('agendaCtrl', function (CatalogosFactory, agendaFactory, $localStorage, $uibModal) {
    
     function init(){
       CatalogosFactory.GetPlazaList($localStorage.currentUser.idUsuario).then(function(data){
@@ -38,7 +38,9 @@ angular
         'NOMBRE': (Opc == 2 && vm.Nombre != undefined)? vm.Nombre : '',
         'ApellidoPaterno': (Opc == 2 && vm.Paterno != undefined)? vm.Paterno : '',
         'ApellidoMaterno': (Opc == 2 && vm.Materno != undefined)? vm.Materno : '',
-        'SetUpBox': (Opc == 3 && vm.SetUpBox != undefined)? vm.SetUpBox : ''
+        'SetUpBox': (Opc == 3 && vm.SetUpBox != undefined)? vm.SetUpBox : '',
+        'FECHA': (Opc == 4 && vm.Dia != undefined)? ToDate(vm.Dia) : '',
+        'Turno': (Opc == 5 && vm.Turno != undefined)? vm.Turno.TURNO : ''
       }
       agendaFactory.GetDesplegarAgenda(ObjAgenda).then(function(data){
         console.log(data);
@@ -51,6 +53,16 @@ angular
           vm.SinResultado = true;
         }
       });
+    }
+
+    function ToDate(Fecha){
+        var D = Fecha.getDate();
+        var M = Fecha.getMonth() + 1;
+        var FD = (String(D).length == 1)? '0'+D : D;
+        var FM = (String(M).length == 1)? '0'+M : M;
+        var FY = Fecha.getFullYear();
+        var FDate =  String(FD) + '/' + String(FM) + '/' + String(FY);
+        return FDate;
     }
 
     var vm = this;

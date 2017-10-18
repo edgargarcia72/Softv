@@ -16,7 +16,11 @@ angular
       GetDesplegarAgenda: '/CatalogoAgenda/GetDesplegarAgenda',
       GetSoftv_MuestraSectores: '/CatalogoAgenda/GetSoftv_MuestraSectores',
       GetMuestra_Tecnicos_Agenda: '/CatalogoAgenda/GetMuestra_Tecnicos_Agenda',
-      GetspConsultaTurnosList: '/spConsultaTurnos/GetspConsultaTurnosList'
+      GetspConsultaTurnosList: '/spConsultaTurnos/GetspConsultaTurnosList',
+      GetMuestraContratoReal: '/MuestraContratoReal/GetMuestraContratoReal',
+      GetBUSCLIPORCONTRATO2: '/CatalogoAgenda/GetBUSCLIPORCONTRATO2',
+      GetMuestra_Tecnicos_Almacen: '/CatalogoAgenda/GetMuestra_Tecnicos_Almacen',
+      GetCONCITAS:'/CatalogoAgenda/GetCONCITAS'
     };
 
     var factory = {};   
@@ -276,6 +280,54 @@ angular
       var deferred = $q.defer();
       var config = {headers: {'Authorization': $localStorage.currentUser.token}};
       $http.get(globalService.getUrl() + paths.GetspConsultaTurnosList, config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetMuestraContratoReal = function (ObjContrato) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = ObjContrato;
+      $http.post(globalService.getUrl() + paths.GetMuestraContratoReal, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetBUSCLIPORCONTRATO2 = function (ObjCliente) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = ObjCliente;
+      $http.post(globalService.getUrl() + paths.GetBUSCLIPORCONTRATO2, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetMuestra_Tecnicos_Almacen = function (op) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {'op': op};
+      $http.post(globalService.getUrl() + paths.GetMuestra_Tecnicos_Almacen, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetCONCITAS = function (Clv_Cita) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {'Clv_Cita': Clv_Cita};
+      $http.post(globalService.getUrl() + paths.GetCONCITAS, JSON.stringify(Parametros), config).then(function (response) {
         deferred.resolve(response.data);
       }).catch(function (response) {
         deferred.reject(response);
