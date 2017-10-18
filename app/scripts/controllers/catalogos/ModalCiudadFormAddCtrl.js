@@ -17,12 +17,11 @@ angular
             CatalogosFactory.GetAddCiudades(ObjCiudad).then(function(data){
                 if(data.GetAddCiudadesResult[0].mismoNombre == 0){
                     vm.IdCiudad = data.GetAddCiudadesResult[0].Clv_Ciudad;
-                    ngNotify.set('CORRECTO, se añadió una ciudad nueva.', 'success');
-                    //cancel();
-                    vm.ShowEdit = true;
-                    GetEstadoList(vm.IdCiudad)
-                    /*$state.reload('home.catalogos.ciudades');
-                    OpenUpdateCiudad(IdMunicipio);*/
+                    $state.reload('home.catalogos.ciudades');
+                    ngNotify.set('CORRECTO, se añadió una ciudad nueva, ahora puedes comenzar a agregar relaciones', 'success');
+                    vm.ShowEdit = false;
+                    vm.ShowAdd = true;
+                    GetEstadoList(vm.IdCiudad);
                 }else if(data.GetAddCiudadesResult[0].mismoNombre == 1){
                     ngNotify.set('ERROR, Ya existe una ciudad con el mismo nombre.', 'warn');
                 }else{
@@ -117,6 +116,8 @@ angular
         var vm = this;
         vm.Titulo = 'Nuevo Registro';
         vm.Icono = 'fa fa-plus';
+        vm.ShowEdit = true;
+        vm.ShowAdd = false;
         vm.DisableAdd = false;
         vm.DisableUpdate = true;
         vm.SaveCiudad = SaveCiudad;

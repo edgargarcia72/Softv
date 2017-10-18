@@ -128,10 +128,20 @@ angular
             }
         }
 
+        function GetNumber(num){
+            var res = [];
+            for (var i = 0; i < num; i++) {
+                res.push(i);
+            }
+            return res;
+        }
+
         var vm = this;
         vm.ShowAccord = false;
         vm.BlockInput = false;
         vm.DisableInput = true;
+        vm.ShowServiciosE = 8;
+        vm.SetForm = 1;
         vm.TipoPersona = "F";
         vm.Title = 'Cliente nuevo';
         vm.ValidateRFC = /^[A-Z]{4}\d{6}[A-Z]{3}$|^[A-Z]{4}\d{6}\d{3}$|^[A-Z]{4}\d{6}[A-Z]{2}\d{1}$|^[A-Z]{4}\d{6}[A-Z]{1}\d{2}$|^[A-Z]{4}\d{6}\d{2}[A-Z]{1}$|^[A-Z]{4}\d{6}\d{1}[A-Z]{2}$|^[A-Z]{4}\d{6}\d{1}[A-Z]{1}\d{1}$|^[A-Z]{4}\d{6}[A-Z]{1}\d{1}[A-Z]{1}$/;
@@ -141,6 +151,7 @@ angular
         vm.GetLocalidad = GetLocalidad;
         vm.GetColonia = GetColonia;
         vm.GetCalle = GetCalle;
+        vm.GetNumber = GetNumber;
         initData();
         
     });

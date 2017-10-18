@@ -182,7 +182,25 @@ angular
       GetBuscaMotivosFacturaCancelada: '/CatalogoMotivos/GetBuscaMotivosFacturaCancelada',
       GetNUEMOTIVOSFACTURACANCELACION: '/CatalogoMotivos/GetNUEMOTIVOSFACTURACANCELACION',
       GetMODMOTIVOSFACTURACANCELACION: '/CatalogoMotivos/GetMODMOTIVOSFACTURACANCELACION',
-      GetBORMOTIVOSFACTURACANCELACION: '/CatalogoMotivos/GetBORMOTIVOSFACTURACANCELACION'
+      GetBORMOTIVOSFACTURACANCELACION: '/CatalogoMotivos/GetBORMOTIVOSFACTURACANCELACION',
+      GetMuestraArbolServicios_ClientesList: '/MuestraArbolServicios_Clientes/GetMuestraArbolServicios_ClientesList',
+      GetStatusNet: '/ContratacionServicio/GetStatusNet',
+      GetStatusCableModem: '/ContratacionServicio/GetStatusCableModem',
+      GetMuestraPromotoresNet: '/ContratacionServicio/GetMuestraPromotoresNet',
+      GetMuestra_Usuarios: '/ContratacionServicio/GetMuestra_Usuarios',
+      GetCONRel_ContNet_Usuarios: '/ContratacionServicio/GetCONRel_ContNet_Usuarios',
+      GetClientesServicioList: '/ClientesServicio/GetClientesServicioList',
+      GetClientesAparatoList: '/ClientesAparato/GetClientesAparatoList',
+      GetModeloAparato: '/ModeloAparato/GetModeloAparato',
+      GetRelTipoServClienteList: '/RelTipoServCliente/GetRelTipoServClienteList',
+      AddClientesServicio: '/ClientesServicio/AddClientesServicio',
+      UpdateClientesServicio: '/ClientesServicio/UpdateClientesServicio',
+      UpdateClientesAparato: '/ClientesAparato/UpdateClientesAparato',
+      GetDeepMuestraMedios_New: '/MuestraMedios_New/GetDeepMuestraMedios_New',
+      GetConRelCteDescuento: '/ContratacionServicio/GetConRelCteDescuento',
+      GetNueRelCteDescuento: '/ContratacionServicio/GetNueRelCteDescuento',
+      GetBorRelCteDescuento: '/ContratacionServicio/GetBorRelCteDescuento',
+      GetInfoTvs: '/InfoTvs/GetInfoTvs'
     };
 
     factory.AddSucursal = function (SUCURSALESobj) {
@@ -3010,6 +3028,219 @@ angular
       var config = {headers: {'Authorization': $localStorage.currentUser.token}};
       var Parametros = {'Clv_Motivo': Clv_Motivo};
       $http.post(globalService.getUrl() + paths.GetBORMOTIVOSFACTURACANCELACION, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetMuestraArbolServicios_ClientesList = function (Contrato) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {'Contrato': Contrato};
+      $http.post(globalService.getUrl() + paths.GetMuestraArbolServicios_ClientesList, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetStatusNet = function () {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      $http.get(globalService.getUrl() + paths.GetStatusNet, config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetStatusCableModem = function () {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      $http.get(globalService.getUrl() + paths.GetStatusCableModem, config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetMuestraPromotoresNet = function () {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      $http.get(globalService.getUrl() + paths.GetMuestraPromotoresNet, config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetMuestra_Usuarios = function (ObjUsuario) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = ObjUsuario;
+      $http.post(globalService.getUrl() + paths.GetMuestra_Usuarios, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetCONRel_ContNet_Usuarios = function (Clv_UnicaNet) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {Clv_UnicaNet: Clv_UnicaNet};
+      $http.post(globalService.getUrl() + paths.GetCONRel_ContNet_Usuarios, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetClientesServicioList = function (Clv_UnicaNet) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {Clv_UnicaNet: Clv_UnicaNet};
+      $http.post(globalService.getUrl() + paths.GetClientesServicioList, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetClientesAparatoList = function (ContratoNet) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {ContratoNet: ContratoNet};
+      $http.post(globalService.getUrl() + paths.GetClientesAparatoList, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetModeloAparato = function (Clv_CableModem) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {Clv_CableModem: Clv_CableModem};
+      $http.post(globalService.getUrl() + paths.GetModeloAparato, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetRelTipoServClienteList = function (Clv_TipSer) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {Clv_TipSer: Clv_TipSer};
+      $http.post(globalService.getUrl() + paths.GetRelTipoServClienteList, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.AddClientesServicio = function (objClientesServicio) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {objClientesServicio: objClientesServicio};
+      $http.post(globalService.getUrl() + paths.AddClientesServicio, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.UpdateClientesServicio = function (objClientesServicio) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {objClientesServicio: objClientesServicio};
+      $http.post(globalService.getUrl() + paths.UpdateClientesServicio, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.UpdateClientesAparato = function (objClientesAparato) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {objClientesAparato: objClientesAparato};
+      $http.post(globalService.getUrl() + paths.UpdateClientesAparato, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetDeepMuestraMedios_New = function (IdMedio) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {IdMedio: IdMedio};
+      $http.post(globalService.getUrl() + paths.GetDeepMuestraMedios_New, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetConRelCteDescuento = function (ObjRelDescuento) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = ObjRelDescuento;
+      $http.post(globalService.getUrl() + paths.GetConRelCteDescuento, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetNueRelCteDescuento = function (ObjRelDescuento) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = ObjRelDescuento;
+      $http.post(globalService.getUrl() + paths.GetNueRelCteDescuento, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetBorRelCteDescuento = function (ObjRelDescuento) {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = ObjRelDescuento;
+      $http.post(globalService.getUrl() + paths.GetBorRelCteDescuento, JSON.stringify(Parametros), config).then(function (response) {
+        deferred.resolve(response.data);
+      }).catch(function (response) {
+        deferred.reject(response);
+      });
+      return deferred.promise;
+    };
+
+    factory.GetInfoTvs = function () {
+      var deferred = $q.defer();
+      var config = {headers: {'Authorization': $localStorage.currentUser.token}};
+      var Parametros = {};
+      $http.post(globalService.getUrl() + paths.GetInfoTvs, JSON.stringify(Parametros), config).then(function (response) {
         deferred.resolve(response.data);
       }).catch(function (response) {
         deferred.reject(response);
